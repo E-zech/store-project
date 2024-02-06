@@ -1,0 +1,90 @@
+Time: 2024-02-05T10:35:54.815Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:36:53.638Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:37:10.053Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:37:16.289Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:41:35.563Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:41:59.527Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:42:01.883Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:42:04.824Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:43:14.461Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:43:17.731Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:44:30.933Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:46:11.331Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T10:52:22.968Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-05T11:08:48.548Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-05T11:24:03.449Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+

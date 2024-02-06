@@ -1,0 +1,114 @@
+Time: 2024-02-06T07:53:40.670Z
+Method: POST
+Route: /users/login
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-06T07:54:27.575Z
+Method: POST
+Route: /users/login
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-06T08:01:16.182Z
+Method: POST
+Route: /users/login
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-06T08:02:14.229Z
+Method: POST
+Route: /users/login
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-06T08:03:33.179Z
+Method: POST
+Route: /users/login
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-06T08:06:35.079Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:10:06.895Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:14:40.292Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:15:07.767Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:15:56.965Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:17:08.068Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:17:08.484Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:17:17.264Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:17:17.607Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:17:45.157Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:25:55.965Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:50:40.152Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:51:54.848Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-06T08:55:31.312Z
+Method: GET
+Route: /users/login
+Status Code: 401
+Error:  Unauthorized
+

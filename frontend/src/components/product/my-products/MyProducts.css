@@ -1,0 +1,14 @@
+.addCardBtn{
+    display: block;
+    position: fixed;
+    right: 18px;
+    bottom: 75px;
+}
+
+.form-container{
+padding: 45px 0;
+}
+
+.leftFix{
+    margin-right: 1.2rem;
+}

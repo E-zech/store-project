@@ -1,0 +1,90 @@
+Time: 2024-02-04T08:58:37.198Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T08:58:57.815Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T08:59:54.385Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T09:00:03.137Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T09:01:46.307Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T09:15:10.884Z
+Method: GET
+Route: /users
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-04T09:18:14.864Z
+Method: GET
+Route: /users/65be4960b00f9931d1a74d5c
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-04T09:24:20.908Z
+Method: PUT
+Route: /users/65b4cec0fb0246b79d10e484
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-04T09:27:33.795Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T09:27:50.303Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T09:27:52.263Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T09:30:54.179Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T09:31:13.687Z
+Method: PUT
+Route: /users/65bf57aefad6e52c02de1227
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-04T10:29:51.458Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-04T10:30:02.431Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+

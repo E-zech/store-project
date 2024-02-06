@@ -1,0 +1,44 @@
+.container-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+
+} 
+
+.card{
+    transition: all 0.2s ease !important;
+}
+
+.card:hover{
+    transform: scale(1.02);
+    cursor: text;
+}
+
+.card-wrapper{
+    text-align: left;
+}
+
+.main-headline{
+    font-size: 1.7rem;
+   padding: 15px 0px;
+    color: darkgoldenrod;
+}
+
+.sec-headline{ 
+padding: 5px 0px;
+}
+
+.cardSpan{
+    display: block;
+    font-size: 1rem;
+    padding-top: 15px;  
+}
+
+.bold-spn{
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: black;
+}
