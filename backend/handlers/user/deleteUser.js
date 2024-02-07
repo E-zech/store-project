@@ -25,10 +25,10 @@ const deleteUser = app => {
 
             const message =
                 req.params.id === userId
-                    ? `It's sad to see you leaving, ${deletedUser.name.first} 🫤`
+                    ? `It's sad to see you leaving, ${deletedUser.firstName} 🫤`
                     : isAdminOrMaster
-                        ? `You have deleted ${deletedUser.name.first} successfully.`
-                        : `It's sad to see you leaving, ${deletedUser.name.first} 🫤`;
+                        ? `You have deleted ${deletedUser.firstName} successfully.`
+                        : `It's sad to see you leaving, ${deletedUser.firstName} 🫤`;
 
             res.send({ message, deletedUser });
 

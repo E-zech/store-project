@@ -10,7 +10,7 @@ import { initialDataStart } from './initial-data/initial-data.js';
 import logMiddleware from './middleware/logMiddleware.js';
 import dotenv from 'dotenv';
 import { getContent } from './configs/contentConfig.js';
-
+//asdas
 // Environment setup
 const env = dotenv.config({ path: './prod.env' });
 const port = env.parsed.PORT || 5000;

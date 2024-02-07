@@ -4,7 +4,7 @@ export const UserValid = Joi.object({
 
     firstName: Joi.string().min(2).max(20).label('first name').required(),
 
-    lastNameast: Joi.string().min(2).max(20).label('last name').required(),
+    lastName: Joi.string().min(2).max(20).label('last name').required(),
 
     roleType: Joi.number().default(2),
 

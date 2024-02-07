@@ -5,10 +5,7 @@ const getAllUsers = app => {
     app.get('/users', guard, adminGuard, async (req, res) => {
         try {
             const allUsers = await User.find().select('-password');
-            res.send({
-                message: "Here are all the users currently signed up to your web application",
-                allUsers
-            });
+            res.send(allUsers);
 
         } catch (err) {
             return res.status(500).send('Internal Server Error');

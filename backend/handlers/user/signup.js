@@ -12,7 +12,7 @@ const signup = app => {
                 return res.status(400).send(errorObj);
             }
 
-            const { name, phone, email, password, address, image } = value;
+            const { firstName, lastName, roleType, phone, email, password } = value;
 
             const existingUser = await User.findOne({ email });
 
@@ -21,18 +21,18 @@ const signup = app => {
             }
 
             const newUser = new User({
-                name,
+                firstName,
+                lastName,
+                roleType,
                 phone,
                 email,
                 password,
-                address,
-                image,
             });
 
             await newUser.save();
 
             res.send({
-                message: `Hello ${newUser.name.first}, you have successfully signed up!`,
+                message: `Hello ${newUser.firstName}, you have successfully signed up!`,
                 newUser
             });
 

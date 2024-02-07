@@ -8,15 +8,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../../../App';
 
-export default function EditCards() {
+export default function EditProduct() {
     const [formData, setFormData] = useState({});
-    const { id } = useParams();
+    const { productId } = useParams();
     const navigate = useNavigate();
     const { setLoader, snackbar, filteredCards, setFilteredCards } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true);
-        fetch(`http://localhost:5000/cards/${id}?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`, {
+        fetch(`http://localhost:5000/products/${productId}`, {
             credentials: 'include',
         })
             .then((res) => res.json())
@@ -25,16 +25,18 @@ export default function EditCards() {
             }).finally(() => {
                 setLoader(false);
             })
-    }, [id]);
+    }, [productId]);
 
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
         setLoader(true);
-        fetch(`http://localhost:5000/business/cards/${id}?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`, {
+        fetch(`http://localhost:5000/products/${productId}`, {
             credentials: 'include',
             method: 'PUT',
-            headers: { 'Content-type': 'application/json' },
+            headers: {
+                'Authorization': localStorage.token
+            },
             body: JSON.stringify(formData),
         })
             .then((data) => {
@@ -58,7 +60,7 @@ export default function EditCards() {
     return (
         <>
             <header>
-                <h1 className='main-title'>Edit Card</h1>
+                <h1 className='main-title'>Edit Product</h1>
             </header>
 
             <Container component="main" maxWidth="xs">

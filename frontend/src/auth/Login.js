@@ -82,23 +82,14 @@ export default function Login() {
                 }
             })
             .then(data => {
-                console.log(data);
                 const token = data.token
-                console.log(token);
                 localStorage.token = token;
 
                 const decodedToken = jwtDecode(token);
                 const roleTypeTKN = decodedToken.roleType;
-                console.log(roleTypeTKN);
 
                 setUser(data);
-                setUserRoleType(RoleTypes.user);
-
-                if (data.business) {
-                    setUserRoleType(RoleTypes.business);
-                } else if (data.admin) {
-                    setUserRoleType(RoleTypes.admin);
-                }
+                setUserRoleType(roleTypeTKN);
 
                 navigate('/');
                 snackbar('log-in successful');

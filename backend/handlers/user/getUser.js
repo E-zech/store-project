@@ -7,26 +7,17 @@ const getUser = app => {
         const { userId, roleType } = getUserFromTKN(req, res);
         const isAdminOrMaster = roleType === roleType.admin || roleType === roleType.master;;
 
-
         if (userId !== req.params.id && !isAdminOrMaster) {
             return res.status(401).send('you are not authorized to do so');
         }
 
         try {
-            const userByParams = await User.findById(req.params.id).select('-password');
-
+            const userByParams = await User.findById(req.params.id).select('-password'); // here the _id recive as Object mongo id type
             if (!userByParams) {
                 return res.status(403).send('User not found');
             }
 
-            const message =
-                req.params.id === userId
-                    ? `Here are your details, ${userByParams.name.first}.`
-                    : isAdminOrMaster
-                        ? `Here are the details of ${userByParams.name.first}.`
-                        : `Here are your details, ${userByParams.name.first}.`;
-
-            res.send({ message, userByParams });
+            res.send(userByParams);
         }
 
         catch (err) {

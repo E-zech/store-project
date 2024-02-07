@@ -1,5 +1,6 @@
 import { useState, createContext, useEffect } from 'react';
 import './css/App.css';
+import { jwtDecode } from 'jwt-decode';
 import Router from './Router';
 import Navbar, { RoleTypes } from './components/navbar/Navbar';
 import Loader from './components/loader/Loader';
@@ -48,7 +49,10 @@ function App() {
 
     useEffect(() => {
         if (localStorage.token) {
-            fetch(`http://localhost:5000/users/login`, {
+            const decodedToken = jwtDecode(localStorage.token);
+            const userId = decodedToken.userId;
+
+            fetch(`http://localhost:5000/users/${userId}`, {
                 credentials: 'include',
                 headers: {
                     'Authorization': localStorage.token
@@ -67,13 +71,8 @@ function App() {
                 .then(data => {
                     console.log(data)
                     setUser(data);
-                    setUserRoleType(RoleTypes.user);
+                    setUserRoleType(data.roleType);
 
-                    if (data.business) {
-                        setUserRoleType(RoleTypes.business);
-                    } else if (data.admin) {
-                        setUserRoleType(RoleTypes.admin);
-                    }
                 })
                 .catch(err => {
                     console.log(err)

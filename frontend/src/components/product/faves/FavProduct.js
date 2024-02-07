@@ -4,14 +4,17 @@ import { GeneralContext } from "../../../App.js";
 import ProductComponent from '../ProductComponent.js';
 import ResultNotFound from '../../../pages/ResultNotFound.js';
 
-export default function FavCards() {
+export default function FavProducts() {
     const [favCards, setFavCards] = useState([]);
     const { filteredCards, setFilteredCards, loader, setLoader } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true);
-        fetch(`http://localhost:5000/cards/favorite?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`, {
+        fetch(`http://localhost:5000/products/my-faves-products`, {
             credentials: 'include',
+            headers: {
+                'Authorization': localStorage.token
+            },
         })
             .then(res => {
                 if (res.ok) {
@@ -37,7 +40,7 @@ export default function FavCards() {
     return (
         <>
             <header>
-                <h1 className='main-title'> My Favorites Cards</h1>
+                <h1 className='main-title'> My Favorites Products</h1>
                 <br />
             </header>
             <section className="container-cards">

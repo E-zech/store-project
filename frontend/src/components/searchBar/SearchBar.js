@@ -54,7 +54,7 @@ export default function SearchBar() {
     const { setFilteredCards } = useContext(GeneralContext);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/cards?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`, {
+        fetch(`http://localhost:5000/products`, {
             credentials: 'include',
         })
             .then(res => res.json())

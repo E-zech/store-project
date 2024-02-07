@@ -1,28 +1,17 @@
 import Joi from 'joi';
 
 export const clientStructure = [
-  { name: 'name.first', type: 'text', label: 'First Name', required: true, block: false },
-  { name: 'name.middle', type: 'text', label: 'Middle Name', required: false, block: false },
-  { name: 'name.last', type: 'text', label: 'Last Name', required: true, block: false },
+  { name: 'firstName', type: 'text', label: 'First Name', required: true, block: false },
+  { name: 'lastName', type: 'text', label: 'Last Name', required: true, block: false },
   { name: 'phone', type: 'text', label: 'Phone', required: true, block: false },
   { name: 'email', type: 'email', label: 'Email', required: true, block: false },
   { name: 'password', type: 'password', label: 'Password', required: true, block: false, initialOnly: true },
-  { name: 'address.state', type: 'text', label: 'State', required: false, block: false },
-  { name: 'address.country', type: 'text', label: 'Country', required: true, block: false },
-  { name: 'address.city', type: 'text', label: 'City', required: true, block: false },
-  { name: 'address.street', type: 'text', label: 'Street', required: true, block: false },
-  { name: 'address.houseNumber', type: 'number', label: 'House Number', required: true, block: false },
-  { name: 'address.zip', type: 'number', label: 'ZIP Code', required: false, block: false },
-  { name: 'image.url', type: 'text', label: 'Image URL', required: true, block: false },
-  { name: 'image.alt', type: 'text', label: 'Image Alt Text', required: false, block: false },
 ];
 
 export const schema = Joi.object({
-  name: Joi.object({
-    first: Joi.string().min(2).max(20).label('First Name').required(),
-    middle: Joi.string().allow(''),
-    last: Joi.string().min(2).max(20).label('Last Name').required(),
-  }).required(),
+
+  firstName: Joi.string().min(2).max(20).label('First Name').required(),
+  lastName: Joi.string().min(2).max(20).label('Last Name').required(),
 
   phone: Joi.string().pattern(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/).message('Phone must be 9 digits long').required(),
 
@@ -31,29 +20,7 @@ export const schema = Joi.object({
   password: Joi.string().pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{9,}$/)
     .message('Password must be 9 characters long and include 1 uppercase letter, 1 lowercase letter, 1 special character, and numbers.')
     .required(),
-
-  address: Joi.object({
-    state: Joi.string().min(2).max(56).allow(''),
-    country: Joi.string().min(2).max(56).label('Country').required(),
-    city: Joi.string().label('City').required(),
-    street: Joi.string().label('Street').required(),
-    houseNumber: Joi.number().min(1).label('House Number').required(),
-    zip: Joi.number().allow(''),
-  }).required(),
-
-  image: Joi.object({
-    url: Joi.string().uri().allow(''),
-    alt: Joi.string().allow(''),
-  }).required(),
-
 }).options({ abortEarly: false }); // To show all validation errors at once
-
-
-
-
-
-
-
 
 // old ones ....
 

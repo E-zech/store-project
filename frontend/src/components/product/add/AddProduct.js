@@ -9,26 +9,23 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Joi from 'joi';
-import "./MyProducts.css";
+import "./AddProduct.css";
 import ResultNotFound from '../../../pages/ResultNotFound.js';
 
-const inputsForCard = [
+const inputsForProducts = [
   { name: 'title', type: 'text', label: 'title', required: true },
   { name: 'description', type: 'text', label: 'description', required: true },
-  { name: 'subtitle', type: 'text', label: 'subtitle', required: true },
-  { name: 'phone', type: 'tel', label: 'Phone', required: true },
-  { name: 'email', type: 'email', label: 'Email', required: true },
-  { name: 'web', type: 'text', label: 'web', required: true },
+  { name: 'howToUse', type: 'text', label: 'how to use', required: true },
+  { name: 'Ingredients', type: 'text', label: 'Ingredients', required: true },
+  { name: 'price', type: 'number', label: 'price', required: true },
+  { name: 'discount', type: 'number', label: 'discount', required: true },
   { name: 'imgUrl', type: 'text', label: 'Img Url', required: true },
   { name: 'imgAlt', type: 'text', label: 'Img Alt', required: true },
-  { name: 'state', type: 'text', label: 'State', required: true },
-  { name: 'country', type: 'text', label: 'Country', required: true },
-  { name: 'city', type: 'text', label: 'City', required: true },
-  { name: 'street', type: 'text', label: 'Street', required: true },
-  { name: 'houseNumber', type: 'number', label: 'House Number', required: true },
-  { name: 'zip', type: 'text', label: 'Zip', required: true },];
+  { name: 'categogory', type: 'text', label: 'State', required: true },
+  { name: 'productId', type: 'text', label: 'Serial Number', required: true },
+];
 
-export default function MyCards() {
+export default function AddProduct() {
   const [allMyCards, setAllMyCards] = useState([]);
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
@@ -37,26 +34,27 @@ export default function MyCards() {
   const { filteredCards, setFilteredCards, snackbar, loader, setLoader } = useContext(GeneralContext);
 
   const schema = Joi.object({
-    title: Joi.string().required().min(2).max(30),
-    description: Joi.string().required().min(6).max(999),
-    subtitle: Joi.string().required().min(2).max(30),
-    phone: Joi.string().required().pattern(/^\d{10}$/).message('"Phone number" must be 10 digits long'),
-    email: Joi.string().email({ tlds: false }).required(),
-    web: Joi.string().required().uri({ scheme: ['http', 'https'] }).message('"web" must be a valid link (HTTP or HTTPS).'),
-    imgUrl: Joi.string().required().uri({ scheme: ['http', 'https'] }).message('"Img Url" must be a valid link (HTTP or HTTPS).'),
-    imgAlt: Joi.string().required().min(2).max(20),
-    state: Joi.string().required().min(4).max(56),
-    country: Joi.string().required().min(2).max(56),
-    city: Joi.string().required(),
-    street: Joi.string().required(),
-    houseNumber: Joi.number().required(),
-    zip: Joi.number().required(),
+    title: Joi.string().min(2).max(30).required(),
+    description: Joi.string().min(10).max(500).required(),
+    howToUse: Joi.string().min(10).max(500).required(),
+    Ingredients: Joi.string().min(10).max(500).required(),
+    price: Joi.number().required(),
+    discount: Joi.number(),
+    imgUrl: Joi.string().uri().allow(""),
+    imgAlt: Joi.string().allow(""),
+    category: Joi.array().default([]).required(),
+    productId: Joi.string().hex().length(24),
   });
 
   useEffect(() => {
     setLoader(true);
-    fetch(`http://localhost:5000/business/cards?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`, {
+
+    // maybe insert if theres localstorage.token and if not send alertt or somthing
+    fetch(`http://localhost:5000/products`, {
       credentials: 'include',
+      headers: {
+        'Authorization': localStorage.token
+      },
     })
       .then(res => res.json())
       .then(data => {
@@ -100,7 +98,7 @@ export default function MyCards() {
     const obj = {};
     const elements = ev.target.elements;
 
-    inputsForCard.forEach((s) => {
+    inputsForProducts.forEach((s) => {
       if (s.type === 'boolean') {
         obj[s.name] = elements[s.name].checked;
       } else {
@@ -131,7 +129,7 @@ export default function MyCards() {
   return (
     <>
       <header>
-        <h1 className='main-title leftFix'>My Cards </h1> <br />
+        <h1 className='main-title leftFix'>Products </h1> <br />
       </header>
       <section className="container-cards">
         {loader ? (
@@ -162,11 +160,11 @@ export default function MyCards() {
 
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                 <Typography component="h1" variant="h5">
-                  Add Card
+                  Add Product
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                   <Grid container spacing={2}>
-                    {inputsForCard.map((i) => (
+                    {inputsForProducts.map((i) => (
                       <Grid key={i.name} item xs={12}>
                         <TextField
                           margin="normal"
@@ -187,7 +185,7 @@ export default function MyCards() {
 
                   <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}
                     disabled={!isFormValid}>
-                    Add Card
+                    Add Product
                   </Button>
 
                 </Box>

@@ -24,9 +24,9 @@ const pages = [
     { route: '/about', title: 'About' },
     { route: '/login', title: 'Login', permissions: [RoleTypes.none] },
     { route: '/signup', title: 'Signup', permissions: [RoleTypes.none] },
-    { route: '/favorite', title: 'Fav cards', permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin] },
-    { route: '/my-cards', title: 'My cards', permissions: [RoleTypes.business, RoleTypes.admin] },
-    { route: '/admin', title: 'User management', permissions: [RoleTypes.admin] }];
+    { route: '/faves', title: 'Fav products', permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
+    { route: '/add-product', title: 'Add product', permissions: [RoleTypes.admin, RoleTypes.master] },
+    { route: '/admin', title: 'User management', permissions: [RoleTypes.admin, RoleTypes.master] }];
 
 export default function Navbar({ mode, toggleMode }) {
     const [anchorElNav, setAnchorElNav] = useState(null);
