@@ -4,7 +4,7 @@ import Signup from './auth/Signup';
 import Account from './auth/Account';
 import UsersMenagment from './admin/UsersMenagment';
 import About from './pages/about/About';
-import Home from './pages/Home';
+import Home from './pages/about/Home';
 import FavProducts from './components/product/faves/FavProduct';
 import EditProduct from './components/product/edit/EditProduct';
 import AddProduct from './components/product/add/AddProduct';

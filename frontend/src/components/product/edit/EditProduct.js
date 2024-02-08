@@ -18,6 +18,10 @@ export default function EditProduct() {
         setLoader(true);
         fetch(`http://localhost:5000/products/${productId}`, {
             credentials: 'include',
+            headers: {
+                'Authorization': localStorage.token,
+                'Content-Type': 'application/json',
+            },
         })
             .then((res) => res.json())
             .then((data) => {
@@ -35,7 +39,8 @@ export default function EditProduct() {
             credentials: 'include',
             method: 'PUT',
             headers: {
-                'Authorization': localStorage.token
+                'Authorization': localStorage.token,
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData),
         })

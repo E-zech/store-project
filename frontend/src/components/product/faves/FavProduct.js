@@ -13,7 +13,8 @@ export default function FavProducts() {
         fetch(`http://localhost:5000/products/my-faves-products`, {
             credentials: 'include',
             headers: {
-                'Authorization': localStorage.token
+                'Authorization': localStorage.token,
+                'Content-Type': 'application/json',
             },
         })
             .then(res => {
@@ -21,7 +22,7 @@ export default function FavProducts() {
                     return res.json();
                 } else {
                     return res.text().then(x => {
-                        throw new Error(x);
+                        throw new Error(x); // of there is no product react error NEED TO FIX   
                     });
                 }
             })

@@ -27,7 +27,8 @@ const productSchema = new mongoose.Schema({
 
     category: {
         type: [String],
-        default: [],
+        enum: ['All Products', 'Face', 'Eyes', 'Body', 'Hands', 'Feet'],
+        default: 'All Products',
         required: true
     },
 

@@ -23,15 +23,15 @@ export default function ProductComponent({ card, setAllCard }) {
   const toggleFavOrNot = (id, favorite) => {
     setLoader(true);
 
-    const url = favorite ?
-      `http://localhost:5000/cards/${id}/unfavorite?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0` :
-      `http://localhost:5000/cards/${id}/favorite?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`;
-
     const snackbarMessage = favorite ? 'Removed from Favorites' : 'Added to Favorites';
 
-    fetch(url, {
+    fetch(`http://localhost:5000/products/${id}`, {
       credentials: 'include',
-      method: 'PUT',
+      method: 'PATCH',
+      headers: {
+        'Authorization': localStorage.token,
+        'Content-Type': 'application/json',
+      },
     })
       .then(() => {
         setAllCard((allCards) =>
@@ -49,16 +49,13 @@ export default function ProductComponent({ card, setAllCard }) {
 
     if (isConfirmed) {
 
-      let url;
-      if (userRoleType === RoleTypes.business) {
-        url = `http://localhost:5000/business/cards/${id}?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`
-      } else {
-        url = `http://localhost:5000/admin/cards/${id}?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`
-      };
-
-      fetch(url, {
+      fetch(`http://localhost:5000/products/${id}`, {
         credentials: 'include',
         method: 'DELETE',
+        headers: {
+          'Authorization': localStorage.token,
+          'Content-Type': 'application/json',
+        },
       })
         .then(() => {
           setAllCard((allCards) =>

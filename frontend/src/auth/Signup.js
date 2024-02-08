@@ -18,26 +18,11 @@ export const defaultTheme = createTheme();
 
 export default function Signup() {
   const [formData, setFormData] = useState({
-    name: {
-      first: '',
-      middle: '',
-      last: '',
-    },
+    firstName: '',
+    lastName: '',
     phone: '',
     email: '',
     password: '',
-    address: {
-      state: '',
-      country: '',
-      city: '',
-      street: '',
-      houseNumber: '',
-      zip: '',
-    },
-    image: {
-      url: '',
-      alt: '',
-    },
   });
 
   const [errors, setErrors] = useState({});
@@ -47,47 +32,32 @@ export default function Signup() {
 
   const handleChange = (ev) => {
     const { name, value } = ev.target;
-    const [section, field] = name.split('.');
+    const obj = { ...formData, [name]: value };
+    setFormData(obj);
 
-    const updatedFormData = {
-      ...formData,
-      [section]: {
-        ...formData[section],
-        [field]: value,
-      },
-    };
-
-    setFormData(updatedFormData);
-
-    const validate = schema.validate(updatedFormData, { abortEarly: false });
+    const validate = schema.validate(obj, { abortEarly: false });
     const tempErrors = { ...errors };
     delete tempErrors[name];
 
     if (validate.error) {
-      const item = validate.error.details.find((e) => e.context.key === field);
+      const item = validate.error.details.find((e) => e.context.key === name);
       if (item) {
         tempErrors[name] = item.message;
       }
     }
-
     if (name in tempErrors && value === "") {
       delete tempErrors[name];
     }
 
     setErrors(tempErrors);
 
-    const formIsValid =
-      Object.keys(tempErrors).length === 0 &&
-      Object.values(updatedFormData).every((value) => {
-        if (typeof value === 'object') {
-          return Object.values(value).every((nestedValue) => nestedValue !== '');
-        }
-        return value !== '';
+    const formIsValid = Object.keys(tempErrors).length === 0 &&
+      Object.values(obj).every((value) => {
+        return value !== "";
       });
-
     setIsFormValid(formIsValid);
-  };
 
+  };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();

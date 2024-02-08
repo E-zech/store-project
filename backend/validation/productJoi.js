@@ -3,11 +3,11 @@ import Joi from 'joi';
 export const ProductValid = Joi.object({
     title: Joi.string().min(2).max(30).required(),
 
-    description: Joi.string().min(10).max(500).required(),
+    description: Joi.string().min(10).max(900).required(),
 
-    howToUse: Joi.string().min(10).max(500).required(),
+    howToUse: Joi.string().min(10).max(900).required(),
 
-    Ingredients: Joi.string().min(10).max(500).required(),
+    Ingredients: Joi.string().min(10).max(900).required(),
 
     price: Joi.number().required(),
 
@@ -17,7 +17,7 @@ export const ProductValid = Joi.object({
 
     imgAlt: Joi.string().allow(""),
 
-    category: Joi.array().default([]).required(),
+    category: Joi.string().valid('Face', 'Eyes', 'Body', 'Hands', 'Feet').required(),
 
     productId: Joi.string().hex().length(24),
 

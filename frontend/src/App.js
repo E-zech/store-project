@@ -55,7 +55,8 @@ function App() {
             fetch(`http://localhost:5000/users/${userId}`, {
                 credentials: 'include',
                 headers: {
-                    'Authorization': localStorage.token
+                    'Authorization': localStorage.token,
+                    'Content-Type': 'application/json',
                 },
             })
                 .then(res => {

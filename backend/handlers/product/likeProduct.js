@@ -10,7 +10,7 @@ const likeProduct = app => {
             let message = '';
 
             const product = await Product.findOne({ productId: paramsId });
-
+            console.log(product)
             if (!product) {
                 return res.status(404).send('product not found');
             }

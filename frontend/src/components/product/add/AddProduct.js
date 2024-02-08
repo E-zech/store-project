@@ -11,18 +11,19 @@ import Grid from '@mui/material/Grid';
 import Joi from 'joi';
 import "./AddProduct.css";
 import ResultNotFound from '../../../pages/ResultNotFound.js';
+import MenuItem from '@mui/material/MenuItem';
+
 
 const inputsForProducts = [
   { name: 'title', type: 'text', label: 'title', required: true },
-  { name: 'description', type: 'text', label: 'description', required: true },
-  { name: 'howToUse', type: 'text', label: 'how to use', required: true },
-  { name: 'Ingredients', type: 'text', label: 'Ingredients', required: true },
+  { name: 'description', type: 'textarea', label: 'description', required: true },
+  { name: 'howToUse', type: 'textarea', label: 'how to use', required: true },
+  { name: 'Ingredients', type: 'textarea', label: 'Ingredients', required: true },
   { name: 'price', type: 'number', label: 'price', required: true },
   { name: 'discount', type: 'number', label: 'discount', required: true },
   { name: 'imgUrl', type: 'text', label: 'Img Url', required: true },
   { name: 'imgAlt', type: 'text', label: 'Img Alt', required: true },
-  { name: 'categogory', type: 'text', label: 'State', required: true },
-  { name: 'productId', type: 'text', label: 'Serial Number', required: true },
+  { name: 'category', type: 'select', label: 'Category', required: true, options: ['Face', 'Eyes', 'Body', 'Hands', 'Feet'] },
 ];
 
 export default function AddProduct() {
@@ -35,15 +36,14 @@ export default function AddProduct() {
 
   const schema = Joi.object({
     title: Joi.string().min(2).max(30).required(),
-    description: Joi.string().min(10).max(500).required(),
-    howToUse: Joi.string().min(10).max(500).required(),
-    Ingredients: Joi.string().min(10).max(500).required(),
+    description: Joi.string().min(10).max(900).required(),
+    howToUse: Joi.string().min(10).max(900).required(),
+    Ingredients: Joi.string().min(10).max(900).required(),
     price: Joi.number().required(),
     discount: Joi.number(),
     imgUrl: Joi.string().uri().allow(""),
     imgAlt: Joi.string().allow(""),
-    category: Joi.array().default([]).required(),
-    productId: Joi.string().hex().length(24),
+    category: Joi.string().valid('Face', 'Eyes', 'Body', 'Hands', 'Feet').required(),
   });
 
   useEffect(() => {
@@ -53,7 +53,8 @@ export default function AddProduct() {
     fetch(`http://localhost:5000/products`, {
       credentials: 'include',
       headers: {
-        'Authorization': localStorage.token
+        'Authorization': localStorage.token,
+        'Content-Type': 'application/json',
       },
     })
       .then(res => res.json())
@@ -106,10 +107,13 @@ export default function AddProduct() {
       }
     });
 
-    fetch(`http://localhost:5000/business/cards?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`, {
+    fetch(`http://localhost:5000/products`, {
       credentials: 'include',
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: {
+        'Authorization': localStorage.token,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(formData),
     })
       .then(res => res.json())
@@ -118,7 +122,7 @@ export default function AddProduct() {
         setFilteredCards([...filteredCards, data]);
       }).finally(() => {
         toggleForm();
-        snackbar('Card added');
+        snackbar('Product added');
       }).finally(() => setLoader(false))
   };
 
@@ -149,7 +153,7 @@ export default function AddProduct() {
         color={isFormVisible ? 'secondary' : 'primary'}
         onClick={toggleForm}
         sx={{ backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}>
-        {isFormVisible ? 'Close' : 'Add Card'}
+        {isFormVisible ? 'Close' : 'Add Product'}
       </Button>
       </a> <br />
       <>
@@ -163,24 +167,64 @@ export default function AddProduct() {
                   Add Product
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
                   <Grid container spacing={2}>
                     {inputsForProducts.map((i) => (
                       <Grid key={i.name} item xs={12}>
-                        <TextField
-                          margin="normal"
-                          required={i.required}
-                          fullWidth
-                          id={i.name}
-                          label={i.label}
-                          name={i.name}
-                          type={i.type}
-                          value={formData[i.name] || ''}
-                          onChange={handleChange}
-                          error={Boolean(errors[i.name])}
-                          helperText={errors[i.name]}
-                          autoComplete="off"
-                        />
-                      </Grid>))}
+                        {i.type === 'textarea' ? (
+                          <TextField
+                            margin="normal"
+                            required={i.required}
+                            fullWidth
+                            id={i.name}
+                            label={i.label}
+                            name={i.name}
+                            multiline
+                            rows={4} // Adjust the number of rows as needed
+                            value={formData[i.name] || ''}
+                            onChange={handleChange}
+                            error={Boolean(errors[i.name])}
+                            helperText={errors[i.name]}
+                            autoComplete="off"
+                          />
+                        ) : i.type === 'select' ? (
+                          <TextField
+                            select
+                            margin="normal"
+                            required={i.required}
+                            fullWidth
+                            id={i.name}
+                            label={i.label}
+                            name={i.name}
+                            value={formData[i.name] || ''}
+                            onChange={handleChange}
+                            error={Boolean(errors[i.name])}
+                            helperText={errors[i.name]}
+                          >
+                            {i.options.map((option) => (
+                              <MenuItem key={option} value={option}>
+                                {option}
+                              </MenuItem>
+                            ))}
+                          </TextField>
+                        ) : (
+                          <TextField
+                            margin="normal"
+                            required={i.required}
+                            fullWidth
+                            id={i.name}
+                            label={i.label}
+                            name={i.name}
+                            type={i.type}
+                            value={formData[i.name] || ''}
+                            onChange={handleChange}
+                            error={Boolean(errors[i.name])}
+                            helperText={errors[i.name]}
+                            autoComplete="off"
+                          />
+                        )}
+                      </Grid>))
+                    }
                   </Grid>
 
                   <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}
