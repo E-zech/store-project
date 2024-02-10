@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GeneralContext } from "../../../../App.js";
-import ProductComponent from '../../ProductComponent.js';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -10,8 +9,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Joi from 'joi';
 import "./AddProduct.css";
-import ResultNotFound from '../../../../pages/ResultNotFound.js';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
 
 
 const inputsForProducts = [
@@ -27,11 +26,11 @@ const inputsForProducts = [
 ];
 
 export default function AddProduct() {
-  const [allMyProducts, setAllMyProducts] = useState([]);
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const navigate = useNavigate();
   const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader } = useContext(GeneralContext);
 
   const schema = Joi.object({
@@ -46,28 +45,13 @@ export default function AddProduct() {
     category: Joi.string().valid('Face', 'Eyes', 'Body', 'Hands', 'Feet').required(),
   });
 
-  useEffect(() => {
-
-    // maybe insert if theres localstorage.token and if not send alertt or somthing
-    fetch(`http://localhost:5000/products`, {
-      credentials: 'include',
-      headers: {
-        'Authorization': localStorage.token,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        setAllMyProducts(data);
-      })
-  }, [filteredProducts]) // [filteredProducts] I CHANGE THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
     if (!isFormVisible) {
       setFormData({});
       setErrors({});
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleChange = (event) => {
@@ -122,32 +106,14 @@ export default function AddProduct() {
 
       }).finally(() => {
         toggleForm();
+        navigate('/product-management');
         snackbar('Product added');
       }).finally(() => setLoader(false))
   };
 
-  const filteredMyProducts = allMyProducts.filter(product => {
-    return filteredProducts.some(filteredProduct => filteredProduct._id === product._id);
-  });
 
   return (
     <>
-      <header>
-        <h1 className='main-title leftFix'>Products </h1> <br />
-      </header>
-      <section className="container-cards">
-        {loader ? (
-          <h1>Loading...</h1>
-        ) : (
-          <div className="grid-cards">
-            {filteredMyProducts.length > 0 ? (
-              filteredMyProducts.map(product => (
-                <ProductComponent key={product._id} product={product} setAllProducts={setFilteredProducts} />))
-            ) : (
-              <ResultNotFound />
-            )}
-          </div>)}
-      </section>
       <a href="#addCard" className='addCardBtn'>  <Button
         variant="contained"
         color={isFormVisible ? 'secondary' : 'primary'}

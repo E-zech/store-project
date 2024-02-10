@@ -183,7 +183,7 @@ export default function Navbar({ mode, toggleMode }) {
                                     color: mode === 'dark' ? 'white' : 'black'
                                 }}>
                                     <MenuItem onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{user.fullName}</Typography>
+                                        <Typography align="center">{user.firstName || 'Account'}</Typography>
                                     </MenuItem>
                                 </Link>
 

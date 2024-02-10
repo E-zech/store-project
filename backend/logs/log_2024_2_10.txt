@@ -1552,3 +1552,171 @@ Route: /products/my-faves-products
 Status Code: 404
 Error:  Not Found
 
+Time: 2024-02-10T09:22:31.672Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-10T09:42:00.315Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:42:00.512Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:42:00.772Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:51:49.045Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:51:52.019Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:51:52.303Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:51:54.862Z
+Method: GET
+Route: /users
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:51:57.531Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:52:04.370Z
+Method: GET
+Route: /users
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:52:07.152Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:52:12.244Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:52:12.474Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:52:16.334Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-10T09:52:39.385Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:52:39.628Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:52:41.394Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:53:40.006Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:53:40.217Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:53:40.645Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:53:40.950Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:53:41.980Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:53:42.659Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-10T09:58:59.315Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-10T09:59:04.533Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:59:04.792Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:59:05.006Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-10T09:59:05.292Z
+Method: GET
+Route: /products/cart
+Status Code: 400
+Error:  Bad Request
+

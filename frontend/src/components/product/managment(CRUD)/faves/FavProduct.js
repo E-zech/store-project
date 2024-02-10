@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import * as React from "react";
-import { GeneralContext } from "../../../App.js";
-import ProductComponent from '../ProductComponent.js';
-import ResultNotFound from '../../../pages/ResultNotFound.js';
+import { GeneralContext } from "../../../../App.js";
+import ProductComponent from '../../ProductComponent.js';
+import ResultNotFound from '../../../../pages/ResultNotFound.js';
 
 export default function FavProducts() {
     const [favProducts, setFavProducts] = useState([]);

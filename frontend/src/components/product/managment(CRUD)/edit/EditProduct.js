@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { GeneralContext } from '../../../App';
+import { GeneralContext } from '../../../../App';
 
 export default function EditProduct() {
     const [formData, setFormData] = useState({});

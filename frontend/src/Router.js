@@ -5,8 +5,8 @@ import Account from './auth/Account';
 import UsersMenagment from './admin/UsersMenagment';
 import About from './pages/about/About';
 import AllProducts from './pages/AllProducts';
-import FavProducts from './components/product/faves/FavProduct';
-import EditProduct from './components/product/edit/EditProduct';
+import FavProducts from './components/product/managment(CRUD)/faves/FavProduct';
+import EditProduct from './components/product/managment(CRUD)/edit/EditProduct';
 import ProductMangement from './components/product/managment(CRUD)/ProductMangement';
 
 export default function Router() {
