@@ -64,8 +64,6 @@ export default function ProductComponent({ product, setProducts }) {
       .finally(() => setLoader(false));
   }
 
-
-
   // const deleteProduct = (id, userRoleType) => {
   //   setLoader(true);
 

@@ -10,7 +10,7 @@ export default function AllProducts() { // ALL Products Page basicly
     const { loader, setLoader, filteredProducts, setFilteredProducts } = useContext(GeneralContext);
 
     useEffect(() => {
-        setLoader(true);
+
         fetch(`http://localhost:5000/products`, {
             credentials: 'include',
             headers: {
@@ -20,7 +20,7 @@ export default function AllProducts() { // ALL Products Page basicly
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
-            }).finally(() => setLoader(false))
+            })
     }, [filteredProducts]);
 
     const add2Cart = async (id) => {

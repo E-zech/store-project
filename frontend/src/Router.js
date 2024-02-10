@@ -7,17 +7,17 @@ import About from './pages/about/About';
 import AllProducts from './pages/AllProducts';
 import FavProducts from './components/product/faves/FavProduct';
 import EditProduct from './components/product/edit/EditProduct';
-import AddProduct from './components/product/add/AddProduct';
+import ProductMangement from './components/product/managment(CRUD)/ProductMangement';
 
 export default function Router() {
     return (
         <Routes>
             <Route path="/" element={<AllProducts />} />
             <Route path="/about" element={<About />} />
-            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/product-management" element={<ProductMangement />} />
             <Route path="/faves" element={<FavProducts />} />
             <Route path="/edit-product/:id" element={<EditProduct />} />
-            <Route path="/admin" element={<UsersMenagment />} />
+            <Route path="/user-management" element={<UsersMenagment />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account />} />

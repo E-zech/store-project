@@ -9,7 +9,6 @@ export default function FavProducts() {
     const { filteredProducts, setFilteredProducts, loader, setLoader, snackbar } = useContext(GeneralContext);
 
     useEffect(() => {
-        setLoader(true);
         fetch(`http://localhost:5000/products/my-faves-products`, {
             credentials: 'include',
             headers: {
@@ -28,8 +27,6 @@ export default function FavProducts() {
             })
             .then(data => {
                 setFavProducts(data);
-            }).finally(() => {
-                setLoader(false);
             });
     }, [filteredProducts]);
 

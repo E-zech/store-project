@@ -21,12 +21,12 @@ export const checkPermissions = (permissions, userRoleType) => {
 }
 
 const pages = [
-    { route: '/about', title: 'About' },
-    { route: '/login', title: 'Login', permissions: [RoleTypes.none] },
-    { route: '/signup', title: 'Signup', permissions: [RoleTypes.none] },
-    { route: '/faves', title: 'Fav products', permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
-    { route: '/add-product', title: 'Add product', permissions: [RoleTypes.admin, RoleTypes.master] },
-    { route: '/admin', title: 'User management', permissions: [RoleTypes.admin, RoleTypes.master] }];
+    { route: '/about', title: 'about' },
+    { route: '/login', title: 'login', permissions: [RoleTypes.none] },
+    { route: '/signup', title: 'signup', permissions: [RoleTypes.none] },
+    { route: '/faves', title: 'favorites ', permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
+    { route: '/product-management', title: 'product management', permissions: [RoleTypes.admin, RoleTypes.master] },
+    { route: '/user-management', title: 'user management', permissions: [RoleTypes.admin, RoleTypes.master] }];
 
 export default function Navbar({ mode, toggleMode }) {
     const [anchorElNav, setAnchorElNav] = useState(null);

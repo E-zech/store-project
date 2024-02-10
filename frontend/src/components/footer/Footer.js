@@ -3,6 +3,7 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import InfoIcon from '@mui/icons-material/Info';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useResolvedPath } from 'react-router-dom';
@@ -25,10 +26,12 @@ export default function Footer({ mode }) {
   useEffect(() => {
     if (path === '/about') {
       setValue(0);
-    } else if (path === '/favorite') {
+    } else if (path === '/faves') {
       setValue(1);
-    } else if (path === '/my-cards') {
+    } else if (path === '/product-management') {
       setValue(2);
+    } else if (path === '/user-management') {
+      setValue(3);
     } else {
       setValue(-1);
     }
@@ -59,8 +62,11 @@ export default function Footer({ mode }) {
               <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} onClick={() => navigate('/faves')} sx={path === '/faves' ? activeColor : {}} />
             }
 
-            {(userRoleType === RoleTypes.business || userRoleType === RoleTypes.admin) &&
-              <BottomNavigationAction label="ADD PRODUCT" icon={<AccountCircleIcon />} onClick={() => navigate('/add-product')} sx={path === '/add-product' ? activeColor : {}} />
+            {(userRoleType === RoleTypes.admin || userRoleType === RoleTypes.master) &&
+              <BottomNavigationAction label="product management" icon={<LocalMallIcon />} onClick={() => navigate('/product-management')} sx={path === '/product-management' ? activeColor : {}} />
+            }
+            {(userRoleType === RoleTypes.admin || userRoleType === RoleTypes.master) &&
+              <BottomNavigationAction label="user management" icon={<AccountCircleIcon />} onClick={() => navigate('/user-management')} sx={path === '/user-management' ? activeColor : {}} />
             }
 
           </BottomNavigation>

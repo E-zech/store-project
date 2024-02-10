@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { GeneralContext } from "../../../App.js";
-import ProductComponent from '../ProductComponent.js';
+import { GeneralContext } from "../../../../App.js";
+import ProductComponent from '../../ProductComponent.js';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Joi from 'joi';
 import "./AddProduct.css";
-import ResultNotFound from '../../../pages/ResultNotFound.js';
+import ResultNotFound from '../../../../pages/ResultNotFound.js';
 import MenuItem from '@mui/material/MenuItem';
 
 
@@ -47,7 +47,6 @@ export default function AddProduct() {
   });
 
   useEffect(() => {
-    setLoader(true);
 
     // maybe insert if theres localstorage.token and if not send alertt or somthing
     fetch(`http://localhost:5000/products`, {
@@ -60,8 +59,8 @@ export default function AddProduct() {
       .then(res => res.json())
       .then(data => {
         setAllMyProducts(data);
-      }).finally(() => setLoader(false))
-  }, [filteredProducts])
+      })
+  }, [filteredProducts]) // [filteredProducts] I CHANGE THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
