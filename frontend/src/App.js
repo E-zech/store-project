@@ -19,7 +19,7 @@ function App() {
     const [snackbarText, setSnackbarText] = useState('');
     const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
     const [mode, setMode] = useState('light');
-    const [filteredCards, setFilteredCards] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     const navigate = useNavigate();
 
@@ -90,7 +90,7 @@ function App() {
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
             <CssBaseline />
-            <GeneralContext.Provider value={{ user, setUser, loader, setLoader, snackbar, userRoleType, setUserRoleType, filteredCards, setFilteredCards }}>
+            <GeneralContext.Provider value={{ user, setUser, loader, setLoader, snackbar, userRoleType, setUserRoleType, filteredProducts, setFilteredProducts }}>
                 <Navbar mode={mode} toggleMode={toggleMode} />
                 <Router />
                 {loader && <Loader />}

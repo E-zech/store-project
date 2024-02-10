@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
-import { Types } from "mongoose";
 
-export function randomObjectId() {
-    return new Types.ObjectId();
-}
 const productSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -32,25 +28,12 @@ const productSchema = new mongoose.Schema({
         required: true
     },
 
-    productId: {
-        type: Types.ObjectId,
-        default: randomObjectId,
-        unique: true,
-    },
-
     faves: [String],
 
     createdAt: {
         type: Date,
         default: Date.now
     }
-});
-
-productSchema.pre('save', function (next) {
-    if (this.isNew) {
-        this.productId = randomObjectId();
-    }
-    next();
 });
 
 const Product = mongoose.model('products', productSchema);

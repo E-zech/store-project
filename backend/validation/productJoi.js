@@ -19,20 +19,8 @@ export const ProductValid = Joi.object({
 
     category: Joi.string().valid('Face', 'Eyes', 'Body', 'Hands', 'Feet').required(),
 
-    productId: Joi.string().hex().length(24),
-
     faves: Joi.array().default([]),
 
     createdAt: Joi.date(),
 });
 
-export const productNumberIsValid = Joi.object({
-    productId: Joi.string() // Expecting a string (Types.ObjectId is a string)
-        .length(24) // ObjectId is a 24-character hexadecimal string
-        .hex() // Ensure it's a valid hexadecimal string
-        .messages({
-            'string.base': 'productId must be a string',
-            'string.length': 'productId must be a 24-character hexadecimal string',
-            'string.hex': 'productId must be a valid hexadecimal string',
-        }),
-});

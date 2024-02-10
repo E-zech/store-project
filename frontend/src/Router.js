@@ -4,7 +4,7 @@ import Signup from './auth/Signup';
 import Account from './auth/Account';
 import UsersMenagment from './admin/UsersMenagment';
 import About from './pages/about/About';
-import Home from './pages/about/Home';
+import AllProducts from './pages/AllProducts';
 import FavProducts from './components/product/faves/FavProduct';
 import EditProduct from './components/product/edit/EditProduct';
 import AddProduct from './components/product/add/AddProduct';
@@ -12,7 +12,7 @@ import AddProduct from './components/product/add/AddProduct';
 export default function Router() {
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<AllProducts />} />
             <Route path="/about" element={<About />} />
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/faves" element={<FavProducts />} />

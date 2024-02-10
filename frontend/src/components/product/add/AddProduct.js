@@ -27,12 +27,12 @@ const inputsForProducts = [
 ];
 
 export default function AddProduct() {
-  const [allMyCards, setAllMyCards] = useState([]);
+  const [allMyProducts, setAllMyProducts] = useState([]);
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const { filteredCards, setFilteredCards, snackbar, loader, setLoader } = useContext(GeneralContext);
+  const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader } = useContext(GeneralContext);
 
   const schema = Joi.object({
     title: Joi.string().min(2).max(30).required(),
@@ -59,9 +59,9 @@ export default function AddProduct() {
     })
       .then(res => res.json())
       .then(data => {
-        setAllMyCards(data);
+        setAllMyProducts(data);
       }).finally(() => setLoader(false))
-  }, [filteredCards])
+  }, [filteredProducts])
 
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
@@ -93,7 +93,7 @@ export default function AddProduct() {
     setErrors(tempErrors)
   };
 
-  const handleSubmit = (ev) => {
+  const handleSubmit = (ev) => { // nnes to fix the update of the UI after adding a product
     ev.preventDefault();
     setLoader(true);
     const obj = {};
@@ -119,15 +119,16 @@ export default function AddProduct() {
       .then(res => res.json())
       .then(data => {
         setFormData(formData);
-        setFilteredCards([...filteredCards, data]);
+        setFilteredProducts([...filteredProducts, data]);
+
       }).finally(() => {
         toggleForm();
         snackbar('Product added');
       }).finally(() => setLoader(false))
   };
 
-  const filteredMyCards = allMyCards.filter(card => {
-    return filteredCards.some(filteredCard => filteredCard.id === card.id);
+  const filteredMyProducts = allMyProducts.filter(product => {
+    return filteredProducts.some(filteredProduct => filteredProduct._id === product._id);
   });
 
   return (
@@ -140,9 +141,9 @@ export default function AddProduct() {
           <h1>Loading...</h1>
         ) : (
           <div className="grid-cards">
-            {filteredMyCards.length > 0 ? (
-              filteredMyCards.map(card => (
-                <ProductComponent key={card.id} card={card} setAllCard={setFilteredCards} />))
+            {filteredMyProducts.length > 0 ? (
+              filteredMyProducts.map(product => (
+                <ProductComponent key={product._id} product={product} setAllProducts={setFilteredProducts} />))
             ) : (
               <ResultNotFound />
             )}

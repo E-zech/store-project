@@ -12,7 +12,7 @@ export default function EditProduct() {
     const [formData, setFormData] = useState({});
     const { productId } = useParams();
     const navigate = useNavigate();
-    const { setLoader, snackbar, filteredCards, setFilteredCards } = useContext(GeneralContext);
+    const { setLoader, snackbar, filteredProducts, setFilteredProducts } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true);
@@ -44,12 +44,12 @@ export default function EditProduct() {
             },
             body: JSON.stringify(formData),
         })
-            .then((data) => {
+            .then((data) => { // maybe need to change formData._id ?? 
                 if (data.ok) {
-                    if (filteredCards.some(card => card.id === formData.id)) {
-                        setFilteredCards(prevFilteredCards => {
-                            return prevFilteredCards.map(card => {
-                                return card.id === formData.id ? { ...card, ...formData } : card;
+                    if (filteredProducts.some(product => product._id === formData.id)) {
+                        setFilteredProducts(prevfilteredProducts => {
+                            return prevfilteredProducts.map(product => {
+                                return product._id === formData.id ? { ...product, ...formData } : product;
                             });
                         });
                     }

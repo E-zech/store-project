@@ -56,11 +56,11 @@ export default function Footer({ mode }) {
               sx={path === '/about' ? activeColor : {}} />
 
             {user &&
-              <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} onClick={() => navigate('/favorite')} sx={path === '/favorite' ? activeColor : {}} />
+              <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} onClick={() => navigate('/faves')} sx={path === '/faves' ? activeColor : {}} />
             }
 
             {(userRoleType === RoleTypes.business || userRoleType === RoleTypes.admin) &&
-              <BottomNavigationAction label="My Cards" icon={<AccountCircleIcon />} onClick={() => navigate('/my-cards')} sx={path === '/my-cards' ? activeColor : {}} />
+              <BottomNavigationAction label="ADD PRODUCT" icon={<AccountCircleIcon />} onClick={() => navigate('/add-product')} sx={path === '/add-product' ? activeColor : {}} />
             }
 
           </BottomNavigation>

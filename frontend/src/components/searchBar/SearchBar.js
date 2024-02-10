@@ -49,9 +49,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
-    const [allCards, setAllCard] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
 
-    const { setFilteredCards } = useContext(GeneralContext);
+    const { setFilteredProducts } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products`, {
@@ -59,8 +59,8 @@ export default function SearchBar() {
         })
             .then(res => res.json())
             .then(data => {
-                setAllCard(data);
-                setFilteredCards(data);
+                setAllProducts(data);
+                setFilteredProducts(data);
             });
     }, [])
 
@@ -69,9 +69,9 @@ export default function SearchBar() {
         const lowercaseValue = value.toLowerCase().trim();
         setSearchValue(value);
 
-        const searchCards = allCards.filter(c => c.title.toLowerCase().startsWith(lowercaseValue));;
+        const searchProducts = allProducts.filter(p => p.title.toLowerCase().startsWith(lowercaseValue));;
 
-        setFilteredCards(searchCards);
+        setFilteredProducts(searchProducts);
     };
 
 

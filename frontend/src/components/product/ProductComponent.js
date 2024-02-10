@@ -5,18 +5,18 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import { useContext } from "react";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import RemoveShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { useContext, useState } from "react";
 import { GeneralContext } from "../../App";
 import { RoleTypes } from "../navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import './ProductComponent.css';
 
 
-export default function ProductComponent({ card, setAllCard }) {
-  const { user, setLoader, userRoleType, snackbar, } = useContext(GeneralContext);
+export default function ProductComponent({ product, setProducts }) {
+  const { user, setUser, setLoader, userRoleType, snackbar, } = useContext(GeneralContext);
+  const [isAdded, setIsAdded] = useState(false);
   const navigate = useNavigate();
 
 
@@ -34,96 +34,244 @@ export default function ProductComponent({ card, setAllCard }) {
       },
     })
       .then(() => {
-        setAllCard((allCards) =>
-          allCards.map((card) =>
-            card.id === id ? { ...card, favorite: !favorite } : card));
+        setProducts((products) =>
+          products.map((product) =>
+            product._id === id ? { ...product, favorite: !favorite } : product));
         setLoader(false);
         snackbar(snackbarMessage);
       });
   };
 
-  const deleteCard = (id, userRoleType) => {
+  const addedOrNot = (productId, userId) => {
     setLoader(true);
 
-    const isConfirmed = window.confirm("Are you sure you want to delete this card?");
-
-    if (isConfirmed) {
-
-      fetch(`http://localhost:5000/products/${id}`, {
-        credentials: 'include',
-        method: 'DELETE',
-        headers: {
-          'Authorization': localStorage.token,
-          'Content-Type': 'application/json',
-        },
+    fetch(`http://localhost:5000/users/${userId}`, {
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.token,
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        const isProductAdded = data.addToCart && data.addToCart.some(item => item._id === productId);
+        setIsAdded(isProductAdded);
+        setUser(data);
       })
-        .then(() => {
-          setAllCard((allCards) =>
-            allCards.filter((card) => card.id !== id)
-          );
-          setLoader(false);
-          snackbar('Card deleted successfully');
-        });
-    } else {
-      setLoader(false);
-    }
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      })
+      .finally(() => setLoader(false));
   }
+
+
+
+  // const deleteProduct = (id, userRoleType) => {
+  //   setLoader(true);
+
+  //   const isConfirmed = window.confirm("Are you sure you want to delete this product?");
+
+  //   if (isConfirmed) {
+
+  //     fetch(`http://localhost:5000/products/${id}`, {
+  //       credentials: 'include',
+  //       method: 'DELETE',
+  //       headers: {
+  //         'Authorization': localStorage.token,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     })
+  //       .then(() => {
+  //         setProducts((products) =>
+  //           products.filter((product) => product._id !== id)
+  //         );
+  //         setLoader(false);
+  //         snackbar('Card deleted successfully');
+  //       });
+  //   } else {
+  //     setLoader(false);
+  //   }
+  // }
 
   return (
     <>
       <section className='container-cards' >
-        <Card sx={{ maxWidth: 345, backgroundColor: '#f3ead985', boxShadow: '0px 0px 6px 0.5px #b88138;', '&:hover': { boxShadow: '0px 0px 6px 1px #fba32d', } }}
-          key={card.id}
+        <Card sx={{
+          maxWidth: 345,
+          backgroundColor: '#f3ead985',
+          boxShadow: '0px 0px 6px 0.5px #b88138;', '&:hover': { boxShadow: '0px 0px 6px 1px #fba32d', }
+        }}
+          key={product._id}
           className='card' >
 
           <CardMedia sx={{ transition: "all 0.5s ease-in-out", "&:hover": { cursor: "pointer", transform: "scale(1.02)" } }}
             component="img"
             height="194"
-            image={card.imgUrl}
+            image={product.imgUrl}
             alt="Paella dish"
-            onClick={() => navigate(`/landing-page/${card.id}`)} />
+            onClick={() => navigate(`/product/${product._id}`)} /> {/* // need to create a route like this and a page that canhandle the product + prams id */}
 
           <CardContent>
             <div className="card-wrapper">
-              <h1 className="main-headline"> {card.title} </h1>
-              <h3 className="sec-headline"> {card.subtitle} </h3>
-
-              <span className="phone cardSpan">
-                <span className="bold-spn">Phone:</span> {card.phone}
-              </span>
-
-              <span className="adress cardSpan">
-                <span className="bold-spn">Adress:</span> {card.state}, {card.city}. <br /> {card.street}. {card.houseNumber}. {card.zip}.
-              </span>
+              <h1 className="main-headline"> {product.title} </h1>
 
               <span className="card-number cardSpan">
-                <span className="bold-spn">Card Number:</span> {card.id}
+                <span className="bold-spn">Product Number:</span> {product._id}
               </span>
             </div>
           </CardContent>
 
           <CardActions disableSpacing>
-            <IconButton onClick={() => snackbar(`Phone Number : ${card.phone}`)}>
-              <LocalPhoneIcon aria-label="phone" />
+
+
+            <IconButton id='favoriteBtn' aria-label="add to favorites" onClick={() => toggleFavOrNot(product._id, product.faves)}>
+              <FavoriteIcon color={product.faves ? "error" : ""} />
             </IconButton>
 
-            {user && (
-              <IconButton id='favoriteBtn' aria-label="add to favorites" onClick={() => toggleFavOrNot(card.id, card.favorite)}>
-                <FavoriteIcon color={card.favorite ? "error" : ""} />
-              </IconButton>)}
+            <IconButton aria-label="" onClick={() => addedOrNot(product._id, user._id)}>
+              {isAdded ? <RemoveShoppingCartIcon /> : <AddShoppingCartIcon />}
+            </IconButton>
 
-            {((userRoleType === RoleTypes.business && card.clientId === user.id) || (userRoleType === RoleTypes.admin && card.clientId === 0)) && (
-              <IconButton aria-label="edit" onClick={() => navigate(`/edit-cards/${card.id}`)}>
-                <ModeEditIcon />
-              </IconButton>)}
+            <IconButton aria-label="" >
+            </IconButton>
 
-            {((userRoleType === RoleTypes.business && card.clientId === user.id) || userRoleType === RoleTypes.admin) && (
-              <IconButton aria-label="delete" onClick={() => deleteCard(card.id, userRoleType)}>
-                <DeleteIcon />
-              </IconButton>)}
+            <IconButton aria-label="" >
+            </IconButton>
+
+            <IconButton aria-label="" >
+            </IconButton>
+
+            <IconButton aria-label="" >
+            </IconButton>
+
           </CardActions>
         </Card >
       </section>
     </>
   );
 }
+// {
+//   openCart &&
+//   <Cart add2Cart={add2Cart} />
+// }
+// const add2Cart = async (id) => {
+//   const updatedProducts = products.map(p => p._id === id ? { ...p, addToCart: !p.addToCart } : p);
+//   setProducts(updatedProducts);
+
+//   const productUpdate = updatedProducts.find(p => p._id === id);
+
+//   try {
+//     const res = await fetch(`http://localhost:5000/products/${id}`, {
+//       method: 'PUT',
+//       credentials: 'include',
+//       headers: { "Content-Type": "application/json", },
+//       body: JSON.stringify(productUpdate),
+//     });
+
+//     // Handle the response
+//     const data = await res.json();
+
+//     setProducts(updatedProducts.map(p => (p._id === id ? data : p)));
+
+//   } catch (error) {
+//     console.error('Error updating product:', error);
+//   }
+// };
+
+// const [tableMode, setTableMode] = useState(false);
+// const toggleTableMode = () => {
+//         setTableMode(!tableMode);
+//     };
+// <Box mb={2}>
+// <label>View as Table</label>
+// <Switch checked={tableMode} onChange={toggleTableMode} />
+// </Box>
+
+
+// const handleCategory = (ev) => {
+//   const selectedCategory = ev.target.value;
+//   setFormData({ ...formData, category: selectedCategory });
+// };
+// <Box mb={2}>
+// <Select value={formData.category} onChange={handleCategory}>
+//     <MenuItem value="all">All</MenuItem>
+//     <MenuItem value="face">Face</MenuItem>
+//     <MenuItem value="eyes">Eyes</MenuItem>
+//     <MenuItem value="body">Body</MenuItem>
+//     <MenuItem value="hands">Hands</MenuItem>
+//     <MenuItem value="feet">Feet</MenuItem>
+// </Select>
+// </Box>
+
+
+
+
+
+
+{/* <CardContent>
+<Box marginTop={1}>
+    <Typography gutterBottom variant="h4" component="div">
+        {p.name}
+    </Typography>
+</Box>
+<Box marginTop={1}>
+    <Typography component="h2" variant="h3" color="text.primary">
+        ${p.price}
+    </Typography>
+</Box>
+<Box marginTop={1}>
+    <Typography component="h2" variant="h5" color="text.secondary">
+        Discount: ${p.discount}
+    </Typography>
+</Box>
+<Box marginTop={1}>
+    <Typography variant="body2" color="text.secondary">
+        {p.description}
+    </Typography>
+</Box>
+<Box marginTop={1}>
+    <Typography variant="body2" color="text.secondary">
+        {moment(p.createdAt).format('DD-MM-YYYY, hh:mm A')}
+    </Typography>
+</Box>
+
+</CardContent> */}
+
+
+// <CardActions>
+// <Button size="small" onClick={() => navigate('/payment')}>Buy</Button>
+// <Button size="small" onClick={() => add2Cart(p._id)}>{p.addToCart ? <RemoveShoppingCartIcon /> : <AddShoppingCartIcon />}</Button>
+// <Button size="small" onClick={() => edit(p._id)}><EditIcon /></Button>
+// <Button size="small" onClick={() => remove(p._id)}><DeleteIcon /></Button>
+// </CardActions>
+
+
+
+// const addOrUpdate = (ev) => {
+//   if (ev) {
+//       ev.preventDefault();
+//   }
+//   const url = editProductId ? `http://localhost:5000/products/${editProductId}` : "http://localhost:5000/products";
+//   const method = editProductId ? 'PUT' : 'POST';
+
+//   fetch(url, {
+//       method,
+//       credentials: 'include',
+//       headers: { "Content-Type": "application/json", },
+//       body: JSON.stringify(formData)
+//   })
+//       .then(res => res.json())
+//       .then(data => {
+//           if (editProductId) {
+//               // If it's an update, replace the existing product
+//               setProducts(products.map(p => (p._id === editProductId ? data : p)));
+//           } else {
+//               // If it's a new product, add it to the list
+//               setProducts([...products, data]);
+//           }
+//       })
+//       .finally(() => {
+//           setPopUp(false);
+//           setEditProductId(null);
+//       });
+// }

@@ -5,8 +5,8 @@ import ProductComponent from '../ProductComponent.js';
 import ResultNotFound from '../../../pages/ResultNotFound.js';
 
 export default function FavProducts() {
-    const [favCards, setFavCards] = useState([]);
-    const { filteredCards, setFilteredCards, loader, setLoader } = useContext(GeneralContext);
+    const [favProducts, setFavProducts] = useState([]);
+    const { filteredProducts, setFilteredProducts, loader, setLoader, snackbar } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true);
@@ -22,19 +22,19 @@ export default function FavProducts() {
                     return res.json();
                 } else {
                     return res.text().then(x => {
-                        throw new Error(x); // of there is no product react error NEED TO FIX   
+                        return snackbar(x); // of there is no product react error NEED TO FIX   
                     });
                 }
             })
             .then(data => {
-                setFavCards(data);
+                setFavProducts(data);
             }).finally(() => {
                 setLoader(false);
             });
-    }, [filteredCards]);
+    }, [filteredProducts]);
 
-    const filteredFavCards = favCards.filter(card => {
-        return filteredCards.some(filteredCard => filteredCard.id === card.id);
+    const filteredfavProducts = favProducts && favProducts.filter(product => {
+        return filteredProducts.some(filteredProduct => filteredProduct._id === product._id);
 
     });
 
@@ -49,9 +49,9 @@ export default function FavProducts() {
                     <h1>Loading...</h1>
                 ) : (
                     <div className="grid-cards">
-                        {filteredFavCards.length > 0 ? (
-                            filteredFavCards.map(card => (
-                                <ProductComponent key={card.id} card={card} setAllCard={setFilteredCards} />
+                        {favProducts && filteredfavProducts.length > 0 ? (
+                            filteredfavProducts.map(product => (
+                                <ProductComponent key={product._id} product={product} setProducts={setFilteredProducts} />
                             ))
                         ) : (
                             <ResultNotFound />
