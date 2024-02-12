@@ -9,7 +9,6 @@ import ListItemText from '@mui/material/ListItemText';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from 'react';
 
 export default function Cart({ add2Cart }) {
@@ -21,15 +20,34 @@ export default function Cart({ add2Cart }) {
     };
 
     useEffect(() => {
-        fetch("http://localhost:5000/products/cart", {
+        fetch("http://localhost:5000/cart", {
             credentials: 'include',
-            headers: { "Content-Type": "application/json", }
+            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token }
         })
-            .then(res => res.json())
-            .then(data => {
-                setCartItems(data);
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.json();
             })
-    }, [add2Cart])
+            .then(data => {
+                // Organize the cart items to update quantity if item already exists
+                const organizedCartItems = data.reduce((acc, currentItem) => {
+                    const existingItemIndex = acc.findIndex(item => item._id === currentItem._id);
+                    if (existingItemIndex !== -1) {
+                        acc[existingItemIndex].quantity += currentItem.quantity;
+                    } else {
+                        acc.push(currentItem);
+                    }
+                    return acc;
+                }, []);
+
+                setCartItems(organizedCartItems);
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
+    }, [add2Cart]);
 
     const list = () => (
         <Box // the big div
@@ -56,6 +74,7 @@ export default function Cart({ add2Cart }) {
             >
                 {cartItems.map((p) => (
                     <Box
+                        onClick={(e) => e.stopPropagation()}
                         key={p._id}
                         sx={{
                             width: '100%',
@@ -67,10 +86,11 @@ export default function Cart({ add2Cart }) {
                         }}
                     >
                         <ListItem>
-                            <ListItemText primary={p.name} />
+                            <ListItemText primary={p.title} />
                             <ListItemText primary={p.price} />
+                            <ListItemText primary={p.quantity} />
                             <ListItemIcon>
-                                <img src={p.image} alt={p.name} style={{ width: '50px', height: '50px' }} />
+                                <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
                             </ListItemIcon>
                             <ListItemButton>
                                 <RemoveShoppingCartIcon />

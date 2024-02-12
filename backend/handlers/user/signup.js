@@ -14,6 +14,8 @@ const signup = app => {
 
             const { firstName, lastName, roleType, phone, email, password } = value;
 
+            const hashedPassword = await bcrypt.hash(password, 10);
+
             const existingUser = await User.findOne({ email });
 
             if (existingUser) {
@@ -26,7 +28,7 @@ const signup = app => {
                 roleType,
                 phone,
                 email,
-                password,
+                password: hashedPassword,
             });
 
             await newUser.save();

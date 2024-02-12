@@ -2,14 +2,31 @@ import jwt from 'jsonwebtoken';
 import { getUserFromTKN } from '../configs/config.js';
 import { RoleTypes } from '../models/User.js';
 
-export const guard = (req, res, next) => {
+export const guard = async (req, res, next) => {
     try {
-        jwt.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
+        const token = req.headers.authorization;
+        if (!token) {
+            return res.status(401).json({ message: 'No token provided' });
+        }
+
+        // Verify the token
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
             if (err) {
-                res.status(401).send('Authentication failed. Please provide a valid token');
-            } else {
-                next();
+                return res.status(401).json({ message: 'Authentication failed. Please provide a valid token' });
             }
+
+            // Check if token needs to be refreshed
+            const currentTime = Math.floor(Date.now() / 1000);
+            const { exp, userId } = decoded;
+            const bufferTime = 300; // 5 minutes buffer time
+            if (exp - currentTime <= bufferTime) {
+                // Token is about to expire, refresh it
+                const newToken = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                res.setHeader('Authorization', newToken);
+            }
+
+            // Token is valid, proceed to the next middleware
+            next();
         });
     } catch (error) {
         console.error('Error in guard middleware:', error);

@@ -10,7 +10,6 @@ export default function AllProducts() { // ALL Products Page basicly
     const { loader, setLoader, filteredProducts, setFilteredProducts } = useContext(GeneralContext);
 
     useEffect(() => {
-
         fetch(`http://localhost:5000/products`, {
             credentials: 'include',
             headers: {
@@ -23,29 +22,21 @@ export default function AllProducts() { // ALL Products Page basicly
             })
     }, [filteredProducts]);
 
-    const add2Cart = async (id) => {
-        const updatedProducts = products.map(p => p._id === id ? { ...p, addToCart: !p.addToCart } : p);
-        setProducts(updatedProducts);
-
-        const productUpdate = updatedProducts.find(p => p._id === id);
-
-        try {
-            const res = await fetch(`http://localhost:5000/products/${id}`, {
-                method: 'PUT',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(productUpdate),
-            });
-
-            const data = await res.json();
-
-            setProducts(updatedProducts.map(p => (p._id === id ? data : p)));
-
-        } catch (error) {
-            console.error('Error updating product:', error);
-        }
+    const add2Cart = async (productId, price, quantity) => {
+        console.log(price, quantity)
+        const obj = { price, quantity }
+        fetch(`http://localhost:5000/cart/add/${productId}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json', 'Authorization': localStorage.token,
+            },
+            body: JSON.stringify(obj),
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+            })
     };
     return (
         <>
@@ -67,7 +58,7 @@ export default function AllProducts() { // ALL Products Page basicly
                             <div className="grid-cards">
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map(product => (
-                                        <ProductComponent key={product._id} product={product} setProducts={setFilteredProducts} />
+                                        <ProductComponent key={product._id} product={product} setProducts={setFilteredProducts} add2Cart={add2Cart} />
                                     ))
                                 ) : (
                                     <ResultNotFound />

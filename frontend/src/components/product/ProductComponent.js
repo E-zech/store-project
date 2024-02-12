@@ -7,18 +7,40 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove'
 import { useContext, useState } from "react";
 import { GeneralContext } from "../../App";
 import { RoleTypes } from "../navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import './ProductComponent.css';
+import { Box } from "@mui/material";
 
 
-export default function ProductComponent({ product, setProducts }) {
+export default function ProductComponent({ product, setProducts, add2Cart }) {
   const { user, setUser, setLoader, userRoleType, snackbar, } = useContext(GeneralContext);
   const [isAdded, setIsAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1); // State for quantity
+
   const navigate = useNavigate();
 
+  const handleAddToCart = (productId, price) => {
+    console.log("Adding product to cart:", productId, price, quantity);
+    add2Cart(product._id, product.price, quantity);
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+    console.log(quantity)
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+      console.log(quantity)
+    }
+  };
 
   const toggleFavOrNot = (id, favorite) => {
     setLoader(true);
@@ -117,21 +139,36 @@ export default function ProductComponent({ product, setProducts }) {
                 <span className="bold-spn">Product Number:</span> {product._id}
               </span>
             </div>
+
+            <div>
+              <IconButton aria-label="">
+                Price: {product.price} <AttachMoneyIcon />
+              </IconButton>
+            </div>
           </CardContent>
 
           <CardActions disableSpacing>
+
 
 
             <IconButton id='favoriteBtn' aria-label="add to favorites" onClick={() => toggleFavOrNot(product._id, product.faves)}>
               <FavoriteIcon color={product.faves ? "error" : ""} />
             </IconButton>
 
-            <IconButton aria-label="" onClick={() => addedOrNot(product._id, user._id)}>
+            <IconButton aria-label="" onClick={() => handleAddToCart(product._id, product.price)}>
               {isAdded ? <RemoveShoppingCartIcon /> : <AddShoppingCartIcon />}
             </IconButton>
 
-            <IconButton aria-label="" >
+            <IconButton aria-label="" onClick={decrementQuantity}>
+              <RemoveIcon />
             </IconButton>
+
+            <span>{quantity}</span>
+            <IconButton aria-label="" onClick={incrementQuantity}>
+              <AddIcon />
+            </IconButton>
+
+
 
             <IconButton aria-label="" >
             </IconButton>

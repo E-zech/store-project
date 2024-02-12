@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import { coloredStatus } from './configs/morganConfig.js';
 import userRoutes from './routes/userRoutes.js';
 import productRoutes from './routes/productRoutes.js';
+import cardRoutes from './routes/cartRoutes.js';
 import { initialDataStart } from './initial-data/initial-data.js';
 import logMiddleware from './middleware/logMiddleware.js';
 import dotenv from 'dotenv';
@@ -50,6 +51,7 @@ app.use(logMiddleware);
 app.get('/', (req, res) => res.send(`Welcome 😊 \n Project NodeJs + MongoDb, 2024`));
 userRoutes(app);
 productRoutes(app);
+cardRoutes(app);
 
 // Server Listening
 app.listen(port, () => {

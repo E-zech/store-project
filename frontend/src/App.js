@@ -48,6 +48,38 @@ function App() {
     };
 
     useEffect(() => {
+        const checkTokenExpiration = () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const decodedToken = jwtDecode(token);
+                const expirationTime = decodedToken.exp * 1000;
+                const currentTime = Date.now();
+
+                if (expirationTime - currentTime < 5 * 60 * 1000) { // Refresh token 5 minutes before expiration
+                    refreshToken(token);
+                }
+            }
+        };
+
+        const refreshToken = (expiredToken) => {
+            fetch('http://localhost:5000/refresh-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': expiredToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    localStorage.setItem('token', data.token); // Update token in local storage
+                })
+                .catch(error => {
+                    console.error('Error refreshing token:', error);
+                });
+        };
+
+        const intervalId = setInterval(checkTokenExpiration, 10 * 60 * 1000); // Check every 10 minutes
+
         if (localStorage.token) {
             const decodedToken = jwtDecode(localStorage.token);
             const userId = decodedToken.userId;
@@ -62,31 +94,29 @@ function App() {
                 .then(res => {
                     if (res.ok) {
                         return res.json();
-                    }
-                    else {
+                    } else {
                         return res.text().then(x => {
                             throw new Error(x);
                         });
                     }
                 })
                 .then(data => {
-                    console.log(data)
+                    console.log(data);
                     setUser(data);
                     setUserRoleType(data.roleType);
-
                 })
                 .catch(err => {
-                    console.log(err)
+                    console.log(err);
                     setUserRoleType(RoleTypes.none);
                 })
                 .finally(() => setLoader(false));
         } else {
             navigate('/');
-            setLoader(false)
+            setLoader(false);
         }
 
+        return () => clearInterval(intervalId); // Clean up interval on component unmount
     }, []);
-
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
             <CssBaseline />
