@@ -29,24 +29,24 @@ export default function Cart({ add2Cart }) {
                     throw new Error('Network response was not ok');
                 }
                 return res.json();
-            }) / ss
-                .then(data => {
-                    // Organize the cart items to update quantity if item already exists
-                    const organizedCartItems = data.reduce((acc, currentItem) => {
-                        const existingItemIndex = acc.findIndex(item => item._id === currentItem._id);
-                        if (existingItemIndex !== -1) {
-                            acc[existingItemIndex].quantity += currentItem.quantity;
-                        } else {
-                            acc.push(currentItem);
-                        }
-                        return acc;
-                    }, []);
+            })
+            .then(data => {
+                // Organize the cart items to update quantity if item already exists
+                const organizedCartItems = data.reduce((acc, currentItem) => {
+                    const existingItemIndex = acc.findIndex(item => item._id === currentItem._id);
+                    if (existingItemIndex !== -1) {
+                        acc[existingItemIndex].quantity += currentItem.quantity;
+                    } else {
+                        acc.push(currentItem);
+                    }
+                    return acc;
+                }, []);
 
-                    setCartItems(organizedCartItems);
-                })
-                .catch(error => {
-                    console.error('Error fetching cart items:', error);
-                });
+                setCartItems(organizedCartItems);
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
     }, [add2Cart]);
 
     const list = () => (
