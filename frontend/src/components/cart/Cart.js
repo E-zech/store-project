@@ -64,6 +64,8 @@ export default function Cart({ add2Cart }) {
             });
     };
 
+
+
     const list = () => (
         <Box // the big div 
             sx={{
