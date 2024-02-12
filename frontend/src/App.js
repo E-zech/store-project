@@ -28,6 +28,13 @@ function App() {
         setTimeout(() => setSnackbarText(''), 1 * 2000);
     }
 
+    const logoutApp = () => {
+        localStorage.removeItem('token');
+        setUser(null); // Reset user state
+        setUserRoleType(RoleTypes.none); // Reset user role type
+        navigate('/'); // Redirect to the login page or homepage
+    };
+
     const lightTheme = createTheme({
         palette: {
             mode: 'light',
@@ -75,6 +82,7 @@ function App() {
                 })
                 .catch(error => {
                     console.error('Error refreshing token:', error);
+                    logoutApp();
                 });
         };
 
@@ -108,6 +116,7 @@ function App() {
                 .catch(err => {
                     console.log(err);
                     setUserRoleType(RoleTypes.none);
+                    logoutApp();
                 })
                 .finally(() => setLoader(false));
         } else {

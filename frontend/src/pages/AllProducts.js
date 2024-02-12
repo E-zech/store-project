@@ -7,7 +7,7 @@ import '../css/App.css'
 
 export default function AllProducts() { // ALL Products Page basicly
     const [products, setProducts] = useState([]);
-    const { loader, setLoader, filteredProducts, setFilteredProducts } = useContext(GeneralContext);
+    const { loader, setLoader, filteredProducts, setFilteredProducts, snackbar } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products`, {
@@ -22,8 +22,7 @@ export default function AllProducts() { // ALL Products Page basicly
             })
     }, [filteredProducts]);
 
-    const add2Cart = async (productId, price, quantity) => {
-        console.log(price, quantity)
+    const add2Cart = async (productId, title, price, quantity) => {
         const obj = { price, quantity }
         fetch(`http://localhost:5000/cart/add/${productId}`, {
             method: 'POST',
@@ -36,6 +35,7 @@ export default function AllProducts() { // ALL Products Page basicly
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
+                snackbar(`${title} added to cart successfully`);
             })
     };
     return (

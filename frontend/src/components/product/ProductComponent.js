@@ -21,24 +21,22 @@ import { Box } from "@mui/material";
 export default function ProductComponent({ product, setProducts, add2Cart }) {
   const { user, setUser, setLoader, userRoleType, snackbar, } = useContext(GeneralContext);
   const [isAdded, setIsAdded] = useState(false);
-  const [quantity, setQuantity] = useState(1); // State for quantity
+  const [quantity, setQuantity] = useState(1);
 
   const navigate = useNavigate();
 
-  const handleAddToCart = (productId, price) => {
-    console.log("Adding product to cart:", productId, price, quantity);
-    add2Cart(product._id, product.price, quantity);
+  const handleAddToCart = (productId, title, price,) => {
+    add2Cart(productId, title, price, quantity);
+    setQuantity(1);
   };
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
-    console.log(quantity)
   };
 
   const decrementQuantity = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
-      console.log(quantity)
     }
   };
 
@@ -155,7 +153,7 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
               <FavoriteIcon color={product.faves ? "error" : ""} />
             </IconButton>
 
-            <IconButton aria-label="" onClick={() => handleAddToCart(product._id, product.price)}>
+            <IconButton aria-label="" onClick={() => handleAddToCart(product._id, product.title, product.price)}>
               {isAdded ? <RemoveShoppingCartIcon /> : <AddShoppingCartIcon />}
             </IconButton>
 

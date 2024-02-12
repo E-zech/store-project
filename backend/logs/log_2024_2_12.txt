@@ -568,3 +568,477 @@ Route: /refresh-token
 Status Code: 404
 Error:  Not Found
 
+Time: 2024-02-12T10:12:58.648Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:12:58.692Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:02.566Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:02.706Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:02.824Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:03.130Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:03.403Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:06.135Z
+Method: POST
+Route: /cart/add/65c6013b70b1c89ce1fa45b2
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:06.188Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:34.416Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:13:37.291Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:52:41.034Z
+Method: DELETE
+Route: /cart/delete/65c6013b70b1c89ce1fa45b4
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T10:53:00.215Z
+Method: DELETE
+Route: /cart/delete/65c6013b70b1c89ce1fa45b4
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-12T11:15:02.345Z
+Method: DELETE
+Route: /cart/delete/65c9fd4665982a24f1f55833
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:02.458Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:07.723Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:07.909Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:07.993Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:11.375Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:11.461Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:11.502Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:43.170Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:43.352Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:15:43.428Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:18:23.864Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:18:24.028Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:18:24.092Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:18:31.154Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:18:31.338Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:18:31.353Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:18:31.397Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:19:10.274Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:19:10.438Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:19:10.503Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:19:56.969Z
+Method: GET
+Route: /users/65c6013b70b1c89ce1fa45b0
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:19:57.118Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:19:57.182Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:34.158Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:34.236Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:37.595Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:37.668Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:46.348Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:46.404Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:54.913Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:20:54.992Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:21:53.537Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:21:53.591Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:23:21.106Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:23:21.157Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:23:24.898Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:23:24.955Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:24:02.974Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:24:03.024Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:20.701Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:20.738Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:20.885Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:21.145Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:21.393Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:22.771Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:22.822Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:22.948Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:23.015Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:23.241Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:23.296Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:23.449Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:23.495Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:24.821Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:24.874Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:24.911Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:24.962Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.003Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.041Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.081Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.118Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.285Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.335Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.376Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.413Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-12T11:29:25.498Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

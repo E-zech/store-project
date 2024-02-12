@@ -9,11 +9,15 @@ import ListItemText from '@mui/material/ListItemText';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Fab from '@mui/material/Fab';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { GeneralContext } from "../../App";
+
 
 export default function Cart({ add2Cart }) {
     const [isOpen, setIsOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
+
+    const { snackbar } = useContext(GeneralContext);
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
@@ -22,43 +26,46 @@ export default function Cart({ add2Cart }) {
     useEffect(() => {
         fetch("http://localhost:5000/cart", {
             credentials: 'include',
-            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token }
+            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
         })
             .then(res => {
                 if (!res.ok) {
-                    throw new Error('Network response was not ok');
+                    snackbar('Network response was not ok');
                 }
                 return res.json();
             })
             .then(data => {
-                const tempStore = {};
-
-                // Iterate over each item in the fetched data
-                data.forEach(currentItem => {
-                    // Check if the item with the current ID already exists in tempStore
-                    if (tempStore[currentItem._id]) {
-                        // If it exists, increment the quantity of the existing item
-                        tempStore[currentItem._id].quantity += currentItem.quantity;
-                    } else {
-                        // If it doesn't exist, add the current item to tempStore
-                        tempStore[currentItem._id] = { ...currentItem };
-                    }
-                });
-
-                // Convert the tempStore object back to an array of cart items
-                // This ensures that each item appears only once, with its quantity updated if necessary
-                const organizedCartItems = Object.values(tempStore);
-
-                // Update the state with the organized cart items
-                setCartItems(organizedCartItems);
+                console.log(data)
+                setCartItems(data);
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);
             });
     }, [add2Cart]);
 
+    const removeFromCart = (productId) => {
+        fetch(`http://localhost:5000/cart/delete/${productId}`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    snackbar('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log(data.addToCart)
+                setCartItems(cartItems.filter(p => p._id !== productId));
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
+    };
+
     const list = () => (
-        <Box // the big div
+        <Box // the big div 
             sx={{
                 width: 500,
                 backgroundColor: 'blue',
@@ -100,7 +107,7 @@ export default function Cart({ add2Cart }) {
                             <ListItemIcon>
                                 <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
                             </ListItemIcon>
-                            <ListItemButton>
+                            <ListItemButton onClick={() => removeFromCart(p._id)}>
                                 <RemoveShoppingCartIcon />
                             </ListItemButton>
                         </ListItem>
