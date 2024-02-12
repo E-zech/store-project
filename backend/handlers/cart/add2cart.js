@@ -23,14 +23,11 @@ const add2cart = app => {
             const { userId } = getUserFromTKN(req, res);
 
             const user = await User.findById(userId);
-            let existingProduct = user.addToCart.find(item => item.productId === productId);
+            const productExist = user.addToCart.find(item => item.productId.toString() === productId);
 
-            if (existingProduct) {
-                // If the product already exists in addToCart, update its quantity
-                existingProduct.quantity += quantity;
-                existingProduct.price = price; // Update the price too, if necessary
+            if (productExist) {
+                productExist.quantity += quantity;
             } else {
-                // If the product doesn't exist in addToCart, add it
                 user.addToCart.push({ productId, quantity, price });
             }
 

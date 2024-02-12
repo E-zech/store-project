@@ -31,17 +31,25 @@ export default function Cart({ add2Cart }) {
                 return res.json();
             })
             .then(data => {
-                // Organize the cart items to update quantity if item already exists
-                const organizedCartItems = data.reduce((acc, currentItem) => {
-                    const existingItemIndex = acc.findIndex(item => item._id === currentItem._id);
-                    if (existingItemIndex !== -1) {
-                        acc[existingItemIndex].quantity += currentItem.quantity;
-                    } else {
-                        acc.push(currentItem);
-                    }
-                    return acc;
-                }, []);
+                const tempStore = {};
 
+                // Iterate over each item in the fetched data
+                data.forEach(currentItem => {
+                    // Check if the item with the current ID already exists in tempStore
+                    if (tempStore[currentItem._id]) {
+                        // If it exists, increment the quantity of the existing item
+                        tempStore[currentItem._id].quantity += currentItem.quantity;
+                    } else {
+                        // If it doesn't exist, add the current item to tempStore
+                        tempStore[currentItem._id] = { ...currentItem };
+                    }
+                });
+
+                // Convert the tempStore object back to an array of cart items
+                // This ensures that each item appears only once, with its quantity updated if necessary
+                const organizedCartItems = Object.values(tempStore);
+
+                // Update the state with the organized cart items
                 setCartItems(organizedCartItems);
             })
             .catch(error => {

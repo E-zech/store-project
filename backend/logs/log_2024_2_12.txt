@@ -550,3 +550,21 @@ Route: /cart
 Status Code: 401
 Error:  Unauthorized
 
+Time: 2024-02-12T09:47:33.801Z
+Method: POST
+Route: /refresh-token
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-12T09:57:33.838Z
+Method: POST
+Route: /refresh-token
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-12T10:07:33.777Z
+Method: POST
+Route: /refresh-token
+Status Code: 404
+Error:  Not Found
+
