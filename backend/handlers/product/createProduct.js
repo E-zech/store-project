@@ -21,8 +21,6 @@ const createProduct = app => {
 
             res.send(newproduct);
 
-
-
         } catch (err) {
             return res.status(500).send('Internal Server Error');
         }
