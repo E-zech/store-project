@@ -38,7 +38,7 @@ export const products = [
         "discount": 7.99,
         "imgUrl": "https://images.pexels.com/photos/4041391/pexels-photo-4041391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "imgAlt": "",
-        "category": ["Face"],
+        "category": "Face",
         "faves": [],
         "createdAt": Date.now()
     },
@@ -51,7 +51,7 @@ export const products = [
         "discount": 29.99,
         "imgUrl": "https://images.pexels.com/photos/10695206/pexels-photo-10695206.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "imgAlt": "",
-        "category": ["Eyes"],
+        "category": "Eyes",
         "faves": [],
         "createdAt": Date.now()
     },
@@ -64,7 +64,7 @@ export const products = [
         "discount": 19.99,
         "imgUrl": "https://images.pexels.com/photos/4465124/pexels-photo-4465124.jpeg?auto=compress&cs=tinysrgb&w=600",
         "imgAlt": "",
-        "category": ["Body"],
+        "category": "Body",
         "faves": [],
         "createdAt": Date.now()
     },
@@ -77,7 +77,7 @@ export const products = [
         "discount": 11.99,
         "imgUrl": "https://images.pexels.com/photos/5217926/pexels-photo-5217926.jpeg?auto=compress&cs=tinysrgb&w=600",
         "imgAlt": "",
-        "category": ["Hands"],
+        "category": "Hands",
         "faves": [],
         "createdAt": Date.now()
     },
@@ -90,7 +90,7 @@ export const products = [
         "discount": 11.99,
         "imgUrl": "https://images.pexels.com/photos/6621323/pexels-photo-6621323.jpeg?auto=compress&cs=tinysrgb&w=600",
         "imgAlt": "",
-        "category": ["Feet"],
+        "category": "Feet",
         "faves": [],
         "createdAt": Date.now()
     }

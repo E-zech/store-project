@@ -13,15 +13,19 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import { useContext, useState } from "react";
 import { GeneralContext } from "../../App";
 import { RoleTypes } from "../navbar/Navbar";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useResolvedPath } from "react-router-dom";
 import './ProductComponent.css';
 import { Box } from "@mui/material";
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import AddOrEditProduct from "./managment(CRUD)/AddOrEditProduct";
 
 export default function ProductComponent({ product, setProducts, add2Cart }) {
   const { user, setUser, setLoader, userRoleType, snackbar, } = useContext(GeneralContext);
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const path = useResolvedPath().pathname;
+
 
   const navigate = useNavigate();
 
@@ -84,32 +88,32 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
       .finally(() => setLoader(false));
   }
 
-  // const deleteProduct = (id, userRoleType) => {
-  //   setLoader(true);
+  const deleteProduct = (id, userRoleType) => {
+    setLoader(true);
 
-  //   const isConfirmed = window.confirm("Are you sure you want to delete this product?");
+    const isConfirmed = window.confirm("Are you sure you want to delete this product?");
 
-  //   if (isConfirmed) {
+    if (isConfirmed) {
 
-  //     fetch(`http://localhost:5000/products/${id}`, {
-  //       credentials: 'include',
-  //       method: 'DELETE',
-  //       headers: {
-  //         'Authorization': localStorage.token,
-  //         'Content-Type': 'application/json',
-  //       },
-  //     })
-  //       .then(() => {
-  //         setProducts((products) =>
-  //           products.filter((product) => product._id !== id)
-  //         );
-  //         setLoader(false);
-  //         snackbar('Card deleted successfully');
-  //       });
-  //   } else {
-  //     setLoader(false);
-  //   }
-  // }
+      fetch(`http://localhost:5000/products/${id}`, {
+        credentials: 'include',
+        method: 'DELETE',
+        headers: {
+          'Authorization': localStorage.token,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(() => {
+          setProducts((products) =>
+            products.filter((product) => product._id !== id)
+          );
+          setLoader(false);
+          snackbar('Card deleted successfully');
+        });
+    } else {
+      setLoader(false);
+    }
+  }
 
   return (
     <>
@@ -166,20 +170,27 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
               <AddIcon />
             </IconButton>
 
+            {path === '/product-management' && (
+              <>
+                <IconButton aria-label="" onClick={() => deleteProduct(product._id)}>
+                  <DeleteIcon />
+                </IconButton>
+
+                <IconButton aria-label="Edit" onClick={() => navigate(`/product/add-edit/${product._id}`)}><EditIcon />
+                </IconButton>
+              </>
+
+            )}
 
 
-            <IconButton aria-label="" >
-            </IconButton>
 
-            <IconButton aria-label="" >
-            </IconButton>
 
             <IconButton aria-label="" >
             </IconButton>
 
           </CardActions>
         </Card >
-      </section>
+      </section >
     </>
   );
 }

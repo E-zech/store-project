@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema({
     imgAlt: { type: String, allow: ("") },
 
     category: {
-        type: [String],
+        type: String,
         enum: ['All Products', 'Face', 'Eyes', 'Body', 'Hands', 'Feet'],
         default: 'All Products',
         required: true

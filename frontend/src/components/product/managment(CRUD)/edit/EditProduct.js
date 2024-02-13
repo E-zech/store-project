@@ -13,7 +13,7 @@ export default function EditProduct() {
     const { productId } = useParams();
     const navigate = useNavigate();
     const { setLoader, snackbar, filteredProducts, setFilteredProducts } = useContext(GeneralContext);
-
+    console.log(productId)
     useEffect(() => {
         setLoader(true);
         fetch(`http://localhost:5000/products/${productId}`, {
@@ -54,7 +54,7 @@ export default function EditProduct() {
                         });
                     }
                     snackbar('Card updated successfully');
-                    navigate('/my-cards');
+                    navigate('/product-management');
                 } else {
                     snackbar('Error updating card');
                 }

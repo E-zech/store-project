@@ -36,7 +36,7 @@ export default function Cart({ add2Cart }) {
             })
             .then(data => {
                 console.log(data)
-                setCartItems(data);
+                // setCartItems(data);
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);

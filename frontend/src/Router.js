@@ -6,8 +6,8 @@ import UsersMenagment from './admin/UsersMenagment';
 import About from './pages/about/About';
 import AllProducts from './pages/AllProducts';
 import FavProducts from './components/product/managment(CRUD)/faves/FavProduct';
-import EditProduct from './components/product/managment(CRUD)/edit/EditProduct';
 import ProductMangement from './components/product/managment(CRUD)/ProductMangement';
+import AddOrEditProduct from './components/product/managment(CRUD)/AddOrEditProduct';
 
 export default function Router() {
     return (
@@ -16,7 +16,7 @@ export default function Router() {
             <Route path="/about" element={<About />} />
             <Route path="/product-management" element={<ProductMangement />} />
             <Route path="/faves" element={<FavProducts />} />
-            <Route path="/edit-product/:id" element={<EditProduct />} />
+            <Route path="/product/add-edit/:id?" element={<AddOrEditProduct />} />
             <Route path="/user-management" element={<UsersMenagment />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
