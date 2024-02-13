@@ -19,10 +19,9 @@ const createProduct = app => {
 
             await newproduct.save();
 
-            res.send({
-                message: `Your product has been successfully created`,
-                product: newproduct
-            });
+            res.send(newproduct);
+
+
 
         } catch (err) {
             return res.status(500).send('Internal Server Error');

@@ -60,7 +60,6 @@ export default function AddOrEditProduct() {
                 tempErrors[name] = item.message;
             }
         }
-
         setIsFormValid(!validate.error);
         setErrors(tempErrors);
 
@@ -95,13 +94,27 @@ export default function AddOrEditProduct() {
         })
             .then(res => res.json())
             .then(data => {
-                setFormData(formData);
-                setFilteredProducts([...filteredProducts, data]);
+                if (id) {
+                    // If it's an edit, find the index of the edited product in filteredProducts array
+                    const index = filteredProducts.findIndex(product => product._id === data._id);
 
-            }).finally(() => {
+                    if (index !== -1) {
+                        // If the product exists in filteredProducts, replace it with the edited product
+                        const updatedProducts = [...filteredProducts];
+                        updatedProducts[index] = data;
+                        setFilteredProducts(updatedProducts);
+                    } else {
+                        // If the product doesn't exist in filteredProducts, add it
+                        setFilteredProducts([...filteredProducts, data]);
+                    }
+                } else {
+                    // If it's an addition, add the new product to filteredProducts
+                    setFilteredProducts([...filteredProducts, data]);
+                }
                 navigate('/product-management');
-                snackbar(id ? 'product change sucssefuly' : 'product added');
+                snackbar(id ? 'Product changed successfully' : 'Product added');
             }).finally(() => setLoader(false))
+
     };
 
     return (
@@ -162,7 +175,8 @@ export default function AddOrEditProduct() {
                                                     id={i.name}
                                                     label={i.label}
                                                     name={i.name}
-                                                    type={i.type}
+                                                    type={i.type === 'number' ? 'number' : i.type}
+                                                    InputProps={i.name === 'price' || i.name === 'discount' ? { inputProps: { min: 0 } } : undefined}
                                                     value={formData[i.name] || ''}
                                                     onChange={handleChange}
                                                     error={Boolean(errors[i.name])}

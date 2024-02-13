@@ -19,7 +19,7 @@ export const schema = Joi.object({
     Ingredients: Joi.string().min(10).max(900).required(),
     price: Joi.number().required(),
     discount: Joi.number(),
-    imgUrl: Joi.string().uri().allow(""),
-    imgAlt: Joi.string().allow(""),
+    imgUrl: Joi.string().uri().required(),
+    imgAlt: Joi.string().required(),
     category: Joi.string().valid('All Products', 'Face', 'Eyes', 'Body', 'Hands', 'Feet').required(),
 });
