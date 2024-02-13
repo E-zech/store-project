@@ -131,7 +131,7 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
             height="194"
             image={product.imgUrl}
             alt="Paella dish"
-            onClick={() => navigate(`/product/${product._id}`)} /> {/* // need to create a route like this and a page that canhandle the product + prams id */}
+            onClick={() => navigate(`/product/${product._id}`)} />
 
           <CardContent>
             <div className="card-wrapper">
@@ -150,8 +150,6 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
           </CardContent>
 
           <CardActions disableSpacing>
-
-
 
             <IconButton id='favoriteBtn' aria-label="add to favorites" onClick={() => toggleFavOrNot(product._id, product.faves)}>
               <FavoriteIcon color={product.faves ? "error" : ""} />
@@ -181,10 +179,6 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
               </>
 
             )}
-
-
-
-
             <IconButton aria-label="" >
             </IconButton>
 

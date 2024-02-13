@@ -22,6 +22,7 @@ export const checkPermissions = (permissions, userRoleType) => {
 
 const pages = [
     { route: '/about', title: 'about' },
+    { route: '/product/:id', title: 'product' },
     { route: '/login', title: 'login', permissions: [RoleTypes.none] },
     { route: '/signup', title: 'signup', permissions: [RoleTypes.none] },
     { route: '/faves', title: 'favorites ', permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
@@ -53,7 +54,7 @@ export default function Navbar({ mode, toggleMode }) {
     };
 
     useEffect(() => {
-        const disableSearchBar = ['/admin', '/about', '/login', '/signup', '/account'];
+        const disableSearchBar = ['/admin', '/about', '/product', '/login', '/signup', '/account',];
         setIsSearchBar(!disableSearchBar.includes(path))
     }, [path]);
 

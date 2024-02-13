@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -16,7 +15,6 @@ import { GeneralContext } from "../../App";
 export default function Cart({ add2Cart }) {
     const [isOpen, setIsOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
-
     const { snackbar } = useContext(GeneralContext);
 
     const toggleDrawer = () => {
@@ -30,18 +28,17 @@ export default function Cart({ add2Cart }) {
         })
             .then(res => {
                 if (!res.ok) {
-                    snackbar('Network response was not ok');
+                    snackbar('Network response was not ok : cart.js');
                 }
                 return res.json();
             })
             .then(data => {
-                console.log(data)
                 // setCartItems(data);
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);
             });
-    }, [add2Cart]);
+    }, []);
 
     const removeFromCart = (productId) => {
         fetch(`http://localhost:5000/cart/delete/${productId}`, {
