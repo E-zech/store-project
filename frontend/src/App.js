@@ -43,7 +43,8 @@ function App() {
         palette: {
             mode: 'light',
             background: {
-                default: '#ffefd78a',
+                default: 'white',
+                // default: '#ffefd78a',
             },
         },
     });

@@ -11,5 +11,5 @@ root.render(
   </BrowserRouter>
 );
 
-document.title = 'Queenstown Activities';
+document.title = 'Skin Care Store';
 reportWebVitals();

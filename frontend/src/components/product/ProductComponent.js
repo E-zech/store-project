@@ -102,59 +102,74 @@ export default function ProductComponent({ product, add2Cart }) {
         <Card sx={{
           maxWidth: 345,
           backgroundColor: '#f3ead985',
-          boxShadow: '0px 0px 6px 0.5px #b88138;', '&:hover': { boxShadow: '0px 0px 6px 1px #fba32d', }
+          boxShadow: 'none',
+          transition: 'box-shadow 0.3s', // Add transition for smooth effect
+          '&:hover': {
+            boxShadow: '0px 0px 6px 1px #fba32d', // Apply box shadow on hover
+          },
+          // boxShadow: '0px 0px 6px 0.5px #b88138;', '&:hover': { boxShadow: '0px 0px 6px 1px #fba32d', }
         }}
           key={product._id}
           className='card' >
 
-          <CardMedia sx={{ transition: "all 0.5s ease-in-out", "&:hover": { cursor: "pointer", transform: "scale(1.02)" } }}
+          <CardMedia sx={{ transition: "all 0.2s ease-in-out", "&:hover": { cursor: "pointer", transform: "scale(1.02)" } }}
             component="img"
             height="194"
             image={product.imgUrl}
-            alt="Paella dish"
+            alt={product.imgAlt}
             onClick={() => navigate(`/product/${product._id}`)} />
 
-          <CardContent>
+          <CardContent sx={{ textAlign: 'center' }}>
             <div className="card-wrapper">
               <h1 className="main-headline"> {product.title} </h1>
-
-              <span className="card-number cardSpan">
-                <span className="bold-spn">Product Number:</span> {product._id}
-              </span>
             </div>
 
-            <div>
-              <IconButton aria-label="">
-                Price: {product.price} <AttachMoneyIcon />
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+              <IconButton aria-label="price">
+                {product.price} <AttachMoneyIcon />
               </IconButton>
-            </div>
+
+              <IconButton aria-label="discount" sx={{ textDecoration: 'line-through' }}>
+                {product.discount} <AttachMoneyIcon />
+              </IconButton>
+            </Box>
+
+
           </CardContent>
 
           <CardActions disableSpacing>
+            {path === '/' && (
+              <>
+                <IconButton
+                  aria-label="Add or Remove"
+                  onClick={handleClick}
+                >
+                  {isAdded ? <ShoppingCartIcon /> : <AddShoppingCartIcon />}
+                </IconButton>
 
-            <IconButton id='favoriteBtn' aria-label="add to favorites"
-            //  onClick={() => toggleFavOrNot(product._id, product.faves)}
-            >
-              <FavoriteIcon color={product.faves ? "error" : ""} />
-            </IconButton>
+                <IconButton id='favoriteBtn' aria-label="add to favorites"
+                //  onClick={() => toggleFavOrNot(product._id, product.faves)}
+                >
+                  <FavoriteIcon color={product.faves ? "error" : ""} />
+                </IconButton>
 
-            <IconButton
-              aria-label="Add or Remove"
-              onClick={handleClick}
-            >
-              {isAdded ? <ShoppingCartIcon /> : <AddShoppingCartIcon />}
-            </IconButton>
+
+              </>
+            )}
+
 
             {path === '/product-management' && (
               <>
+                <IconButton aria-label="Edit" onClick={() => navigate(`/product/add-edit/${product._id}`)}><EditIcon />
+                </IconButton>
+
                 <IconButton aria-label="Delete"
                   onClick={() => deleteProduct(product._id)}
                 >
                   <DeleteIcon />
                 </IconButton>
 
-                <IconButton aria-label="Edit" onClick={() => navigate(`/product/add-edit/${product._id}`)}><EditIcon />
-                </IconButton>
+
               </>
 
             )}

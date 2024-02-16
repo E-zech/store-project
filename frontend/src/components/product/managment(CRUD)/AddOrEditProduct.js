@@ -11,6 +11,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate, useParams } from 'react-router-dom';
 import { inputsForProducts, schema } from '../ProductStructureValid.js';
 import Joi from 'joi';
+import { Tooltip } from '@mui/material';
+import './AddOrEditProduct.css'
 
 
 export default function AddOrEditProduct() {
@@ -120,80 +122,103 @@ export default function AddOrEditProduct() {
     return (
         <>
             <>
+                {
+                    id && <div className='edit-imgContainer'>
+                        <img className="edit-img" src={formData.imgUrl} alt={formData.imgAlt} />
+                    </div>
+                }
+
                 <section className='form-container' id='addCard'>
-                    <Container component="main" maxWidth="xs"  >
+                    <Container component="main" maxWidth="sm"  >
                         <CssBaseline />
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                             <Typography component="h1" variant="h5">
                                 {id ? `Edit Product` : `Add product`}
                             </Typography>
-                            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                                <Grid container spacing={2}>
-                                    {inputsForProducts.map((i) => (
-                                        <Grid key={i.name} item xs={12}>
-                                            {i.type === 'textarea' ? (
-                                                <TextField
-                                                    margin="normal"
-                                                    required={i.required}
-                                                    fullWidth
-                                                    id={i.name}
-                                                    label={i.label}
-                                                    name={i.name}
-                                                    multiline
-                                                    rows={4} // Adjust the number of rows as needed
-                                                    value={formData[i.name] || ''}
-                                                    onChange={handleChange}
-                                                    error={Boolean(errors[i.name])}
-                                                    helperText={errors[i.name]}
-                                                    autoComplete="off"
-                                                />
-                                            ) : i.type === 'select' ? (
-                                                <TextField
-                                                    select
-                                                    margin="normal"
-                                                    required={i.required}
-                                                    fullWidth
-                                                    id={i.name}
-                                                    label={i.label}
-                                                    name={i.name}
-                                                    value={formData[i.name] || ''}
-                                                    onChange={handleChange}
-                                                    error={Boolean(errors[i.name])}
-                                                    helperText={errors[i.name]}
-                                                >
-                                                    {i.options.map((option) => (
-                                                        <MenuItem key={option} value={option}>
-                                                            {option}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            ) : (
-                                                <TextField
-                                                    margin="normal"
-                                                    required={i.required}
-                                                    fullWidth
-                                                    id={i.name}
-                                                    label={i.label}
-                                                    name={i.name}
-                                                    type={i.type === 'number' ? 'number' : i.type}
-                                                    InputProps={i.name === 'price' || i.name === 'discount' ? { inputProps: { min: 0 } } : undefined}
-                                                    value={formData[i.name] || ''}
-                                                    onChange={handleChange}
-                                                    error={Boolean(errors[i.name])}
-                                                    helperText={errors[i.name]}
-                                                    autoComplete="off"
-                                                />
-                                            )}
-                                        </Grid>))
-                                    }
-                                </Grid>
 
-                                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}
-                                    disabled={!isFormValid}>
-                                    {id ? `Edit Product` : `Add product`}
-                                </Button>
+                            <>
+                                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                                    <Grid container spacing={2}>
+                                        {inputsForProducts.map((i) => (
+                                            <Grid key={i.name} item xs={12}>
+                                                {i.type === 'textarea' ? (
+                                                    <TextField
+                                                        margin="normal"
+                                                        required={i.required}
+                                                        fullWidth
+                                                        id={i.name}
+                                                        label={i.label}
+                                                        name={i.name}
+                                                        multiline
+                                                        rows={4} // Adjust the number of rows as needed
+                                                        value={formData[i.name] || ''}
+                                                        onChange={handleChange}
+                                                        error={Boolean(errors[i.name])}
+                                                        helperText={errors[i.name]}
+                                                        autoComplete="off"
+                                                    />
+                                                ) : i.type === 'select' ? (
+                                                    <TextField
+                                                        select
+                                                        margin="normal"
+                                                        required={i.required}
+                                                        fullWidth
+                                                        id={i.name}
+                                                        label={i.label}
+                                                        name={i.name}
+                                                        value={formData[i.name] || ''}
+                                                        onChange={handleChange}
+                                                        error={Boolean(errors[i.name])}
+                                                        helperText={errors[i.name]}
+                                                    >
+                                                        {i.options.map((option) => (
+                                                            <MenuItem key={option} value={option}>
+                                                                {option}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </TextField>
+                                                ) : (
+                                                    <TextField
+                                                        margin="normal"
+                                                        required={i.required}
+                                                        fullWidth
+                                                        id={i.name}
+                                                        label={i.label}
+                                                        name={i.name}
+                                                        type={i.type === 'number' ? 'number' : i.type}
+                                                        InputProps={i.name === 'price' || i.name === 'discount' ? { inputProps: { min: 0 } } : undefined}
+                                                        value={formData[i.name] || ''}
+                                                        onChange={handleChange}
+                                                        error={Boolean(errors[i.name])}
+                                                        helperText={errors[i.name]}
+                                                        autoComplete="off"
+                                                    />
+                                                )}
+                                            </Grid>))
+                                        }
+                                    </Grid>
+                                    <Tooltip title="Save and Back to Product Management" arrow>
+                                        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}
+                                            disabled={!isFormValid}>
+                                            {id ? `Edit Product` : `Add product`}
+                                        </Button>
+                                    </Tooltip>
 
-                            </Box>
+
+
+                                    <Tooltip title="Back to Product Management " arrow>
+                                        <Button type="button" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}
+                                            onClick={() => navigate('/product-management')}
+                                            disabled={isFormValid}
+                                        >
+                                            Back to management
+                                        </Button>
+                                    </Tooltip>
+
+
+                                </Box>
+                            </>
+
                         </Box>
                     </Container>
 

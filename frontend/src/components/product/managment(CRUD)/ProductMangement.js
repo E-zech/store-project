@@ -1,4 +1,3 @@
-import AddProduct from './add/AddProduct';
 import React, { useState, useEffect, useContext } from 'react';
 import { GeneralContext } from "../../../App.js";
 import ResultNotFound from '../../../pages/ResultNotFound.js';

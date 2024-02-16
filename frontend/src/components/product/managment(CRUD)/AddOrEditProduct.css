@@ -1,0 +1,17 @@
+.form-container {
+margin-top: 40px;
+}
+
+
+.edit-imgContainer{
+    margin-top: 25px;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.edit-img{
+    width: 10vw;
+    border-radius: 110px;
+}

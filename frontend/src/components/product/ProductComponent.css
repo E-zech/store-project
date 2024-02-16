@@ -9,7 +9,7 @@
 
 .card{
     width: 30vw;
-    transition: all 0.2s ease !important;
+    transition: all 0.2s ease-in-out !important;
 }
 
 .card:hover{
@@ -18,7 +18,7 @@
 }
 
 .card-wrapper{
-    text-align: left;
+    text-align: center;
 }
 
 .main-headline{
@@ -29,16 +29,4 @@
 
 .sec-headline{ 
 padding: 5px 0px;
-}
-
-.cardSpan{
-    display: block;
-    font-size: 1rem;
-    padding-top: 15px;  
-}
-
-.bold-spn{
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: black;
 }
