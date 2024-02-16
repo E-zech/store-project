@@ -5,12 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove'
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GeneralContext } from "../../App";
 import { RoleTypes } from "../navbar/Navbar";
 import { useLocation, useNavigate, useParams, useResolvedPath } from "react-router-dom";
@@ -19,76 +20,56 @@ import { Box } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddOrEditProduct from "./managment(CRUD)/AddOrEditProduct";
+import { CartContext } from '../../pages/AllProducts.js';
 
-export default function ProductComponent({ product, setProducts, add2Cart }) {
-  const { user, setUser, setLoader, userRoleType, snackbar, } = useContext(GeneralContext);
-  const [isAdded, setIsAdded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+
+export default function ProductComponent({ product, add2Cart }) {
+
+  const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader } = useContext(GeneralContext);
+
+
   const path = useResolvedPath().pathname;
-
-
   const navigate = useNavigate();
 
-  const handleAddToCart = (productId, title, price,) => {
-    add2Cart(productId, title, price, quantity);
-    setQuantity(1);
-  };
+  const isAdded = productsInCart.some(item => item._id === product._id);
 
-  const incrementQuantity = () => {
-    setQuantity(quantity + 1);
-  };
 
-  const decrementQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+  const handleClick = () => {
+    if (isAdded) {
+      // If the item is already in the cart, show a snackbar
+      snackbar("Item already in cart");
+    } else {
+      handleAddToCart(product._id, product.title, product.price);
     }
   };
 
-  const toggleFavOrNot = (id, favorite) => {
-    setLoader(true);
-
-    const snackbarMessage = favorite ? 'Removed from Favorites' : 'Added to Favorites';
-
-    fetch(`http://localhost:5000/products/${id}`, {
-      credentials: 'include',
-      method: 'PATCH',
-      headers: {
-        'Authorization': localStorage.token,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(() => {
-        setProducts((products) =>
-          products.map((product) =>
-            product._id === id ? { ...product, favorite: !favorite } : product));
-        setLoader(false);
-        snackbar(snackbarMessage);
-      });
+  const handleAddToCart = (productId, title, price,) => {
+    add2Cart(productId, title, price);
   };
 
-  const addedOrNot = (productId, userId) => {
-    setLoader(true);
+  // const toggleFavOrNot = (id, favorite) => {
+  //   setLoader(true);
 
-    fetch(`http://localhost:5000/users/${userId}`, {
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.token,
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        const isProductAdded = data.addToCart && data.addToCart.some(item => item._id === productId);
-        setIsAdded(isProductAdded);
-        setUser(data);
-      })
-      .catch(error => {
-        console.error('Error fetching user data:', error);
-      })
-      .finally(() => setLoader(false));
-  }
+  //   const snackbarMessage = favorite ? 'Removed from Favorites' : 'Added to Favorites';
 
-  const deleteProduct = (id, userRoleType) => {
+  //   fetch(`http://localhost:5000/products/${id}`, {
+  //     credentials: 'include',
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Authorization': localStorage.token,
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(() => {
+  //       setProducts((products) =>
+  //         products.map((product) =>
+  //           product._id === id ? { ...product, favorite: !favorite } : product));
+  //       setLoader(false);
+  //       snackbar(snackbarMessage);
+  //     });
+  // };
+
+  const deleteProduct = (id) => {
     setLoader(true);
 
     const isConfirmed = window.confirm("Are you sure you want to delete this product?");
@@ -104,8 +85,8 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
         },
       })
         .then(() => {
-          setProducts((products) =>
-            products.filter((product) => product._id !== id)
+          setFilteredProducts((filteredProducts) =>
+            filteredProducts.filter((product) => product._id !== id)
           );
           setLoader(false);
           snackbar('Card deleted successfully');
@@ -151,26 +132,24 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
 
           <CardActions disableSpacing>
 
-            <IconButton id='favoriteBtn' aria-label="add to favorites" onClick={() => toggleFavOrNot(product._id, product.faves)}>
+            <IconButton id='favoriteBtn' aria-label="add to favorites"
+            //  onClick={() => toggleFavOrNot(product._id, product.faves)}
+            >
               <FavoriteIcon color={product.faves ? "error" : ""} />
             </IconButton>
 
-            <IconButton aria-label="" onClick={() => handleAddToCart(product._id, product.title, product.price)}>
-              {isAdded ? <RemoveShoppingCartIcon /> : <AddShoppingCartIcon />}
-            </IconButton>
-
-            <IconButton aria-label="" onClick={decrementQuantity}>
-              <RemoveIcon />
-            </IconButton>
-
-            <span>{quantity}</span>
-            <IconButton aria-label="" onClick={incrementQuantity}>
-              <AddIcon />
+            <IconButton
+              aria-label="Add or Remove"
+              onClick={handleClick}
+            >
+              {isAdded ? <ShoppingCartIcon /> : <AddShoppingCartIcon />}
             </IconButton>
 
             {path === '/product-management' && (
               <>
-                <IconButton aria-label="" onClick={() => deleteProduct(product._id)}>
+                <IconButton aria-label="Delete"
+                  onClick={() => deleteProduct(product._id)}
+                >
                   <DeleteIcon />
                 </IconButton>
 
@@ -179,9 +158,6 @@ export default function ProductComponent({ product, setProducts, add2Cart }) {
               </>
 
             )}
-            <IconButton aria-label="" >
-            </IconButton>
-
           </CardActions>
         </Card >
       </section >

@@ -7,8 +7,6 @@ import AddOrEditProduct from './AddOrEditProduct.js';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-
-
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
     const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader } = useContext(GeneralContext);
@@ -40,7 +38,6 @@ export default function ProductMangement() {
             <header>
                 <h1 className='main-title leftFix'>Products Manegment </h1> <br />
             </header>
-
             <section className="container-cards">
                 {loader ? (
                     <h1>Loading...</h1>
@@ -48,7 +45,7 @@ export default function ProductMangement() {
                     <div className="grid-cards">
                         {filteredMyProducts.length > 0 ? (
                             filteredMyProducts.map(product => (
-                                <ProductComponent key={product._id} product={product} setAllProducts={setFilteredProducts} />))
+                                <ProductComponent key={product._id} product={product} />))
                         ) : (
                             <ResultNotFound />
                         )}
@@ -73,6 +70,8 @@ export default function ProductMangement() {
 
                     </div>)}
             </section>
+
+
         </>
     )
 }

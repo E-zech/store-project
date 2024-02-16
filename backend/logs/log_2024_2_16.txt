@@ -1,0 +1,432 @@
+Time: 2024-02-16T04:46:49.219Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T04:58:24.227Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T05:54:09.553Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T05:59:48.021Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T05:59:53.627Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T06:03:31.842Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:03:35.012Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:03:37.888Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:04:00.739Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:04:08.994Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:04:13.637Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:14:51.576Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T06:32:40.306Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T06:33:35.713Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:33:49.319Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:33:56.281Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:34:52.258Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:34:58.798Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:35:17.437Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:35:23.267Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T06:35:38.045Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:35:42.653Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:36:35.580Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:36:39.518Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:36:40.854Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:36:44.075Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:37:23.410Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:37:29.251Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:37:35.916Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:37:38.877Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:37:57.437Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T06:38:13.875Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T06:41:02.995Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T06:56:37.691Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T06:56:37.702Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc9
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T07:08:11.352Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T07:08:11.488Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T07:08:11.553Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T07:08:11.589Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T07:08:13.657Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T08:05:48.116Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T08:06:02.326Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-16T08:09:56.583Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T08:10:28.448Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T08:10:28.459Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T08:20:22.132Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bc9
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:22.424Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bc9
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:22.688Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bc9
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:22.932Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bc9
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:25.390Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bcb
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:25.769Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bc9
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:26.165Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bcb
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:27.977Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bc9
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T08:20:30.582Z
+Method: DELETE
+Route: /cart/delete/65cb488ab432517e07d43bcb
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:14:35.227Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T09:14:35.237Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T09:14:43.294Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T09:14:43.305Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T09:14:44.729Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T09:14:51.897Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T09:14:52.107Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-16T09:15:26.716Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:23:42.443Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:23:42.777Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:42:11.303Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:51:41.617Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:52:24.053Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T09:53:51.986Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:54:09.836Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:56:32.623Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-02-16T09:56:57.702Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-16T09:59:20.816Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+

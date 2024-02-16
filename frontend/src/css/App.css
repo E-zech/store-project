@@ -1,13 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,100..900,0..100;1,9..144,100..900,0..100&display=swap');
+
 *{
     padding:  0;
     margin: 0;
-    box-sizing: border-box;
+    box-sizing: border-box;  
+    font-family: "Fraunces", serif;
 }
 
 .main-title,
 .sec-title{
     text-align: center;
-    font-family: ui-monospace;
+    /* font-family: ui-monospace; */
 }
 
 .main-title{

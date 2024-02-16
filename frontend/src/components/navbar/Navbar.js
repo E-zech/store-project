@@ -9,7 +9,7 @@ import NightlightIcon from '@mui/icons-material/Nightlight';
 import HomeIcon from '@mui/icons-material/Home';
 
 export const RoleTypes = {
-    none: 1, //can see products , add2cart , and buy .
+    none: 1, //can see products .
     user: 2, //all of the above + add to faves +(will recive mails about marketing)
     business: 3, //(users who already make few purcheses/ the admin decide to make them business) : all of the above + spiceal prices (fast deliveries)
     admin: 4, //can do all + CRUD + CRM (can view all users , change thier status, delete) . // owner of the site
@@ -22,7 +22,6 @@ export const checkPermissions = (permissions, userRoleType) => {
 
 const pages = [
     { route: '/about', title: 'about' },
-    { route: '/product/:id', title: 'product' },
     { route: '/login', title: 'login', permissions: [RoleTypes.none] },
     { route: '/signup', title: 'signup', permissions: [RoleTypes.none] },
     { route: '/faves', title: 'favorites ', permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
@@ -33,7 +32,7 @@ export default function Navbar({ mode, toggleMode }) {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [isSearchBar, setIsSearchBar] = useState(false);
-    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar } = useContext(GeneralContext);
+    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout } = useContext(GeneralContext);
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
 
@@ -58,20 +57,6 @@ export default function Navbar({ mode, toggleMode }) {
         setIsSearchBar(!disableSearchBar.includes(path))
     }, [path]);
 
-    const logout = async () => {
-        try {
-            setLoader(true);
-            await localStorage.removeItem('token');
-            setUser();
-            setUserRoleType(RoleTypes.none);
-            navigate('/');
-            snackbar('You have been successfully logged out');
-        } catch (error) {
-            console.error('Error occurred during logout:', error);
-        } finally {
-            setLoader(false);
-        }
-    }
 
     return (
         <AppBar

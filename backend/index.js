@@ -59,7 +59,7 @@ app.listen(port, () => {
 });
 
 // Error Handling 
-app.get("*", async (req, res) => {
+app.all("*", async (req, res) => {
     const combinedContent = await getContent(res);
     res.send(combinedContent);
-});
+}); // need to remember that if i want to handle diffrent type of HTTP falls requestes i need to change here the app.all to somthing more spicipic like app.get/post

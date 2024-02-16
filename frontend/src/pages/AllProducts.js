@@ -1,13 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import ProductComponent from "../components/product/ProductComponent";
 import { GeneralContext } from "../App";
 import ResultNotFound from "./ResultNotFound";
 import Cart from '../components/cart/Cart'
 import '../css/App.css'
+import { RoleTypes } from "../components/navbar/Navbar";
+export const CartContext = createContext();
 
 export default function AllProducts() { // ALL Products Page basicly
-    const [products, setProducts] = useState([]);
-    const { loader, setLoader, filteredProducts, setFilteredProducts, snackbar } = useContext(GeneralContext);
+    // const [products, setProducts] = useState([]);
+    // const [productsInCart, setProductsInCart] = useState([]);
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products`, {
@@ -22,22 +25,50 @@ export default function AllProducts() { // ALL Products Page basicly
             })
     }, [filteredProducts]);
 
-    const add2Cart = async (productId, title, price, quantity) => {
-        const obj = { price, quantity }
+
+    const add2Cart = (productId, title, price) => {
+        const quantity = 1;
         fetch(`http://localhost:5000/cart/add/${productId}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json', 'Authorization': localStorage.token,
             },
-            body: JSON.stringify(obj),
+            body: JSON.stringify({
+                quantity,
+                price
+            }),
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setProducts(data);
+                setProductsInCart(data);
                 snackbar(`${title} added to cart successfully`);
             })
     };
+
+    useEffect(() => {
+        fetch("http://localhost:5000/cart", {
+            credentials: 'include',
+            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    snackbar('Network response was not ok : cart.js');
+                    return [];
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log(data)
+                setProductsInCart(data);
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
+    }, []);
+
     return (
         <>
             <section>
@@ -52,13 +83,18 @@ export default function AllProducts() { // ALL Products Page basicly
                     ) : (
                         <>
                             <div className="cart-buttonDiv" style={{ display: 'flex', position: 'fixed', bottom: '55px', left: '5px', zIndex: '9999' }}>
-                                <Cart add2Cart={add2Cart} />
+                                {
+                                    user &&
+                                    <Cart />
+                                }
+
                             </div>
 
                             <div className="grid-cards">
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map(product => (
-                                        <ProductComponent key={product._id} product={product} setProducts={setFilteredProducts} add2Cart={add2Cart} />
+                                        <ProductComponent key={product._id} product={product} add2Cart={add2Cart} />
+
                                     ))
                                 ) : (
                                     <ResultNotFound />

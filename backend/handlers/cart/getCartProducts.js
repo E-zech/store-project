@@ -6,16 +6,12 @@ import Product from '../../models/Product.js';
 const getCartProducts = app => {
     app.get('/cart', guard, async (req, res) => {
         try {
-            if (!req.headers.authorization) {
-                return res.status(403).send("U must signup");
-                // const token = jwt.sign({
-                //     userId: anonymousId,
-                //     roleType: 1,
-                // }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            }
-
             const { userId } = getUserFromTKN(req, res);
             const user = await User.findById(userId);
+
+            if (!user) {
+                return res.status(404).send('User is not found')
+            }
 
             const allProducts = await Product.find();
 
@@ -42,3 +38,6 @@ const getCartProducts = app => {
 };
 
 export default getCartProducts;
+
+
+

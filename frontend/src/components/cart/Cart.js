@@ -10,12 +10,66 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Fab from '@mui/material/Fab';
 import { useEffect, useState, useContext } from 'react';
 import { GeneralContext } from "../../App";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import IconButton from "@mui/material/IconButton";
+import { CartContext } from '../../pages/AllProducts';
 
 
-export default function Cart({ add2Cart }) {
+
+export default function Cart() {
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader } = useContext(GeneralContext);
     const [isOpen, setIsOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const { snackbar } = useContext(GeneralContext);
+
+
+
+    const incrementQuantity = (productId, price) => {
+        const productIndex = productsInCart.findIndex(p => p._id === productId);
+        if (productIndex !== -1) {
+            const updatedproductsInCart = [...productsInCart];
+            updatedproductsInCart[productIndex].quantity += 1;
+            setProductsInCart(updatedproductsInCart);
+            const currentQuantity = updatedproductsInCart[productIndex].quantity;
+            console.log(productId, price, currentQuantity)
+            handleAddToCart(productId, price, currentQuantity);
+        }
+    }
+
+    const decrementQuantity = (productId, price) => {
+        console.log(productId)
+        const productIndex = productsInCart.findIndex(p => p._id === productId);
+        if (productIndex !== -1) {
+            const updatedproductsInCart = [...productsInCart];
+            if (updatedproductsInCart[productIndex].quantity > 1) {
+
+                updatedproductsInCart[productIndex].quantity -= 1;
+                setProductsInCart(updatedproductsInCart);
+                const currentQuantity = updatedproductsInCart[productIndex].quantity;
+
+                console.log(productId, price, currentQuantity)
+                handleAddToCart(productId, price, currentQuantity);
+            }
+        }
+    }
+
+    const handleAddToCart = (productId, price, quantity) => {
+        fetch(`http://localhost:5000/cart/add/${productId}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json', 'Authorization': localStorage.token,
+            },
+            body: JSON.stringify({
+                quantity,
+                price
+            }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setProductsInCart(data);
+            })
+    };
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
@@ -29,11 +83,13 @@ export default function Cart({ add2Cart }) {
             .then(res => {
                 if (!res.ok) {
                     snackbar('Network response was not ok : cart.js');
+                    return [];
                 }
                 return res.json();
             })
             .then(data => {
-                // setCartItems(data);
+                console.log(data)
+                setProductsInCart(data);
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);
@@ -54,14 +110,13 @@ export default function Cart({ add2Cart }) {
             })
             .then(data => {
                 console.log(data.addToCart)
-                setCartItems(cartItems.filter(p => p._id !== productId));
+                setProductsInCart(productsInCart.filter(p => p._id !== productId));
+                setProductsInCart(productsInCart.filter(p => p._id !== productId))
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);
             });
     };
-
-
 
     const list = () => (
         <Box // the big div 
@@ -86,7 +141,7 @@ export default function Cart({ add2Cart }) {
                 }}
 
             >
-                {cartItems.map((p) => (
+                {productsInCart.map((p) => (
                     <Box
                         onClick={(e) => e.stopPropagation()}
                         key={p._id}
@@ -101,8 +156,15 @@ export default function Cart({ add2Cart }) {
                     >
                         <ListItem>
                             <ListItemText primary={p.title} />
-                            <ListItemText primary={p.price} />
-                            <ListItemText primary={p.quantity} />
+                            <ListItemText primary={`Total Price: ${p.price * p.quantity}`} /> {/* Calculate total price */}
+                            <IconButton aria-label="Decrease quantity" onClick={() => decrementQuantity(p._id, p.price)}>
+                                <RemoveIcon />
+                            </IconButton>
+
+                            <span>{p.quantity}</span>
+                            <IconButton aria-label="Add quantity" onClick={() => incrementQuantity(p._id, p.price)}>
+                                <AddIcon />
+                            </IconButton>
                             <ListItemIcon>
                                 <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
                             </ListItemIcon>
@@ -112,6 +174,7 @@ export default function Cart({ add2Cart }) {
                         </ListItem>
                     </Box>
                 ))}
+
             </List>
         </Box>
     );
