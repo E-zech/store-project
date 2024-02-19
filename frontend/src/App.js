@@ -23,7 +23,6 @@ function App() {
     const [products, setProducts] = useState([]);
     const [productsInCart, setProductsInCart] = useState([]);
 
-
     const navigate = useNavigate();
 
     const snackbar = text => {
@@ -43,7 +42,7 @@ function App() {
         palette: {
             mode: 'light',
             background: {
-                default: 'white',
+                default: '#ffffff',
                 // default: '#ffefd78a',
             },
         },
@@ -55,11 +54,12 @@ function App() {
         },
     });
 
-    const toggleMode = () => {
-        setMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
-    };
+    // const toggleMode = () => {
+    //     setMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
+    // };
 
     useEffect(() => {
+        setLoader(true);
         if (localStorage.token) {
             const decodedToken = jwtDecode(localStorage.token);
             const userId = decodedToken.userId;
@@ -94,8 +94,28 @@ function App() {
             navigate('/');
             setLoader(false);
         }
-    }, [])
+    }, []);
 
+    useEffect(() => {
+        fetch("http://localhost:5000/cart", {
+            credentials: 'include',
+            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    snackbar('Network response was not ok : App.js');
+                    return [];
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log(data)
+                setProductsInCart(data);
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
+    }, []);
 
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
@@ -105,14 +125,14 @@ function App() {
                 user, setUser, userRoleType, setUserRoleType,
                 products, setProducts, productsInCart, setProductsInCart,
                 filteredProducts, setFilteredProducts,
-                loader, setLoader, snackbar, logout
+                loader, setLoader, snackbar, logout, mode, setMode
             }}>
 
-                <Navbar mode={mode} toggleMode={toggleMode} />
+                <Navbar />
                 <Router />
                 {loader && <Loader />}
                 {snackbarText && <SnackBar text={snackbarText} />}
-                <Footer mode={mode} toggleMode={toggleMode} />
+                <Footer />
             </GeneralContext.Provider>
         </ThemeProvider>
     );

@@ -1,13 +1,9 @@
-#body{
-padding: 10px;
-}
 
 .header{
  display: flex;
  justify-content: center;
  align-items: center;
 /* background-color: #fff; */
-margin-top: 25px;
 }
 
 .header > h1 {

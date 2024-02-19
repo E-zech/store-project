@@ -11,15 +11,15 @@ import { GeneralContext } from '../../App';
 import { RoleTypes } from '../navbar/Navbar';
 import '../../css/App.css';
 
-export default function Footer({ mode }) {
+export default function Footer() {
   const navigate = useNavigate();
   const path = useResolvedPath().pathname;
   const [value, setValue] = useState(0);
-  const { user, userRoleType } = useContext(GeneralContext);
+  const { user, userRoleType, mode, setMode } = useContext(GeneralContext);
 
   const activeColor = {
     "&.Mui-selected": {
-      color: '#db8a45',
+      color: 'white',
     }
   };
 
@@ -48,7 +48,7 @@ export default function Footer({ mode }) {
         }}>
 
           <BottomNavigation
-            sx={{ backgroundColor: mode === 'dark' ? 'black' : '#ffefd7' }}
+            sx={{ backgroundColor: mode === 'dark' ? 'black' : '#99c8c2' }}
             showLabels
             value={value}
             onChange={(event, newValue) => {
@@ -63,10 +63,10 @@ export default function Footer({ mode }) {
             }
 
             {(userRoleType === RoleTypes.admin || userRoleType === RoleTypes.master) &&
-              <BottomNavigationAction label="product management" icon={<LocalMallIcon />} onClick={() => navigate('/product-management')} sx={path === '/product-management' ? activeColor : {}} />
+              <BottomNavigationAction label="PRM" icon={<LocalMallIcon />} onClick={() => navigate('/product-management')} sx={path === '/product-management' ? activeColor : {}} />
             }
             {(userRoleType === RoleTypes.admin || userRoleType === RoleTypes.master) &&
-              <BottomNavigationAction label="user management" icon={<AccountCircleIcon />} onClick={() => navigate('/user-management')} sx={path === '/user-management' ? activeColor : {}} />
+              <BottomNavigationAction label="CRM" icon={<AccountCircleIcon />} onClick={() => navigate('/user-management')} sx={path === '/user-management' ? activeColor : {}} />
             }
 
           </BottomNavigation>

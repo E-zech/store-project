@@ -5,10 +5,11 @@ import ProductComponent from '../ProductComponent.js';
 import AddOrEditProduct from './AddOrEditProduct.js';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
+import Add from '@mui/icons-material/Add.js';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
-    const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader } = useContext(GeneralContext);
+    const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -51,20 +52,30 @@ export default function ProductMangement() {
 
                         <Button
                             variant="contained"
-                            color='primary'
                             onClick={() => navigate(`/product/add-edit`)}
                             sx={{
-                                backgroundColor: 'indigo',
-                                '&:hover': {
-                                    backgroundColor: '#7e30b7'
-                                },
-                                display: 'block',
+                                minWidth: 0,
+                                width: '50px', // Set the width to the same value as the height
+                                height: '50px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
                                 position: 'fixed',
-                                right: '18px',
-                                bottom: '75px'
+                                right: '12px',
+                                bottom: '70px',
+                                color: mode === 'light' ? '#99c8c2' : '#fff',
+                                backgroundColor: mode === 'light' ? '#fff' : '#000',
+                                boxShadow: mode === 'light' ? '0px 0px 0px 5px #99c8c2, 0px 0px 9px 1px #99c8c2, 0px 0px 0px 7px #99c8c2' : '0px 0px 0px 5px #fff, 0px 0px 9px 1px #fff, 0px 0px 0px 7px #fff',
+                                transition: 'all 0.3s ease',
+                                '&:hover': {
+                                    transform: 'scale(1.1)',
+                                    boxShadow: mode === 'light' ? '0px 0px 0px 6px #99c8c2, 0px 0px 10px 2px #99c8c2, 0px 0px 0px 8px #99c8c2' : '0px 0px 0px 6px #fff, 0px 0px 10px 2px #fff, 0px 0px 0px 8px #fff',
+                                    backgroundColor: 'white',
+                                },
                             }}
                         >
-                            Add Product
+                            <Add style={{ fontSize: '2.5rem', fontWeight: 'bold' }} />
                         </Button>
 
                     </div>)}

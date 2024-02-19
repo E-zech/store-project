@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Paper } from '@mui/material';
 import { Link, useNavigate, useResolvedPath } from 'react-router-dom';
 import { GeneralContext } from '../../App';
 import SearchBar from '../searchBar/SearchBar';
@@ -25,14 +25,15 @@ const pages = [
     { route: '/login', title: 'login', permissions: [RoleTypes.none] },
     { route: '/signup', title: 'signup', permissions: [RoleTypes.none] },
     { route: '/faves', title: 'favorites ', permissions: [RoleTypes.user, RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
-    { route: '/product-management', title: 'product management', permissions: [RoleTypes.admin, RoleTypes.master] },
-    { route: '/user-management', title: 'user management', permissions: [RoleTypes.admin, RoleTypes.master] }];
+    { route: '/product-management', title: 'PRM', permissions: [RoleTypes.admin, RoleTypes.master] },
+    { route: '/user-management', title: 'CRM', permissions: [RoleTypes.admin, RoleTypes.master] }];
 
-export default function Navbar({ mode, toggleMode }) {
+export default function Navbar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [isSearchBar, setIsSearchBar] = useState(false);
-    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout } = useContext(GeneralContext);
+    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout, mode, setMode } = useContext(GeneralContext);
+
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
 
@@ -61,8 +62,8 @@ export default function Navbar({ mode, toggleMode }) {
     return (
         <AppBar
             position="static"
-            sx={{ backgroundColor: mode === 'dark' ? 'black' : '#dda147' }}>
-            <Container maxWidth="xl">
+            sx={{ backgroundColor: mode === 'dark' ? 'black' : '#99c8c2' }}>
+            <Container maxWidth="xl" >
                 <Toolbar disableGutters>
                     <Typography
                         variant="h6"
@@ -91,10 +92,16 @@ export default function Navbar({ mode, toggleMode }) {
                             transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            sx={{ display: { xs: 'block', md: 'none' }, }}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                                '& .MuiMenu-paper': {
+                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                                    color: 'white'
+                                }
+                            }}
                         >
                             {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
-                                <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: mode === 'dark' ? 'white' : 'black' }}>
+                                <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: 'white' }}>
                                     <MenuItem onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">{p.title}</Typography>
                                     </MenuItem>
@@ -102,6 +109,7 @@ export default function Navbar({ mode, toggleMode }) {
                             ))}
                         </Menu>
                     </Box>
+
                     <Typography
                         variant="h5"
                         noWrap
@@ -130,26 +138,34 @@ export default function Navbar({ mode, toggleMode }) {
                     </Box>
 
                     {isSearchBar && (
-                        <Box sx={{ width: user ? '29vw' : '40vw' }}>
+                        <Box sx={{
+                            width: user ? '30vw' : '40vw',
+                        }}>
                             <SearchBar />
                         </Box>)}
 
 
                     <Box sx={{}} >
-                        <IconButton sx={{ ml: 1 }} onClick={toggleMode} color="inherit">
+                        <IconButton sx={{ ml: 1 }} onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} color="inherit">
                             {mode === 'dark' ? <Brightness4Icon /> : <NightlightIcon />}
                         </IconButton>
                     </Box>
 
                     {user ?
-                        <Box sx={{ flexGrow: 0 }}>
+                        <Box sx={{ flexGrow: 0, color: 'black' }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} src={user.imgUrl} alt="User Avatar" />
+                                    <Avatar sx={{ m: 1, bgcolor: 'transparent', color: '#fdfdfd' }} src={user.imgUrl} alt="User Avatar" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
-                                sx={{ mt: '45px' }}
+                                sx={{
+                                    mt: '45px',
+                                    '& .MuiMenu-paper': {
+                                        backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                                        color: 'white'
+                                    }
+                                }}
                                 id="menu-appbar"
                                 anchorEl={anchorElUser}
                                 anchorOrigin={{
@@ -162,11 +178,13 @@ export default function Navbar({ mode, toggleMode }) {
                                     horizontal: 'right'
                                 }}
                                 open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}>
+                                onClose={handleCloseUserMenu} >
+
+
 
                                 <Link to="/account" style={{
                                     textDecoration: 'none',
-                                    color: mode === 'dark' ? 'white' : 'black'
+                                    color: 'white'
                                 }}>
                                     <MenuItem onClick={handleCloseUserMenu}>
                                         <Typography align="center">{user.firstName || 'Account'}</Typography>
@@ -176,6 +194,8 @@ export default function Navbar({ mode, toggleMode }) {
                                 <MenuItem onClick={logout}>
                                     <Typography textAlign="center">Logout</Typography>
                                 </MenuItem>
+
+
 
                             </Menu>
                         </Box> : ''}

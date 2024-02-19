@@ -1,3 +1,11 @@
+.grid-cards{
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+}
+
 .container-cards{
     display: flex;
     flex-wrap: wrap;
@@ -8,7 +16,7 @@
 } 
 
 .card{
-    width: 30vw;
+    width: 345px;
     transition: all 0.2s ease-in-out !important;
 }
 
@@ -23,10 +31,40 @@
 
 .main-headline{
     font-size: 1.7rem;
-   padding: 15px 0px;
-    color: darkgoldenrod;
+   padding: 5px 0px;
+    color: black;
 }
 
-.sec-headline{ 
-padding: 5px 0px;
+@media screen and (max-width:1850px) {
+    .grid-cards{
+        grid-template-columns: repeat(4, auto);
+    }
+
+}
+@media screen and (max-width:1500px) {
+    .grid-cards{
+        grid-template-columns: repeat(3, auto);
+    }
+
+}
+
+@media screen and (max-width:1150px) {
+    .grid-cards{
+        grid-template-columns: repeat(2, auto);
+    }
+
+}
+
+@media screen and (max-width:750px) {
+    .grid-cards{
+        grid-template-columns: repeat(1, auto);
+    }
+
+}
+
+@media screen and (max-width:600px) {
+    .grid-cards{
+        grid-template-columns: repeat(1, auto);
+    }  
+
 }

@@ -41,40 +41,18 @@ export default function AllProducts() { // ALL Products Page basicly
         })
             .then(res => res.json())
             .then(data => {
+                snackbar(`${title} added to cart successfully`);
                 console.log(data)
                 setProducts(data);
                 setProductsInCart(data);
-                snackbar(`${title} added to cart successfully`);
             })
     };
-
-    useEffect(() => {
-        fetch("http://localhost:5000/cart", {
-            credentials: 'include',
-            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token }
-        })
-            .then(res => {
-                if (!res.ok) {
-                    snackbar('Network response was not ok : cart.js');
-                    return [];
-                }
-                return res.json();
-            })
-            .then(data => {
-                console.log(data)
-                setProductsInCart(data);
-            })
-            .catch(error => {
-                console.error('Error fetching cart items:', error);
-            });
-    }, []);
 
     return (
         <>
             <section>
-                <header className="header">
+                <header>
                     <h1 className="main-title">Skin Care Store</h1>
-                    <h3 className="sec-title">All Products</h3>
                 </header>
 
                 <section className="container-cards">
@@ -82,7 +60,7 @@ export default function AllProducts() { // ALL Products Page basicly
                         <h1>Loading...</h1>
                     ) : (
                         <>
-                            <div className="cart-buttonDiv" style={{ display: 'flex', position: 'fixed', bottom: '55px', left: '5px', zIndex: '9999' }}>
+                            <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>
                                 {
                                     user &&
                                     <Cart />

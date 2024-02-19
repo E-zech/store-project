@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { GeneralContext } from "../App";
 import { useParams } from "react-router-dom";
 import './Product.css';
+import Cart from "../components/cart/Cart";
 
 
 export default function Product() {
     const [product, setProduct] = useState({});
     const { id } = useParams();
-    const { loader, setLoader, filteredProducts, setFilteredProducts, snackbar } = useContext(GeneralContext);
+    const { user, loader, setLoader, filteredProducts, setFilteredProducts, snackbar } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true);
@@ -30,7 +31,7 @@ export default function Product() {
     return (
         <> <main id="body">
             <header className="header" >
-                <h1>{product.title}</h1>
+                <h1 className="main-title">{product.title}</h1>
             </header>
 
             <section className="first-wrapper">
@@ -66,7 +67,13 @@ export default function Product() {
                     <h2>Ingredients</h2>
                     {product.Ingredients}
                 </div>
+                <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>
+                    {
+                        user &&
+                        <Cart />
+                    }
 
+                </div>
             </section>
         </main>
         </>

@@ -51,7 +51,7 @@ export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
     const [allProducts, setAllProducts] = useState([]);
 
-    const { setFilteredProducts } = useContext(GeneralContext);
+    const { setFilteredProducts, setLoader } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products`, {
