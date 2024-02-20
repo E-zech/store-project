@@ -4,6 +4,15 @@ import { useParams } from "react-router-dom";
 import './Product.css';
 import Cart from "../components/cart/Cart";
 
+import { GiBarefoot } from "react-icons/gi";
+import { FaHandSparkles } from "react-icons/fa";
+import { IoBody } from "react-icons/io5";
+import { MdOutlineFaceRetouchingNatural } from "react-icons/md";
+import { IoEyeSharp } from "react-icons/io5";
+
+
+
+
 
 export default function Product() {
     const [product, setProduct] = useState({});
@@ -53,6 +62,16 @@ export default function Product() {
                 </div>
 
             </section>
+
+            <div>
+
+                <GiBarefoot size={50} />
+                <FaHandSparkles size={50} />
+                <IoBody size={50} />
+                <MdOutlineFaceRetouchingNatural size={50} />
+                <IoEyeSharp size={50} />
+            </div>
+
 
             <section className="second-wrapper">
                 <div className="description">
