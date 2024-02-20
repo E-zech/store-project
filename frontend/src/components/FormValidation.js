@@ -13,7 +13,7 @@ export const schema = Joi.object({
   firstName: Joi.string().min(2).max(20).label('First Name').required(),
   lastName: Joi.string().min(2).max(20).label('Last Name').required(),
 
-  phone: Joi.string().pattern(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/).message('Phone must be 9 digits long').required(),
+  phone: Joi.string().pattern(/0[0-9]{2}\-?\s?[0-9]{3}\s?[0-9]{4}/).message('Phone must be 10 digits long').required(),
 
   email: Joi.string().email({ tlds: false }).lowercase().trim().required(),
 

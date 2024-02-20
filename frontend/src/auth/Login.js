@@ -23,7 +23,7 @@ export default function Login() {
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
-    const { setUser, setLoader, snackbar, setUserRoleType } = useContext(GeneralContext);
+    const { setUser, setLoader, snackbar, setUserRoleType, mode } = useContext(GeneralContext);
 
     const schema = Joi.object({
         email: Joi.string()
@@ -111,7 +111,7 @@ export default function Login() {
                     alignItems: 'center',
                 }}>
 
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
                     <LockOutlinedIcon />
                 </Avatar>
 
@@ -152,9 +152,9 @@ export default function Login() {
                         variant="contained"
                         disabled={!isFormValid}
                         sx={{
-                            mt: 3, mb: 2, backgroundColor: 'indigo',
+                            mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                             '&:hover': {
-                                backgroundColor: '#7e30b7'
+                                backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
                             }
                         }}>
                         Login
@@ -162,9 +162,12 @@ export default function Login() {
 
                     <Grid container justifyContent="center">
                         <Grid item>
-                            <Link to="/signup">
-                                Already have an account ? Sign-Up
-                            </Link>
+
+                            <Button
+                                onClick={() => navigate('/signup')}>
+                                Already have an account? Sign In
+                            </Button>
+
                         </Grid>
                     </Grid>
 

@@ -8,7 +8,7 @@ export const UserValid = Joi.object({
 
     roleType: Joi.number().default(2),
 
-    phone: Joi.string().pattern(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/).message('phone must be 9 digits long').required(),
+    phone: Joi.string().pattern(/0[0-9]{2}\-?\s?[0-9]{3}\s?[0-9]{4}/).message('Phone must be 10 digits long').required(),
 
     email: Joi.string().email().lowercase().trim().required(),
 

@@ -28,7 +28,7 @@ export default function Signup() {
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
-  const { setLoader, snackbar } = useContext(GeneralContext);
+  const { setLoader, snackbar, mode } = useContext(GeneralContext);
 
   const handleChange = (ev) => {
     const { name, value } = ev.target;
@@ -112,7 +112,7 @@ export default function Signup() {
             alignItems: 'center',
           }}>
 
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
             <AssignmentIndIcon />
           </Avatar>
 
@@ -151,9 +151,9 @@ export default function Signup() {
               variant="contained"
               disabled={!isFormValid}
               sx={{
-                mt: 3, mb: 2, backgroundColor: 'indigo',
+                mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                 '&:hover': {
-                  backgroundColor: '#7e30b7'
+                  backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
                 }
               }}>
               Signup
@@ -161,9 +161,12 @@ export default function Signup() {
 
             <Grid container justifyContent="center">
               <Grid item>
-                <Link to="/login">
-                  Already have an account? Login
-                </Link>
+                <Button
+                  sx={{ color: mode === 'dark' ? 'white' : '#3d4f4d' }}
+                  onClick={() => navigate('/signup')}>
+                  Already have an account? Sign In
+                </Button>
+
               </Grid>
             </Grid>
 
@@ -174,51 +177,3 @@ export default function Signup() {
   );
 }
 
-
-
-// old ones : 
-// const [formData, setFormData] = useState({
-//   firstName: '',
-//   middleName: '',
-//   lastName: '',
-//   phone: '',
-//   email: '',
-//   password: '',
-//   imgUrl: '',
-//   imgAlt: '',
-//   state: '',
-//   country: '',
-//   city: '',
-//   street: '',
-//   houseNumber: '',
-//   zip: ''
-// });
-
-// const handleChange = (ev) => {
-//   const { name, value } = ev.target;
-//   const obj = { ...formData, [name]: value };
-//   setFormData(obj);
-
-//   const validate = schema.validate(obj, { abortEarly: false });
-//   const tempErrors = { ...errors };
-//   delete tempErrors[name];
-
-//   if (validate.error) {
-//     const item = validate.error.details.find((e) => e.context.key === name);
-//     if (item) {
-//       tempErrors[name] = item.message;
-//     }
-//   }
-//   if (name in tempErrors && value === "") {
-//     delete tempErrors[name];
-//   }
-
-//   setErrors(tempErrors);
-
-//   const formIsValid = Object.keys(tempErrors).length === 0 &&
-//     Object.values(obj).every((value) => {
-//       return value !== "";
-//     });
-//   setIsFormValid(formIsValid);
-
-// };

@@ -1,5 +1,6 @@
 import User from '../../models/User.js';
 import { UserValid } from '../../validation/userJoi.js';
+import bcrypt from 'bcrypt';
 
 const signup = app => {
     app.post('/signup', async (req, res) => {
@@ -39,6 +40,7 @@ const signup = app => {
             });
 
         } catch (err) {
+
             return res.status(500).send('Internal Server Error');
         }
     });
