@@ -68,9 +68,7 @@ export default function SearchBar() {
     const handleChange = (value) => {
         const lowercaseValue = value.toLowerCase().trim();
         setSearchValue(value);
-
         const searchProducts = allProducts.filter(p => p.title.toLowerCase().startsWith(lowercaseValue));;
-
         setFilteredProducts(searchProducts);
     };
 

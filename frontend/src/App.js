@@ -22,6 +22,7 @@ function App() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [products, setProducts] = useState([]);
     const [productsInCart, setProductsInCart] = useState([]);
+    const [isAppBarOpen, setIsAppBarOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -94,7 +95,7 @@ function App() {
             navigate('/');
             setLoader(false);
         }
-    }, []);
+    }, [localStorage.token]);
 
     useEffect(() => {
         fetch("http://localhost:5000/cart", {
@@ -125,7 +126,7 @@ function App() {
                 user, setUser, userRoleType, setUserRoleType,
                 products, setProducts, productsInCart, setProductsInCart,
                 filteredProducts, setFilteredProducts,
-                loader, setLoader, snackbar, logout, mode, setMode
+                loader, setLoader, snackbar, logout, mode, setMode, isAppBarOpen, setIsAppBarOpen
             }}>
 
                 <Navbar />

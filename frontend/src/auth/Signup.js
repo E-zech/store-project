@@ -13,6 +13,7 @@ import { GeneralContext } from '../App';
 import Switch from '@mui/material/Switch';
 import { FormControlLabel } from '@mui/material';
 import { schema, clientStructure } from '../components/FormValidation';
+import { useInputsFormColors } from '../utils/utils'
 
 export const defaultTheme = createTheme();
 
@@ -29,6 +30,7 @@ export default function Signup() {
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
   const { setLoader, snackbar, mode } = useContext(GeneralContext);
+  const { sx } = useInputsFormColors();
 
   const handleChange = (ev) => {
     const { name, value } = ev.target;
@@ -141,7 +143,8 @@ export default function Signup() {
                       error={Boolean(errors[s.name])}
                       helperText={errors[s.name]}
                       onChange={handleChange}
-                      value={formData[s.name]} />}
+                      value={formData[s.name]}
+                      sx={sx} />}
                 </Grid>)}
             </Grid>
 
@@ -153,7 +156,7 @@ export default function Signup() {
               sx={{
                 mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                 '&:hover': {
-                  backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                  backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
                 }
               }}>
               Signup
@@ -162,8 +165,8 @@ export default function Signup() {
             <Grid container justifyContent="center">
               <Grid item>
                 <Button
-                  sx={{ color: mode === 'dark' ? 'white' : '#3d4f4d' }}
-                  onClick={() => navigate('/signup')}>
+                  sx={{ color: mode === 'dark' ? 'white' : 'black' }}
+                  onClick={() => navigate('/login')}>
                   Already have an account? Sign In
                 </Button>
 

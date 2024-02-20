@@ -10,11 +10,15 @@ import { useContext } from 'react';
 import { GeneralContext } from '../App';
 import Switch from '@mui/material/Switch';
 import { FormControlLabel } from '@mui/material';
-import {  clientStructure } from '../components/FormValidation';
+import { clientStructure } from '../components/FormValidation';
+import { useInputsFormColors } from '../utils/utils'
+
 
 export default function Account() {
     const navigate = useNavigate();
-    const { user, setUser, setLoader, snackbar } = useContext(GeneralContext);
+    const { user, setUser, setLoader, snackbar, mode } = useContext(GeneralContext);
+    const { sx } = useInputsFormColors();
+
 
     const handleSubmit = ev => {
         ev.preventDefault();
@@ -30,78 +34,81 @@ export default function Account() {
         });
 
         setLoader(true);
-    
-        fetch(`http://localhost:5000/clients/update?token=d29611be-3431-11ee-b3e9-14dda9d4a5f0`, {
+
+        fetch(`http://localhost:5000/users/${user._id}`, {
             credentials: 'include',
             method: 'PUT',
-            headers: {'Content-type': 'application/json'},
+            headers: { 'Content-type': 'application/json', 'Authorization': localStorage.token },
             body: JSON.stringify(obj),
         })
-        .then(() => {
-            setLoader(false);
-            snackbar("Update successful");
-        }).finally(()=> {
-            navigate('/');
-        })
+            .then(() => {
+                setLoader(false);
+                snackbar("Update successful");
+            }).finally(() => {
+                navigate('/');
+            })
     };
     return (
-    <>  
-    {user ?
-            <Container component="main" maxWidth="xs">
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} src={user.imgUrl} alt="User Avatar"/>
-                    <Typography component="h1" variant="h5">Edit Details</Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <Grid container spacing={2}>
-                            {
-                                clientStructure.filter(s => !s.initialOnly).map(s =>
-                                    <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
-                                        {
-                                            s.type === 'boolean' ?
-                                            <FormControlLabel
-                                                control={<Switch color="primary" name={s.name} checked={user[s.name]} />}
-                                                label={s.label}
-                                                labelPlacement="start"
-                                            /> :
-                                            <TextField
-                                                margin="normal"
-                                                required={s.required}
-                                                fullWidth
-                                                id={s.name}
-                                                label={s.label}
-                                                name={s.name}
-                                                type={s.type}
-                                                autoComplete={s.name}
-                                                value={user[s.name]}
-                                                onChange={ev => setUser({ ...user, [s.name]: ev.target.value })}
-                                            />
-                                        }
-                                    </Grid>
-                                )
-                            }
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2,  backgroundColor: 'indigo',
-                            '&:hover':{
-                                backgroundColor:'#7e30b7' 
-                               } }}
-                        >
-                            Save
-                        </Button>
+        <>
+            {user ?
+                <Container component="main" maxWidth="xs">
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgUrl} alt="User Avatar" />
+                        <Typography component="h1" variant="h5">Edit Details</Typography>
+                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                            <Grid container spacing={2}>
+                                {
+                                    clientStructure.filter(s => !s.initialOnly).map(s =>
+                                        <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
+                                            {
+                                                s.type === 'boolean' ?
+                                                    <FormControlLabel
+                                                        control={<Switch color="primary" name={s.name} checked={user[s.name]} />}
+                                                        label={s.label}
+                                                        labelPlacement="start"
+                                                    /> :
+                                                    <TextField
+                                                        margin="normal"
+                                                        required={s.required}
+                                                        fullWidth
+                                                        id={s.name}
+                                                        label={s.label}
+                                                        name={s.name}
+                                                        type={s.type}
+                                                        autoComplete={s.name}
+                                                        value={user[s.name]}
+                                                        onChange={ev => setUser({ ...user, [s.name]: ev.target.value })}
+                                                        sx={sx}
+                                                    />
+                                            }
+                                        </Grid>
+                                    )
+                                }
+                            </Grid>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{
+                                    mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
+                                    '&:hover': {
+                                        backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+                                    }
+                                }}
+                            >
+                                Save
+                            </Button>
+                        </Box>
                     </Box>
-                </Box>
-            </Container> : ''
-        }
-    </>
-);
+                </Container> : ''
+            }
+        </>
+    );
 }

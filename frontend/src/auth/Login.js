@@ -12,6 +12,7 @@ import { GeneralContext } from '../App';
 import { RoleTypes } from '../components/navbar/Navbar';
 import Joi from 'joi';
 import { jwtDecode } from 'jwt-decode';
+import { useInputsFormColors } from '../utils/utils'
 
 
 export default function Login() {
@@ -24,6 +25,7 @@ export default function Login() {
     const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
     const { setUser, setLoader, snackbar, setUserRoleType, mode } = useContext(GeneralContext);
+    const { sx } = useInputsFormColors();
 
     const schema = Joi.object({
         email: Joi.string()
@@ -82,10 +84,16 @@ export default function Login() {
                 }
             })
             .then(data => {
+                console.log(data)
+
                 const token = data.token
+                console.log(token)
+
                 localStorage.token = token;
 
                 const decodedToken = jwtDecode(token);
+                console.log(decodedToken)
+
                 const roleTypeTKN = decodedToken.roleType;
 
                 setUser(data);
@@ -130,7 +138,9 @@ export default function Login() {
                         autoComplete="email"
                         autoFocus
                         onChange={handelChange}
-                        value={formData.email} />
+                        value={formData.email}
+                        sx={sx}
+                    />
 
                     <TextField
                         error={Boolean(errors.password)}
@@ -144,7 +154,9 @@ export default function Login() {
                         id="password"
                         autoComplete="current-password"
                         onChange={handelChange}
-                        value={formData.password} />
+                        value={formData.password}
+                        sx={sx}
+                    />
 
                     <Button
                         type="submit"
@@ -154,7 +166,7 @@ export default function Login() {
                         sx={{
                             mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                             '&:hover': {
-                                backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                                backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
                             }
                         }}>
                         Login
@@ -164,6 +176,7 @@ export default function Login() {
                         <Grid item>
 
                             <Button
+                                sx={{ color: mode === 'dark' ? 'white' : 'black' }}
                                 onClick={() => navigate('/signup')}>
                                 Already have an account? Sign In
                             </Button>

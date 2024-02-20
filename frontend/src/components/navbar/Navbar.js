@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Paper } from '@mui/material';
 import { Link, useNavigate, useResolvedPath } from 'react-router-dom';
 import { GeneralContext } from '../../App';
@@ -7,6 +7,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import MenuIcon from '@mui/icons-material/Menu';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import HomeIcon from '@mui/icons-material/Home';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export const RoleTypes = {
     none: 1, //can see products .
@@ -32,7 +33,7 @@ export default function Navbar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [isSearchBar, setIsSearchBar] = useState(false);
-    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout, mode, setMode } = useContext(GeneralContext);
+    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout, mode, setMode, isAppBarOpen, setIsAppBarOpen } = useContext(GeneralContext);
 
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
@@ -136,6 +137,8 @@ export default function Navbar() {
                                 </Button>
                             </Link>))}
                     </Box>
+
+                    <Button color="inherit" onClick={() => setIsAppBarOpen(!isAppBarOpen)}>CATEGORY <ArrowDropDownIcon /></Button>
 
                     {isSearchBar && (
                         <Box sx={{

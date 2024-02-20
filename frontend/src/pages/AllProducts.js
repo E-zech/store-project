@@ -1,16 +1,20 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import ProductComponent from "../components/product/ProductComponent";
-import { GeneralContext } from "../App";
-import ResultNotFound from "./ResultNotFound";
-import Cart from '../components/cart/Cart'
-import '../css/App.css'
-import { RoleTypes } from "../components/navbar/Navbar";
-export const CartContext = createContext();
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import ProductComponent from '../components/product/ProductComponent';
+import { GeneralContext } from '../App';
+import ResultNotFound from './ResultNotFound';
+import Cart from '../components/cart/Cart';
+import '../css/App.css';
+import { RoleTypes } from '../components/navbar/Navbar';
+import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-export default function AllProducts() { // ALL Products Page basicly
-    // const [products, setProducts] = useState([]);
-    // const [productsInCart, setProductsInCart] = useState([]);
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader } = useContext(GeneralContext);
+export default function AllProducts() { // ALL Products Page basically
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarOpen, setIsAppBarOpen } = useContext(GeneralContext);
+    const [selectedCategory, setSelectedCategory] = useState("All");
+
+
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:5000/products`, {
@@ -24,7 +28,6 @@ export default function AllProducts() { // ALL Products Page basicly
                 setProducts(data);
             })
     }, [filteredProducts]);
-
 
     const add2Cart = (productId, title, price) => {
         const quantity = 1;
@@ -48,10 +51,42 @@ export default function AllProducts() { // ALL Products Page basicly
             })
     };
 
+
     return (
         <>
+            <AppBar position="static"
+                sx={{
+                    width: '97vw',
+                    top: '70px', display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    boxShadow: 'none',
+                    backgroundColor: 'transparent',
+                    transform: isAppBarOpen ? 'translateY(0px)' : 'translateY(-200%)',
+                    transition: 'transform 0.3s ease-in-out',
+                }}>
+                <Toolbar sx={{
+                    width: '40vw',
+                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderBottomLeftRadius: '15px',
+                    borderBottomRightRadius: '15px',
+
+                }}>
+                    <Button color="inherit" onClick={() => setSelectedCategory('All')}>All</Button>
+                    <Button color="inherit" onClick={() => setSelectedCategory('Face')}>Face</Button>
+                    <Button color="inherit" onClick={() => setSelectedCategory('Eyes')}>Eyes</Button>
+                    <Button color="inherit" onClick={() => setSelectedCategory('Body')}>Body</Button>
+                    <Button color="inherit" onClick={() => setSelectedCategory('Hands')}>Hands</Button>
+                    <Button color="inherit" onClick={() => setSelectedCategory('Feet')}>Feet</Button>
+                </Toolbar>
+            </AppBar>
+
+
             <section>
-                <header>
+                <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                     <h1 className="main-title">Skin Care Store</h1>
                 </header>
 
@@ -69,14 +104,9 @@ export default function AllProducts() { // ALL Products Page basicly
                             </div>
 
                             <div className="grid-cards">
-                                {filteredProducts.length > 0 ? (
-                                    filteredProducts.map(product => (
-                                        <ProductComponent key={product._id} product={product} add2Cart={add2Cart} />
-
-                                    ))
-                                ) : (
-                                    <ResultNotFound />
-                                )}
+                                {filteredProducts.filter(product => product.category === selectedCategory || selectedCategory === "All").map(product => (
+                                    <ProductComponent key={product._id} product={product} add2Cart={add2Cart} />
+                                ))}
                             </div>
                         </>
 

@@ -13,6 +13,8 @@ import { inputsForProducts, schema } from '../ProductStructureValid.js';
 import Joi from 'joi';
 import { Tooltip } from '@mui/material';
 import './AddOrEditProduct.css'
+import { useInputsFormColors } from '../../../utils/utils.js'
+
 
 
 export default function AddOrEditProduct() {
@@ -21,7 +23,8 @@ export default function AddOrEditProduct() {
     const [isFormValid, setIsFormValid] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
-    const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader } = useContext(GeneralContext);
+    const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
+    const { sx } = useInputsFormColors();
 
     useEffect(() => {
         setLoader(true);
@@ -156,6 +159,7 @@ export default function AddOrEditProduct() {
                                                         error={Boolean(errors[i.name])}
                                                         helperText={errors[i.name]}
                                                         autoComplete="off"
+                                                        sx={sx}
                                                     />
                                                 ) : i.type === 'select' ? (
                                                     <TextField
@@ -170,6 +174,7 @@ export default function AddOrEditProduct() {
                                                         onChange={handleChange}
                                                         error={Boolean(errors[i.name])}
                                                         helperText={errors[i.name]}
+                                                        sx={sx}
                                                     >
                                                         {i.options.map((option) => (
                                                             <MenuItem key={option} value={option}>
@@ -192,13 +197,19 @@ export default function AddOrEditProduct() {
                                                         error={Boolean(errors[i.name])}
                                                         helperText={errors[i.name]}
                                                         autoComplete="off"
+                                                        sx={sx}
                                                     />
                                                 )}
                                             </Grid>))
                                         }
                                     </Grid>
                                     <Tooltip title="Save and Back to Product Management" arrow>
-                                        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}
+                                        <Button type="submit" fullWidth variant="contained" sx={{
+                                            mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+                                            }
+                                        }}
                                             disabled={!isFormValid}>
                                             {id ? `Edit Product` : `Add product`}
                                         </Button>
@@ -207,7 +218,12 @@ export default function AddOrEditProduct() {
 
 
                                     <Tooltip title="Back to Product Management " arrow>
-                                        <Button type="button" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: 'indigo', '&:hover': { backgroundColor: '#7e30b7' } }}
+                                        <Button type="button" fullWidth variant="contained" sx={{
+                                            mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+                                            }
+                                        }}
                                             onClick={() => navigate('/product-management')}
                                             disabled={isFormValid}
                                         >
