@@ -9,4 +9,5 @@ export default function cardRoutes(app) {
     getCartProducts(app);
     deleteFromCart(app);
     subtractFromCart(app);
+
 };  

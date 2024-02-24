@@ -116,7 +116,7 @@ function App() {
             .catch(error => {
                 console.error('Error fetching cart items:', error);
             });
-    }, []);
+    }, [user]);
 
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>

@@ -47,6 +47,7 @@ export default function Cart() {
     };
 
     const saveChanges = () => {
+        setLoader(true)
         productsInCart.forEach(product => {
             fetch(`http://localhost:5000/cart/add/${product._id}`, {
                 method: 'POST',
@@ -63,13 +64,17 @@ export default function Cart() {
                 .then(data => {
                     console.log(data)
                     setProductsInCart(data);
+
+
                 })
         });
+        setLoader(false)
     }
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
         saveChanges();
+
     };
 
     const removeFromCart = (productId) => {
@@ -233,7 +238,9 @@ export default function Cart() {
                 <Drawer
                     anchor="right"
                     open={isOpen}
-                    onClose={toggleDrawer}>
+                    onClose={toggleDrawer}
+                    transitionDuration={500}
+                >
                     {list()}
                 </Drawer>
             </div>

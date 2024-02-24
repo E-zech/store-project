@@ -10,3 +10,405 @@ Route: /cart
 Status Code: 401
 Error:  Unauthorized
 
+Time: 2024-02-24T06:48:34.125Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T06:48:42.358Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T07:05:53.173Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T07:31:27.559Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T08:34:03.687Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T08:34:03.691Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T08:34:03.909Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T09:00:07.685Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:00:12.815Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:09:05.679Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:09:18.549Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:09:20.481Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T09:09:46.185Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:12:00.829Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:12:03.324Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:18:15.887Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:21:27.106Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:24:35.965Z
+Method: POST
+Route: /cart/add
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T09:24:50.879Z
+Method: POST
+Route: /cart/add
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T09:28:04.820Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:28:13.031Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:42:22.494Z
+Method: POST
+Route: /cart/add
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T09:59:02.280Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:59:04.512Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:59:07.018Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T09:59:08.654Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T10:01:05.544Z
+Method: POST
+Route: /cart/add
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:09:31.288Z
+Method: POST
+Route: /cart/add
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T10:17:21.083Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T10:17:21.098Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T10:17:21.155Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T10:22:57.896Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:23:21.401Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:27:15.368Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bcd
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:39:14.429Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:40:04.209Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:46:32.372Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bcd
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:48:14.598Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bcd
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:52:43.869Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:54:36.001Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:57:04.489Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc7
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:58:07.687Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:58:29.613Z
+Method: POST
+Route: /cart/add/one/65cb488ab432517e07d43bc9
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T10:59:48.248Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T11:02:01.227Z
+Method: POST
+Route: /cart/add/one/65cb488bb432517e07d43bcf
+Status Code: 403
+Error:  Forbidden
+
+Time: 2024-02-24T11:02:07.342Z
+Method: POST
+Route: /cart/add/one/65d30f631c18d27517095a4a
+Status Code: 403
+Error:  Forbidden
+
+Time: 2024-02-24T11:02:35.053Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T11:02:39.902Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T11:02:46.540Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-02-24T11:22:48.109Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bcb
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T11:22:48.113Z
+Method: POST
+Route: /cart/add/65cb488ab432517e07d43bcd
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T11:22:48.117Z
+Method: POST
+Route: /cart/add/65cb488bb432517e07d43bcf
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T11:22:50.717Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T11:22:50.721Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T11:22:50.833Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T11:26:44.244Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:44.248Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:44.252Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:44.255Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:45.849Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:45.853Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:45.857Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:45.861Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:46.462Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:46.465Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:46.469Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-02-24T11:26:46.473Z
+Method: POST
+Route: /cart/add/undefined
+Status Code: 400
+Error:  Bad Request
+
