@@ -1,0 +1,12 @@
+Time: 2024-02-24T06:40:25.739Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-02-24T06:40:25.753Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

@@ -8,18 +8,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import IconButton from "@mui/material/IconButton";
-import { CartContext } from '../../pages/AllProducts';
-import { Button, Typography } from '@mui/material';
+
 
 
 export default function Checkout() {
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader } = useContext(GeneralContext);
+    const { productsInCart } = useContext(GeneralContext);
 
     const [isOpen, setIsOpen] = useState(false);
 
