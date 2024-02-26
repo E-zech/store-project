@@ -31,24 +31,28 @@ export default function AllProducts() { // ALL Products Page basically
 
     const add2Cart = (productId, title, price) => {
         const quantity = 1;
-        fetch(`http://localhost:5000/cart/add/${productId}`, {
+        const products = [{ productId, quantity, price }];
+        fetch(`http://localhost:5000/cart/add`, {
             method: 'POST',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json', 'Authorization': localStorage.token,
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.token,
             },
             body: JSON.stringify({
-                quantity,
-                price
+                products,
             }),
         })
             .then(res => res.json())
             .then(data => {
                 snackbar(`${title} added to cart successfully`);
-                console.log(data)
+                console.log(data);
                 setProducts(data);
-                setProductsInCart(data);
+                setProductsInCart(existingProducts => [...existingProducts, ...data]);
             })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+            });
     };
 
 

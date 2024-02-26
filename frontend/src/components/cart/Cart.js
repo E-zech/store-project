@@ -47,29 +47,30 @@ export default function Cart() {
     };
 
     const saveChanges = () => {
-        setLoader(true)
-        productsInCart.forEach(product => {
-            fetch(`http://localhost:5000/cart/add/${product._id}`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json', 'Authorization': localStorage.token,
-                },
-                body: JSON.stringify({
+        fetch(`http://localhost:5000/cart/add`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.token,
+            },
+            body: JSON.stringify({
+                products: productsInCart.map(product => ({
+                    productId: product._id,
                     quantity: product.quantity,
-                    price: product.price
-                }),
+                    price: product.price,
+                })),
+            }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setProductsInCart(data);
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    setProductsInCart(data);
-
-
-                })
-        });
-        setLoader(false)
-    }
+            .catch(error => {
+                console.error('Error saving changes:', error);
+            })
+    };
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
@@ -239,7 +240,7 @@ export default function Cart() {
                     anchor="right"
                     open={isOpen}
                     onClose={toggleDrawer}
-                    transitionDuration={500}
+                    transitionDuration={300}
                 >
                     {list()}
                 </Drawer>

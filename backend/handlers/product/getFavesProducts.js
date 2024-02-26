@@ -15,10 +15,7 @@ const getFavesProducts = app => {
                 return res.status(404).send('You dont have products');
             }
 
-            res.send({
-                message: `Here are your products:`,
-                myFavesProducts: myFavesProducts
-            });
+            res.send(myFavesProducts);
 
         } catch (err) {
             return res.status(500).send('Internal Server Error');

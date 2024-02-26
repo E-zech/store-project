@@ -26,6 +26,7 @@ export default function FavProducts() {
                 }
             })
             .then(data => {
+                console.log(data)
                 setFavProducts(data);
             });
     }, [filteredProducts]);

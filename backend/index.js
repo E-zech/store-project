@@ -35,7 +35,7 @@ app.use(express.json());
 
 app.use(cors({
     origin: true,
-    methods: 'GET,PUT,POST,DELETE,OPTIONS',
+    methods: 'GET,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
     allowedHeaders: 'Content-Type, Accept, Authorization',
 }));

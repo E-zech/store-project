@@ -32,7 +32,6 @@ export default function ProductComponent({ product, add2Cart }) {
   const [isSaving, setIsSaving] = useState(false)
   const isAdded = productsInCart.some(item => item._id === product._id);
 
-
   const handleClick = () => {
     if (isAdded) {
       // If the item is already in the cart, show a snackbar
@@ -44,6 +43,35 @@ export default function ProductComponent({ product, add2Cart }) {
       setIsSaving(false);
     }, 300);
   };
+
+  const toggleFavOrNot = (id, faves) => {
+    setLoader(true);
+
+    const snackbarMessage = faves.includes(user._id) ? 'Removed from Favorites' : 'Added to Favorites';
+
+    fetch(`http://localhost:5000/products/faves/${id}`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        'Authorization': localStorage.token,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        if (!res.ok) {
+          return snackbar('Network response was not ok : product Component "toggleFavOrNot"');
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log(data)
+        setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+        setFilteredProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+        setLoader(false);
+        snackbar(snackbarMessage);
+      });
+  };
+
 
   const deleteProduct = (id) => {
     setLoader(true);
@@ -115,7 +143,7 @@ export default function ProductComponent({ product, add2Cart }) {
           </CardContent>
 
           <CardActions disableSpacing sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            {path === '/' && (
+            {(path === '/' || path === '/faves') && (
               <>
                 <IconButton
                   aria-label="Add or Remove"
@@ -126,9 +154,9 @@ export default function ProductComponent({ product, add2Cart }) {
                 </IconButton>
 
                 <IconButton id='favoriteBtn' aria-label="add to favorites"
-                //  onClick={() => toggleFavOrNot(product._id, product.faves)}
+                  onClick={() => toggleFavOrNot(product._id, product.faves)}
                 >
-                  <FavoriteIcon color={product.faves ? "error" : ""} />
+                  <FavoriteIcon color={product.faves.includes(user._id) ? "error" : ""} />
                 </IconButton>
               </>
             )}
