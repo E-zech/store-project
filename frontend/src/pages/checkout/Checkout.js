@@ -1,50 +1,105 @@
-import { useEffect, useState, useContext } from 'react';
-import { GeneralContext } from "../../App";
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { GeneralContext } from '../../App';
+import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import AddressForm from './AddressForm';
+import PaymentForm from './PaymentForm';
+import Review from './Review';
 
 
 
-export default function Checkout() {
-    const { productsInCart } = useContext(GeneralContext);
+const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const navigate = useNavigate();
-    return (
-        <>
-            <section>
-                {productsInCart.map((p) => (
-                    <Box
-                        onClick={(e) => e.stopPropagation()}
-                        key={p._id}
-                        sx={{
-                            width: '100%',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            color: 'red',
-                            backgroundColor: 'greenyellow',
-                        }}
-                    >
-                        <ListItem>
-                            <ListItemText primary={p.title} />
-                            <ListItemText primary={`Total Price: ${p.price * p.quantity}`} /> {/* Calculate total price */}
-                            <ListItemIcon>
-                                <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
-                            </ListItemIcon>
-                        </ListItem>
-                    </Box>
-                ))}
-            </section>
-        </>
-    )
+function getStepContent(step) {
+    switch (step) {
+        case 0:
+            return <AddressForm />;
+        case 1:
+            return <PaymentForm />;
+        case 2:
+            return <Review />;
+        default:
+            throw new Error('Unknown step');
+    }
 }
 
+export default function Checkout() {
+    const [activeStep, setActiveStep] = useState(0);
+    const { user } = useContext(GeneralContext);
+    const [isFormValid, setIsFormValid] = useState(true);
 
+    const handleNext = () => {
+        setActiveStep(activeStep + 1);
+    };
+
+    const handleBack = () => {
+        setActiveStep(activeStep - 1);
+    };
+
+    return (
+        <>
+            <CssBaseline />
+            {user && <Container component="main" sx={{ mb: 4, maxWidth: '900px' }}>
+                <Paper variant="outlined" sx={{
+                    my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 },
+                    border: 'none',
+                    backgroundColor: '#bddbd730',
+                    borderRadius: '30px'
+                }}>
+                    <Typography component="h1" variant="h4" align="center">
+                        Checkout
+                    </Typography>
+                    <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+                        {steps.map((label) => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
+                    {activeStep === steps.length ? (
+                        <React.Fragment>
+                            <Typography variant="h5" gutterBottom>
+                                Thank you for your order.
+                            </Typography>
+                            <Typography variant="subtitle1">
+                                Your order number is #2001539. We have emailed your order
+                                confirmation, and will send you an update when your order has
+                                shipped.
+                            </Typography>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            {getStepContent(activeStep)}
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                {activeStep !== 0 && (
+                                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                                        Back
+                                    </Button>
+                                )}
+
+                                <Button
+                                    variant="contained"
+                                    onClick={handleNext}
+                                    sx={{ mt: 3, ml: 1 }}
+
+                                >
+                                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                                </Button>
+                            </Box>
+                        </React.Fragment>
+                    )}
+                </Paper>
+
+            </Container>
+            }
+
+        </>
+    );
+}

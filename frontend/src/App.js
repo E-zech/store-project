@@ -110,7 +110,6 @@ function App() {
                 return res.json();
             })
             .then(data => {
-                console.log(data)
                 setProductsInCart(data);
             })
             .catch(error => {

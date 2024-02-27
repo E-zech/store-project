@@ -156,7 +156,7 @@ export default function ProductComponent({ product, add2Cart }) {
                 <IconButton id='favoriteBtn' aria-label="add to favorites"
                   onClick={() => toggleFavOrNot(product._id, product.faves)}
                 >
-                  <FavoriteIcon color={product.faves.includes(user._id) ? "error" : ""} />
+                  <FavoriteIcon color={product.faves ? "error" : ""} />
                 </IconButton>
               </>
             )}
