@@ -22,7 +22,8 @@ function App() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [products, setProducts] = useState([]);
     const [productsInCart, setProductsInCart] = useState([]);
-    const [isAppBarOpen, setIsAppBarOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState("All");
+
 
     const navigate = useNavigate();
 
@@ -120,19 +121,18 @@ function App() {
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
             <CssBaseline />
-
             <GeneralContext.Provider value={{
                 user, setUser, userRoleType, setUserRoleType,
                 products, setProducts, productsInCart, setProductsInCart,
                 filteredProducts, setFilteredProducts,
-                loader, setLoader, snackbar, logout, mode, setMode, isAppBarOpen, setIsAppBarOpen
+                loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory
             }}>
 
                 <Navbar />
                 <Router />
                 {loader && <Loader />}
                 {snackbarText && <SnackBar text={snackbarText} />}
-                <Footer />
+                {/* <Footer /> */}
             </GeneralContext.Provider>
         </ThemeProvider>
     );

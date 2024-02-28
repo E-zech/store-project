@@ -9,10 +9,7 @@ import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } fr
 import { useNavigate } from 'react-router-dom';
 
 export default function AllProducts() { // ALL Products Page basically
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarOpen, setIsAppBarOpen } = useContext(GeneralContext);
-    const [selectedCategory, setSelectedCategory] = useState("All");
-
-
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
 
     const navigate = useNavigate();
 
@@ -55,41 +52,10 @@ export default function AllProducts() { // ALL Products Page basically
             });
     };
 
-
     return (
         <>
-            <AppBar position="static"
-                sx={{
-                    width: '97vw',
-                    top: '70px', display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    boxShadow: 'none',
-                    backgroundColor: 'transparent',
-                    transform: isAppBarOpen ? 'translateY(0px)' : 'translateY(-200%)',
-                    transition: 'transform 0.3s ease-in-out',
-                }}>
-                <Toolbar sx={{
-                    width: '40vw',
-                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderBottomLeftRadius: '15px',
-                    borderBottomRightRadius: '15px',
 
-                }}>
-                    <Button color="inherit" onClick={() => setSelectedCategory('All')}>All</Button>
-                    <Button color="inherit" onClick={() => setSelectedCategory('Face')}>Face</Button>
-                    <Button color="inherit" onClick={() => setSelectedCategory('Eyes')}>Eyes</Button>
-                    <Button color="inherit" onClick={() => setSelectedCategory('Body')}>Body</Button>
-                    <Button color="inherit" onClick={() => setSelectedCategory('Hands')}>Hands</Button>
-                    <Button color="inherit" onClick={() => setSelectedCategory('Feet')}>Feet</Button>
-                </Toolbar>
-            </AppBar>
-
-
-            <section>
+            <section style={{ marginBottom: '100px' }}>
                 <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                     <h1 className="main-title">Skin Care Store</h1>
                 </header>

@@ -33,7 +33,15 @@ export default function Navbar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [isSearchBar, setIsSearchBar] = useState(false);
-    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout, mode, setMode, isAppBarOpen, setIsAppBarOpen } = useContext(GeneralContext);
+    const [visibleSecondAppBar, setVisibleSecondAppBar] = useState(false); // incharge of the visibility of the secondary appBar based on the path
+    const [isAppBarFixed, setIsAppBarFixed] = useState(false);
+
+
+    const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
+
+    const style = {
+        fontSize: '0.8rem'
+    };
 
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
@@ -54,157 +62,237 @@ export default function Navbar() {
         setAnchorElUser(null)
     };
 
+
+
     useEffect(() => {
-        const disableSearchBar = ['/admin', '/about', '/product', '/login', '/signup', '/account',];
-        setIsSearchBar(!disableSearchBar.includes(path))
+        const disableSearchBar =
+            ['/user-management', '/about', '/product/:id', '/login', '/signup', '/account', '/product/add-edit/:id?', '/checkout',];
+        const disableSecondaryAppBar =
+            ['/user-management', '/about', '/product/:id', '/login', '/signup', '/account', '/product/add-edit/:id?', '/checkout'];
+        setIsSearchBar(!disableSearchBar.includes(path));
+        setVisibleSecondAppBar(!disableSecondaryAppBar.includes(path));
     }, [path]);
 
+    useEffect(() => {
+        const cleanup = () => {
+            setSelectedCategory('All');
+        };
 
+        return cleanup;
+    }, [path]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            setIsAppBarFixed(scrollPosition > 70);
+        };
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
+
+    const handleAppBar = () => {
+        window.scrollTo({
+            top: 71,
+            behavior: 'smooth' // Optional: smooth scrolling effect
+        });
+    };
     return (
-        <AppBar
-            position="static"
-            sx={{ backgroundColor: mode === 'dark' ? 'black' : '#99c8c2' }}>
-            <Container maxWidth="xl" >
-                <Toolbar disableGutters>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        onClick={() => navigate('/')}
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'color', textDecoration: 'none', cursor: "pointer", userSelect: 'none' }}>
-                        <HomeIcon />
-                    </Typography>
+        <>
+            <AppBar
+                position="static"
+                sx={{ backgroundColor: mode === 'dark' ? 'black' : '#99c8c2' }}>
+                <Container maxWidth="xl" >
+                    <Toolbar disableGutters>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            onClick={() => navigate('/')}
+                            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'color', textDecoration: 'none', cursor: "pointer", userSelect: 'none' }}>
+                            <HomeIcon />
+                        </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit">
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                            keepMounted
-                            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                                '& .MuiMenu-paper': {
-                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
-                                    color: 'white'
-                                }
-                            }}
-                        >
-                            {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
-                                <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: 'white' }}>
-                                    <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{p.title}</Typography>
-                                    </MenuItem>
-                                </Link>
-                            ))}
-                        </Menu>
-                    </Box>
-
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                            mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none',
-                        }}>
-                        <HomeIcon />
-                    </Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
-                            <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: 'white' }}>
-                                <Button
-                                    onClick={handleCloseNavMenu}
-                                    sx={{
-                                        my: 2,
-                                        color: 'white',
-                                        display: 'block',
-                                        backgroundColor: p.route === path ? '#ffffff3d' : {}
-                                    }}>
-                                    {p.title}
-                                </Button>
-                            </Link>))}
-                    </Box>
-
-                    <Button color="inherit" onClick={() => setIsAppBarOpen(!isAppBarOpen)}>CATEGORY <ArrowDropDownIcon /></Button>
-
-                    {isSearchBar && (
-                        <Box sx={{
-                            width: user ? '30vw' : '40vw',
-                        }}>
-                            <SearchBar />
-                        </Box>)}
-
-
-                    <Box sx={{}} >
-                        <IconButton sx={{ ml: 1 }} onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} color="inherit">
-                            {mode === 'dark' ? <Brightness4Icon /> : <NightlightIcon />}
-                        </IconButton>
-                    </Box>
-
-                    {user ?
-                        <Box sx={{ flexGrow: 0, color: 'black' }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar sx={{ m: 1, bgcolor: 'transparent', color: '#fdfdfd' }} src={user.imgUrl} alt="User Avatar" />
-                                </IconButton>
-                            </Tooltip>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton
+                                size="large"
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleOpenNavMenu}
+                                color="inherit">
+                                <MenuIcon />
+                            </IconButton>
                             <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorElNav}
+                                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                                keepMounted
+                                transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                                open={Boolean(anchorElNav)}
+                                onClose={handleCloseNavMenu}
                                 sx={{
-                                    mt: '45px',
+                                    display: { xs: 'block', md: 'none' },
                                     '& .MuiMenu-paper': {
                                         backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
                                         color: 'white'
                                     }
                                 }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right'
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right'
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu} >
-
-
-
-                                <Link to="/account" style={{
-                                    textDecoration: 'none',
-                                    color: 'white'
-                                }}>
-                                    <MenuItem onClick={handleCloseUserMenu}>
-                                        <Typography align="center">{user.firstName || 'Account'}</Typography>
-                                    </MenuItem>
-                                </Link>
-
-                                <MenuItem onClick={logout}>
-                                    <Typography textAlign="center">Logout</Typography>
-                                </MenuItem>
-
-
-
+                            >
+                                {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
+                                    <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: 'white' }}>
+                                        <MenuItem onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center">{p.title}</Typography>
+                                        </MenuItem>
+                                    </Link>
+                                ))}
                             </Menu>
-                        </Box> : ''}
-                </Toolbar>
-            </Container>
-        </AppBar>
+                        </Box>
+
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component="a"
+                            href="/"
+                            sx={{
+                                mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none',
+                            }}>
+                            <HomeIcon />
+                        </Typography>
+
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
+                                <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: 'white' }}>
+                                    <Button
+                                        onClick={handleCloseNavMenu}
+                                        sx={{
+                                            my: 2,
+                                            color: 'white',
+                                            display: 'block',
+                                            backgroundColor: p.route === path ? '#ffffff3d' : {}
+                                        }}>
+                                        {p.title}
+                                    </Button>
+                                </Link>))}
+                        </Box>
+                        {
+                            visibleSecondAppBar &&
+                            <Button color="inherit" onClick={handleAppBar} >
+                                CATEGORY <ArrowDropDownIcon />
+                            </Button>
+                        }
+
+
+                        {isSearchBar && (
+                            <Box sx={{
+                                width: user ? '30vw' : '40vw',
+                            }}>
+                                <SearchBar />
+                            </Box>)}
+
+
+                        <Box sx={{}} >
+                            <IconButton sx={{ ml: 1 }} onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} color="inherit">
+                                {mode === 'dark' ? <Brightness4Icon /> : <NightlightIcon />}
+                            </IconButton>
+                        </Box>
+
+                        {user ?
+                            <Box sx={{ flexGrow: 0, color: 'black' }}>
+                                <Tooltip title="Open settings">
+                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                        <Avatar sx={{ m: 1, bgcolor: 'transparent', color: '#fdfdfd' }} src={user.imgUrl} alt="User Avatar" />
+                                    </IconButton>
+                                </Tooltip>
+                                <Menu
+                                    sx={{
+                                        mt: '45px',
+                                        '& .MuiMenu-paper': {
+                                            backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                                            color: 'white'
+                                        }
+                                    }}
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right'
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right'
+                                    }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu} >
+
+
+
+                                    <Link to="/account" style={{
+                                        textDecoration: 'none',
+                                        color: 'white'
+                                    }}>
+                                        <MenuItem onClick={handleCloseUserMenu}>
+                                            <Typography align="center">{user.firstName || 'Account'}</Typography>
+                                        </MenuItem>
+                                    </Link>
+
+                                    <MenuItem onClick={logout}>
+                                        <Typography textAlign="center">Logout</Typography>
+                                    </MenuItem>
+
+
+
+                                </Menu>
+                            </Box> : ''}
+                    </Toolbar>
+                </Container>
+            </AppBar>
+
+            {/* /////// */}
+            {
+
+                visibleSecondAppBar &&
+                <AppBar
+                    position="fixed"
+                    sx={{
+                        top: '0px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxShadow: 'none',
+                        backgroundColor: 'transparent',
+                        transform: isAppBarFixed ? 'translateY(0px)' : 'translateY(-100%)',
+                        transition: 'transform 0.3s ease-in-out',
+                    }}>
+                    <Toolbar sx={{
+                        width: '60vw',
+                        maxWidth: '600px',
+                        backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        borderBottomLeftRadius: '15px',
+                        borderBottomRightRadius: '15px',
+                    }}
+                        onClick={handleAppBar}>
+                        <Button color="inherit" onClick={() => setSelectedCategory('All')} sx={style}>All</Button>
+                        <Button color="inherit" onClick={() => setSelectedCategory('Face')} sx={style}>Face</Button>
+                        <Button color="inherit" onClick={() => setSelectedCategory('Eyes')} sx={style}>Eyes</Button>
+                        <Button color="inherit" onClick={() => setSelectedCategory('Body')} sx={style}>Body</Button>
+                        <Button color="inherit" onClick={() => setSelectedCategory('Hands')} sx={style}>Hands</Button>
+                        <Button color="inherit" onClick={() => setSelectedCategory('Feet')} sx={style}>Feet</Button>
+                    </Toolbar>
+                </AppBar>
+            }
+
+        </>
+
+
     );
 }
 

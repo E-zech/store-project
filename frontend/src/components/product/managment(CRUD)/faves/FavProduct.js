@@ -1,12 +1,11 @@
-import { useEffect, useState, useContext } from 'react';
-import * as React from "react";
-import { GeneralContext } from "../../../../App.js";
-import ProductComponent from '../../ProductComponent.js';
-import ResultNotFound from '../../../../pages/ResultNotFound.js';
+import React, { useContext, useEffect, useState } from 'react';
+import { GeneralContext } from '../../../../App';
+import ProductComponent from '../../ProductComponent';
+import ResultNotFound from '../../../../pages/ResultNotFound';
 
 export default function FavProducts() {
     const [favProducts, setFavProducts] = useState([]);
-    const { filteredProducts, setFilteredProducts, loader, setLoader, snackbar } = useContext(GeneralContext);
+    const { snackbar, loader, setFilteredProducts, selectedCategory } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products/my-faves-products`, {
@@ -29,11 +28,10 @@ export default function FavProducts() {
                 console.log(data)
                 setFavProducts(data);
             });
-    }, [filteredProducts]);
+    }, [selectedCategory]);
 
-    const filteredfavProducts = favProducts && favProducts.filter(product => {
-        return filteredProducts.some(filteredProduct => filteredProduct._id === product._id);
-
+    const filteredFavProducts = favProducts.filter(product => {
+        return product.category === selectedCategory || selectedCategory === "All";
     });
 
     return (
@@ -42,13 +40,13 @@ export default function FavProducts() {
                 <h1 className='main-title'> My Favorites Products</h1>
                 <br />
             </header>
-            <section className="container-cards">
+            <section className="container-cards" style={{ marginBottom: '100px' }}>
                 {loader ? (
                     <h1>Loading...</h1>
                 ) : (
                     <div className="grid-cards">
-                        {favProducts && filteredfavProducts.length > 0 ? (
-                            filteredfavProducts.map(product => (
+                        {filteredFavProducts.length > 0 ? (
+                            filteredFavProducts.map(product => (
                                 <ProductComponent key={product._id} product={product} setProducts={setFilteredProducts} />
                             ))
                         ) : (

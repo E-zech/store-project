@@ -9,7 +9,7 @@ import Add from '@mui/icons-material/Add.js';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
-    const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function ProductMangement() {
 
 
     const filteredMyProducts = allMyProducts.filter(product => {
-        return filteredProducts.some(filteredProduct => filteredProduct._id === product._id);
+        return product.category === selectedCategory || selectedCategory === "All";
     });
 
     return (
@@ -38,7 +38,7 @@ export default function ProductMangement() {
             <header>
                 <h1 className='main-title leftFix'>Products Manegment </h1> <br />
             </header>
-            <section className="container-cards">
+            <section className="container-cards" style={{ marginBottom: '100px' }}>
                 {loader ? (
                     <h1>Loading...</h1>
                 ) : (
