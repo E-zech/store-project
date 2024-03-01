@@ -148,3 +148,15 @@ Route: /cart
 Status Code: 401
 Error:  Unauthorized
 
+Time: 2024-03-01T10:57:16.256Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T11:05:00.111Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+

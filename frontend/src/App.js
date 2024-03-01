@@ -9,7 +9,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import SnackBar from './components/snackbar/Snackbar';
 import './css/ScrollBar.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
 
 export const GeneralContext = createContext();
 
@@ -25,6 +25,7 @@ function App() {
     const [selectedCategory, setSelectedCategory] = useState("All");
 
     const navigate = useNavigate();
+    const path = useResolvedPath().pathname;
 
     const snackbar = text => {
         setSnackbarText(text);
@@ -110,7 +111,7 @@ function App() {
                 setFilteredProducts(data);
                 console.log(data)
             })
-    }, []);
+    }, [path]);
 
     useEffect(() => {
         fetch("http://localhost:5000/cart", {

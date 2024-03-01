@@ -23,7 +23,7 @@ import AddOrEditProduct from "./managment(CRUD)/AddOrEditProduct";
 import { CartContext } from '../../pages/AllProducts.js';
 
 
-export default function ProductComponent({ product, add2Cart }) {
+export default function ProductComponent({ product, add2Cart, setFavProducts }) {
 
   const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader } = useContext(GeneralContext);
 
@@ -67,6 +67,7 @@ export default function ProductComponent({ product, add2Cart }) {
         console.log(data)
         setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
         setFilteredProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+        setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
         setLoader(false);
         snackbar(snackbarMessage);
       });
@@ -156,7 +157,7 @@ export default function ProductComponent({ product, add2Cart }) {
                 <IconButton id='favoriteBtn' aria-label="add to favorites"
                   onClick={() => toggleFavOrNot(product._id, product.faves)}
                 >
-                  <FavoriteIcon color={product.faves ? "error" : ""} />
+                  <FavoriteIcon color={product.faves?.includes(user._id) ? "error" : ""} />
                 </IconButton>
               </>
             )}

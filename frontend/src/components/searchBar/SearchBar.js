@@ -54,6 +54,7 @@ const ClearButton = styled(IconButton)(({ theme }) => ({
     right: theme.spacing(1),
     top: '50%',
     transform: 'translateY(-50%)',
+    color: 'white'
 }));
 
 export default function SearchBar() {

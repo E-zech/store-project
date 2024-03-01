@@ -10,10 +10,6 @@ import { IoBody } from "react-icons/io5";
 import { MdOutlineFaceRetouchingNatural } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 
-
-
-
-
 export default function Product() {
     const [product, setProduct] = useState({});
     const { id } = useParams();

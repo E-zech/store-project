@@ -5,7 +5,7 @@ import ResultNotFound from '../../../../pages/ResultNotFound';
 
 export default function FavProducts() {
     const [favProducts, setFavProducts] = useState([]);
-    const { snackbar, loader, filteredProducts, setFilteredProducts, selectedCategory } = useContext(GeneralContext);
+    const { snackbar, loader, filteredProducts, setFilteredProducts, selectedCategory, } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products/my-faves-products`, {
@@ -43,7 +43,7 @@ export default function FavProducts() {
                         {filteredProducts
                             .filter(product => product.category === selectedCategory || selectedCategory === "All")
                             .filter(product => favProducts.some(favProduct => favProduct._id === product._id))
-                            .map(product => <ProductComponent key={product._id} product={product} />)
+                            .map(product => <ProductComponent key={product._id} product={product} setFavProducts={setFavProducts} />)
                         }
                     </div>
                 )}
