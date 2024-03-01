@@ -9,29 +9,25 @@ import Add from '@mui/icons-material/Add.js';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, products, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        // maybe insert if theres localstorage.token and if not send alertt or somthing
-        fetch(`http://localhost:5000/products`, {
-            credentials: 'include',
-            headers: {
-                'Authorization': localStorage.token,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                setAllMyProducts(data);
-            })
-    }, [filteredProducts])
+    //     // maybe insert if theres localstorage.token and if not send alertt or somthing
+    //     fetch(`http://localhost:5000/products`, {
+    //         credentials: 'include',
+    //         headers: {
 
-
-    const filteredMyProducts = allMyProducts.filter(product => {
-        return product.category === selectedCategory || selectedCategory === "All";
-    });
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setProducts(data);
+    //             setFilteredProducts(data);
+    //         })
+    // }, [])
 
     return (
         <>
@@ -43,13 +39,9 @@ export default function ProductMangement() {
                     <h1>Loading...</h1>
                 ) : (
                     <div className="grid-cards">
-                        {filteredMyProducts.length > 0 ? (
-                            filteredMyProducts.map(product => (
-                                <ProductComponent key={product._id} product={product} />))
-                        ) : (
-                            <ResultNotFound />
-                        )}
-
+                        {
+                            filteredProducts.filter(product => product.category === selectedCategory || selectedCategory === "All").map(product => <ProductComponent key={product._id} product={product} />)
+                        }
                         <Button
                             variant="contained"
                             onClick={() => navigate(`/product/add-edit`)}

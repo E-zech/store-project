@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Paper } from '@mui/material';
-import { Link, useNavigate, useResolvedPath } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useResolvedPath } from 'react-router-dom';
 import { GeneralContext } from '../../App';
+import { pathToRegexp } from 'path-to-regexp';
 import SearchBar from '../searchBar/SearchBar';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -35,13 +36,17 @@ export default function Navbar() {
     const [isSearchBar, setIsSearchBar] = useState(false);
     const [visibleSecondAppBar, setVisibleSecondAppBar] = useState(false); // incharge of the visibility of the secondary appBar based on the path
     const [isAppBarFixed, setIsAppBarFixed] = useState(false);
+    const [changePosition, setChangePosition] = useState(false);
 
 
     const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
 
     const style = {
-        fontSize: '0.8rem'
+        fontSize: '0.8rem',
     };
+
+    const location = useLocation();
+    const { pathname } = location;
 
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
@@ -62,16 +67,20 @@ export default function Navbar() {
         setAnchorElUser(null)
     };
 
-
-
     useEffect(() => {
-        const disableSearchBar =
-            ['/user-management', '/about', '/product/:id', '/login', '/signup', '/account', '/product/add-edit/:id?', '/checkout',];
-        const disableSecondaryAppBar =
-            ['/user-management', '/about', '/product/:id', '/login', '/signup', '/account', '/product/add-edit/:id?', '/checkout'];
-        setIsSearchBar(!disableSearchBar.includes(path));
-        setVisibleSecondAppBar(!disableSecondaryAppBar.includes(path));
-    }, [path]);
+        const disableSearchBar = [
+            '/user-management', '/about', '/login', '/signup', '/account', '/checkout',
+        ];
+        const disableSecondaryAppBar = [
+            '/user-management', '/about', '/login', '/signup', '/account', '/checkout',
+        ];
+
+        const productPathRegex = pathToRegexp('/product/:id');
+        const addEditProductPathRegex = pathToRegexp('/product/add-edit/:id?');
+
+        setIsSearchBar(!disableSearchBar.includes(pathname) && !productPathRegex.test(pathname) && !addEditProductPathRegex.test(pathname));
+        setVisibleSecondAppBar(!disableSecondaryAppBar.includes(pathname) && !productPathRegex.test(pathname) && !addEditProductPathRegex.test(pathname));
+    }, [pathname]);
 
     useEffect(() => {
         const cleanup = () => {
@@ -84,23 +93,26 @@ export default function Navbar() {
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
+            setChangePosition(scrollPosition > 70);
             setIsAppBarFixed(scrollPosition > 70);
         };
-        window.addEventListener('scroll', handleScroll);
+
+        if (pathname === '/' || pathname === '/product-management' || pathname === '/faves') {
+            window.addEventListener('scroll', handleScroll);
+        }
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [pathname]);
 
 
+    const openMenu = () => {
+        if (window.scrollY < 70) {
+            setIsAppBarFixed(!isAppBarFixed);
+        }
+    }
 
-    const handleAppBar = () => {
-        window.scrollTo({
-            top: 71,
-            behavior: 'smooth' // Optional: smooth scrolling effect
-        });
-    };
     return (
         <>
             <AppBar
@@ -181,8 +193,8 @@ export default function Navbar() {
                         </Box>
                         {
                             visibleSecondAppBar &&
-                            <Button color="inherit" onClick={handleAppBar} >
-                                CATEGORY <ArrowDropDownIcon />
+                            <Button color="inherit" onClick={openMenu} >
+                                {selectedCategory.toUpperCase()}<ArrowDropDownIcon />
                             </Button>
                         }
 
@@ -256,22 +268,22 @@ export default function Navbar() {
             {/* /////// */}
             {
 
-                visibleSecondAppBar &&
+                isAppBarFixed &&
                 <AppBar
-                    position="fixed"
+                    position={changePosition ? "fixed" : "absolute"}
                     sx={{
-                        top: '0px',
+                        top: changePosition ? 0 : '69px',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
                         boxShadow: 'none',
                         backgroundColor: 'transparent',
-                        transform: isAppBarFixed ? 'translateY(0px)' : 'translateY(-100%)',
-                        transition: 'transform 0.3s ease-in-out',
+
                     }}>
                     <Toolbar sx={{
                         width: '60vw',
                         maxWidth: '600px',
+                        // fix the min-height
                         backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
                         display: 'flex',
                         justifyContent: 'space-around',
@@ -279,7 +291,8 @@ export default function Navbar() {
                         borderBottomLeftRadius: '15px',
                         borderBottomRightRadius: '15px',
                     }}
-                        onClick={handleAppBar}>
+                        onClick={() => openMenu()}
+                    >
                         <Button color="inherit" onClick={() => setSelectedCategory('All')} sx={style}>All</Button>
                         <Button color="inherit" onClick={() => setSelectedCategory('Face')} sx={style}>Face</Button>
                         <Button color="inherit" onClick={() => setSelectedCategory('Eyes')} sx={style}>Eyes</Button>

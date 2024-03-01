@@ -24,7 +24,6 @@ function App() {
     const [productsInCart, setProductsInCart] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
 
-
     const navigate = useNavigate();
 
     const snackbar = text => {
@@ -99,6 +98,21 @@ function App() {
     }, [localStorage.token]);
 
     useEffect(() => {
+        fetch(`http://localhost:5000/products`, {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+                setFilteredProducts(data);
+                console.log(data)
+            })
+    }, []);
+
+    useEffect(() => {
         fetch("http://localhost:5000/cart", {
             credentials: 'include',
             headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
@@ -117,6 +131,7 @@ function App() {
                 console.error('Error fetching cart items:', error);
             });
     }, [user]);
+
 
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>

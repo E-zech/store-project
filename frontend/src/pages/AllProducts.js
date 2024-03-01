@@ -13,18 +13,19 @@ export default function AllProducts() { // ALL Products Page basically
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/products`, {
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data);
-            })
-    }, [filteredProducts]);
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/products`, {
+    //         credentials: 'include',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setProducts(data);
+    //             setFilteredProducts(data);
+    //         })
+    // }, []); // i removed the [filteredProducts] to save a call to the DB for each time the user insert/remove a word from the search input 
 
     const add2Cart = (productId, title, price) => {
         const quantity = 1;

@@ -49,26 +49,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
-    const [allProducts, setAllProducts] = useState([]);
-
-    const { setFilteredProducts, setLoader } = useContext(GeneralContext);
-
-    useEffect(() => {
-        fetch(`http://localhost:5000/products`, {
-            credentials: 'include',
-        })
-            .then(res => res.json())
-            .then(data => {
-                setAllProducts(data);
-                setFilteredProducts(data);
-            });
-    }, [])
+    const { setFilteredProducts, setLoader, products, setProducts } = useContext(GeneralContext);
 
 
     const handleChange = (value) => {
         const lowercaseValue = value.toLowerCase().trim();
         setSearchValue(value);
-        const searchProducts = allProducts.filter(p => p.title.toLowerCase().startsWith(lowercaseValue));;
+        const searchProducts = products.filter(p => p.title.toLowerCase().startsWith(lowercaseValue));;
         setFilteredProducts(searchProducts);
     };
 

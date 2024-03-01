@@ -1,0 +1,114 @@
+Time: 2024-03-01T06:41:08.670Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T06:41:08.681Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T06:41:08.972Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T07:27:31.696Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T07:31:45.175Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T07:39:51.288Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T07:56:21.482Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T07:56:21.487Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T07:56:21.772Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T08:57:14.636Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T08:57:29.280Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T08:57:29.286Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T08:57:29.289Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T08:57:29.445Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T10:09:36.489Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T10:14:17.786Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T10:15:48.001Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T10:15:59.746Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-01T10:16:03.727Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+

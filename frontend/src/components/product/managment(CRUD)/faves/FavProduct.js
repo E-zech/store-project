@@ -5,7 +5,7 @@ import ResultNotFound from '../../../../pages/ResultNotFound';
 
 export default function FavProducts() {
     const [favProducts, setFavProducts] = useState([]);
-    const { snackbar, loader, setFilteredProducts, selectedCategory } = useContext(GeneralContext);
+    const { snackbar, loader, filteredProducts, setFilteredProducts, selectedCategory } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products/my-faves-products`, {
@@ -25,14 +25,9 @@ export default function FavProducts() {
                 }
             })
             .then(data => {
-                console.log(data)
                 setFavProducts(data);
             });
-    }, [selectedCategory]);
-
-    const filteredFavProducts = favProducts.filter(product => {
-        return product.category === selectedCategory || selectedCategory === "All";
-    });
+    }, []);
 
     return (
         <>
@@ -45,13 +40,11 @@ export default function FavProducts() {
                     <h1>Loading...</h1>
                 ) : (
                     <div className="grid-cards">
-                        {filteredFavProducts.length > 0 ? (
-                            filteredFavProducts.map(product => (
-                                <ProductComponent key={product._id} product={product} setProducts={setFilteredProducts} />
-                            ))
-                        ) : (
-                            <ResultNotFound />
-                        )}
+                        {filteredProducts
+                            .filter(product => product.category === selectedCategory || selectedCategory === "All")
+                            .filter(product => favProducts.some(favProduct => favProduct._id === product._id))
+                            .map(product => <ProductComponent key={product._id} product={product} />)
+                        }
                     </div>
                 )}
             </section>
