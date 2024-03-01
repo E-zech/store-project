@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { GeneralContext } from '../../App';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -46,35 +49,61 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+const ClearButton = styled(IconButton)(({ theme }) => ({
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: '50%',
+    transform: 'translateY(-50%)',
+}));
 
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
+    const [showClearButton, setShowClearButton] = useState(false);
+    const [initialFilteredProducts, setInitialFilteredProducts] = useState([]);
     const { setFilteredProducts, setLoader, products, setProducts } = useContext(GeneralContext);
 
+    const navigate = useNavigate();
+    const path = useResolvedPath().pathname;
+
+    useEffect(() => {
+        setInitialFilteredProducts(products);
+    }, []);
 
     const handleChange = (value) => {
         const lowercaseValue = value.toLowerCase().trim();
         setSearchValue(value);
-        const searchProducts = products.filter(p => p.title.toLowerCase().startsWith(lowercaseValue));;
+        const searchProducts = products.filter(p => p.title.toLowerCase().startsWith(lowercaseValue));
         setFilteredProducts(searchProducts);
+        setShowClearButton(value.length > 0);
     };
 
+    const handleClear = () => {
+        setSearchValue('');
+        setShowClearButton(false);
+        setFilteredProducts(initialFilteredProducts);
+    };
+
+    useEffect(() => {
+        handleClear();
+    }, [path]);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-
             <Search>
                 <SearchIconWrapper>
                     <SearchIcon />
                 </SearchIconWrapper>
-
                 <StyledInputBase
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
                     value={searchValue}
                     onChange={(ev) => handleChange(ev.target.value)} />
+                {showClearButton && (
+                    <ClearButton onClick={handleClear}>
+                        <ClearIcon />
+                    </ClearButton>
+                )}
             </Search>
-
         </Box>
     );
 }

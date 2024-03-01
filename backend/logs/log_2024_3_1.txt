@@ -112,3 +112,39 @@ Route: /products/undefined
 Status Code: 500
 Error:  Internal Server Error
 
+Time: 2024-03-01T10:34:34.273Z
+Method: GET
+Route: /users
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T10:34:39.211Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T10:34:50.425Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T10:34:50.432Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T10:34:50.435Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-01T10:34:50.557Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
