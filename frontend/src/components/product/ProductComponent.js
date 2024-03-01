@@ -67,7 +67,10 @@ export default function ProductComponent({ product, add2Cart, setFavProducts }) 
         console.log(data)
         setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
         setFilteredProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
-        setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
+        if (faves.includes(user._id)) {
+          // If the product is already in favorites, remove it from favProducts
+          setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
+        }
         setLoader(false);
         snackbar(snackbarMessage);
       });
