@@ -1,0 +1,108 @@
+Time: 2024-03-02T07:15:07.257Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T07:15:07.288Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T07:15:07.464Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T07:15:12.401Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T07:15:53.526Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T07:16:06.272Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T08:28:54.685Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T08:28:54.693Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T08:28:54.879Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T09:08:04.099Z
+Method: PUT
+Route: /users/65c1e4db97b29f31c255cc3b
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T09:08:22.619Z
+Method: PUT
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-03-02T09:09:43.603Z
+Method: PUT
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-03-02T09:10:55.916Z
+Method: PUT
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-03-02T09:10:57.157Z
+Method: PUT
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-03-02T09:12:21.364Z
+Method: PUT
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-03-02T09:33:42.250Z
+Method: GET
+Route: /users/65cb488ab432517e07d43bc5
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T09:33:42.264Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-02T09:33:42.414Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

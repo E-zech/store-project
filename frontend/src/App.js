@@ -21,8 +21,10 @@ function App() {
     const [mode, setMode] = useState('light');
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [products, setProducts] = useState([]);
+    const [favProducts, setFavProducts] = useState([]);
     const [productsInCart, setProductsInCart] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
+
 
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
@@ -83,6 +85,7 @@ function App() {
                     }
                 })
                 .then(data => {
+                    console.log(data)
                     setUser(data);
                     setUserRoleType(data.roleType);
                 })
@@ -141,7 +144,8 @@ function App() {
                 user, setUser, userRoleType, setUserRoleType,
                 products, setProducts, productsInCart, setProductsInCart,
                 filteredProducts, setFilteredProducts,
-                loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory
+                loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory,
+                favProducts, setFavProducts
             }}>
 
                 <Navbar />

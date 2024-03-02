@@ -52,7 +52,6 @@ export default function AllProducts() { // ALL Products Page basically
                 console.error('Error adding product to cart:', error);
             });
     };
-
     return (
         <>
 

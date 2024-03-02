@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 export const RoleTypes = {
     none: 1, //can see products .
@@ -37,6 +38,7 @@ export default function Navbar() {
     const [visibleSecondAppBar, setVisibleSecondAppBar] = useState(false); // incharge of the visibility of the secondary appBar based on the path
     const [isAppBarFixed, setIsAppBarFixed] = useState(false);
     const [changePosition, setChangePosition] = useState(false);
+    const [toggleIcon, setToggleIcon] = useState(false);
 
 
     const { user, setUser, setLoader, userRoleType, setUserRoleType, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
@@ -108,6 +110,7 @@ export default function Navbar() {
 
 
     const openMenu = () => {
+        setToggleIcon(!toggleIcon);
         if (window.scrollY < 70) {
             setIsAppBarFixed(!isAppBarFixed);
         }
@@ -194,7 +197,8 @@ export default function Navbar() {
                         {
                             visibleSecondAppBar &&
                             <Button color="inherit" onClick={openMenu} >
-                                {selectedCategory.toUpperCase()}<ArrowDropDownIcon />
+                                {selectedCategory.toUpperCase()}
+                                {toggleIcon ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
                             </Button>
                         }
 

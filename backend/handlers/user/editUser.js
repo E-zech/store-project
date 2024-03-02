@@ -1,6 +1,6 @@
 import User, { RoleTypes } from '../../models/User.js';
 import { getUserFromTKN } from '../../configs/config.js';
-import { UserValid } from '../../validation/userJoi.js';
+import { UserEditValid } from '../../validation/userJoi.js';
 import { guard } from '../../middleware/guard.js';
 
 const editUser = app => { // can edit details except for roleType.
@@ -15,7 +15,7 @@ const editUser = app => { // can edit details except for roleType.
         }
 
         try {
-            const { error, value } = UserValid.validate(req.body, { abortEarly: false });
+            const { error, value } = UserEditValid.validate(req.body, { abortEarly: false });
 
             if (error) {
                 const errorObj = error.details.map(err => err.message.replace(/['"]/g, ''));
@@ -29,6 +29,19 @@ const editUser = app => { // can edit details except for roleType.
             }
 
             value.roleType = updateUser.roleType; //  equals to the same roleType the edit user had before 
+
+            if (value.address) {
+                // Update the user's address details
+                updateUser.address = {
+                    state: value.address.state,
+                    country: value.address.country,
+                    city: value.address.city,
+                    street: value.address.street,
+                    houseNumber: value.address.houseNumber,
+                    zip: value.address.zip
+                };
+            }
+
 
             updateUser.set(value);
             await updateUser.save();

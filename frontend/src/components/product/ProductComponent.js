@@ -23,9 +23,9 @@ import AddOrEditProduct from "./managment(CRUD)/AddOrEditProduct";
 import { CartContext } from '../../pages/AllProducts.js';
 
 
-export default function ProductComponent({ product, add2Cart, setFavProducts }) {
+export default function ProductComponent({ product, add2Cart }) {
 
-  const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader } = useContext(GeneralContext);
+  const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, favProducts, setFavProducts } = useContext(GeneralContext);
 
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
@@ -160,7 +160,7 @@ export default function ProductComponent({ product, add2Cart, setFavProducts }) 
                 <IconButton id='favoriteBtn' aria-label="add to favorites"
                   onClick={() => toggleFavOrNot(product._id, product.faves)}
                 >
-                  <FavoriteIcon color={product.faves?.includes(user._id) ? "error" : ""} />
+                  <FavoriteIcon color={product.faves?.includes(user?._id) ? "error" : ""} />
                 </IconButton>
               </>
             )}

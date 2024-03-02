@@ -4,8 +4,8 @@ import ProductComponent from '../../ProductComponent';
 import ResultNotFound from '../../../../pages/ResultNotFound';
 
 export default function FavProducts() {
-    const [favProducts, setFavProducts] = useState([]);
-    const { snackbar, loader, filteredProducts, setFilteredProducts, selectedCategory, } = useContext(GeneralContext);
+
+    const { snackbar, loader, filteredProducts, setFilteredProducts, selectedCategory, favProducts, setFavProducts } = useContext(GeneralContext);
 
     useEffect(() => {
         fetch(`http://localhost:5000/products/my-faves-products`, {

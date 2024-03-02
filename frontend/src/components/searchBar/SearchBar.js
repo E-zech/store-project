@@ -99,11 +99,6 @@ export default function SearchBar() {
                     inputProps={{ 'aria-label': 'search' }}
                     value={searchValue}
                     onChange={(ev) => handleChange(ev.target.value)} />
-                {showClearButton && (
-                    <ClearButton onClick={handleClear}>
-                        <ClearIcon />
-                    </ClearButton>
-                )}
             </Search>
         </Box>
     );
