@@ -92,34 +92,33 @@ export default function Navbar() {
         return cleanup;
     }, [path]);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY;
-            setChangePosition(scrollPosition > 70);
-            setIsAppBarFixed(scrollPosition > 70);
-        };
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const scrollPosition = window.scrollY;
+    //         setChangePosition(scrollPosition > 70);
+    //         setIsAppBarFixed(scrollPosition > 70);
+    //     };
 
-        if (pathname === '/' || pathname === '/product-management' || pathname === '/faves') {
-            window.addEventListener('scroll', handleScroll);
-        }
+    //     if (pathname === '/' || pathname === '/product-management' || pathname === '/faves') {
+    //         window.addEventListener('scroll', handleScroll);
+    //     }
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [pathname]);
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, [pathname]);
 
 
     const openMenu = () => {
         setToggleIcon(!toggleIcon);
-        if (window.scrollY < 70) {
-            setIsAppBarFixed(!isAppBarFixed);
-        }
+        setIsAppBarFixed(!isAppBarFixed);
+
     }
 
     return (
         <>
             <AppBar
-                position="static"
+                position="fixed"
                 sx={{ backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: mode === 'dark' ? 'white' : '#474c4bed' }}>
                 <Container maxWidth="xl" sx={{ color: mode === 'dark' ? 'white' : '#474c4bed', }}>
                     <Toolbar disableGutters>
@@ -263,15 +262,13 @@ export default function Navbar() {
                                         <Typography textAlign="center">Logout</Typography>
                                     </MenuItem>
 
-
-
                                 </Menu>
                             </Box> : ''}
                     </Toolbar>
                 </Container>
             </AppBar>
 
-            {/* /////// */}
+
             {
 
                 isAppBarFixed &&
@@ -283,11 +280,11 @@ export default function Navbar() {
                         justifyContent: 'center',
                         alignItems: 'center',
                         boxShadow: 'none',
-                        backgroundColor: mode === 'dark' ? 'black' : 'white',
+                        backgroundColor: mode === 'dark' ? 'black' : 'transparent',
 
                     }}>
                     <Toolbar sx={{
-                        width: '60vw',
+                        width: '80vw',
                         maxWidth: '600px',
                         // fix the min-height
                         backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',

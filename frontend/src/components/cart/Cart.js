@@ -117,6 +117,7 @@ export default function Cart() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    marginBottom: '120px'
                 }}
 
             >
@@ -200,7 +201,8 @@ export default function Cart() {
                 ))}
 
             </List>
-            <Box sx={{ backgroundColor: 'black', color: 'white', textAlign: 'center', position: "absolute", bottom: '0px', width: '100%' }}>
+
+            <Box sx={{ backgroundColor: 'black', color: 'white', textAlign: 'center', position: "fixed", bottom: '0px', width: '500px' }}>
                 <Button onClick={() => {
                     if (productsInCart.length === 0) {
                         snackbar("You don't have products in cart");
@@ -209,6 +211,8 @@ export default function Cart() {
                     }
                 }}>Go To Checkout</Button>
             </Box>
+
+
         </Box>
 
     );

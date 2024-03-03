@@ -27,7 +27,7 @@ export default function Checkout() {
     const { sx } = useInputsFormColors();
     const [formData, setFormData] = useState(user || {});
     const [currentStep, setCurrentStep] = useState(1);
-    console.log(currentStep);
+
 
 
     const handleChange = (ev) => {
@@ -62,7 +62,7 @@ export default function Checkout() {
         ev.preventDefault(); // Prevent the default form submission behavior
 
         setCurrentStep(currentStep => currentStep + 1);
-        console.log(currentStep);
+
         // const obj = {};
         // const elements = ev.target.elements;
 

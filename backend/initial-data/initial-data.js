@@ -20,4 +20,4 @@ export const initialDataStart = async () => {
             await product.save();
         }
     }
-}
+} 
