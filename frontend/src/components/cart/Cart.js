@@ -200,11 +200,14 @@ export default function Cart() {
                 ))}
 
             </List>
-
             <Box sx={{ backgroundColor: 'black', color: 'white', textAlign: 'center', position: "absolute", bottom: '0px', width: '100%' }}>
-
-                <Button onClick={() => navigate('/checkout')}>Go To Checkout</Button>
-
+                <Button onClick={() => {
+                    if (productsInCart.length === 0) {
+                        snackbar("You don't have products in cart");
+                    } else {
+                        navigate('/checkout');
+                    }
+                }}>Go To Checkout</Button>
             </Box>
         </Box>
 

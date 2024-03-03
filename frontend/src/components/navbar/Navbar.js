@@ -120,15 +120,17 @@ export default function Navbar() {
         <>
             <AppBar
                 position="static"
-                sx={{ backgroundColor: mode === 'dark' ? 'black' : '#99c8c2' }}>
-                <Container maxWidth="xl" >
+                sx={{ backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: mode === 'dark' ? 'white' : '#474c4bed' }}>
+                <Container maxWidth="xl" sx={{ color: mode === 'dark' ? 'white' : '#474c4bed', }}>
                     <Toolbar disableGutters>
                         <Typography
                             variant="h6"
                             noWrap
                             component="a"
                             onClick={() => navigate('/')}
-                            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'color', textDecoration: 'none', cursor: "pointer", userSelect: 'none' }}>
+                            sx={{
+                                mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', textDecoration: 'none', cursor: "pointer", userSelect: 'none',
+                            }}>
                             <HomeIcon />
                         </Typography>
 
@@ -159,7 +161,7 @@ export default function Navbar() {
                                 }}
                             >
                                 {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
-                                    <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: 'white' }}>
+                                    <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: mode === 'dark' ? 'white' : '#474c4bed', }}>
                                         <MenuItem onClick={handleCloseNavMenu}>
                                             <Typography textAlign="center">{p.title}</Typography>
                                         </MenuItem>
@@ -181,12 +183,12 @@ export default function Navbar() {
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
-                                <Link key={p.route} to={p.route} style={{ textDecoration: 'none', color: 'white' }}>
+                                <Link key={p.route} to={p.route} style={{ textDecoration: 'none' }}>
                                     <Button
                                         onClick={handleCloseNavMenu}
                                         sx={{
                                             my: 2,
-                                            color: 'white',
+                                            color: mode === 'dark' ? 'white' : '#474c4bed',
                                             display: 'block',
                                             backgroundColor: p.route === path ? '#ffffff3d' : {}
                                         }}>
@@ -221,7 +223,7 @@ export default function Navbar() {
                             <Box sx={{ flexGrow: 0, color: 'black' }}>
                                 <Tooltip title="Open settings">
                                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                        <Avatar sx={{ m: 1, bgcolor: 'transparent', color: '#fdfdfd' }} src={user.imgUrl} alt="User Avatar" />
+                                        <Avatar sx={{ m: 1, bgcolor: 'transparent', color: mode === 'dark' ? 'white' : '#474c4bed', }} src={user.imgUrl} alt="User Avatar" />
                                     </IconButton>
                                 </Tooltip>
                                 <Menu
@@ -229,7 +231,7 @@ export default function Navbar() {
                                         mt: '45px',
                                         '& .MuiMenu-paper': {
                                             backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
-                                            color: 'white'
+                                            color: mode === 'dark' ? 'white' : '#474c4bed',
                                         }
                                     }}
                                     id="menu-appbar"
@@ -250,7 +252,7 @@ export default function Navbar() {
 
                                     <Link to="/account" style={{
                                         textDecoration: 'none',
-                                        color: 'white'
+                                        color: mode === 'dark' ? 'white' : '#474c4bed',
                                     }}>
                                         <MenuItem onClick={handleCloseUserMenu}>
                                             <Typography align="center">{user.firstName || 'Account'}</Typography>
@@ -281,7 +283,7 @@ export default function Navbar() {
                         justifyContent: 'center',
                         alignItems: 'center',
                         boxShadow: 'none',
-                        backgroundColor: 'transparent',
+                        backgroundColor: mode === 'dark' ? 'black' : 'white',
 
                     }}>
                     <Toolbar sx={{
@@ -289,6 +291,7 @@ export default function Navbar() {
                         maxWidth: '600px',
                         // fix the min-height
                         backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                        color: mode === 'dark' ? 'white' : '#474c4bed',
                         display: 'flex',
                         justifyContent: 'space-around',
                         alignItems: 'center',

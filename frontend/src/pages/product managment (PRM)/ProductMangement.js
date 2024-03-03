@@ -54,8 +54,9 @@ export default function ProductMangement() {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 position: 'fixed',
-                                right: '12px',
-                                bottom: '70px',
+                                left: '25px',
+                                // right:'12px', // not sure where to place the add button
+                                bottom: '25px',
                                 color: mode === 'light' ? '#99c8c2' : '#fff',
                                 backgroundColor: mode === 'light' ? '#fff' : '#000',
                                 boxShadow: mode === 'light' ? '0px 0px 0px 5px #99c8c2, 0px 0px 9px 1px #99c8c2, 0px 0px 0px 7px #99c8c2' : '0px 0px 0px 5px #fff, 0px 0px 9px 1px #fff, 0px 0px 0px 7px #fff',
