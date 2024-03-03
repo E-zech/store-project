@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { GeneralContext } from "../App";
+import { GeneralContext } from "../../App";
 import { useParams } from "react-router-dom";
 import './Product.css';
-import Cart from "../components/cart/Cart";
+import Cart from "../../components/cart/Cart";
 
 import { GiBarefoot } from "react-icons/gi";
 import { FaHandSparkles } from "react-icons/fa";

@@ -19,8 +19,8 @@ import './ProductComponent.css';
 import { Box } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import AddOrEditProduct from "./managment(CRUD)/AddOrEditProduct";
-import { CartContext } from '../../pages/AllProducts.js';
+import AddOrEditProduct from "../../pages/add or edit product/AddOrEditProduct";
+
 
 
 export default function ProductComponent({ product, add2Cart }) {

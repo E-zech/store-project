@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { GeneralContext } from "../../../App";
+import { GeneralContext } from "../../App.js";
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -9,11 +9,11 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate, useParams } from 'react-router-dom';
-import { inputsForProducts, schema } from '../ProductStructureValid.js';
+import { inputsForProducts, schema } from '../../components/product component/ProductStructureValid.js.js';
 import Joi from 'joi';
 import { Tooltip } from '@mui/material';
 import './AddOrEditProduct.css'
-import { useInputsFormColors } from '../../../utils/utils.js'
+import { useInputsFormColors } from '../../utils/utils.js'
 
 
 

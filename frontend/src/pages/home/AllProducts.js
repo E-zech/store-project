@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import ProductComponent from '../components/product/ProductComponent';
-import { GeneralContext } from '../App';
-import ResultNotFound from './ResultNotFound';
-import Cart from '../components/cart/Cart';
-import '../css/App.css';
-import { RoleTypes } from '../components/navbar/Navbar';
+import ProductComponent from '../../components/product component/ProductComponent';
+import { GeneralContext } from '../../App';
+import ResultNotFound from '../ResultNotFound';
+import Cart from '../../components/cart/Cart';
+import '../../css/App.css';
+import { RoleTypes } from '../../components/navbar/Navbar';
 import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 

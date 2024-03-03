@@ -3,13 +3,13 @@ import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
-import { GeneralContext } from '../App';
-import "./UsersMenagment.css";
+import { GeneralContext } from '../../App';
+import "./CustomerMenagment.css";
 import "./PopUpBtn.css";
 import "./PopUpMediaQ.css";
 import { useMediaQuery } from "@mui/material";
 
-export default function UsersMenagment() {
+export default function CustomerMenagment() {
   const [allClients, setAllClients] = useState([]);
   const [refresh, setRefresh] = useState([]);
   const { setLoader, snackbar } = useContext(GeneralContext);

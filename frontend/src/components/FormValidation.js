@@ -43,7 +43,7 @@ export const schema = Joi.object({
 
 
 
-
+ 
 // export const schema1 = Joi.object({
 //   firstName: Joi.string().required().min(2).max(20).pattern(/^[A-Za-z]+$/).message('"First Name" should only contain letters'),
 //   middleName: Joi.string().min(2).max(20).pattern(/^[A-Za-z]+$/).message('"Middle Name" should only contain letters').optional(),

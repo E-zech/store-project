@@ -13,7 +13,6 @@ import { GeneralContext } from "../../App";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from "@mui/material/IconButton";
-import { CartContext } from '../../pages/AllProducts';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 

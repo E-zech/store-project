@@ -2,13 +2,13 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import Account from './auth/Account';
-import UsersMenagment from './admin/UsersMenagment';
+import UsersMenagment from './pages/customer management (CRM)/CustomerMenagment';
 import About from './pages/about/About';
-import AllProducts from './pages/AllProducts';
-import FavProducts from './components/product/managment(CRUD)/faves/FavProduct';
-import ProductMangement from './components/product/managment(CRUD)/ProductMangement';
-import AddOrEditProduct from './components/product/managment(CRUD)/AddOrEditProduct';
-import Product from './pages/Product';
+import AllProducts from './pages/home/AllProducts';
+import FavProducts from './pages/favorites/FavProduct';
+import ProductMangement from './pages/product managment (PRM)/ProductMangement';
+import AddOrEditProduct from './pages/add or edit product/AddOrEditProduct';
+import Product from './pages/product/Product';
 import Checkout from './pages/checkout/Checkout';
 
 export default function Router() {

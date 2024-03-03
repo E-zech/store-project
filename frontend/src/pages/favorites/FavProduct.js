@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { GeneralContext } from '../../../../App';
-import ProductComponent from '../../ProductComponent';
-import ResultNotFound from '../../../../pages/ResultNotFound';
+import { GeneralContext } from '../../App';
+import ProductComponent from '../../components/product component/ProductComponent';
+import ResultNotFound from '../ResultNotFound';
 
 export default function FavProducts() {
 
