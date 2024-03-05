@@ -194,73 +194,84 @@ export default function ProductComponent({ product, add2Cart }) {
             </Box>
 
           </CardContent>
+          {
+            user && <CardActions disableSpacing
+              sx={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #99c8c2',
+                borderTopLeftRadius: '80px', borderTopRightRadius: '5px', borderBottomLeftRadius: '5px', borderBottomRightRadius: '80px',
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  borderTopLeftRadius: '5px',
+                  borderTopRightRadius: '80px',
+                  borderBottomLeftRadius: '80px',
+                  borderBottomRightRadius: '5px',
 
-          <CardActions disableSpacing
-            sx={{
-              display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #99c8c2',
-              borderTopLeftRadius: '80px', borderTopRightRadius: '5px', borderBottomLeftRadius: '5px', borderBottomRightRadius: '80px'
+                  backgroundColor: '#99c8c2'
+                }
 
-            }}>
-            {(path === '/' || path === '/faves') && (
-              <>
-                <Tooltip title="Add to cart" arrow sx={{
-                  color: "lightblue",
-                  backgroundColor: "green"
-                }}>
-                  <IconButton
-                    aria-label="Add or Remove"
-                    onClick={() => { setIsSaving(true); handleClick() }}
-                    disabled={isSaving}
+              }}>
+              {(path === '/' || path === '/faves') && (
+                <>
+                  <Tooltip title="Add to cart" arrow sx={{
+                    color: "lightblue",
+                    backgroundColor: "green"
+                  }}>
+                    <IconButton
+                      aria-label="Add or Remove"
+                      onClick={() => { setIsSaving(true); handleClick() }}
+                      disabled={isSaving}
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: 'white',
+                        },
+                      }}
+                    >
+                      {isAdded ? <ShoppingCartIcon /> : <AddShoppingCartIcon />}
+                    </IconButton>
+                  </Tooltip>
+
+
+                  <Tooltip title="Add to favorites" arrow >
+                    <IconButton id='favoriteBtn' aria-label="add to favorites"
+                      onClick={() => toggleFavOrNot(product._id, product.faves)}
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: 'white',
+                        },
+                      }}
+                    >
+                      <FavoriteIcon color={product.faves?.includes(user?._id) ? "error" : ""} />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+
+              {path === '/product-management' && (
+                <>
+                  <IconButton aria-label="Edit"
                     sx={{
                       '&:hover': {
                         backgroundColor: 'white',
                       },
                     }}
-                  >
-                    {isAdded ? <ShoppingCartIcon /> : <AddShoppingCartIcon />}
+                    onClick={() => navigate(`/product/add-edit/${product._id}`)}><EditIcon />
                   </IconButton>
-                </Tooltip>
 
-
-                <Tooltip title="Add to favorites" arrow >
-                  <IconButton id='favoriteBtn' aria-label="add to favorites"
-                    onClick={() => toggleFavOrNot(product._id, product.faves)}
+                  <IconButton aria-label="Delete"
                     sx={{
                       '&:hover': {
                         backgroundColor: 'white',
                       },
                     }}
+                    onClick={() => deleteProduct(product._id)}
                   >
-                    <FavoriteIcon color={product.faves?.includes(user?._id) ? "error" : ""} />
+                    <DeleteIcon />
                   </IconButton>
-                </Tooltip>
-              </>
-            )}
+                </>
+              )}
+            </CardActions>
+          }
 
-            {path === '/product-management' && (
-              <>
-                <IconButton aria-label="Edit"
-                  sx={{
-                    '&:hover': {
-                      backgroundColor: 'white',
-                    },
-                  }}
-                  onClick={() => navigate(`/product/add-edit/${product._id}`)}><EditIcon />
-                </IconButton>
-
-                <IconButton aria-label="Delete"
-                  sx={{
-                    '&:hover': {
-                      backgroundColor: 'white',
-                    },
-                  }}
-                  onClick={() => deleteProduct(product._id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </>
-            )}
-          </CardActions>
         </Card>
       </section>
 

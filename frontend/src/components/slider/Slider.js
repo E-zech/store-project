@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import './Slider.css';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function Slider() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     const images = [
-        'https://picsum.photos/200/300?random=1',
-        'https://picsum.photos/200/300?random=2',
-        'https://picsum.photos/200/300?random=3',
-        'https://picsum.photos/200/300?random=4',
+        'https://picsum.photos/1200/500?random=1',
+        'https://picsum.photos/1200/500?random=2',
+        'https://picsum.photos/1200/500?random=3',
+        'https://picsum.photos/1200/500?random=4',
     ];
 
     const nextSlide = () => {
@@ -45,11 +48,18 @@ export default function Slider() {
     };
 
     return (
-        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <h1>Slider</h1>
-            <button onClick={prevSlide}>Previous</button>
-            <img src={images[currentSlide]} alt={`Slide ${currentSlide}`} />
-            <button onClick={nextSlide}>Next</button>
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='container'>
+            {/* <h1>Slider bla bla</h1> */}
+
+            <div className='wrapBtns'>
+                <button onClick={prevSlide}><ArrowBackIosIcon /></button>
+                <button onClick={nextSlide}><ArrowForwardIosIcon /></button>
+            </div>
+
+
+            <img className='sliderImg' src={images[currentSlide]} alt={`Slide ${currentSlide}`} />
+
+
         </div>
     );
 }
