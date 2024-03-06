@@ -270,12 +270,12 @@ export default function Navbar() {
 
 
             {
-
+                visibleSecondAppBar &&
                 isAppBarFixed &&
                 <AppBar
-                    position={changePosition ? "fixed" : "absolute"}
+                    position="fixed"
                     sx={{
-                        top: changePosition ? 0 : '69px',
+                        top: "69px",
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',

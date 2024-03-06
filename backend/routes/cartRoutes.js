@@ -2,6 +2,7 @@ import add2cart from '../handlers/cart/add2cart.js';
 import getCartProducts from '../handlers/cart/getCartProducts.js';
 import deleteFromCart from '../handlers/cart/deleteFromCart.js';
 import subtractFromCart from '../handlers/cart/subtractFromCart.js';
+import deleteAllCart from '../handlers/cart/deleteAllCart.js';
 
 
 export default function cardRoutes(app) {
@@ -9,5 +10,5 @@ export default function cardRoutes(app) {
     getCartProducts(app);
     deleteFromCart(app);
     subtractFromCart(app);
-
+    deleteAllCart(app);
 };  

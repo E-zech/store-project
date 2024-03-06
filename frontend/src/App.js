@@ -93,6 +93,7 @@ function App() {
                     console.log(err);
                     setUserRoleType(RoleTypes.none);
                     logout();
+                    navigate('/');
                 })
                 .finally(() => setLoader(false));
         } else {
@@ -136,6 +137,32 @@ function App() {
             });
     }, [user]);
 
+    const add2Cart = (productId, title, price) => {
+        const quantity = 1;
+        const products = [{ productId, quantity, price }];
+        fetch(`http://localhost:5000/cart/add`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.token,
+            },
+            body: JSON.stringify({
+                products,
+            }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                snackbar(`${title} added to cart successfully`);
+                console.log(data);
+                setProducts(data);
+                setProductsInCart(existingProducts => [...existingProducts, ...data]);
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+            });
+    };
+
 
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
@@ -145,7 +172,7 @@ function App() {
                 products, setProducts, productsInCart, setProductsInCart,
                 filteredProducts, setFilteredProducts,
                 loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory,
-                favProducts, setFavProducts
+                favProducts, setFavProducts, add2Cart
             }}>
 
                 <Navbar />

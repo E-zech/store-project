@@ -1,22 +1,53 @@
-.container{
+.container {
     margin-top: 71px;
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     justify-content: center;
     align-items: center;
-
+    width: 100%;
 }
-.wrapBtns{
+
+.wrapBtns {
     width: 90vw;
     position: absolute;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 33;
+    margin-bottom: 100px;
+    display: none; /* Initially hide the buttons */
 }
 
-.sliderImg{
-    display: block;
-  object-fit: cover;
+.container:hover .wrapBtns {
+    display: flex; /* Show the buttons when hovering over the container */
+}
 
+.sliderImg {
+    display: block;
+    object-fit: fill;
+    width: 100%;
+}
+
+.sliderBtn {
+    background-color: transparent;
+    border: none;
+}
+
+.sliderBtn > svg {
+    border-radius: 25px;
+    font-size: 3rem;
+    color: #5a5a5a;
+    padding: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.sliderBtn > svg:hover {
+    cursor: pointer;
+    background-color: #f5ebebad;
+    transform: scale(1.2);
+}
+
+.back {
+    transform: rotate(180deg);
 }

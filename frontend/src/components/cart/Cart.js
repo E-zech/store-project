@@ -15,7 +15,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from "@mui/material/IconButton";
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Cart() {
     const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
@@ -98,7 +98,29 @@ export default function Cart() {
                     console.error('Error fetching cart items:', error);
                 });
         }
+    };
 
+    const removeAllFromCart = () => {
+        if (window.confirm("Are you sure you want to delete this product?")) {
+            fetch(`http://localhost:5000/cart/delete-all`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        snackbar('Network response was not ok');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    console.log(data.addToCart)
+                    setProductsInCart([]);
+                })
+                .catch(error => {
+                    console.error('Error fetching cart items:', error);
+                });
+        }
     };
 
     const list = () => (
@@ -107,7 +129,7 @@ export default function Cart() {
                 width: 500,
             }}
             role="presentation"
-            onClick={toggleDrawer}
+            onClick={(e) => e.stopPropagation()}
             onKeyDown={toggleDrawer}
         >
             <List // the wrapper div of the items
@@ -187,7 +209,7 @@ export default function Cart() {
                                 textAlign: 'center'
                             }}>
 
-                                <ListItemText primary={`Total: ${parseFloat(((p.price * p.quantity) * 100) / 100).toFixed(2)}`} />
+                                <ListItemText primary={`Total: ${parseFloat((((p.price - p.discount) * p.quantity) * 100) / 100).toFixed(2)}`} />
 
                                 <ListItemButton onClick={() => removeFromCart(p._id)}>
                                     <RemoveShoppingCartIcon />
@@ -202,17 +224,29 @@ export default function Cart() {
 
             </List>
 
-            <Box sx={{ backgroundColor: 'black', color: 'white', textAlign: 'center', position: "fixed", bottom: '0px', width: '500px' }}>
-                <Button onClick={() => {
-                    if (productsInCart.length === 0) {
-                        snackbar("You don't have products in cart");
-                    } else {
-                        navigate('/checkout');
-                    }
-                }}>Go To Checkout</Button>
+            <Box sx={{ backgroundColor: 'black', color: 'white', textAlign: 'center', position: "fixed", bottom: '0px', width: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center', }}
+                onClick={(e) => e.stopPropagation()}
+            >
+                <Box sx={{ width: '350px' }}>
+                    <Button onClick={() => {
+                        if (productsInCart.length === 0) {
+                            snackbar("You don't have products in cart");
+                        } else {
+                            navigate('/checkout');
+                        }
+                    }}>Go To Checkout</Button>
+                </Box>
+
+                <Box sx={{ width: '150px', backgroundColor: 'blue' }}>
+                    <Button onClick={() => {
+                        if (productsInCart.length === 0) {
+                            snackbar("You don't have products in cart");
+                        } else {
+                            removeAllFromCart();
+                        }
+                    }}><DeleteIcon /></Button>
+                </Box>
             </Box>
-
-
         </Box>
 
     );

@@ -29,15 +29,15 @@ export default function Slider() {
         }
     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (!isHovered) {
-                nextSlide();
-            }
-        }, 2500); // Change the interval time (in milliseconds) to adjust the auto-slide speed
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         if (!isHovered) {
+    //             nextSlide();
+    //         }
+    //     }, 2200);
 
-        return () => clearInterval(interval);
-    }, [currentSlide, isHovered]);
+    //     return () => clearInterval(interval);
+    // }, [currentSlide, isHovered]);
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -52,8 +52,8 @@ export default function Slider() {
             {/* <h1>Slider bla bla</h1> */}
 
             <div className='wrapBtns'>
-                <button onClick={prevSlide}><ArrowBackIosIcon /></button>
-                <button onClick={nextSlide}><ArrowForwardIosIcon /></button>
+                <button className='sliderBtn back' onClick={prevSlide}><ArrowForwardIosIcon /></button>
+                <button className='sliderBtn foward' onClick={nextSlide}><ArrowForwardIosIcon /></button>
             </div>
 
 

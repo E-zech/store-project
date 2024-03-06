@@ -29,6 +29,13 @@ export default function ProductMangement() {
     //         })
     // }, [])
 
+
+    // useEffect(() => {
+    //     setLoader(true)
+    //     setTimeout(() => {
+    //         setLoader(false); // Set isLoading to false after loading
+    //     }, 1000); // Adjust the delay as needed
+    // }, []);
     return (
         <>
             <header>
@@ -54,9 +61,9 @@ export default function ProductMangement() {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 position: 'fixed',
-                                left: '25px',
+                                left: '26px',
                                 // right:'12px', // not sure where to place the add button
-                                bottom: '25px',
+                                bottom: '26px',
                                 color: mode === 'light' ? '#99c8c2' : '#fff',
                                 backgroundColor: mode === 'light' ? '#fff' : '#000',
                                 boxShadow: mode === 'light' ? '0px 0px 0px 5px #99c8c2, 0px 0px 9px 1px #99c8c2, 0px 0px 0px 7px #99c8c2' : '0px 0px 0px 5px #fff, 0px 0px 9px 1px #fff, 0px 0px 0px 7px #fff',

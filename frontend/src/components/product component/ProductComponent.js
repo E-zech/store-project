@@ -24,9 +24,9 @@ import Tooltip from '@mui/material/Tooltip';
 
 
 
-export default function ProductComponent({ product, add2Cart }) {
+export default function ProductComponent({ product }) {
 
-  const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, favProducts, setFavProducts } = useContext(GeneralContext);
+  const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, favProducts, setFavProducts, add2Cart } = useContext(GeneralContext);
 
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
@@ -38,6 +38,7 @@ export default function ProductComponent({ product, add2Cart }) {
     if (product.discount === 0) {
       setIsDiscount(false)
     }
+
   }, [])
 
 
@@ -74,7 +75,7 @@ export default function ProductComponent({ product, add2Cart }) {
       })
       .then(data => {
         console.log(data)
-        setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+        // setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
         setFilteredProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
         if (faves.includes(user._id)) {
           // If the product is already in favorites, remove it from favProducts

@@ -9,8 +9,10 @@ import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } fr
 import { useNavigate } from 'react-router-dom';
 import Slider from '../../components/slider/Slider';
 
+
+
 export default function AllProducts() { // ALL Products Page basically
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory, add2Cart } = useContext(GeneralContext);
 
     const navigate = useNavigate();
 
@@ -28,31 +30,15 @@ export default function AllProducts() { // ALL Products Page basically
     //         })
     // }, []); // i removed the [filteredProducts] to save a call to the DB for each time the user insert/remove a word from the search input 
 
-    const add2Cart = (productId, title, price) => {
-        const quantity = 1;
-        const products = [{ productId, quantity, price }];
-        fetch(`http://localhost:5000/cart/add`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.token,
-            },
-            body: JSON.stringify({
-                products,
-            }),
-        })
-            .then(res => res.json())
-            .then(data => {
-                snackbar(`${title} added to cart successfully`);
-                console.log(data);
-                setProducts(data);
-                setProductsInCart(existingProducts => [...existingProducts, ...data]);
-            })
-            .catch(error => {
-                console.error('Error adding product to cart:', error);
-            });
-    };
+
+    // useEffect(() => {
+    //     setLoader(true)
+    //     setTimeout(() => {
+    //         setLoader(false);
+    //     }, 1000);
+    // }, []);
+
+
     return (
         <>
 
@@ -76,9 +62,11 @@ export default function AllProducts() { // ALL Products Page basically
                             </div>
 
                             <div className="grid-cards">
+                                {setLoader(true)}
                                 {filteredProducts.filter(product => product.category === selectedCategory || selectedCategory === "All").map(product => (
-                                    <ProductComponent key={product._id} product={product} add2Cart={add2Cart} />
+                                    <ProductComponent key={product._id} product={product} />
                                 ))}
+                                {setLoader(false)}
                             </div>
                         </>
 
