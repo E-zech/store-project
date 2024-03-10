@@ -38,8 +38,7 @@ export default function ProductComponent({ product }) {
     if (product.discount === 0) {
       setIsDiscount(false)
     }
-
-  }, [])
+  }, [path])
 
 
   const handleClick = () => {
@@ -55,7 +54,7 @@ export default function ProductComponent({ product }) {
   };
 
   const toggleFavOrNot = (id, faves) => {
-    setLoader(true);
+    // setLoader(true);
 
     const snackbarMessage = faves.includes(user._id) ? 'Removed from Favorites' : 'Added to Favorites';
 
@@ -75,20 +74,20 @@ export default function ProductComponent({ product }) {
       })
       .then(data => {
         console.log(data)
-        // setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
-        setFilteredProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+        setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+        // setFilteredProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
         if (faves.includes(user._id)) {
           // If the product is already in favorites, remove it from favProducts
           setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
         }
-        setLoader(false);
+        // setLoader(false);
         snackbar(snackbarMessage);
       });
   };
 
 
   const deleteProduct = (id) => {
-    setLoader(true);
+    // setLoader(true);
 
     const isConfirmed = window.confirm("Are you sure you want to delete this product?");
 
@@ -106,11 +105,9 @@ export default function ProductComponent({ product }) {
           setFilteredProducts((filteredProducts) =>
             filteredProducts.filter((product) => product._id !== id)
           );
-          setLoader(false);
+          // setLoader(false);
           snackbar('Card deleted successfully');
         });
-    } else {
-      setLoader(false);
     }
   }
 

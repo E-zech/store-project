@@ -6,7 +6,7 @@ import Cart from '../../components/cart/Cart';
 
 export default function FavProducts() {
 
-    const { user, snackbar, loader, setLoader, filteredProducts, setFilteredProducts, selectedCategory, favProducts, setFavProducts, add2Cart } = useContext(GeneralContext);
+    const { user, snackbar, loader, setLoader, filteredProducts, setFilteredProducts, products, selectedCategory, favProducts, setFavProducts, add2Cart } = useContext(GeneralContext);
 
 
     // useEffect(() => {
@@ -59,7 +59,7 @@ export default function FavProducts() {
                     <h1>Loading...</h1>
                 ) : (
                     <div className="grid-cards">
-                        {filteredProducts
+                        {products
                             .filter(product => product.category === selectedCategory || selectedCategory === "All")
                             .filter(product => favProducts?.some(favProduct => favProduct._id === product._id))
                             .map(product => <ProductComponent key={product._id} product={product} setFavProducts={setFavProducts} />)

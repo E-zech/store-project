@@ -12,7 +12,7 @@ import Slider from '../../components/slider/Slider';
 
 
 export default function AllProducts() { // ALL Products Page basically
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory, add2Cart } = useContext(GeneralContext);
+    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, products, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory, add2Cart } = useContext(GeneralContext);
 
     const navigate = useNavigate();
 
@@ -63,7 +63,7 @@ export default function AllProducts() { // ALL Products Page basically
 
                             <div className="grid-cards">
                                 {setLoader(true)}
-                                {filteredProducts.filter(product => product.category === selectedCategory || selectedCategory === "All").map(product => (
+                                {products.filter(product => product.category === selectedCategory || selectedCategory === "All").map(product => (
                                     <ProductComponent key={product._id} product={product} />
                                 ))}
                                 {setLoader(false)}

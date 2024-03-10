@@ -23,7 +23,7 @@ export default function AddOrEditProduct() {
     const [isFormValid, setIsFormValid] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
-    const { filteredProducts, setFilteredProducts, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
+    const { filteredProducts, setFilteredProducts, products, setProducts, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
     const { sx } = useInputsFormColors();
 
     useEffect(() => {
@@ -101,20 +101,20 @@ export default function AddOrEditProduct() {
             .then(data => {
                 if (id) {
                     // If it's an edit, find the index of the edited product in filteredProducts array
-                    const index = filteredProducts.findIndex(product => product._id === data._id);
+                    const index = products.findIndex(product => product._id === data._id);
 
                     if (index !== -1) {
                         // If the product exists in filteredProducts, replace it with the edited product
-                        const updatedProducts = [...filteredProducts];
+                        const updatedProducts = [...products];
                         updatedProducts[index] = data;
-                        setFilteredProducts(updatedProducts);
+                        setProducts(updatedProducts);
                     } else {
                         // If the product doesn't exist in filteredProducts, add it
-                        setFilteredProducts([...filteredProducts, data]);
+                        setProducts([...products, data]);
                     }
                 } else {
                     // If it's an addition, add the new product to filteredProducts
-                    setFilteredProducts([...filteredProducts, data]);
+                    setProducts([...products, data]);
                 }
                 navigate('/product-management');
                 snackbar(id ? 'Product changed successfully' : 'Product added');

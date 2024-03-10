@@ -19,8 +19,9 @@ function App() {
     const [snackbarText, setSnackbarText] = useState('');
     const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
     const [mode, setMode] = useState('light');
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);// not using anymore i hope
     const [products, setProducts] = useState([]);
+    const [initialProducts, setInitialProducts] = useState([]);
     const [favProducts, setFavProducts] = useState([]);
     const [productsInCart, setProductsInCart] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -112,7 +113,8 @@ function App() {
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
-                setFilteredProducts(data);
+                setInitialProducts(data);
+                // setFilteredProducts(data);
                 console.log(data)
             })
     }, [path]);
@@ -172,7 +174,8 @@ function App() {
                 products, setProducts, productsInCart, setProductsInCart,
                 filteredProducts, setFilteredProducts,
                 loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory,
-                favProducts, setFavProducts, add2Cart
+                favProducts, setFavProducts, add2Cart,
+                initialProducts, setInitialProducts
             }}>
 
                 <Navbar />
