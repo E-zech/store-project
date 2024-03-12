@@ -3,6 +3,7 @@ import { GeneralContext } from '../../App';
 import ProductComponent from '../../components/product component/ProductComponent';
 import ResultNotFound from '../ResultNotFound';
 import Cart from '../../components/cart/Cart';
+import '../../css/grid.css';
 
 export default function FavProducts() {
 

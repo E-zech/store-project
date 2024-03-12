@@ -125,6 +125,9 @@ export default function AddOrEditProduct() {
     return (
         <>
             <>
+                <Typography component="h1" variant="h5" sx={{ marginTop: "85px", textAlign: 'center', fontSize: '2rem' }}>
+                    {id ? `Edit Product` : `Add Product`}
+                </Typography>
                 {
                     id && <div className='edit-imgContainer'>
                         <img className="edit-img" src={formData.imgUrl} alt={formData.imgAlt} />
@@ -135,9 +138,6 @@ export default function AddOrEditProduct() {
                     <Container component="main" maxWidth="sm"  >
                         <CssBaseline />
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-                            <Typography component="h1" variant="h5">
-                                {id ? `Edit Product` : `Add product`}
-                            </Typography>
 
                             <>
                                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>

@@ -49,17 +49,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const ClearButton = styled(IconButton)(({ theme }) => ({
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: '50%',
-    transform: 'translateY(-50%)',
-    color: 'white'
-}));
+// const ClearButton = styled(IconButton)(({ theme }) => ({
+//     position: 'absolute',
+//     right: theme.spacing(1),
+//     top: '50%',
+//     transform: 'translateY(-50%)',
+//     color: 'white'
+// }));
 
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
-    const [showClearButton, setShowClearButton] = useState(false);
+    // const [showClearButton, setShowClearButton] = useState(false);
     const { setFilteredProducts, setLoader, products, setProducts, initialProducts, setInitialProducts } = useContext(GeneralContext);
 
     const navigate = useNavigate();
@@ -74,12 +74,12 @@ export default function SearchBar() {
         console.log(`the searchProducts is: ${searchProducts}`)
 
         setProducts(searchProducts);
-        setShowClearButton(value.length > 0);
+        // setShowClearButton(value.length > 0);
     };
 
     const handleClear = () => {
         setSearchValue('');
-        setShowClearButton(false);
+        // setShowClearButton(false);
         setProducts(initialProducts);
     };
 

@@ -16,6 +16,8 @@ import IconButton from "@mui/material/IconButton";
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { listStyle, boxStyle, counterWrapper, counterBtn, footerBtnWrapper, colorLight, colorDark, boxShadowLight, boxShadowDark, hoverBoxShadowLight, hoverBoxShadowDark } from './Cart.style'
+import { mainColor, white } from '../../css/Main.style';
 
 export default function Cart() {
     const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
@@ -125,96 +127,45 @@ export default function Cart() {
 
     const list = () => (
         <Box // the big div 
-            sx={{
-                width: 500,
-            }}
+            sx={{ width: 500 }}
             role="presentation"
             onClick={(e) => e.stopPropagation()}
             onKeyDown={toggleDrawer}
         >
             <List // the wrapper div of the items
-                sx={{
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '120px'
-                }}
-
-            >
+                sx={listStyle}>
                 {productsInCart.map((p) => (
                     <Box
                         onClick={(e) => e.stopPropagation()}
                         key={p._id}
-                        sx={{
-                            width: '100%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            color: 'white',
-                            backgroundColor: 'black',
-                            textAlign: 'center'
-                        }}
-                    >
+                        sx={boxStyle}>
+
                         <ListItem>
-                            <Box sx={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                gap: '10px',
-                                color: 'white',
-                                backgroundColor: 'black',
-                                textAlign: 'center'
-                            }}>
+                            <Box sx={boxStyle}>
                                 <ListItemIcon>
                                     <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '60px', height: '60px', borderRadius: '15px' }} />
                                 </ListItemIcon>
                                 <ListItemText primary={p.title} />
                             </Box>
 
-                            <Box sx={{
-                                width: '100px',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                gap: '5px',
-                                textAlign: 'center'
-                            }}>
-                                <IconButton aria-label="Add quantity" onClick={() => incrementQuantity(p._id, p.price)} sx={{
-                                    color: 'white',
-                                    backgroundColor: 'black',
-                                }}>
+                            <Box sx={counterWrapper}>
+                                <IconButton aria-label="Add quantity" onClick={() => incrementQuantity(p._id, p.price)} sx={counterBtn}>
                                     <AddIcon />
                                 </IconButton>
                                 <span>{p.quantity}</span>
                                 <IconButton aria-label="Decrease quantity" onClick={() => decrementQuantity(p._id, p.price)}
-                                    sx={{
-                                        color: 'white',
-                                        backgroundColor: 'black',
-                                    }}
-                                >
+                                    sx={counterBtn}>
+
                                     <RemoveIcon />
                                 </IconButton>
                             </Box>
 
-                            <Box sx={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                gap: '5px',
-                                marginLeft: '5px',
-                                textAlign: 'center'
-                            }}>
-
+                            <Box sx={boxStyle}>
                                 <ListItemText primary={`Total: ${parseFloat((((p.price - p.discount) * p.quantity) * 100) / 100).toFixed(2)}`} />
 
                                 <ListItemButton onClick={() => removeFromCart(p._id)}>
                                     <RemoveShoppingCartIcon />
                                 </ListItemButton>
-
                             </Box>
 
 
@@ -224,7 +175,7 @@ export default function Cart() {
 
             </List>
 
-            <Box sx={{ backgroundColor: 'black', color: 'white', textAlign: 'center', position: "fixed", bottom: '0px', width: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center', }}
+            <Box sx={footerBtnWrapper}
                 onClick={(e) => e.stopPropagation()}
             >
                 <Box sx={{ width: '350px' }}>
@@ -248,7 +199,6 @@ export default function Cart() {
                 </Box>
             </Box>
         </Box>
-
     );
 
 
@@ -259,29 +209,24 @@ export default function Cart() {
                     <Fab
                         aria-label="add"
                         sx={{
-                            width: '50px',
-                            height: '50px',
-                            color: mode === 'light' ? '#99c8c2' : '#fff',
-                            backgroundColor: mode === 'light' ? '#fff' : '#000',
-                            boxShadow: mode === 'light' ? '0px 0px 0px 5px #99c8c2, 0px 0px 9px 1px #99c8c2, 0px 0px 0px 7px #99c8c2' : '0px 0px 0px 5px #fff, 0px 0px 9px 1px #fff, 0px 0px 0px 7px #fff',
+                            width: '50px', height: '50px',
+                            color: mode === 'light' ? mainColor : white,
+                            backgroundColor: mode === 'light' ? 'white' : 'black',
+                            boxShadow: mode === 'light' ? boxShadowLight : boxShadowDark,
                             transition: 'all 0.3s ease',
                             '&:hover': {
                                 transform: 'scale(1.1)',
-                                boxShadow: mode === 'light' ? '0px 0px 0px 6px #99c8c2, 0px 0px 10px 2px #99c8c2, 0px 0px 0px 8px #99c8c2' : '0px 0px 0px 6px #fff, 0px 0px 10px 2px #fff, 0px 0px 0px 8px #fff',
+                                boxShadow: mode === 'light' ? hoverBoxShadowLight : hoverBoxShadowDark,
                             },
-                        }}
-                    >
+                        }} >
                         <ShoppingCartIcon />
                     </Fab>
                 </Box>
-
-
                 <Drawer
                     anchor="right"
                     open={isOpen}
                     onClose={toggleDrawer}
-                    transitionDuration={300}
-                >
+                    transitionDuration={300}>
                     {list()}
                 </Drawer>
             </div>

@@ -7,32 +7,26 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import RemoveShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove'
 import { useContext, useState, useEffect } from "react";
 import { GeneralContext } from "../../App";
-import { RoleTypes } from "../navbar/Navbar";
-import { useLocation, useNavigate, useParams, useResolvedPath } from "react-router-dom";
-import './ProductComponent.css';
-import { Box } from "@mui/material";
+import { useNavigate, useResolvedPath } from "react-router-dom";
+import { Box, Container, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import AddOrEditProduct from "../../pages/add or edit product/AddOrEditProduct";
 import Tooltip from '@mui/material/Tooltip';
-
-
+import { cardContentStyle, cardStyle, cartMediaStyle, containerCardStyle, discountBtnStyle, priceWrapper, titleStyle, totalPriceBtn } from './ProductComponent.style';
+import { black, mainColor, transparent, white } from "../../css/Main.style";
 
 export default function ProductComponent({ product }) {
-
-  const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, favProducts, setFavProducts, add2Cart } = useContext(GeneralContext);
-
+  const [isDiscount, setIsDiscount] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
-  const [isSaving, setIsSaving] = useState(false);
+  const { user, mode, setFilteredProducts, setProducts, productsInCart, snackbar, setFavProducts, add2Cart } = useContext(GeneralContext);
+
   const isAdded = productsInCart.some(item => item._id === product._id);
-  const [isDiscount, setIsDiscount] = useState(true);
+  const isFavorite = product.faves.includes(user?._id);
+  const snackbarMessage = isFavorite ? 'Removed from Favorites' : 'Added to Favorites';
 
   useEffect(() => {
     if (product.discount === 0) {
@@ -53,11 +47,8 @@ export default function ProductComponent({ product }) {
     }, 300);
   };
 
-  const toggleFavOrNot = (id, faves) => {
+  const toggleFavOrNot = (id) => {
     // setLoader(true);
-
-    const snackbarMessage = faves.includes(user._id) ? 'Removed from Favorites' : 'Added to Favorites';
-
     fetch(`http://localhost:5000/products/faves/${id}`, {
       credentials: 'include',
       method: 'PATCH',
@@ -73,10 +64,9 @@ export default function ProductComponent({ product }) {
         return res.json();
       })
       .then(data => {
-        console.log(data)
         setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
-        // setFilteredProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
-        if (faves.includes(user._id)) {
+
+        if (isFavorite) {
           // If the product is already in favorites, remove it from favProducts
           setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
         }
@@ -89,10 +79,9 @@ export default function ProductComponent({ product }) {
   const deleteProduct = (id) => {
     // setLoader(true);
 
-    const isConfirmed = window.confirm("Are you sure you want to delete this product?");
+    const isConfirmed = window.confirm("Are you sure you want to delete this product?"); // cahnge to a modal or popUp for confirmationn
 
     if (isConfirmed) {
-
       fetch(`http://localhost:5000/products/${id}`, {
         credentials: 'include',
         method: 'DELETE',
@@ -113,68 +102,36 @@ export default function ProductComponent({ product }) {
 
   return (
     <>
-      <section className='container-cards'>
-        <Card sx={{
-          maxWidth: 300,
-          position: 'relative', // Ensure Card has a positioning context
-          backgroundColor: 'white',
-          boxShadow: 'none',
-          transition: 'box-shadow 0.3s',
-          '&:hover': {
-
-            boxShadow: 'none'
-            // boxShadow: '0px 0px 6px 1px #b6b6b6',
-          },
-        }}
-          key={product._id}
-          className='card'>
+      <Container sx={containerCardStyle}>
+        <Card sx={{ ...cardStyle, color: mode === 'light' ? black : white, backgroundColor: mode === 'light' ? white : black, }}
+          key={product._id}>
 
           {isDiscount && (
-            <IconButton aria-label="discount" sx={{
-              position: 'absolute',
-              width: '115px',
-              top: '45px',
-              left: '-9px',
-              color: 'white',
-              padding: '6px 5px 5px 3px',
-              transform: 'rotate(319deg)',
-              transformOrigin: 'left bottom',
-              fontSize: '0.8rem',
-              textAlign: 'center',
-              zIndex: 2,
-              borderRadius: '5px',
-              backgroundColor: '#99c8c2',
-              '&:hover': {
-                backgroundColor: '#99c8c2',
-              },
-            }}>
+            <IconButton aria-label="discount"
+              sx={{
+                ...discountBtnStyle,
+                backgroundColor: mode === 'light' ? mainColor : black,
+              }}>
               -{product.discount.toFixed(2)}$
             </IconButton>
           )}
 
-          <CardMedia sx={{ position: 'relative', transition: "all 0.2s ease-in-out", "&:hover": { cursor: "pointer", transform: "scale(1.02)" } }}
+          <CardMedia sx={cartMediaStyle}
             component="img"
-            height="194"
             image={product.imgUrl}
             alt={product.imgAlt}
             onClick={() => navigate(`/product/${product._id}`)} />
 
-          <CardContent sx={{
-            textAlign: 'center', padding: '0',
-          }}>
-            <div className="card-wrapper">
-              <h1 className="main-headline"> {product.title} </h1>
-            </div>
+          <CardContent sx={cardContentStyle}>
+            <Box>
+              <Typography sx={titleStyle}>
+                {product.title}
+              </Typography>
+            </Box>
 
-            <Box sx={{
-              display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
-            }}>
+            <Box sx={priceWrapper}>
               {isDiscount &&
-                <IconButton aria-label="total-price" sx={{
-                  '&:hover': {
-                    backgroundColor: 'white',
-                  },
-                }}>
+                <IconButton aria-label="total-price" sx={totalPriceBtn}>
 
                   {`${(Math.floor((product.price - product.discount) * 10) / 10).toFixed(1)}0$`}
                 </IconButton>
@@ -231,7 +188,7 @@ export default function ProductComponent({ product }) {
 
                   <Tooltip title="Add to favorites" arrow >
                     <IconButton id='favoriteBtn' aria-label="add to favorites"
-                      onClick={() => toggleFavOrNot(product._id, product.faves)}
+                      onClick={() => toggleFavOrNot(product._id,)}
                       sx={{
                         '&:hover': {
                           backgroundColor: 'white',
@@ -271,8 +228,7 @@ export default function ProductComponent({ product }) {
           }
 
         </Card>
-      </section>
-
+      </Container>
     </>
   );
 }

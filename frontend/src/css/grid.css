@@ -6,34 +6,6 @@
     gap: 1.2rem;
 }
 
-.container-cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 10px;
-} 
-
-.card{
-    width: 345px;
-    transition: all 0.2s ease-in-out !important;
-}
-
-.card:hover{
-    transform: scale(1.02);
-    cursor: text;
-}
-
-.card-wrapper{
-    text-align: center;
-}
-
-.main-headline{
-    font-size: 1.7rem;
-   padding: 5px 0px;
-    color: black;
-}
 
 @media screen and (max-width:1850px) {
     .grid-cards{

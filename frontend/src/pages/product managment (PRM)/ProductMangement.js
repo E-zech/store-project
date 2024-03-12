@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GeneralContext } from "../../App.js";
-import ResultNotFound from '../ResultNotFound.js';
 import ProductComponent from '../../components/product component/ProductComponent.js';
-import AddOrEditProduct from '../add or edit product/AddOrEditProduct.js';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Add from '@mui/icons-material/Add.js';
+import '../../css/grid.css';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);

@@ -8,6 +8,7 @@ import "./CustomerMenagment.css";
 import "./PopUpBtn.css";
 import "./PopUpMediaQ.css";
 import { useMediaQuery } from "@mui/material";
+import '../../css/grid.css';
 
 export default function CustomerMenagment() {
   const [allClients, setAllClients] = useState([]);

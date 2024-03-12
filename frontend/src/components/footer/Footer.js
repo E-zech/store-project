@@ -8,7 +8,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useResolvedPath } from 'react-router-dom';
 import { GeneralContext } from '../../App';
-import { RoleTypes } from '../navbar/Navbar';
+import { RoleTypes } from '../../utils/constants';
 import '../../css/App.css';
 
 export default function Footer() {

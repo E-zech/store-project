@@ -4,6 +4,7 @@ import { GeneralContext } from '../../App';
 import ResultNotFound from '../ResultNotFound';
 import Cart from '../../components/cart/Cart';
 import '../../css/App.css';
+import '../../css/grid.css';
 import { RoleTypes } from '../../components/navbar/Navbar';
 import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +49,7 @@ export default function AllProducts() { // ALL Products Page basically
                     <h1 className="main-title">Skin Care Store</h1>
                 </header>
 
-                <section className="container-cards">
+                <section >
                     {loader ? (
                         <h1>Loading...</h1>
                     ) : (
