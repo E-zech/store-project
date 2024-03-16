@@ -9,11 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../App';
 import { ClientStructureNoPassword, SchemaNoPassword } from '../components/FormValidation';
-import { initialFormData, handleChange, useInputsFormColors } from '../utils/utils'
+import { initialFormDataNoPassword, handleChange, useInputsFormColors } from '../utils/utils'
 
 
 export default function Account() {
-    const [formData, setFormData] = useState(initialFormData);
+    const [formData, setFormData] = useState(initialFormDataNoPassword);
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ export default function Account() {
                 zip: user.zip || 0
             });
         }
-    }, [user]);
+    }, [user]); // fix !! if no user then no page ! but also takes time for user to accumalte in the app.js
 
 
     const handleAccountChange = (ev) => {

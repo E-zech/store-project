@@ -12,7 +12,18 @@ export const initialFormData = {
     street: '',
     houseNumber: 0,
     zip: 0
-}
+};
+
+export const initialFormDataNoPassword = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    city: '',
+    street: '',
+    houseNumber: 0,
+    zip: 0
+};
 
 
 export const handleChange = (ev, formData, setFormData, errors, setErrors, schema, setIsFormValid) => {

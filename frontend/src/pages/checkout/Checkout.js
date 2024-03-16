@@ -14,92 +14,131 @@ import Container from '@mui/material/Container';
 import { createTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { FormControlLabel } from '@mui/material';
-import { checkoutSturcture, schemaCheckout } from './checkoutStructure'
-import { useInputsFormColors } from '../../utils/utils'
+import { ClientStructureNoPassword, SchemaNoPassword } from '../../components/FormValidation';
+import { initialFormDataNoPassword, handleChange, useInputsFormColors } from '../../utils/utils'
+
 
 
 export default function Checkout() {
+    const [formData, setFormData] = useState(initialFormDataNoPassword);
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
-
     const { sx } = useInputsFormColors();
-    const [formData, setFormData] = useState(user || {});
+    const { user, setUser, productsInCart, snackbar, setLoader, mode } = useContext(GeneralContext);
+    const [currentStep, setCurrentStep] = useState(1);
+    const [showAddressConfirmation, setShowAddressConfirmation] = useState(true);
+
     const [isCheck, setIsCheck] = useState(false);
     console.log(isCheck)
-    const [currentStep, setCurrentStep] = useState(1);
 
 
-
-    const handleChange = (ev) => {
-        const { name, value } = ev.target;
-        console.log(name, value);
-
-        // Update form data
-        if (name.includes('.')) {
-            const [objectName, fieldName] = name.split('.'); // Split the name into objectName and fieldName
-            setFormData(prevFormData => ({
-                ...prevFormData,
-                [objectName]: {
-                    ...prevFormData[objectName],
-                    [fieldName]: value // Update the nested field within the object
-                }
-            }));
-        } else {
-            // For non-nested fields, update the form data directly
-            setFormData(prevFormData => ({
-                ...prevFormData,
-                [name]: value
-            }));
+    useEffect(() => {
+        // Check if the user object exists and has data
+        if (user) {
+            setFormData({
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                phone: user.phone || '',
+                email: user.email || '',
+                city: user.city || '',
+                street: user.street || '',
+                houseNumber: user.houseNumber || 0,
+                zip: user.zip || 0
+            });
         }
-    }
+    }, [user]);// fix !! if no user then no page ! but also takes time for user to accumalte in the app.js
+
+    const handleCheckoutChange = (ev) => {
+        handleChange(ev, formData, setFormData, errors, setErrors, SchemaNoPassword, setIsFormValid);
+    };
 
     const handleSubmit = ev => {
         ev.preventDefault();
-        if (isCheck) {
-            const obj = checkoutSturcture.filter(s => !s.initialOnly).reduce((acc, field) => {
-                // Check if the field is nested
-                if (field.name.includes('.')) {
-                    const [parent, child] = field.name.split('.'); // Split the nested field name
-                    acc[parent] = { ...(acc[parent] || {}), [child]: ev.target.elements[field.name].value };
-                } else {
-                    acc[field.name] = ev.target.elements[field.name].value;
+
+
+        const obj = {};
+        const elements = ev.target.elements;
+
+        ClientStructureNoPassword.forEach((s) => {
+            obj[s.name] = elements[s.name].value;
+        });
+        setLoader(true);
+
+        fetch(`http://localhost:5000/users/${user._id}`, {
+            credentials: 'include',
+            method: 'PUT',
+            headers: { 'Content-type': 'application/json', 'Authorization': localStorage.token },
+            body: JSON.stringify(obj),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-                return acc;
-            }, {});
-
-            setLoader(true);
-
-            fetch(`http://localhost:5000/users/${user._id}`, {
-                credentials: 'include',
-                method: 'PUT',
-                headers: { 'Content-type': 'application/json', 'Authorization': localStorage.token },
-                body: JSON.stringify(obj),
+                return response.json();
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Update user data in the context
-                    setUser(data);
-                    setLoader(false);
-                    snackbar("Update successful");
-                })
-                .catch(error => {
-                    console.error('Error updating user:', error);
-                    setLoader(false);
-                    // Handle error
-                });
-        }
+            .then(data => {
+                // Update user data in the context
+                setUser(data);
+                setLoader(false);
+                snackbar("Update successful");
+            })
+            .catch(error => {
+                console.error('Error updating user:', error);
+                setLoader(false);
+                // Handle error
+            });
+    }
+
+    const handleYes = () => {
+        setIsFormValid(true);
+        console.log("yes")
+        setShowAddressConfirmation(false);
 
     }
+
+    const handleNo = () => {
+        setFormData(initialFormDataNoPassword);
+        console.log("no")
+        setShowAddressConfirmation(false);
+    }
+
+
     return (
         <>
             <h1 className='main-title'>CHEKOUT</h1>
+            {showAddressConfirmation && (
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'white',
+                    padding: '20px',
+                    borderRadius: '5px',
+                    margin: "0 auto"
+                }}>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <p style={{ marginBottom: '10px' }}>Is this your details?</p>
+                        <div style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <Button onClick={handleYes} style={{ marginRight: '10px' }}>Yes</Button>
+                            <Button onClick={handleNo}>No</Button>
+                        </div>
+
+                    </div>
+
+                </div>
+            )}
+
             {
                 currentStep === 1 && <Container component="main" maxWidth="xs">
                     <Box
@@ -119,7 +158,7 @@ export default function Checkout() {
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
                             <Grid container spacing={2}>
-                                {checkoutSturcture.map(s =>
+                                {ClientStructureNoPassword.map(s =>
                                     <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
                                         {s.type === 'boolean' ?
                                             <FormControlLabel
@@ -135,21 +174,14 @@ export default function Checkout() {
                                                 label={s.label}
                                                 name={s.name}
                                                 type={s.type}
-                                                // autoComplete={s.name}
-                                                // error={Boolean(errors[s.name])}
-                                                // helperText={errors[s.name]}
-                                                onChange={handleChange}
+                                                autoComplete={s.name}
+                                                error={Boolean(errors[s.name])}
+                                                helperText={errors[s.name]}
+                                                onChange={handleCheckoutChange}
                                                 value={formData[s.name]}
                                                 InputLabelProps={{ shrink: true }}
                                                 sx={sx} />}
                                     </Grid>)}
-
-                                <Button sx={{ textDecoration: 'none', color: "black" }}>
-                                    Save as my Address
-                                    <Switch
-                                        onClick={() => setIsCheck(!isCheck)}
-                                    />
-                                </Button>
                             </Grid>
 
                             <Grid item xs={12} sm={12}>
@@ -157,7 +189,7 @@ export default function Checkout() {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    // disabled={!isFormValid}
+                                    disabled={!isFormValid}
                                     onClick={() => setCurrentStep(currentStep => currentStep + 1)}
                                     sx={{
                                         mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -240,7 +272,7 @@ export default function Checkout() {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    // disabled={!isFormValid}
+                                    disabled={!isFormValid}
                                     onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))}
                                     sx={{
                                         mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -303,7 +335,7 @@ export default function Checkout() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            // disabled={!isFormValid}\
+                            // disabled={!isFormValid}
                             onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))}
                             sx={{
                                 mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -316,7 +348,7 @@ export default function Checkout() {
                     </Grid>
 
 
-                </section>
+                </section >
             }
 
         </>

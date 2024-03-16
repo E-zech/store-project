@@ -5,8 +5,6 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { GeneralContext } from '../../App';
 import { useNavigate, useResolvedPath } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import ClearIcon from '@mui/icons-material/Clear';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -49,37 +47,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-// const ClearButton = styled(IconButton)(({ theme }) => ({
-//     position: 'absolute',
-//     right: theme.spacing(1),
-//     top: '50%',
-//     transform: 'translateY(-50%)',
-//     color: 'white'
-// }));
-
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
-    // const [showClearButton, setShowClearButton] = useState(false);
     const { setFilteredProducts, setLoader, products, setProducts, initialProducts, setInitialProducts } = useContext(GeneralContext);
 
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
 
     const handleChange = (value) => {
-        console.log(`the value is: ${value}`)
         const lowercaseValue = value.toLowerCase().trim();
-        console.log(`the lowercaseValue is: ${lowercaseValue}`)
         setSearchValue(value);
         const searchProducts = initialProducts.filter(p => p.title.toLowerCase().includes(lowercaseValue));
-        console.log(`the searchProducts is: ${searchProducts}`)
-
         setProducts(searchProducts);
-        // setShowClearButton(value.length > 0);
     };
 
     const handleClear = () => {
         setSearchValue('');
-        // setShowClearButton(false);
         setProducts(initialProducts);
     };
 
