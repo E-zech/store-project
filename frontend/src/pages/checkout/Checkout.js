@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Button, Checkbox, Typography } from '@mui/material';
+import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -107,38 +107,6 @@ export default function Checkout() {
     return (
         <>
             <h1 className='main-title'>CHEKOUT</h1>
-            {showAddressConfirmation && (
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'white',
-                    padding: '20px',
-                    borderRadius: '5px',
-                    margin: "0 auto"
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <p style={{ marginBottom: '10px' }}>Is this your details?</p>
-                        <div style={{
-                            width: '100%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                            <Button onClick={handleYes} style={{ marginRight: '10px' }}>Yes</Button>
-                            <Button onClick={handleNo}>No</Button>
-                        </div>
-
-                    </div>
-
-                </div>
-            )}
-
             {
                 currentStep === 1 && <Container component="main" maxWidth="xs">
                     <Box
@@ -154,7 +122,43 @@ export default function Checkout() {
                         </Avatar>
 
                         <Typography component="h1" variant="h5">Address</Typography>
+                        {showAddressConfirmation && (
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: 'white',
+                                padding: '20px',
+                                borderRadius: '5px',
+                                margin: "0 auto"
+                            }}>
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <p style={{ marginBottom: '10px' }}>Is this your current details?</p>
+                                    <div style={{
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}>
 
+                                        <Tooltip title="Keep details" arrow >
+                                            <Button onClick={handleYes} sx={{ color: 'black' }}>Yes</Button>
+                                        </Tooltip>
+
+                                        <Tooltip title="Clear details" arrow >
+                                            <Button onClick={handleNo} sx={{ color: 'black' }} >No</Button>
+                                        </Tooltip>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        )}
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
                             <Grid container spacing={2}>
