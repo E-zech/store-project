@@ -158,7 +158,7 @@ function App() {
             .then(data => {
                 snackbar(`${title} added to cart successfully`);
                 console.log(data);
-                setProducts(data);
+                setProducts(existingProducts => [...existingProducts, ...data]);
                 setProductsInCart(existingProducts => [...existingProducts, ...data]);
             })
             .catch(error => {

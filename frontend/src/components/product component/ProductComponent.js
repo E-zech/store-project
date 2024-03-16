@@ -103,8 +103,7 @@ export default function ProductComponent({ product }) {
   return (
     <>
       <Container sx={containerCardStyle}>
-        <Card sx={{ ...cardStyle, color: mode === 'light' ? black : white, backgroundColor: mode === 'light' ? white : black, }}
-          key={product._id}>
+        <Card key={product._id} sx={{ ...cardStyle, color: mode === 'light' ? black : white, backgroundColor: mode === 'light' ? white : black, }}>
 
           {isDiscount && (
             <IconButton aria-label="discount"

@@ -134,10 +134,10 @@ export default function Cart() {
         >
             <List // the wrapper div of the items
                 sx={listStyle}>
-                {productsInCart.map((p) => (
+                {productsInCart.map((p, index) => (
                     <Box
                         onClick={(e) => e.stopPropagation()}
-                        key={p._id}
+                        key={index}
                         sx={boxStyle}>
 
                         <ListItem>

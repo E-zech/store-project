@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { AddToCartSchema } from './shared/AddToCart.js';
-import { AddressSchema  } from './shared/Address.js';
 
 const userSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
@@ -31,7 +30,25 @@ const userSchema = new mongoose.Schema({
 
     addToCart: [AddToCartSchema],
     
-    address: AddressSchema ,
+    city:{ 
+        type: String,
+        required: true,
+    },
+
+    street:{
+        type: String,
+        required: true,
+    },
+
+    houseNumber:{
+        type: Number,
+        required: true,
+    },
+
+    zip:{
+        type: Number,
+        required: true,
+    },
 
     createdAt: {
         type: Date,

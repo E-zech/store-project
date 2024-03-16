@@ -13,32 +13,8 @@ import Slider from '../../components/slider/Slider';
 
 
 export default function AllProducts() { // ALL Products Page basically
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, products, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory, add2Cart } = useContext(GeneralContext);
-
+    const { user, products, loader, selectedCategory, } = useContext(GeneralContext);
     const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/products`, {
-    //         credentials: 'include',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         }
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setProducts(data);
-    //             setFilteredProducts(data);
-    //         })
-    // }, []); // i removed the [filteredProducts] to save a call to the DB for each time the user insert/remove a word from the search input 
-
-
-    // useEffect(() => {
-    //     setLoader(true)
-    //     setTimeout(() => {
-    //         setLoader(false);
-    //     }, 1000);
-    // }, []);
-
 
     return (
         <>
@@ -63,11 +39,11 @@ export default function AllProducts() { // ALL Products Page basically
                             </div>
 
                             <div className="grid-cards">
-                                {setLoader(true)}
-                                {products.filter(product => product.category === selectedCategory || selectedCategory === "All").map(product => (
-                                    <ProductComponent key={product._id} product={product} />
-                                ))}
-                                {setLoader(false)}
+                                {products
+                                    .filter(product => product.category === selectedCategory || selectedCategory === "All")
+                                    .map((product, index) => (
+                                        <ProductComponent key={index} product={product} />
+                                    ))}
                             </div>
                         </>
 

@@ -63,7 +63,7 @@ export default function FavProducts() {
                         {products
                             .filter(product => product.category === selectedCategory || selectedCategory === "All")
                             .filter(product => favProducts?.some(favProduct => favProduct._id === product._id))
-                            .map(product => <ProductComponent key={product._id} product={product} setFavProducts={setFavProducts} />)
+                            .map((product, index) => <ProductComponent key={index} product={product} setFavProducts={setFavProducts} />)
                         }
                     </div>
                 )}

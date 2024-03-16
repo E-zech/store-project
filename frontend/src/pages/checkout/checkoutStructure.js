@@ -5,12 +5,12 @@ export const checkoutSturcture = [
     { name: 'lastName', type: 'text', label: 'Last Name', required: true, block: false },
     { name: 'phone', type: 'text', label: 'Phone', required: true, block: false },
     { name: 'email', type: 'email', label: 'Email', required: true, block: false },
-    { name: 'country', type: 'text', label: 'Country', required: true, block: false },
-    { name: 'state', type: 'text', label: 'State', required: true, block: false },
-    { name: 'city', type: 'text', label: 'City', required: true, block: false },
-    { name: 'street', type: 'text', label: 'Street', required: true, block: false },
-    { name: 'houseNumber', type: 'text', label: 'houseNumber', required: true, block: false },
-    { name: 'zip', type: 'text', label: 'Zip', required: true, block: false },
+    { name: 'address.state', type: 'text', label: 'State', required: true, block: false },
+    { name: 'address.country', type: 'text', label: 'Country', required: true, block: false },
+    { name: 'address.city', type: 'text', label: 'City', required: true, block: false },
+    { name: 'address.street', type: 'text', label: 'Street', required: true, block: false },
+    { name: 'address.houseNumber', type: 'number', label: 'House Number', required: true, block: false },
+    { name: 'address.zip', type: 'number', label: 'zip', required: true, block: false },
 ];
 
 export const schemaCheckout = Joi.object({

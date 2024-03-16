@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Button, Typography } from '@mui/material';
+import { Button, Checkbox, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -26,73 +26,77 @@ export default function Checkout() {
 
     const { sx } = useInputsFormColors();
     const [formData, setFormData] = useState(user || {});
+    const [isCheck, setIsCheck] = useState(false);
+    console.log(isCheck)
     const [currentStep, setCurrentStep] = useState(1);
 
 
 
     const handleChange = (ev) => {
         const { name, value } = ev.target;
-        const obj = { ...formData, [name]: value };
-        setFormData(obj);
+        console.log(name, value);
 
-        const validate = schemaCheckout.validate(obj, { abortEarly: false });
-        const tempErrors = { ...errors };
-        delete tempErrors[name];
-
-        if (validate.error) {
-            const item = validate.error.details.find((e) => e.context.key === name);
-            if (item) {
-                tempErrors[name] = item.message;
-            }
+        // Update form data
+        if (name.includes('.')) {
+            const [objectName, fieldName] = name.split('.'); // Split the name into objectName and fieldName
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                [objectName]: {
+                    ...prevFormData[objectName],
+                    [fieldName]: value // Update the nested field within the object
+                }
+            }));
+        } else {
+            // For non-nested fields, update the form data directly
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                [name]: value
+            }));
         }
-        if (name in tempErrors && value === "") {
-            delete tempErrors[name];
+    }
+
+    const handleSubmit = ev => {
+        ev.preventDefault();
+        if (isCheck) {
+            const obj = checkoutSturcture.filter(s => !s.initialOnly).reduce((acc, field) => {
+                // Check if the field is nested
+                if (field.name.includes('.')) {
+                    const [parent, child] = field.name.split('.'); // Split the nested field name
+                    acc[parent] = { ...(acc[parent] || {}), [child]: ev.target.elements[field.name].value };
+                } else {
+                    acc[field.name] = ev.target.elements[field.name].value;
+                }
+                return acc;
+            }, {});
+
+            setLoader(true);
+
+            fetch(`http://localhost:5000/users/${user._id}`, {
+                credentials: 'include',
+                method: 'PUT',
+                headers: { 'Content-type': 'application/json', 'Authorization': localStorage.token },
+                body: JSON.stringify(obj),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Update user data in the context
+                    setUser(data);
+                    setLoader(false);
+                    snackbar("Update successful");
+                })
+                .catch(error => {
+                    console.error('Error updating user:', error);
+                    setLoader(false);
+                    // Handle error
+                });
         }
 
-        setErrors(tempErrors);
-
-        const formIsValid = Object.keys(tempErrors).length === 0 &&
-            Object.values(obj).every((value) => {
-                return value !== "";
-            });
-        setIsFormValid(formIsValid);
-    };
-
-    const handleSubmit = (ev) => {
-        ev.preventDefault(); // Prevent the default form submission behavior
-
-        setCurrentStep(currentStep => currentStep + 1);
-
-        // const obj = {};
-        // const elements = ev.target.elements;
-
-        // checkoutSturcture.forEach((s) => {
-        //     if (s.type === 'boolean') {
-        //         obj[s.name] = elements[s.name].checked;
-        //     } else {
-        //         obj[s.name] = elements[s.name].value;
-        //     }
-        // });
-        // fetch(`http://localhost:5000/users/${user._id}1`, {
-        //     credentials: 'include',
-        //     method: 'PUT',
-        //     headers: { 'Content-type': 'application/json', 'Authorization': localStorage.token },
-        //     body: JSON.stringify(obj),
-        // })
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw new Error('Network response was not ok');
-        //         }
-        //         return response.json();
-        //     })
-        //     .then((data) => {
-        //         console.log(data);
-        //     })
-        //     .catch((error) => {
-        //         console.error('There was a problem with the fetch operation:', error);
-        //     });
-    };
-
+    }
     return (
         <>
             <h1 className='main-title'>CHEKOUT</h1>
@@ -100,7 +104,7 @@ export default function Checkout() {
                 currentStep === 1 && <Container component="main" maxWidth="xs">
                     <Box
                         sx={{
-                            marginTop: 8,
+                            marginTop: 2,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -134,10 +138,18 @@ export default function Checkout() {
                                                 // autoComplete={s.name}
                                                 // error={Boolean(errors[s.name])}
                                                 // helperText={errors[s.name]}
-                                                // onChange={handleChange}
-                                                // value={formData[s.name]}
+                                                onChange={handleChange}
+                                                value={formData[s.name]}
+                                                InputLabelProps={{ shrink: true }}
                                                 sx={sx} />}
                                     </Grid>)}
+
+                                <Button sx={{ textDecoration: 'none', color: "black" }}>
+                                    Save as my Address
+                                    <Switch
+                                        onClick={() => setIsCheck(!isCheck)}
+                                    />
+                                </Button>
                             </Grid>
 
                             <Grid item xs={12} sm={12}>
@@ -146,6 +158,7 @@ export default function Checkout() {
                                     fullWidth
                                     variant="contained"
                                     // disabled={!isFormValid}
+                                    onClick={() => setCurrentStep(currentStep => currentStep + 1)}
                                     sx={{
                                         mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                                         '&:hover': {
@@ -214,6 +227,7 @@ export default function Checkout() {
                                     fullWidth
                                     variant="contained"
                                     // disabled={!isFormValid}
+                                    onClick={() => setCurrentStep(currentStep => currentStep + 1)}
                                     sx={{
                                         mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                                         '&:hover': {

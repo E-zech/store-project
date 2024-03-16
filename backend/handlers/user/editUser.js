@@ -23,25 +23,11 @@ const editUser = app => { // can edit details except for roleType.
             }
 
             const updateUser = await User.findById(userId);
-
             if (!updateUser) {
                 return res.status(404).send('User not found');
             }
 
             value.roleType = updateUser.roleType; //  equals to the same roleType the edit user had before 
-
-            if (value.address) {
-                // Update the user's address details
-                updateUser.address = {
-                    state: value.address.state,
-                    country: value.address.country,
-                    city: value.address.city,
-                    street: value.address.street,
-                    houseNumber: value.address.houseNumber,
-                    zip: value.address.zip
-                };
-            }
-
 
             updateUser.set(value);
             await updateUser.save();
@@ -51,10 +37,7 @@ const editUser = app => { // can edit details except for roleType.
                 password: undefined,
             };
 
-            res.send({
-                message: "User updated successfully.",
-                user: user
-            });
+            res.send(user);
 
         } catch (err) {
             return res.status(500).send('Internal Server Error');

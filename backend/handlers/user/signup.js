@@ -13,7 +13,7 @@ const signup = app => {
                 return res.status(400).send(errorObj);
             }
 
-            const { firstName, lastName, roleType, phone, email, password } = value;
+            const { email, password } = value;
 
             const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -24,20 +24,13 @@ const signup = app => {
             }
 
             const newUser = new User({
-                firstName,
-                lastName,
-                roleType,
-                phone,
-                email,
+                ...value,
                 password: hashedPassword,
             });
 
             await newUser.save();
 
-            res.send({
-                message: `Hello ${newUser.firstName}, you have successfully signed up!`,
-                newUser
-            });
+            res.send(newUser);
 
         } catch (err) {
 

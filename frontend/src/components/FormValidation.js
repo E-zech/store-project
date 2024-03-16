@@ -6,21 +6,51 @@ export const clientStructure = [
   { name: 'phone', type: 'text', label: 'Phone', required: true, block: false },
   { name: 'email', type: 'email', label: 'Email', required: true, block: false },
   { name: 'password', type: 'password', label: 'Password', required: true, block: false, initialOnly: true },
+  { name: 'city', type: 'text', label: 'City', required: true, block: false },
+  { name: 'street', type: 'text', label: 'Street', required: true, block: false },
+  { name: 'houseNumber', type: 'number', label: 'House Number', required: true, block: false },
+  { name: 'zip', type: 'number', label: 'zip', required: true, block: false },
 ];
 
 export const schema = Joi.object({
-
   firstName: Joi.string().min(2).max(20).label('First Name').required(),
   lastName: Joi.string().min(2).max(20).label('Last Name').required(),
-
-  phone: Joi.string().pattern(/0[0-9]{2}\-?\s?[0-9]{3}\s?[0-9]{4}/).message('Phone must be 10 digits long').required(),
-
+  phone: Joi.string().pattern(/^(\d{3}-)?\d{7}$/).message('Phone must be in the format 05X-XXXXXXX ').required(),
   email: Joi.string().email({ tlds: false }).lowercase().trim().required(),
-
   password: Joi.string().pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{9,}$/)
     .message('Password must be 9 characters long and include 1 uppercase letter, 1 lowercase letter, 1 special character, and numbers.')
     .required(),
+    city: Joi.string().min(2).max(56).label('city').required(),
+    street: Joi.string().min(2).max(56).label('street').required(),
+    houseNumber: Joi.number().min(1).label('houseNumber').required(),
+    zip: Joi.number().min(1).label('zip').required(),
 }).options({ abortEarly: false }); // To show all validation errors at once
+
+
+export const ClientStructureNoPassword = [
+  { name: 'firstName', type: 'text', label: 'First Name', required: true, block: false },
+  { name: 'lastName', type: 'text', label: 'Last Name', required: true, block: false },
+  { name: 'phone', type: 'text', label: 'Phone', required: true, block: false },
+  { name: 'email', type: 'email', label: 'Email', required: true, block: false },
+  { name: 'city', type: 'text', label: 'City', required: true, block: false },
+  { name: 'street', type: 'text', label: 'Street', required: true, block: false },
+  { name: 'houseNumber', type: 'number', label: 'House Number', required: true, block: false },
+  { name: 'zip', type: 'number', label: 'zip', required: true, block: false },
+];
+
+export const SchemaNoPassword = Joi.object({
+  firstName: Joi.string().min(2).max(20).label('first name').required(),
+  lastName: Joi.string().min(2).max(20).label('last name').required(),
+  roleType: Joi.number().default(2),
+  phone: Joi.string().pattern(/^(\d{3}-)?\d{7}$/).message('Phone must be in the format 05X-XXXXXXX ').required(), 
+  email: Joi.string().email({ tlds: false }).lowercase().trim().required(),
+  city: Joi.string().min(2).max(56).label('city').required(),
+  street: Joi.string().min(2).max(56).label('street').required(),
+  houseNumber: Joi.number().min(1).label('houseNumber').required(),
+  zip: Joi.number().min(1).label('zip').required(),
+  
+}).options({ abortEarly: false });
+
 
 // old ones ....
 

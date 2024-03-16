@@ -6,31 +6,48 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../App';
-import Switch from '@mui/material/Switch';
-import { FormControlLabel } from '@mui/material';
-import { clientStructure } from '../components/FormValidation';
-import { useInputsFormColors } from '../utils/utils'
+import { ClientStructureNoPassword, SchemaNoPassword } from '../components/FormValidation';
+import { initialFormData, handleChange, useInputsFormColors } from '../utils/utils'
 
 
 export default function Account() {
+    const [formData, setFormData] = useState(initialFormData);
+    const [errors, setErrors] = useState({});
+    const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
-    const { user, setUser, setLoader, snackbar, mode } = useContext(GeneralContext);
     const { sx } = useInputsFormColors();
+    const { user, setUser, setLoader, snackbar, mode } = useContext(GeneralContext);
 
+    useEffect(() => {
+        // Check if the user object exists and has data
+        if (user) {
+            setFormData({
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                phone: user.phone || '',
+                email: user.email || '',
+                city: user.city || '',
+                street: user.street || '',
+                houseNumber: user.houseNumber || 0,
+                zip: user.zip || 0
+            });
+        }
+    }, [user]);
+
+
+    const handleAccountChange = (ev) => {
+        handleChange(ev, formData, setFormData, errors, setErrors, SchemaNoPassword, setIsFormValid);
+    };
 
     const handleSubmit = ev => {
         ev.preventDefault();
         const obj = {};
         const elements = ev.target.elements;
 
-        clientStructure.filter(s => !s.initialOnly).forEach(s => {
-            if (s.type === 'boolean') {
-                obj[s.name] = elements[s.name].checked;
-            } else {
-                obj[s.name] = elements[s.name].value;
-            }
+        ClientStructureNoPassword.forEach((s) => {
+            obj[s.name] = elements[s.name].value;
         });
 
         setLoader(true);
@@ -41,12 +58,22 @@ export default function Account() {
             headers: { 'Content-type': 'application/json', 'Authorization': localStorage.token },
             body: JSON.stringify(obj),
         })
-            .then(() => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setUser(data);
                 setLoader(false);
-                snackbar("Update successful");
-            }).finally(() => {
+                snackbar("User details updated successfully");
                 navigate('/');
             })
+            .catch(error => {
+                console.error('Error updating user:', error);
+                setLoader(false);
+            });
     };
     return (
         <>
@@ -64,38 +91,32 @@ export default function Account() {
                         <Typography component="h1" variant="h5">Edit Details</Typography>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                             <Grid container spacing={2}>
-                                {
-                                    clientStructure.filter(s => !s.initialOnly).map(s =>
-                                        <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
-                                            {
-                                                s.type === 'boolean' ?
-                                                    <FormControlLabel
-                                                        control={<Switch color="primary" name={s.name} checked={user[s.name]} />}
-                                                        label={s.label}
-                                                        labelPlacement="start"
-                                                    /> :
-                                                    <TextField
-                                                        margin="normal"
-                                                        required={s.required}
-                                                        fullWidth
-                                                        id={s.name}
-                                                        label={s.label}
-                                                        name={s.name}
-                                                        type={s.type}
-                                                        autoComplete={s.name}
-                                                        value={user[s.name]}
-                                                        onChange={ev => setUser({ ...user, [s.name]: ev.target.value })}
-                                                        sx={sx}
-                                                    />
-                                            }
-                                        </Grid>
-                                    )
-                                }
+                                {ClientStructureNoPassword.map(s =>
+                                    <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
+                                        <TextField
+                                            margin="normal"
+                                            required={s.required}
+                                            fullWidth
+                                            id={s.name}
+                                            label={s.label}
+                                            name={s.name}
+                                            type={s.type}
+                                            autoComplete={s.name}
+                                            error={Boolean(errors[s.name])}
+                                            helperText={errors[s.name]}
+                                            onChange={handleAccountChange}
+                                            value={formData[s.name]}
+                                            InputLabelProps={{ shrink: true }}
+                                            sx={sx}
+                                        />
+                                    </Grid>
+                                )}
                             </Grid>
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                disabled={!isFormValid}
                                 sx={{
                                     mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                                     '&:hover': {

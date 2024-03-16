@@ -9,6 +9,10 @@ export const users = [
         "phone": "050-0000000",
         "email": "regular@gmail.com",
         "password": "Aa123456!",
+        "city": "New-York",
+        "street": "Marvin",
+        "houseNumber": "5",
+        "zip": "5050"
     },
     {
         "firstName": "business",
@@ -17,6 +21,10 @@ export const users = [
         "phone": "050-0000000",
         "email": "business@gmail.com",
         "password": "Aa123456!",
+        "city": "New-Jersey",
+        "street": "Marvin",
+        "houseNumber": "5",
+        "zip": "5050"
     },
     {
         "firstName": "admin",
@@ -25,6 +33,10 @@ export const users = [
         "phone": "050-0000000",
         "email": "admin@gmail.com",
         "password": "Abc!123Abc",
+        "city": "Florida",
+        "street": "Marvin",
+        "houseNumber": "5",
+        "zip": "5050"
     }
 ];
 

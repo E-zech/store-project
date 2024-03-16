@@ -46,7 +46,7 @@ export default function ProductMangement() {
                 ) : (
                     <div className="grid-cards">
                         {
-                            products.filter(product => product.category === selectedCategory || selectedCategory === "All").map(product => <ProductComponent key={product._id} product={product} />)
+                            products.filter(product => product.category === selectedCategory || selectedCategory === "All").map((product, index) => <ProductComponent key={index} product={product} />)
                         }
                         <Button
                             variant="contained"

@@ -2,6 +2,48 @@ import { useContext } from 'react';
 import { GeneralContext } from '../App';
 import { black, mainColor, white } from '../css/Main.style';
 
+export const initialFormData = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    password: '',
+    city: '',
+    street: '',
+    houseNumber: 0,
+    zip: 0
+}
+
+
+export const handleChange = (ev, formData, setFormData, errors, setErrors, schema, setIsFormValid) => {
+    const { name, value } = ev.target;
+    const obj = { ...formData, [name]: value };
+    setFormData(obj);
+
+    const validate = schema.validate(obj, { abortEarly: false });
+    const tempErrors = { ...errors };
+    delete tempErrors[name];
+
+    if (validate.error) {
+        const item = validate.error.details.find((e) => e.context.key === name);
+        if (item) {
+            tempErrors[name] = item.message;
+        }
+    }
+    if (name in tempErrors && value === "") {
+        delete tempErrors[name];
+    }
+
+    setErrors(tempErrors);
+
+    const formIsValid = Object.keys(tempErrors).length === 0 &&
+        Object.values(obj).every((value) => {
+            return value !== "";
+        });
+    setIsFormValid(formIsValid);
+};
+
+
 export const useInputsFormColors = () => {
     const { mode } = useContext(GeneralContext);
 
