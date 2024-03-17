@@ -1,0 +1,36 @@
+Time: 2024-03-17T10:06:10.586Z
+Method: GET
+Route: /users/65f556251c9591bbe8741118
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-17T10:06:10.616Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-17T10:06:10.758Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-17T11:14:01.928Z
+Method: GET
+Route: /users/65f556251c9591bbe8741118
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-17T11:14:01.935Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-17T11:14:02.107Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

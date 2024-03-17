@@ -14,15 +14,17 @@ import Container from '@mui/material/Container';
 import { createTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { FormControlLabel } from '@mui/material';
-import { ClientStructureNoPassword, SchemaNoPassword } from '../../components/FormValidation';
-import { initialFormDataNoPassword, handleChange, useInputsFormColors } from '../../utils/utils'
+import { ClientStructureNoPassword, PaymentStructure, SchemaNoPassword, SchemaPayment } from '../../components/FormValidation';
+import { initialFormDataNoPassword, initialPayment, handleChange, useInputsFormColors } from '../../utils/utils'
 
 
 
 export default function Checkout() {
     const [formData, setFormData] = useState(initialFormDataNoPassword);
+    const [formPayment, setFormPayment] = useState(initialPayment);
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isFormPaymentValid, setIsFormPaymentValid] = useState(false);
     const navigate = useNavigate();
     const { sx } = useInputsFormColors();
     const { user, setUser, productsInCart, snackbar, setLoader, mode } = useContext(GeneralContext);
@@ -51,6 +53,10 @@ export default function Checkout() {
 
     const handleCheckoutChange = (ev) => {
         handleChange(ev, formData, setFormData, errors, setErrors, SchemaNoPassword, setIsFormValid);
+    };
+
+    const handlePayment = (ev) => {
+        handleChange(ev, formPayment, setFormPayment, errors, setErrors, SchemaPayment, setFormPayment);
     };
 
     const handleSubmit = ev => {
@@ -107,8 +113,9 @@ export default function Checkout() {
     return (
         <>
             <h1 className='main-title'>CHEKOUT</h1>
-            {
-                currentStep === 1 && <Container component="main" maxWidth="xs">
+            {// Address
+                currentStep === 1 &&
+                <Container component="main" maxWidth="xs">
                     <Box
                         sx={{
                             marginTop: 2,
@@ -164,28 +171,24 @@ export default function Checkout() {
                             <Grid container spacing={2}>
                                 {ClientStructureNoPassword.map(s =>
                                     <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
-                                        {s.type === 'boolean' ?
-                                            <FormControlLabel
-                                                control={<Switch color="primary" name={s.name} />}
-                                                label={s.label}
-                                                labelPlacement="start"
-                                            /> :
-                                            <TextField
-                                                margin="normal"
-                                                required={s.required}
-                                                fullWidth
-                                                id={s.name}
-                                                label={s.label}
-                                                name={s.name}
-                                                type={s.type}
-                                                autoComplete={s.name}
-                                                error={Boolean(errors[s.name])}
-                                                helperText={errors[s.name]}
-                                                onChange={handleCheckoutChange}
-                                                value={formData[s.name]}
-                                                InputLabelProps={{ shrink: true }}
-                                                sx={sx} />}
-                                    </Grid>)}
+                                        <TextField
+                                            margin="normal"
+                                            required={s.required}
+                                            fullWidth
+                                            id={s.name}
+                                            label={s.label}
+                                            name={s.name}
+                                            type={s.type}
+                                            autoComplete={s.name}
+                                            error={Boolean(errors[s.name])}
+                                            helperText={errors[s.name]}
+                                            onChange={handleCheckoutChange}
+                                            value={formData[s.name]}
+                                            InputLabelProps={{ shrink: true }}
+                                            sx={sx}
+                                        />
+                                    </Grid>
+                                )}
                             </Grid>
 
                             <Grid item xs={12} sm={12}>
@@ -209,8 +212,9 @@ export default function Checkout() {
                 </Container>
             }
 
-            {
-                currentStep === 2 && <Container component="main" maxWidth="xs">
+            {// Payment
+                currentStep === 2 &&
+                <Container component="main" maxWidth="xs">
                     <Box
                         sx={{
                             marginTop: 8,
@@ -229,32 +233,26 @@ export default function Checkout() {
 
                             <Grid container spacing={2}>
 
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="normal"
-                                        fullWidth
-                                        required
-                                        label="Name On Card"
-                                        sx={sx} />
-                                    <TextField
-                                        margin="normal"
-                                        fullWidth
-                                        required
-                                        label="Card Number"
-                                        sx={sx} />
-                                    <TextField
-                                        margin="normal"
-                                        fullWidth
-                                        required
-                                        label="Expiry Date"
-                                        sx={sx} />
-                                    <TextField
-                                        margin="normal"
-                                        fullWidth
-                                        required
-                                        label="CVV"
-                                        sx={sx} />
-                                </Grid>
+                                {PaymentStructure.map(s =>
+                                    <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
+                                        <TextField
+                                            margin="normal"
+                                            required={s.required}
+                                            fullWidth
+                                            id={s.name}
+                                            label={s.label}
+                                            name={s.name}
+                                            type={s.type}
+                                            autoComplete={s.name}
+                                            error={Boolean(errors[s.name])}
+                                            helperText={errors[s.name]}
+                                            onChange={handlePayment}
+                                            value={formData[s.name]}
+                                            InputLabelProps={{ shrink: true }}
+                                            sx={sx}
+                                        />
+                                    </Grid>
+                                )}
                             </Grid>
 
                             <Grid item xs={12} sm={12}>
@@ -262,7 +260,7 @@ export default function Checkout() {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    // disabled={!isFormValid}
+                                    disabled={!isFormValid}
                                     onClick={() => setCurrentStep(currentStep => currentStep + 1)}
                                     sx={{
                                         mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -276,7 +274,6 @@ export default function Checkout() {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    disabled={!isFormValid}
                                     onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))}
                                     sx={{
                                         mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -294,7 +291,7 @@ export default function Checkout() {
                 </Container>
             }
 
-            {
+            {// Review
                 currentStep === 3 && <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
                     <h1 className='sec-title'>review</h1>
                     {productsInCart.map((p) => (

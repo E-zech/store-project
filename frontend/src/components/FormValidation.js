@@ -38,6 +38,7 @@ export const ClientStructureNoPassword = [
   { name: 'zip', type: 'number', label: 'zip', required: true, block: false },
 ];
 
+
 export const SchemaNoPassword = Joi.object({
   firstName: Joi.string().min(2).max(20).label('first name').required(),
   lastName: Joi.string().min(2).max(20).label('last name').required(),
@@ -50,6 +51,40 @@ export const SchemaNoPassword = Joi.object({
   zip: Joi.number().min(1).label('zip').required(),
   
 }).options({ abortEarly: false });
+
+export const PaymentStructure = [
+  { name: 'nameOnCard', type: 'text', label: 'Name On Card', required: true, block: true },
+  { name: 'cardNumber', type: 'text', label: 'Card Number', required: true, block: true },
+  { name: 'expiryDate', type: 'text', label: 'Expiry Date', required: true, block: true },
+  { name: 'cvv', type: 'string', label: 'CVV', required: true, block: true }
+];
+
+export const SchemaPayment = Joi.object({
+  nameOnCard: Joi.string().min(4).max(56).trim().required().messages({
+      'string.base': `Name on card must be a string and between 3 and 56 characters long`,
+      'string.empty': `Name on card is required`,
+    }),
+    
+    cardNumber: Joi.string().trim().required().messages({
+      'string.empty': `Card number is required`,
+      'string.pattern.base': `Card number must be a valid credit card number in the format XXXX-XXXX-XXXX-XXXX`,
+    }).regex(/^[0-9]{4}-?[0-9]{4}-?[0-9]{4}-?[0-9]{4}$/),
+
+
+    expiryDate: Joi.string().trim().required().messages({
+      'string.empty': `Expiry date is required`,
+      'string.pattern.base': `Expiry date must be in MM/YY or MM/YYYY format`,
+    }).regex(/^(0[1-9]|1[0-2])\/?(20[2-9][0-9]|2[1-9][0-9]{2}|[3-9][0-9]{3}|[0-9]{2})$/),
+ 
+  cvv: Joi.number().integer().min(100).max(999).required().messages({ // Updated to number
+      'number.base': `CVV must be a 3-digit number`, // Changed 'string.base' to 'number.base'
+      'number.empty': `CVV is required`, // Changed 'string.empty' to 'number.empty'
+    }),  
+}).options({ abortEarly: false });
+
+
+
+
 
 
 // old ones ....

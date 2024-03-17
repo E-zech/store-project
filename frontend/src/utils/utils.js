@@ -25,6 +25,13 @@ export const initialFormDataNoPassword = {
     zip: 0
 };
 
+export const initialPayment = {
+    nameOnCard: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: ''
+};
+
 
 export const handleChange = (ev, formData, setFormData, errors, setErrors, schema, setIsFormValid) => {
     const { name, value } = ev.target;
