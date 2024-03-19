@@ -21,6 +21,8 @@ export const ProductValid = Joi.object({
 
     faves: Joi.array().default([]),
 
+    totalQuantity: Joi.number(),
+
     createdAt: Joi.date(),
 });
 

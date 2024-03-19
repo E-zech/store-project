@@ -12,7 +12,7 @@ export const users = [
         "city": "New-York",
         "street": "Marvin",
         "houseNumber": "5",
-        "zip": "5050"
+        "zip": "0452"
     },
     {
         "firstName": "business",
@@ -52,6 +52,7 @@ export const products = [
         "imgAlt": "a photo of Face cleanser",
         "category": "Face",
         "faves": [],
+        "totalQuantity": 100,
         "createdAt": Date.now()
     },
     {
@@ -65,6 +66,7 @@ export const products = [
         "imgAlt": "a photo of Eye serum",
         "category": "Eyes",
         "faves": [],
+        "totalQuantity": 80,
         "createdAt": Date.now()
     },
     {
@@ -78,6 +80,7 @@ export const products = [
         "imgAlt": "a photo of Body cream",
         "category": "Body",
         "faves": [],
+        "totalQuantity": 150,
         "createdAt": Date.now()
     },
     {
@@ -91,6 +94,7 @@ export const products = [
         "imgAlt": "a photo of Hands loation",
         "category": "Hands",
         "faves": [],
+        "totalQuantity": 150,
         "createdAt": Date.now()
     },
     {
@@ -104,6 +108,7 @@ export const products = [
         "imgAlt": "a photo of Feet soap",
         "category": "Feet",
         "faves": [],
+        "totalQuantity": 70,
         "createdAt": Date.now()
     },
     {
@@ -117,6 +122,7 @@ export const products = [
         "imgAlt": "a photo of Acne Spray Treatment",
         "category": "Body",
         "faves": [],
+        "totalQuantity": 80,
         "createdAt": Date.now()
     },
     {
@@ -130,6 +136,7 @@ export const products = [
         "imgAlt": "a photo of Acne Spray Treatment",
         "category": "Face",
         "faves": [],
+        "totalQuantity": 50,
         "createdAt": Date.now()
     },
 

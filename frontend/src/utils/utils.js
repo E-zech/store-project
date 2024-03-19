@@ -11,7 +11,7 @@ export const initialFormData = {
     city: '',
     street: '',
     houseNumber: 0,
-    zip: 0
+    zip: ''
 };
 
 export const initialFormDataNoPassword = {
@@ -22,7 +22,7 @@ export const initialFormDataNoPassword = {
     city: '',
     street: '',
     houseNumber: 0,
-    zip: 0
+    zip: ''
 };
 
 export const initialPayment = {

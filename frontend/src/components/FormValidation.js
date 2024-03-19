@@ -9,7 +9,7 @@ export const clientStructure = [
   { name: 'city', type: 'text', label: 'City', required: true, block: false },
   { name: 'street', type: 'text', label: 'Street', required: true, block: false },
   { name: 'houseNumber', type: 'number', label: 'House Number', required: true, block: false },
-  { name: 'zip', type: 'number', label: 'zip', required: true, block: false },
+  { name: 'zip', type: 'text', label: 'zip', required: true, block: false },
 ];
 
 export const schema = Joi.object({
@@ -23,7 +23,7 @@ export const schema = Joi.object({
     city: Joi.string().min(2).max(56).label('city').required(),
     street: Joi.string().min(2).max(56).label('street').required(),
     houseNumber: Joi.number().min(1).label('houseNumber').required(),
-    zip: Joi.number().min(1).label('zip').required(),
+    zip: Joi.string().min(3).max(9).label('zip').required(),
 }).options({ abortEarly: false }); // To show all validation errors at once
 
 
@@ -35,7 +35,7 @@ export const ClientStructureNoPassword = [
   { name: 'city', type: 'text', label: 'City', required: true, block: false },
   { name: 'street', type: 'text', label: 'Street', required: true, block: false },
   { name: 'houseNumber', type: 'number', label: 'House Number', required: true, block: false },
-  { name: 'zip', type: 'number', label: 'zip', required: true, block: false },
+  { name: 'zip', type: 'text', label: 'zip', required: true, block: false },
 ];
 
 
@@ -48,8 +48,7 @@ export const SchemaNoPassword = Joi.object({
   city: Joi.string().min(2).max(56).label('city').required(),
   street: Joi.string().min(2).max(56).label('street').required(),
   houseNumber: Joi.number().min(1).label('houseNumber').required(),
-  zip: Joi.number().min(1).label('zip').required(),
-  
+  zip: Joi.string().min(3).max(9).label('zip').required(),
 }).options({ abortEarly: false });
 
 export const PaymentStructure = [
@@ -60,11 +59,13 @@ export const PaymentStructure = [
 ];
 
 export const SchemaPayment = Joi.object({
-  nameOnCard: Joi.string().min(4).max(56).trim().required().messages({
-      'string.base': `Name on card must be a string and between 3 and 56 characters long`,
-      'string.empty': `Name on card is required`,
-    }),
-    
+  nameOnCard: Joi.string().required().min(3).max(56).messages({ 
+    'string.empty': `Name on card is required`,
+    'string.min': `Name on card must be at least {#limit} characters long`, 
+    'string.max': `Name on card cannot exceed {#limit} characters`,
+  }),
+
+
     cardNumber: Joi.string().trim().required().messages({
       'string.empty': `Card number is required`,
       'string.pattern.base': `Card number must be a valid credit card number in the format XXXX-XXXX-XXXX-XXXX`,
@@ -76,10 +77,10 @@ export const SchemaPayment = Joi.object({
       'string.pattern.base': `Expiry date must be in MM/YY or MM/YYYY format`,
     }).regex(/^(0[1-9]|1[0-2])\/?(20[2-9][0-9]|2[1-9][0-9]{2}|[3-9][0-9]{3}|[0-9]{2})$/),
  
-  cvv: Joi.number().integer().min(100).max(999).required().messages({ // Updated to number
-      'number.base': `CVV must be a 3-digit number`, // Changed 'string.base' to 'number.base'
-      'number.empty': `CVV is required`, // Changed 'string.empty' to 'number.empty'
-    }),  
+    cvv: Joi.string().regex(/^\d{3}$/).required() .messages({
+        'string.pattern.base': `CVV must be a 3-digit number`,
+        'any.required': `CVV is required`,
+    }),   
 }).options({ abortEarly: false });
 
 

@@ -17,7 +17,7 @@ export const UserValid = Joi.object({
     city: Joi.string().min(2).max(56).label('city').required(),
     street: Joi.string().min(2).max(56).label('street').required(),
     houseNumber: Joi.number().min(1).label('houseNumber').required(),
-    zip: Joi.number().min(1).label('zip').required(),
+    zip: Joi.string().min(3).max(9).label('zip').required(),
 
 
     addToCart: Joi.array().items(

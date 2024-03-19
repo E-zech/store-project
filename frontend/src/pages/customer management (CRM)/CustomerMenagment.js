@@ -9,6 +9,7 @@ import "./PopUpBtn.css";
 import "./PopUpMediaQ.css";
 import { useMediaQuery } from "@mui/material";
 import '../../css/grid.css';
+import { RoleTypes } from "../../utils/constants";
 
 export default function CustomerMenagment() {
   const [allClients, setAllClients] = useState([]);
@@ -26,34 +27,36 @@ export default function CustomerMenagment() {
       },
     }).then(res => res.json())
       .then((data) => {
-        // const filteredData = data.map((item) => {
-        //   const { _id, firstName, lastName, phone, email, business } = item;
-        //   return { _id, firstName, lastName, phone, email, business };
-        // });
-        setAllClients(data);
+        // Filter out clients with role types greater than 3 (admin, master)
+        const filteredClients = data.filter(client => client.roleType <= RoleTypes.business);
+        setAllClients(filteredClients);
       }).finally(() => setLoader(false))
   }, [refresh]);
 
   const columns = [
-    { field: '_id', headerName: 'ID', flex: 1 },
-    { field: 'firstName', headerName: 'First Name', flex: 1 },
-    !isSmallScreen && { field: 'lastName', headerName: 'Last Name', flex: 1 },
-    !isSmallScreen && { field: 'phone', headerName: 'Phone', flex: 1 },
-    !isSmallScreen && { field: 'email', headerName: 'Email', flex: 1 },
     {
-      field: 'business', headerName: 'Business', flex: 1,
+      field: 'name',
+      headerName: 'Name',
+      flex: 0.7,
+      justifyContent: 'center',
+      valueGetter: (params) => `${params.row.firstName} ${params.row.lastName}`
+    },
+
+    { field: 'email', headerName: 'Email', flex: 0.7 },
+
+    {
+      field: 'business',
+      headerName: 'Business',
+      flex: 0.4, // Adjusted width
       renderCell: (params) => (
         <div>
-          {params.row.business ? (
+          {params.row.roleType === RoleTypes.business ? (
             <CheckBoxIcon
               onClick={(e) => {
                 e.stopPropagation();
                 handleBusiness(params.row);
               }}
-              style={{
-                cursor: 'pointer',
-                color: 'green',
-              }}
+              style={{ cursor: 'pointer', color: 'green' }}
             />
           ) : (
             <DisabledByDefaultIcon
@@ -61,38 +64,56 @@ export default function CustomerMenagment() {
                 e.stopPropagation();
                 handleBusiness(params.row);
               }}
-              style={{ cursor: 'pointer', color: 'red' }} />
+              style={{ cursor: 'pointer', color: 'red' }}
+            />
           )}
         </div>
       ),
     },
     {
-      field: 'delete', headerName: 'Delete', flex: 1,
+      field: 'delete',
+      headerName: 'Delete',
+      flex: 0.4, // Adjusted width
       renderCell: (params) => (
-        <DeleteIcon
-          onClick={() => handleDelete(params.row.id)}
-          style={{ cursor: 'pointer' }} />
+        <DeleteIcon onClick={() => handleDelete(params.row._id)} style={{ cursor: 'pointer' }} />
       ),
     }
-  ].filter(Boolean);
+  ];
 
   const handleBusiness = (client) => {
     setLoader(true);
-    client.business = !client.business;
-    const snackbarMessage = `${client.firstName} is now ${client.business ? "business" : "non-business"
-      } client`;
-    const obj = { client };
+
+    const updatedClient = { ...client }; // Create a copy of the client object
+    updatedClient.roleType = client.roleType === RoleTypes.user ? RoleTypes.business : RoleTypes.user; // Toggle the roleType field
+
+    const snackbarMessage = `${updatedClient.firstName} is now ${updatedClient.roleType === RoleTypes.business ? "business" : "non-business"} client`;
 
     fetch(`http://localhost:5000/users/${client._id}`, {
       credentials: 'include',
       method: 'PATCH',
-      headers: { 'Authorization': localStorage.token },
-      body: JSON.stringify(client),
+      headers: {
+        'Authorization': localStorage.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedClient),
     })
-      .then(() => {
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to update role type');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        // Update the state with the updated client data
+        setAllClients(prevClients => prevClients.map(prevClient => prevClient._id === data._id ? data : prevClient));
         setRefresh([{}]);
         snackbar(snackbarMessage);
-      }).finally(() => setLoader(false))
+      })
+      .catch((error) => {
+        console.error('Error updating role type:', error);
+        // Handle error, show error message, etc.
+      })
+      .finally(() => setLoader(false));
   };
 
 
@@ -116,7 +137,7 @@ export default function CustomerMenagment() {
   return (
     <>
       <header>
-        <h1 className="main-title">User Table Management</h1>
+        <h1 className="main-title">Customer Management</h1>
       </header>
 
       {isPopUp && (
@@ -144,7 +165,7 @@ export default function CustomerMenagment() {
         </section>
       )}
 
-      <section style={{ height: 'auto', width: '100%', padding: '25px 15px', margin: '0 auto' }}>
+      <section style={{ height: 'auto', width: '90vw', padding: '25px 15px', margin: '0 auto', display: 'flex', justifyContent: "center", alignItems: 'center' }}>
         <DataGrid
           rows={allClients}
           columns={columns}

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Button, Checkbox, Tooltip, Typography } from '@mui/material';
+import { Button, Checkbox, Divider, Tooltip, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -16,6 +16,7 @@ import Switch from '@mui/material/Switch';
 import { FormControlLabel } from '@mui/material';
 import { ClientStructureNoPassword, PaymentStructure, SchemaNoPassword, SchemaPayment } from '../../components/FormValidation';
 import { initialFormDataNoPassword, initialPayment, handleChange, useInputsFormColors } from '../../utils/utils'
+import { gray, selectColor } from '../../css/Main.style';
 
 
 
@@ -34,6 +35,7 @@ export default function Checkout() {
     const [isCheck, setIsCheck] = useState(false);
     console.log(isCheck)
 
+    const fullAddress = `${user.houseNumber} ${user.street}, ${user.city}, ${user.zip}`;
 
     useEffect(() => {
         // Check if the user object exists and has data
@@ -46,7 +48,7 @@ export default function Checkout() {
                 city: user.city || '',
                 street: user.street || '',
                 houseNumber: user.houseNumber || 0,
-                zip: user.zip || 0
+                zip: user.zip || ''
             });
         }
     }, [user]);// fix !! if no user then no page ! but also takes time for user to accumalte in the app.js
@@ -56,8 +58,16 @@ export default function Checkout() {
     };
 
     const handlePayment = (ev) => {
-        handleChange(ev, formPayment, setFormPayment, errors, setErrors, SchemaPayment, setFormPayment);
+        handleChange(ev, formPayment, setFormPayment, errors, setErrors, SchemaPayment, setIsFormPaymentValid);
+        console.log(formPayment)
+        console.log(formPayment)
     };
+
+    const placeOrder = () => {
+        // navigate('/');
+        setCurrentStep(currentStep => currentStep + 1);
+        snackbar("Thank you for your purchase");
+    }
 
     const handleSubmit = ev => {
         ev.preventDefault();
@@ -185,6 +195,9 @@ export default function Checkout() {
                                             onChange={handleCheckoutChange}
                                             value={formData[s.name]}
                                             InputLabelProps={{ shrink: true }}
+                                            inputProps={{
+                                                min: 0, // Minimum value for numeric input
+                                            }}
                                             sx={sx}
                                         />
                                     </Grid>
@@ -229,7 +242,7 @@ export default function Checkout() {
 
                         <Typography component="h1" variant="h5">Payment</Typography>
 
-                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <Box component="form" noValidate sx={{ mt: 1 }}>
 
                             <Grid container spacing={2}>
 
@@ -243,11 +256,11 @@ export default function Checkout() {
                                             label={s.label}
                                             name={s.name}
                                             type={s.type}
-                                            autoComplete={s.name}
+                                            autoComplete="off"
                                             error={Boolean(errors[s.name])}
                                             helperText={errors[s.name]}
                                             onChange={handlePayment}
-                                            value={formData[s.name]}
+                                            value={formPayment[s.name]}
                                             InputLabelProps={{ shrink: true }}
                                             sx={sx}
                                         />
@@ -260,7 +273,7 @@ export default function Checkout() {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    disabled={!isFormValid}
+                                    disabled={!isFormPaymentValid}
                                     onClick={() => setCurrentStep(currentStep => currentStep + 1)}
                                     sx={{
                                         mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -290,37 +303,66 @@ export default function Checkout() {
                     </Box>
                 </Container>
             }
-
+            {console.log(formPayment)}
             {// Review
-                currentStep === 3 && <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
+                currentStep === 3 &&
+                <section
+                    style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
                     <h1 className='sec-title'>review</h1>
-                    {productsInCart.map((p) => (
-                        <Box
-                            onClick={(e) => e.stopPropagation()}
-                            key={p._id}
-                            sx={{
-                                width: '80vw',
-                                display: 'flex',
-                                justifyContent: 'sapce-between',
-                                alignItems: 'center',
-                                color: 'red',
-                                backgroundColor: 'greenyellow',
-                            }}
-                        >
-                            <ListItem>
-                                <ListItemText primary={p.title} />
-                                <ListItemText primary={`Total Price: ${p.price * p.quantity}`} /> {/* Calculate total price */}
-                                <ListItemIcon>
-                                    <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
-                                </ListItemIcon>
-                            </ListItem>
+
+                    <section style={{ width: '80vw', backgroundColor: '#80808040', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                        {productsInCart.map((p) => ( // products part
+                            <Box
+                                onClick={(e) => e.stopPropagation()}
+                                key={p._id}
+                                sx={{
+                                    width: '80vw',
+                                    display: 'flex',
+                                    justifyContent: 'sapce-between',
+                                    alignItems: 'center',
+
+                                }}
+                            >
+                                <ListItem>
+                                    <ListItemText primary={p.title} />
+                                    <ListItemText primary={p.quantity} />
+                                    <ListItemText primary={`Total Price: ${p.price * p.quantity}`} /> {/* Calculate total price */}
+                                    <ListItemIcon>
+                                        <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
+                                    </ListItemIcon>
+                                </ListItem>
+                            </Box>
+                        ))}
+
+                        <hr className='hr' />
+
+                        <Box //address part
+                            sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', }}>
+                            <Typography sx={{ fontWeight: 'bold' }}>Address Details: </Typography>
+                            <Box >
+                                <Typography > {user.firstName + ' ' + user.lastName} </Typography>
+                                <Typography>{fullAddress}</Typography>
+                            </Box>
                         </Box>
-                    ))}
+
+                        <hr className='hr' />
+                        <Box //payment part
+                            sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', }}>
+                            <Typography sx={{ fontWeight: 'bold' }}>Payment Details: </Typography>
+                            <Box >
+                                <Typography>Name On Card: {formPayment.nameOnCard}</Typography>
+                                <Typography>Card Number:XXXX-XXXX-XXXX-{formPayment.cardNumber.slice(-4)}</Typography>
+                                <Typography>
+                                    Expiry Date: {formPayment.expiryDate}
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </section>
 
 
                     <Grid item xs={12} sm={12}>
                         <Button
-                            type="submit"
+                            onClick={placeOrder}
                             fullWidth
                             variant="contained"
                             sx={{
@@ -336,7 +378,6 @@ export default function Checkout() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            // disabled={!isFormValid}
                             onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))}
                             sx={{
                                 mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -351,7 +392,22 @@ export default function Checkout() {
 
                 </section >
             }
+            {
+                currentStep === 4 &&
+                <>
+                    <section
+                        style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
+                        <h1 className='sec-title'>Thank you !</h1>
 
+                        <section style={{ width: '80vw', backgroundColor: '#80808040', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <h1>Your order has been placed </h1>
+                            <h2>Your order number is (maybe order._id). </h2>
+                            <p>and some photo or icon</p>
+                            <button onClick={() => navigate('/')}>Home Page</button>
+                        </section>
+                    </section>
+                </>
+            }
         </>
     )
 }

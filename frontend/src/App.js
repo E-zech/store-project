@@ -27,7 +27,7 @@ function App() {
     const [productsInCart, setProductsInCart] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
 
-
+    console.log(products)
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
 

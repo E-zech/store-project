@@ -30,6 +30,8 @@ const productSchema = new mongoose.Schema({
 
     faves: [String],
 
+    totalQuantity: { type: Number, default: 0 },
+
     createdAt: {
         type: Date,
         default: Date.now

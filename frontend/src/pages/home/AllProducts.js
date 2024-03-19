@@ -9,12 +9,31 @@ import { RoleTypes } from '../../components/navbar/Navbar';
 import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Slider from '../../components/slider/Slider';
+import { mainColor } from '../../css/Main.style';
 
 
 
 export default function AllProducts() { // ALL Products Page basically
-    const { user, products, loader, selectedCategory, } = useContext(GeneralContext);
+    const { user, products, setProducts, loader, selectedCategory, } = useContext(GeneralContext);
     const navigate = useNavigate();
+
+    const displayLow2high = () => {
+        console.log("displayLow2high")
+        // const sortedProducts = [...products].sort((a, b) => a.price - b.price);
+        // setProducts(sortedProducts);
+    }
+
+    const displayHigh2Low = () => {
+        console.log("displayHigh2Low")
+        // const sortedProducts = [...products].sort((a, b) => b.price - a.price);
+        // setProducts(sortedProducts);
+    }
+
+    const displayDiscount = () => {
+        console.log("displayDiscount")
+        // const sortedProducts = [...products].filter(product => product.discount > 0).sort((a, b) => b.discount - a.discount);
+        // setProducts(sortedProducts);
+    }
 
     return (
         <>
@@ -22,8 +41,39 @@ export default function AllProducts() { // ALL Products Page basically
             <section style={{ marginBottom: '100px' }}>
                 <Slider />
                 <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                    <h1 className="main-title">Skin Care Store</h1>
+                    <h1 className="homePage-title">Skin Care Store</h1>
                 </header>
+
+                <section style={{
+                    width: '97vw',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '50px 5px'
+                }}>
+                    <div style={{
+                        width: '50vw',
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        alignItems: 'center'
+                    }}>
+
+                        <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
+                            onClick={displayLow2high}>
+                            Low To High
+                        </button>
+
+                        <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
+                            onClick={displayHigh2Low}>
+                            High To Low
+                        </button>
+
+                        <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
+                            onClick={displayDiscount}>
+                            Discount Products
+                        </button>
+                    </div>
+                </section>
 
                 <section >
                     {loader ? (

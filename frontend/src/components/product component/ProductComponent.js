@@ -147,6 +147,17 @@ export default function ProductComponent({ product }) {
 
             </Box>
 
+            {path === '/product-management' &&
+              <>
+                <Box>
+                  <Typography sx={{ textAlign: 'center' }}>
+                    In-Stock: {product.totalQuantity} Units
+                  </Typography>
+                </Box>
+              </>
+            }
+
+
           </CardContent>
           {
             user && <CardActions disableSpacing
