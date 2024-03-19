@@ -64,3 +64,51 @@ Route: /cart
 Status Code: 401
 Error:  Unauthorized
 
+Time: 2024-03-19T09:59:45.142Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-19T10:31:41.283Z
+Method: GET
+Route: /products/undefined
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-03-19T11:38:14.311Z
+Method: GET
+Route: /users/65f9522a049bfcbffd08778c
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-19T11:38:14.318Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-19T11:38:14.450Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-19T12:40:13.985Z
+Method: GET
+Route: /users/65f9522a049bfcbffd08778c
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-19T12:40:13.995Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-19T12:40:14.246Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { GeneralContext } from "../../App";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import './Product.css';
 import Cart from "../../components/cart/Cart";
 
@@ -9,11 +9,40 @@ import { FaHandSparkles } from "react-icons/fa";
 import { IoBody } from "react-icons/io5";
 import { MdOutlineFaceRetouchingNatural } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
+import { Tooltip } from "@mui/material";
 
 export default function Product() {
     const [product, setProduct] = useState({});
+    const [isInCart, setIsInCart] = useState(false);
     const { id } = useParams();
-    const { user, loader, setLoader, filteredProducts, setFilteredProducts, snackbar } = useContext(GeneralContext);
+    const navigate = useNavigate();
+    const { user, loader, setLoader, filteredProducts, setFilteredProducts, snackbar, selectedCategory, productsInCart, setProductsInCart, add2Cart } = useContext(GeneralContext);
+
+    const icons = {
+        Feet: <GiBarefoot size={50} />,
+        Hands: <FaHandSparkles size={50} />,
+        Body: <IoBody size={50} />,
+        Face: <MdOutlineFaceRetouchingNatural size={50} />,
+        Eyes: <IoEyeSharp size={50} />
+    };
+
+    const renderIcon = (category) => {
+        return icons[category] || null;
+    };
+
+    const handleAdd2Cart = () => {
+        if (!isInCart) {
+            add2Cart(product._id, product.title, product.price);
+        } else {
+            snackbar('Product already in cart');
+        }
+    }
+
+    useEffect(() => {
+        const index = productsInCart.findIndex(p => p._id === product._id);
+        setIsInCart(index !== -1);
+    }, [productsInCart])
+
 
     useEffect(() => {
         setLoader(true);
@@ -33,64 +62,77 @@ export default function Product() {
             })
     }, [id]);
 
+    const buyNow = async () => {
+        if (!isInCart) {
+            await add2Cart(product._id, product.title, product.price);
+            navigate('/checkout');
+        } else {
+            navigate('/checkout');
+        }
+    };
+
+
     return (
-        <> <main id="body">
-            <header className="header" >
-                <h1 className="main-title">{product.title}</h1>
-            </header>
+        <>
+            <main id="body">
+                <header className="header" >
+                    <h1 className="main-title">{product.title}</h1>
+                </header>
 
-            <section className="first-wrapper">
+                <section className="first-wrapper">
 
-                <div className="img-container">
-                    <img className="img" src={product.imgUrl} alt={product.imgAlt} />
-                </div>
+                    <div className="img-container">
+                        <Tooltip Tooltip title={`Category: ` + product.category} arrow>
+                            <div className="icon">{renderIcon(product.category)}</div>
+                        </Tooltip>
 
-                <div className="btnsPrice-wrapper">
-                    <div className="priceDiscount-container">
-                        <span className="price">Price: {product.price}$</span> <br />
-                        <span className="discount">Discount: {product.discount}$</span>
+                        <img className="img" src={product.imgUrl} alt={product.imgAlt} />
                     </div>
 
-                    <div className="btns-container">
-                        <button className="btn">Add to cart</button>
-                        <button className="btn">Buy now</button>
+                    <div className="btnsPrice-wrapper">
+                        <div className="priceDiscount-container">
+                            <span className="price">Category: {product.category} </span> <br />
+                            <span className="price">Price: {product.price}$</span> <br />
+                            <span className="discount">Discount: {product.discount}$</span><br />
+
+                            <span className="price">Total Price: {parseFloat((((product.price - product.discount)) * 100) / 100).toFixed(2)}$</span>
+                        </div>
+                        {
+                            user &&
+                            <div className="btns-container">
+                                <button className="btn" onClick={handleAdd2Cart}>
+                                    {isInCart ? 'Already in cart' : 'Add to cart'}
+                                </button>
+                                <button onClick={buyNow} className="btn">Buy now</button>
+                            </div>
+                        }
+
                     </div>
-                </div>
 
-            </section>
+                </section>
 
-            <div>
+                <section className="second-wrapper">
+                    <div className="description">
+                        <h2>Description</h2>
+                        {product.description}
+                    </div>
+                    <div className="how2use">
+                        <h2>How To Use</h2>
+                        {product.howToUse}
+                    </div>
+                    <div className="Ingredients">
+                        <h2>Ingredients</h2>
+                        {product.Ingredients}
+                    </div>
+                    <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>
+                        {
+                            user &&
+                            <Cart />
+                        }
 
-                <GiBarefoot size={50} />
-                <FaHandSparkles size={50} />
-                <IoBody size={50} />
-                <MdOutlineFaceRetouchingNatural size={50} />
-                <IoEyeSharp size={50} />
-            </div>
-
-
-            <section className="second-wrapper">
-                <div className="description">
-                    <h2>Description</h2>
-                    {product.description}
-                </div>
-                <div className="how2use">
-                    <h2>How To Use</h2>
-                    {product.howToUse}
-                </div>
-                <div className="Ingredients">
-                    <h2>Ingredients</h2>
-                    {product.Ingredients}
-                </div>
-                <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>
-                    {
-                        user &&
-                        <Cart />
-                    }
-
-                </div>
-            </section>
-        </main>
+                    </div>
+                </section>
+            </main>
         </>
     )
 }

@@ -33,9 +33,9 @@ export default function Checkout() {
     const [showAddressConfirmation, setShowAddressConfirmation] = useState(true);
 
     const [isCheck, setIsCheck] = useState(false);
-    console.log(isCheck)
+    const fullAddress = `${user?.houseNumber} ${user?.street}, ${user?.city}, ${user?.zip}`;
 
-    const fullAddress = `${user.houseNumber} ${user.street}, ${user.city}, ${user.zip}`;
+    console.log(productsInCart)
 
     useEffect(() => {
         // Check if the user object exists and has data
@@ -59,8 +59,6 @@ export default function Checkout() {
 
     const handlePayment = (ev) => {
         handleChange(ev, formPayment, setFormPayment, errors, setErrors, SchemaPayment, setIsFormPaymentValid);
-        console.log(formPayment)
-        console.log(formPayment)
     };
 
     const placeOrder = () => {
@@ -68,7 +66,6 @@ export default function Checkout() {
         setCurrentStep(currentStep => currentStep + 1);
         snackbar("Thank you for your purchase");
     }
-
     const handleSubmit = ev => {
         ev.preventDefault();
 
@@ -195,9 +192,7 @@ export default function Checkout() {
                                             onChange={handleCheckoutChange}
                                             value={formData[s.name]}
                                             InputLabelProps={{ shrink: true }}
-                                            inputProps={{
-                                                min: 0, // Minimum value for numeric input
-                                            }}
+                                            inputProps={{ min: 0 }}
                                             sx={sx}
                                         />
                                     </Grid>
