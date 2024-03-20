@@ -41,7 +41,7 @@ export default function Product() {
     useEffect(() => {
         const index = productsInCart.findIndex(p => p._id === product._id);
         setIsInCart(index !== -1);
-    }, [productsInCart])
+    }, [productsInCart, product])
 
 
     useEffect(() => {
