@@ -9,14 +9,58 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 export default function Review({ formPayment, setCurrentStep, }) {
-    const { user, productsInCart, snackbar, mode } = useContext(GeneralContext);
+    const { user, productsInCart, products, snackbar, mode } = useContext(GeneralContext);
 
     const fullAddress = `${user?.houseNumber} ${user?.street}, ${user?.city}, ${user?.zip}`;
-
+    console.log(productsInCart)
     const placeOrder = () => {
         // navigate('/');
-        setCurrentStep(currentStep => currentStep + 1);
-        snackbar("Thank you for your purchase");
+        const totalPrice = productsInCart
+            .map(p => (p.price - p.discount) * p.quantity)
+            .reduce((acc, curr) => acc + curr, 0)
+            .toFixed(2);
+
+        // Combine the product details with the cart items
+        const combinedProducts = productsInCart.map(cartItem => ({
+            productId: cartItem._id,
+            quantity: cartItem.quantity,
+            price: cartItem.price,
+            ...products.find(product => product._id === cartItem._id)
+        }));
+        console.log(combinedProducts)
+        // Construct the order object
+        const obj = {
+            user: user._id,
+            fullName: user.firstName + ' ' + user.lastName,
+            products: combinedProducts,
+            paymentDetails: {
+                nameOnCard: formPayment.nameOnCard,
+                cardLast4Digits: formPayment.cardNumber.slice(-4)
+            },
+            fullAddress: fullAddress,
+            totalPrice: parseFloat(totalPrice)
+        };
+        fetch(`http://localhost:5000/create/order`, {
+            credentials: 'include',
+            method: 'POST',
+            headers: { 'Content-type': 'application/json', 'Authorization': localStorage.token },
+            body: JSON.stringify(obj),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.error('Error updating user:', error);
+            });
+
+        // setCurrentStep(currentStep => currentStep + 1);
+        // snackbar("Thank you for your purchase");
     }
     return (
         <>
@@ -39,8 +83,10 @@ export default function Review({ formPayment, setCurrentStep, }) {
                         >
                             <ListItem>
                                 <ListItemText primary={p.title} />
+                                <ListItemText primary={p.price} />
+                                <ListItemText primary={p.discount} />
                                 <ListItemText primary={p.quantity} />
-                                <ListItemText primary={`Total Price: ${p.price * p.quantity}`} /> {/* Calculate total price */}
+                                <ListItemText primary={`Total Price: ${((p.price - p.discount) * p.quantity).toFixed(2)}`} />
                                 <ListItemIcon>
                                     <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
                                 </ListItemIcon>

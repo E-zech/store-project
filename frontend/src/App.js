@@ -133,6 +133,7 @@ function App() {
                 return res.json();
             })
             .then(data => {
+                console.log(data)
                 setProductsInCart(data);
             })
             .catch(error => {
@@ -158,7 +159,9 @@ function App() {
             .then(data => {
                 snackbar(`${title} added to cart successfully`);
                 console.log(data);
-                setProducts(existingProducts => [...existingProducts, ...data]);
+                setProducts(existingProducts =>
+                    existingProducts.map(product =>
+                        product._id === data._id ? { ...product } : product));
                 setProductsInCart(existingProducts => [...existingProducts, ...data]);
             })
             .catch(error => {

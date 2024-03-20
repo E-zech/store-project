@@ -11,6 +11,7 @@ import { initialDataStart } from './initial-data/initial-data.js';
 import logMiddleware from './middleware/logMiddleware.js';
 import dotenv from 'dotenv';
 import { getContent } from './configs/contentConfig.js';
+import orderRoutes from './routes/orderRoutes.js';
 //asdas
 // Environment setup
 const env = dotenv.config({ path: './prod.env' });
@@ -52,6 +53,7 @@ app.get('/', (req, res) => res.send(`Welcome 😊 \n Project NodeJs + MongoDb, 2
 userRoutes(app);
 productRoutes(app);
 cardRoutes(app);
+orderRoutes(app);
 
 // Server Listening
 app.listen(port, () => {
