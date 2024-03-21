@@ -11,6 +11,31 @@ import ListItemText from '@mui/material/ListItemText';
 export default function Review({ formPayment, setCurrentStep, }) {
     const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode } = useContext(GeneralContext);
 
+    const fullAddress = `${user?.houseNumber} ${user?.street}, ${user?.city}, ${user?.zip}`;
+
+
+
+    function removeOne(productId) {
+        fetch(`http://localhost:5000/cart/delete/${productId}`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    snackbar('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log(data.addToCart)
+                setProductsInCart(productsInCart.filter(p => p._id !== productId));
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
+    };
+
 
     function emptyCart() {
         fetch(`http://localhost:5000/cart/delete-all`, {
@@ -32,10 +57,6 @@ export default function Review({ formPayment, setCurrentStep, }) {
                 console.error('Error fetching cart items:', error);
             });
     }
-
-    const fullAddress = `${user?.houseNumber} ${user?.street}, ${user?.city}, ${user?.zip}`;
-    console.log(productsInCart);
-
 
     const placeOrder = () => {
         const totalPrice = productsInCart
@@ -87,8 +108,6 @@ export default function Review({ formPayment, setCurrentStep, }) {
         setCurrentStep(currentStep => currentStep + 1);
         snackbar("Thank you for your purchase");
     }
-    console.log(order)
-    console.log(productsInCart)
     return (
         <>
             <section
@@ -103,28 +122,51 @@ export default function Review({ formPayment, setCurrentStep, }) {
                             sx={{
                                 width: '80vw',
                                 display: 'flex',
-                                justifyContent: 'sapce-between',
+                                justifyContent: 'space-around',
                                 alignItems: 'center',
+                                backgroundColor: 'yellow',
+                                gap: '5px'
+                            }}>
 
-                            }}
-                        >
-                            <ListItem>
-                                <ListItemText primary={p.title} />
-                                <ListItemText primary={p.price} />
-                                <ListItemText primary={p.discount} />
-                                <ListItemText primary={p.quantity} />
-                                <ListItemText primary={`Total Price: ${((p.price - p.discount) * p.quantity).toFixed(2)}`} />
-                                <ListItemIcon>
-                                    <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
-                                </ListItemIcon>
-                            </ListItem>
+                            <Typography sx={{}}>
+                                {p.title}
+                            </Typography>
+                            <Typography sx={{}}>
+                                {p.price}
+                            </Typography>
+                            <Typography sx={{}}>
+                                {p.discount}
+                            </Typography>
+                            <Typography sx={{}}>
+                                {p.quantity}
+                            </Typography>
+                            <Typography sx={{}}>
+                                {`Total Price: ${((p.price - p.discount) * p.quantity).toFixed(2)}`}
+                            </Typography>
+                            <Typography sx={{}}>
+                                <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
+                            </Typography>
+                            <Typography
+                                onClick={() => removeOne(p._id)}
+                                sx={{
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease-in-out', // Added a comma here
+                                    '&:hover': {
+                                        transform: 'scale(1.2)'
+                                    }
+                                }}>
+                                ❌
+                            </Typography>
                         </Box>
                     ))}
 
                     <hr className='hr' />
 
                     <Box //address part
-                        sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', }}>
+                        sx={{
+                            width: '80vw',
+                            display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', backgroundColor: "green"
+                        }}>
                         <Typography sx={{ fontWeight: 'bold' }}>Address Details: </Typography>
                         <Box >
                             <Typography > {user.firstName + ' ' + user.lastName} </Typography>
@@ -134,7 +176,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
 
                     <hr className='hr' />
                     <Box //payment part
-                        sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', }}>
+                        sx={{ width: '80vw', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', backgroundColor: "blue" }}>
                         <Typography sx={{ fontWeight: 'bold' }}>Payment Details: </Typography>
                         <Box >
                             <Typography>Name On Card: {formPayment.nameOnCard}</Typography>
