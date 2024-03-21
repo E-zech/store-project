@@ -9,12 +9,35 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 export default function Review({ formPayment, setCurrentStep, }) {
-    const { user, productsInCart, products, snackbar, mode } = useContext(GeneralContext);
+    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode } = useContext(GeneralContext);
+
+
+    function emptyCart() {
+        fetch(`http://localhost:5000/cart/delete-all`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    snackbar('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log(data.addToCart)
+                setProductsInCart([]);
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
+    }
 
     const fullAddress = `${user?.houseNumber} ${user?.street}, ${user?.city}, ${user?.zip}`;
-    console.log(productsInCart)
+    console.log(productsInCart);
+
+
     const placeOrder = () => {
-        // navigate('/');
         const totalPrice = productsInCart
             .map(p => (p.price - p.discount) * p.quantity)
             .reduce((acc, curr) => acc + curr, 0)
@@ -53,15 +76,19 @@ export default function Review({ formPayment, setCurrentStep, }) {
                 return response.json();
             })
             .then(data => {
-                console.log(data)
+                console.log(data);
+                setOrder(data);
+                emptyCart();
             })
             .catch(error => {
                 console.error('Error updating user:', error);
             });
 
-        // setCurrentStep(currentStep => currentStep + 1);
-        // snackbar("Thank you for your purchase");
+        setCurrentStep(currentStep => currentStep + 1);
+        snackbar("Thank you for your purchase");
     }
+    console.log(order)
+    console.log(productsInCart)
     return (
         <>
             <section

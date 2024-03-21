@@ -50,7 +50,7 @@ export default function ProductMangement() {
                         }
                         <Button
                             variant="contained"
-                            onClick={() => navigate(`/product/add-edit`)}
+                            onClick={() => { navigate(`/product/add-edit`) }}
                             sx={{
                                 minWidth: 0,
                                 width: '50px', // Set the width to the same value as the height

@@ -15,6 +15,6 @@ export const pages = [
     { route: '/user-management', title: 'CRM', permissions: [RoleTypes.admin, RoleTypes.master] }];
 
 export const disable = [
-    '/user-management', '/about', '/login', '/signup', '/account', '/checkout',
+    '/user-management', '/about', '/login', '/signup', '/account', '/checkout', '/my-orders'
 ];
 

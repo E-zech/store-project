@@ -74,9 +74,10 @@ export default function Cart() {
     };
 
     const toggleDrawer = () => {
+        if (isOpen) {
+            saveChanges();
+        }
         setIsOpen(!isOpen);
-        saveChanges();
-
     };
 
     const removeFromCart = (productId) => {
@@ -103,7 +104,7 @@ export default function Cart() {
     };
 
     const removeAllFromCart = () => {
-        if (window.confirm("Are you sure you want to delete this product?")) {
+        if (window.confirm("Are you sure you want to remove all Products ?")) {
             fetch(`http://localhost:5000/cart/delete-all`, {
                 method: 'DELETE',
                 credentials: 'include',

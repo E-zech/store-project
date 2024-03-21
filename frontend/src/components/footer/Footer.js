@@ -55,18 +55,18 @@ export default function Footer() {
               setValue(newValue);
             }}>
 
-            <BottomNavigationAction label="About" icon={<InfoIcon />} onClick={() => navigate('/about')}
+            <BottomNavigationAction label="About" icon={<InfoIcon />} onClick={() => { navigate('/about') }}
               sx={path === '/about' ? activeColor : {}} />
 
             {user &&
-              <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} onClick={() => navigate('/faves')} sx={path === '/faves' ? activeColor : {}} />
+              <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} onClick={() => { navigate('/faves') }} sx={path === '/faves' ? activeColor : {}} />
             }
 
             {(userRoleType === RoleTypes.admin || userRoleType === RoleTypes.master) &&
-              <BottomNavigationAction label="PRM" icon={<LocalMallIcon />} onClick={() => navigate('/product-management')} sx={path === '/product-management' ? activeColor : {}} />
+              <BottomNavigationAction label="PRM" icon={<LocalMallIcon />} onClick={() => { navigate('/product-management') }} sx={path === '/product-management' ? activeColor : {}} />
             }
             {(userRoleType === RoleTypes.admin || userRoleType === RoleTypes.master) &&
-              <BottomNavigationAction label="CRM" icon={<AccountCircleIcon />} onClick={() => navigate('/user-management')} sx={path === '/user-management' ? activeColor : {}} />
+              <BottomNavigationAction label="CRM" icon={<AccountCircleIcon />} onClick={() => { navigate('/user-management') }} sx={path === '/user-management' ? activeColor : {}} />
             }
 
           </BottomNavigation>

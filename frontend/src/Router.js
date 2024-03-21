@@ -10,6 +10,7 @@ import ProductMangement from './pages/product managment (PRM)/ProductMangement';
 import AddOrEditProduct from './pages/add or edit product/AddOrEditProduct';
 import Product from './pages/product/Product';
 import Checkout from './pages/checkout/Checkout';
+import Order from './pages/order/Order';
 
 export default function Router() {
     return (
@@ -25,6 +26,7 @@ export default function Router() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/my-orders" element={<Order />} />
         </Routes>
     )
 }

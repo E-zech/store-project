@@ -83,7 +83,7 @@ export default function Navbar() {
                             variant="h6"
                             noWrap
                             component="a"
-                            onClick={() => navigate('/')}
+                            onClick={() => { navigate('/') }}
                             sx={homeIconStyle}>
                             <HomeIcon />
                         </Typography>
@@ -210,9 +210,13 @@ export default function Navbar() {
                                         color: mode === 'dark' ? white : gray,
                                     }}>
                                         <MenuItem onClick={handleCloseUserMenu}>
-                                            <Typography align="center">{user.firstName || 'Account'}</Typography>
+                                            <Typography align="center">My Account</Typography>
                                         </MenuItem>
                                     </Link>
+
+                                    <MenuItem onClick={() => { navigate('/my-orders') }}>
+                                        <Typography textAlign="center">My Orders</Typography>
+                                    </MenuItem>
 
                                     <MenuItem onClick={logout}>
                                         <Typography textAlign="center">Logout</Typography>

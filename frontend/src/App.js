@@ -20,11 +20,12 @@ function App() {
     const [snackbarText, setSnackbarText] = useState('');
     const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
     const [mode, setMode] = useState('light');
-    const [filteredProducts, setFilteredProducts] = useState([]);// not using anymore i hope
+    const [filteredProducts, setFilteredProducts] = useState([]);// not using anymore i hope MAYBE DELTE
     const [products, setProducts] = useState([]);
     const [initialProducts, setInitialProducts] = useState([]);
     const [favProducts, setFavProducts] = useState([]);
     const [productsInCart, setProductsInCart] = useState([]);
+    const [order, setOrder] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
 
     console.log(products)
@@ -118,7 +119,7 @@ function App() {
                 // setFilteredProducts(data);
                 console.log(data)
             })
-    }, [path]);
+    }, []); // i change from [path] might cause isssuise!!!!!!!!!!!!!!!
 
     useEffect(() => {
         fetch("http://localhost:5000/cart", {
@@ -179,7 +180,8 @@ function App() {
                 filteredProducts, setFilteredProducts,
                 loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory,
                 favProducts, setFavProducts, add2Cart,
-                initialProducts, setInitialProducts
+                initialProducts, setInitialProducts,
+                order, setOrder
             }}>
 
                 <Navbar />

@@ -177,7 +177,7 @@ export default function Login() {
 
                             <Button
                                 sx={{ color: mode === 'dark' ? 'white' : 'black' }}
-                                onClick={() => navigate('/signup')}>
+                                onClick={() => { navigate('/signup') }}>
                                 Already have an account? Sign In
                             </Button>
 

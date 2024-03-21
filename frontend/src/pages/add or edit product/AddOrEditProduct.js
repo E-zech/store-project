@@ -224,7 +224,7 @@ export default function AddOrEditProduct() {
                                                 backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
                                             }
                                         }}
-                                            onClick={() => navigate('/product-management')}
+                                            onClick={() => { navigate('/product-management') }}
                                             disabled={isFormValid}
                                         >
                                             Back to management

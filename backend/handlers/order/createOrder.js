@@ -35,6 +35,15 @@ const createOrder = app => {
             });
 
             await order.save();
+
+            for (const productItem of products) {
+                const product = await Product.findById(productItem.productId);
+                if (product) {
+                    product.totalQuantity -= productItem.quantity; // Decrease totalQuantity
+                    await product.save(); // Save the updated product
+                }
+            }
+
             res.send(order);
         } catch (err) {
             console.error(err);

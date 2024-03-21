@@ -119,7 +119,7 @@ export default function ProductComponent({ product }) {
             component="img"
             image={product.imgUrl}
             alt={product.imgAlt}
-            onClick={() => navigate(`/product/${product._id}`)} />
+            onClick={() => { navigate(`/product/${product._id}`) }} />
 
           <CardContent sx={cardContentStyle}>
             <Box>
@@ -219,7 +219,7 @@ export default function ProductComponent({ product }) {
                         backgroundColor: 'white',
                       },
                     }}
-                    onClick={() => navigate(`/product/add-edit/${product._id}`)}><EditIcon />
+                    onClick={() => { navigate(`/product/add-edit/${product._id}`) }}><EditIcon />
                   </IconButton>
 
                   <IconButton aria-label="Delete"

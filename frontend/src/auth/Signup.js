@@ -120,7 +120,7 @@ export default function Signup() {
               <Grid item>
                 <Button
                   sx={{ color: mode === 'dark' ? 'white' : 'black' }}
-                  onClick={() => navigate('/login')}>
+                  onClick={() => { navigate('/login') }}>
                   Already have an account? Sign In
                 </Button>
 
