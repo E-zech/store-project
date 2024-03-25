@@ -142,7 +142,7 @@ export const products = [
     ////old ☝🏽
 
     {
-        "title": "Anti-Aging Face Serum",
+        "title": "Anti-Aging Serum",
         "description": "Rejuvenate your skin with our powerful anti-aging serum. Formulated with advanced ingredients to reduce fine lines and wrinkles, leaving your skin looking youthful and radiant.",
         "howToUse": "Apply a small amount to cleansed skin before moisturizer. Gently massage in circular motions until fully absorbed.",
         "Ingredients": "Hyaluronic Acid, Retinol, Vitamin C, Peptides, Collagen",
@@ -156,7 +156,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Hydrating Eye Cream",
+        "title": "Hydrating Cream",
         "description": "Revitalize tired eyes with our hydrating eye cream. Infused with nourishing ingredients to reduce puffiness and dark circles, revealing brighter and more refreshed eyes.",
         "howToUse": "Gently dab a small amount around the eye area using your ring finger. Use morning and night for best results.",
         "Ingredients": "Caffeine, Hyaluronic Acid, Vitamin E, Green Tea Extract, Peptides",
@@ -170,7 +170,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Moisturizing Body Lotion",
+        "title": "Moisturizing Lotion",
         "description": "Nourish and hydrate your skin with our luxurious body lotion. Enriched with shea butter and essential oils, it absorbs quickly for soft and smooth skin all day long.",
         "howToUse": "Apply liberally to clean, dry skin and massage until fully absorbed. Use daily for best results.",
         "Ingredients": "Shea Butter, Coconut Oil, Jojoba Oil, Vitamin E, Lavender Extract",
@@ -184,7 +184,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Nourishing Hand Cream",
+        "title": "Nourishing Cream",
         "description": "Protect and soften your hands with our nourishing hand cream. Infused with natural oils and vitamins, it absorbs quickly without leaving a greasy residue.",
         "howToUse": "Apply a small amount to hands and massage until fully absorbed. Reapply as needed throughout the day.",
         "Ingredients": "Argan Oil, Shea Butter, Vitamin E, Almond Oil, Aloe Vera",
@@ -212,7 +212,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Gentle Facial Cleanser",
+        "title": "Gentle Cleanser",
         "description": "Cleanse your skin gently with our mild facial cleanser. Formulated with soothing ingredients, it removes impurities without stripping the skin's natural moisture barrier.",
         "howToUse": "Apply a small amount to damp skin and massage in circular motions. Rinse thoroughly with warm water. Use morning and night for best results.",
         "Ingredients": "Aloe Vera, Chamomile Extract, Glycerin, Coconut Oil, Green Tea Extract",
@@ -226,7 +226,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Brightening Eye Cream",
+        "title": "Brightening Cream",
         "description": "Brighten and illuminate your eye area with our specialized eye cream. Infused with brightening agents, it reduces the appearance of dark circles and puffiness for a refreshed look.",
         "howToUse": "Apply a pea-sized amount around the eye area using gentle tapping motions. Use morning and night for best results.",
         "Ingredients": "Vitamin C, Kojic Acid, Licorice Extract, Caffeine, Hyaluronic Acid",
@@ -240,7 +240,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Exfoliating Body Scrub",
+        "title": "Exfoliating Scrub",
         "description": "Achieve smoother and softer skin with our exfoliating body scrub. Enriched with natural exfoliants, it buffs away dead skin cells to reveal a radiant complexion.",
         "howToUse": "Massage onto damp skin in circular motions. Rinse thoroughly with warm water. Use 2-3 times a week for best results.",
         "Ingredients": "Brown Sugar, Coconut Oil, Shea Butter, Vitamin E, Peppermint Oil",
@@ -254,7 +254,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Moisturizing Hand Mask",
+        "title": "Moisturizing Mask",
         "description": "Treat your hands to a spa-like experience with our moisturizing hand mask. Infused with hydrating ingredients, it replenishes dry and rough hands for a soft and supple feel.",
         "howToUse": "Apply the gloves to clean hands and leave on for 15-20 minutes. Massage in any excess serum until fully absorbed. Use once a week for best results.",
         "Ingredients": "Shea Butter, Jojoba Oil, Vitamin E, Honey Extract, Collagen",
@@ -268,7 +268,7 @@ export const products = [
         "createdAt": Date.now()
     },
     {
-        "title": "Refreshing Foot Spray",
+        "title": "Refreshing Spray",
         "description": "Revitalize tired and achy feet with our refreshing foot spray. Infused with cooling agents, it provides instant relief and leaves your feet feeling cool and refreshed.",
         "howToUse": "Spray onto clean, dry feet as needed. Focus on areas of discomfort or odor. Use throughout the day for a quick pick-me-up.",
         "Ingredients": "Menthol, Peppermint Oil, Tea Tree Oil, Eucalyptus Extract, Witch Hazel",

@@ -12,11 +12,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Review({ formPayment, setCurrentStep, }) {
-    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode } = useContext(GeneralContext);
+    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode, setLoader } = useContext(GeneralContext);
 
     const navigate = useNavigate();
 
-    const fullAddress = `${user?.houseNumber} ${user?.street} Street, ${user?.city}`;
+    const fullAddress = `${user?.houseNumber} ${user?.street} St, ${user?.city}`;
 
 
 
@@ -64,6 +64,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
     }
 
     const placeOrder = () => {
+        setLoader(true)
         const totalPrice = productsInCart
             .map(p => (p.price - p.discount) * p.quantity)
             .reduce((acc, curr) => acc + curr, 0)
@@ -108,7 +109,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
             })
             .catch(error => {
                 console.error('Error updating user:', error);
-            });
+            }).finally(() => setLoader(false))
 
         setCurrentStep(currentStep => currentStep + 1);
         snackbar("Thank you for your purchase");
@@ -128,7 +129,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                 <div style={{ textAlign: 'center' }}>Quantity</div>
                                 <div style={{ textAlign: 'center' }}>Price</div>
                                 <div style={{ textAlign: 'center' }}>Discount</div>
-                                <div style={{ textAlign: 'center' }}>Total Price</div>
+                                <div style={{ textAlign: 'center' }}>Total </div>
                                 <div style={{ textAlign: 'center' }}>Remove</div>
                             </div>
 

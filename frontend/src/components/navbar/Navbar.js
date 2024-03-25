@@ -77,7 +77,7 @@ export default function Navbar() {
                 backgroundColor: mode === 'dark' ? black : mainColor,
                 color: mode === 'dark' ? white : gray,
             }}>
-                <Container sx={{ maxWidth: "xl", color: mode === 'dark' ? white : gray, }}>
+                <Container sx={{ maxWidth: "2400px !important", color: mode === 'dark' ? white : gray, }}>
                     <Toolbar disableGutters>
                         <Typography
                             variant="h6"

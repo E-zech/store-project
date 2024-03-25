@@ -13,10 +13,10 @@ export const inputsForProducts = [
 ];
 
 export const schema = Joi.object({
-    title: Joi.string().min(2).max(30).required(),
-    description: Joi.string().min(10).max(900).required(),
-    howToUse: Joi.string().min(10).max(900).required(),
-    Ingredients: Joi.string().min(10).max(900).required(),
+    title: Joi.string().min(2).max(19).trim().required(),
+    description: Joi.string().min(10).max(900).trim().required(),
+    howToUse: Joi.string().min(10).max(900).trim().required(),
+    Ingredients: Joi.string().min(10).max(900).trim().required(),
     price: Joi.number().required(),
     discount: Joi.number(),
     imgUrl: Joi.string().uri().required(),
