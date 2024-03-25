@@ -132,8 +132,7 @@ export default function Cart() {
                 sx={{ width: 500 }}
                 role="presentation"
                 onClick={(e) => e.stopPropagation()}
-                onKeyDown={toggleDrawer}
-            >
+                onKeyDown={toggleDrawer}>
 
                 <List // the wrapper div of the items
                     sx={listStyle}>
@@ -149,7 +148,6 @@ export default function Cart() {
                                         <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '70px', height: '70px', borderRadius: '15px' }} />
                                     </ListItemIcon>
                                     <ListItemText primary={<span style={{ fontSize: '17px', fontWeight: 'bold' }}>{p.title}</span>} sx={{ minWidth: '0px', maxWidth: '120px', color: 'black' }} />
-
                                 </Box>
 
                                 <Box sx={counterWrapper}>
@@ -170,7 +168,6 @@ export default function Cart() {
                                         sx={{ textAlign: 'center', }}
                                     />
 
-
                                     <Button sx={{
                                         justifyContent: 'center', minWidth: '0px',
                                         borderRadius: '25%', color: 'black', "&:hover": {
@@ -180,8 +177,6 @@ export default function Cart() {
                                         <RemoveShoppingCartIcon />
                                     </Button>
                                 </Box>
-
-
                             </ListItem>
                         </Box>
                     ))}

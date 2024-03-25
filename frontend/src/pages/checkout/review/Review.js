@@ -6,12 +6,17 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import './review.css';
+import { mainColor } from '../../../css/Main.style';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Review({ formPayment, setCurrentStep, }) {
     const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode } = useContext(GeneralContext);
 
-    const fullAddress = `${user?.houseNumber} ${user?.street}, ${user?.city}, ${user?.zip}`;
+    const navigate = useNavigate();
+
+    const fullAddress = `${user?.houseNumber} ${user?.street} Street, ${user?.city}`;
 
 
 
@@ -110,113 +115,90 @@ export default function Review({ formPayment, setCurrentStep, }) {
     }
     return (
         <>
-            <section
-                style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
-                <h1 className='sec-title'>review</h1>
+            {
+                productsInCart.length !== 0 ? (
+                    <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
+                        <h1 className='sec-title'>Review</h1>
 
-                <section style={{ width: '80vw', backgroundColor: '#80808040', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    {productsInCart.map((p) => ( // products part
-                        <Box
-                            onClick={(e) => e.stopPropagation()}
-                            key={p._id}
+                        <section style={{ width: '90vw', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center' }}>
+                            {/* Products Header */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px', borderRadius: '17px 17px 0 0' }}>
+                                <div style={{ textAlign: 'center' }}>Image</div>
+                                <div style={{ textAlign: 'center' }}>Title</div>
+                                <div style={{ textAlign: 'center' }}>Quantity</div>
+                                <div style={{ textAlign: 'center' }}>Price</div>
+                                <div style={{ textAlign: 'center' }}>Discount</div>
+                                <div style={{ textAlign: 'center' }}>Total Price</div>
+                                <div style={{ textAlign: 'center' }}>Remove</div>
+                            </div>
+
+                            {/* Products */}
+                            {productsInCart.map((p) => (
+                                <div onClick={(e) => e.stopPropagation()} key={p._id} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px 0' }}>
+                                    <div className='reviewImgWrapper' style={{ textAlign: 'center' }}>
+                                        <img src={p.imgUrl} alt={p.imgAlt} style={{ display: 'block', width: '70px', height: '70px', margin: 'auto', borderRadius: '15px' }} />
+                                    </div>
+                                    <div className='revieTitle' style={{ textAlign: 'center' }}>{p.title}</div>
+                                    <div className='reviewQTY' style={{ textAlign: 'center' }}>{p.quantity}</div>
+                                    <div className='reviePrice' style={{ textAlign: 'center' }}>{p.price} $</div>
+                                    <div className='revieDiscount' style={{ textAlign: 'center' }}>{p.discount} $</div>
+                                    <div className='reviewTotal' style={{ textAlign: 'center' }}>{((p.price - p.discount) * p.quantity).toFixed(2)} $</div>
+                                    <div onClick={() => removeOne(p._id)} style={{ textAlign: 'center', cursor: 'pointer', transition: 'all 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}>❌</div>
+                                </div>
+                            ))}
+
+                            <div style={{ width: '90vw', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
+                                {/* Address part */}
+                                <section style={{ width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, textAlign: 'left', padding: '20px 0 20px 20px', borderBottomLeftRadius: '17px' }}>
+                                        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Address Details</div>
+                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Full Name:</span> {user.firstName + ' ' + user.lastName}</div>
+                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Address:</span> {fullAddress}</div>
+                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {user.zip}</div>
+                                    </div>
+                                </section>
+
+                                {/* Payment part */}
+                                <section style={{ width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, textAlign: 'left', padding: '20px 0 20px 20px', borderBottomRightRadius: '17px' }}>
+                                        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Payment Details</div>
+                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Name On Card:</span> {formPayment.nameOnCard}</div>
+                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Last 4 Digits (Card):</span> {formPayment.cardNumber.slice(-4)}</div>
+                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Expiry Date:</span> {formPayment.expiryDate}</div>
+                                    </div>
+                                </section>
+                            </div>
+                        </section>
+
+                        <Grid item xs={12} sm={12}>
+                            <Button onClick={placeOrder} fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>Place Order</Button>
+                            <Button type="submit" fullWidth variant="contained" onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))} sx={{ mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>Back</Button>
+                        </Grid>
+                    </section>
+                ) : (
+                    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '5px' }}>
+                        <Typography sx={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>You dont have Product In Cart</Typography>
+                        <Button
+                            onClick={() => navigate('/')}
+                            fullWidth
+                            variant="contained"
                             sx={{
-                                width: '80vw',
-                                display: 'flex',
-                                justifyContent: 'space-around',
-                                alignItems: 'center',
-                                backgroundColor: 'yellow',
-                                gap: '5px'
+                                mt: 3,
+                                width: '20vw', // Set width to 20vw
+                                backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                                color: 'white',
+                                '&:hover': {
+                                    backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+                                }
                             }}>
-
-                            <Typography sx={{}}>
-                                {p.title}
-                            </Typography>
-                            <Typography sx={{}}>
-                                {p.price}
-                            </Typography>
-                            <Typography sx={{}}>
-                                {p.discount}
-                            </Typography>
-                            <Typography sx={{}}>
-                                {p.quantity}
-                            </Typography>
-                            <Typography sx={{}}>
-                                {`Total Price: ${((p.price - p.discount) * p.quantity).toFixed(2)}`}
-                            </Typography>
-                            <Typography sx={{}}>
-                                <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '50px', height: '50px' }} />
-                            </Typography>
-                            <Typography
-                                onClick={() => removeOne(p._id)}
-                                sx={{
-                                    cursor: 'pointer',
-                                    transition: 'all 0.3s ease-in-out', // Added a comma here
-                                    '&:hover': {
-                                        transform: 'scale(1.2)'
-                                    }
-                                }}>
-                                ❌
-                            </Typography>
-                        </Box>
-                    ))}
-
-                    <hr className='hr' />
-
-                    <Box //address part
-                        sx={{
-                            width: '80vw',
-                            display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', backgroundColor: "green"
-                        }}>
-                        <Typography sx={{ fontWeight: 'bold' }}>Address Details: </Typography>
-                        <Box >
-                            <Typography > {user.firstName + ' ' + user.lastName} </Typography>
-                            <Typography>{fullAddress}</Typography>
-                        </Box>
+                            Back To Home Page
+                        </Button>
                     </Box>
 
-                    <hr className='hr' />
-                    <Box //payment part
-                        sx={{ width: '80vw', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1rem', color: 'black', backgroundColor: "blue" }}>
-                        <Typography sx={{ fontWeight: 'bold' }}>Payment Details: </Typography>
-                        <Box >
-                            <Typography>Name On Card: {formPayment.nameOnCard}</Typography>
-                            <Typography>Card Number:XXXX-XXXX-XXXX-{formPayment.cardNumber.slice(-4)}</Typography>
-                            <Typography>
-                                Expiry Date: {formPayment.expiryDate}
-                            </Typography>
-                        </Box>
-                    </Box>
-                </section>
+                )
+            }
 
-                <Grid item xs={12} sm={12}>
-                    <Button
-                        onClick={placeOrder}
-                        fullWidth
-                        variant="contained"
-                        sx={{
-                            mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
-                            '&:hover': {
-                                backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                            }
-                        }}>
-                        Place Order
-                    </Button>
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))}
-                        sx={{
-                            mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
-                            '&:hover': {
-                                backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                            }
-                        }}>
-                        Back
-                    </Button>
-                </Grid>
-            </section >
         </>
     );
 }
