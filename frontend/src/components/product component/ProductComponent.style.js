@@ -45,8 +45,9 @@ export const discountBtnStyle = {
 export const cartMediaStyle = {
     position: 'relative',
     height: '194px',
+    borderRadius: '15px',
     transition: "all 0.2s ease-in-out",
-    "&:hover": { cursor: "pointer", transform: "scale(1.02)" }
+    "&:hover": { cursor: "pointer", transform: "scale(1.02)", borderRadius: '0px' }
 };
 
 export const cardContentStyle = {

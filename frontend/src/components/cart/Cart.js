@@ -16,7 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { listStyle, boxStyle, counterWrapper, counterBtn, footerBtnWrapper, colorLight, colorDark, boxShadowLight, boxShadowDark, hoverBoxShadowLight, hoverBoxShadowDark } from './Cart.style'
+import { listStyle, bigBoxStyle, smallBoxStyle, counterWrapper, counterBtn, footerBtnWrapper, colorLight, colorDark, boxShadowLight, boxShadowDark, hoverBoxShadowLight, hoverBoxShadowDark, imgTitleWrapper, totalWrapper } from './Cart.style'
 import { mainColor, white } from '../../css/Main.style';
 
 export default function Cart() {
@@ -127,84 +127,115 @@ export default function Cart() {
     };
 
     const list = () => (
-        <Box // the big div 
-            sx={{ width: 500 }}
-            role="presentation"
-            onClick={(e) => e.stopPropagation()}
-            onKeyDown={toggleDrawer}
-        >
-            <List // the wrapper div of the items
-                sx={listStyle}>
-                {productsInCart.map((p, index) => (
-                    <Box
-                        onClick={(e) => e.stopPropagation()}
-                        key={index}
-                        sx={boxStyle}>
-
-                        <ListItem>
-                            <Box sx={boxStyle}>
-                                <ListItemIcon>
-                                    <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '60px', height: '60px', borderRadius: '15px' }} />
-                                </ListItemIcon>
-                                <ListItemText primary={p.title} />
-                            </Box>
-
-                            <Box sx={counterWrapper}>
-                                <IconButton aria-label="Add quantity" onClick={() => incrementQuantity(p._id, p.price)} sx={counterBtn}>
-                                    <AddIcon />
-                                </IconButton>
-                                <span>{p.quantity}</span>
-                                <IconButton aria-label="Decrease quantity" onClick={() => decrementQuantity(p._id, p.price)}
-                                    sx={counterBtn}>
-
-                                    <RemoveIcon />
-                                </IconButton>
-                            </Box>
-
-                            <Box sx={boxStyle}>
-                                <ListItemText primary={`Total: ${parseFloat((((p.price - p.discount) * p.quantity) * 100) / 100).toFixed(2)}`} />
-
-                                <ListItemButton onClick={() => removeFromCart(p._id)}>
-                                    <RemoveShoppingCartIcon />
-                                </ListItemButton>
-                            </Box>
-
-
-                        </ListItem>
-                    </Box>
-                ))}
-
-            </List>
-
-            <Box sx={footerBtnWrapper}
+        productsInCart.length !== 0 ? (
+            <Box // the big div 
+                sx={{ width: 500 }}
+                role="presentation"
                 onClick={(e) => e.stopPropagation()}
+                onKeyDown={toggleDrawer}
             >
-                <Box sx={{ width: '350px' }}>
-                    <Button onClick={() => {
-                        if (productsInCart.length === 0) {
-                            snackbar("You don't have products in cart");
-                        } else {
-                            navigate('/checkout');
-                        }
-                    }}>Go To Checkout</Button>
-                </Box>
 
-                <Box sx={{ width: '150px', backgroundColor: 'blue' }}>
-                    <Button onClick={() => {
-                        if (productsInCart.length === 0) {
-                            snackbar("You don't have products in cart");
-                        } else {
-                            removeAllFromCart();
-                        }
-                    }}><DeleteIcon /></Button>
+                <List // the wrapper div of the items
+                    sx={listStyle}>
+                    {productsInCart.map((p, index) => (
+                        <Box
+                            onClick={(e) => e.stopPropagation()}
+                            key={index}
+                            sx={bigBoxStyle}>
+
+                            <ListItem sx={{ width: '100%', padding: '0px', justifyContent: 'center' }}>
+                                <Box sx={imgTitleWrapper}>
+                                    <ListItemIcon >
+                                        <img src={p.imgUrl} alt={p.imgAlt} style={{ width: '70px', height: '70px', borderRadius: '15px' }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary={<span style={{ fontSize: '17px', fontWeight: 'bold' }}>{p.title}</span>} sx={{ minWidth: '0px', maxWidth: '120px', color: 'black' }} />
+
+                                </Box>
+
+                                <Box sx={counterWrapper}>
+                                    <IconButton aria-label="Add quantity" onClick={() => incrementQuantity(p._id, p.price)} sx={counterBtn}>
+                                        <AddIcon />
+                                    </IconButton>
+                                    <span style={{ fontWeight: 'bold', fontSize: '17px' }}>{p.quantity}</span>
+                                    <IconButton aria-label="Decrease quantity" onClick={() => decrementQuantity(p._id, p.price)}
+                                        sx={counterBtn}>
+
+                                        <RemoveIcon />
+                                    </IconButton>
+                                </Box>
+
+                                <Box sx={totalWrapper}>
+                                    <ListItemText
+                                        primary={<span style={{ fontWeight: 'bold' }}>Total: {parseFloat((((p.price - p.discount) * p.quantity) * 100) / 100).toFixed(2)}</span>}
+                                        sx={{ textAlign: 'center', }}
+                                    />
+
+
+                                    <Button sx={{
+                                        justifyContent: 'center', minWidth: '0px',
+                                        borderRadius: '25%', color: 'black', "&:hover": {
+                                            backgroundColor: 'white'
+                                        }
+                                    }} onClick={() => removeFromCart(p._id)}>
+                                        <RemoveShoppingCartIcon />
+                                    </Button>
+                                </Box>
+
+
+                            </ListItem>
+                        </Box>
+                    ))}
+
+                </List>
+
+                <Box sx={footerBtnWrapper}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <Box sx={{ width: '350px' }}>
+                        <Button onClick={() => {
+                            if (productsInCart.length === 0) {
+                                snackbar("You don't have products in cart");
+                            } else {
+                                navigate('/checkout');
+                            }
+                        }}
+                            sx={{
+                                color: 'black', "&:hover": {
+                                    color: 'white'
+                                }
+                            }}
+                        >Go To Checkout</Button>
+                    </Box>
+
+                    <Box sx={{ width: '150px', backgroundColor: '#ff7f7f', }}>
+                        <Button onClick={() => {
+                            if (productsInCart.length === 0) {
+                                snackbar("You don't have products in cart");
+                            } else {
+                                removeAllFromCart();
+                            }
+                        }}
+                            sx={{
+                                color: 'black', "&:hover": {
+                                    color: 'white'
+                                }
+                            }}
+                        ><DeleteIcon /></Button>
+                    </Box>
                 </Box>
             </Box>
-        </Box>
+        ) : (
+            <Box sx={{ width: 500, textAlign: 'center', marginTop: '20px' }}>
+                <Typography variant="body1">You don't have any products in your cart.</Typography>
+            </Box>
+        )
     );
+
 
 
     return (
         <>
+
             <div>
                 <Box onClick={toggleDrawer} sx={{ '& > :not(style)': { m: 2 } }}>
                     <Fab
