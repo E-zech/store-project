@@ -119,7 +119,7 @@ function App() {
                 // setFilteredProducts(data);
                 console.log(data)
             })
-    }, []); // i change from [path] might cause isssuise!!!!!!!!!!!!!!!
+    }, [order]); // i change from [path] might cause isssuise!!!!!!!!!!!!!!!
 
     useEffect(() => {
         fetch("http://localhost:5000/cart", {
