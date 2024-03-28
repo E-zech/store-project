@@ -64,3 +64,33 @@ Route: /cart
 Status Code: 401
 Error:  Unauthorized
 
+Time: 2024-03-28T11:08:23.394Z
+Method: GET
+Route: /users/65fc0337175cfa38861f0bfe
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-28T11:08:23.413Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-28T11:08:23.603Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-28T11:08:29.430Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-03-28T11:08:36.030Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

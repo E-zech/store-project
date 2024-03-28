@@ -10,11 +10,12 @@ import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } fr
 import { useNavigate } from 'react-router-dom';
 import Slider from '../../components/slider/Slider';
 import { mainColor } from '../../css/Main.style';
+import Loader from '../../components/loader/Loader';
 
 
 
 export default function AllProducts() { // ALL Products Page basically
-    const { user, products, setProducts, loader, selectedCategory, } = useContext(GeneralContext);
+    const { user, products, setProducts, loader, selectedCategory, setLoader } = useContext(GeneralContext);
     const navigate = useNavigate();
 
     const displayLow2high = () => {
@@ -43,7 +44,6 @@ export default function AllProducts() { // ALL Products Page basically
                 <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                     <h1 className="homePage-title">Skin Care Store</h1>
                 </header>
-
                 <section style={{
                     width: '97vw',
                     display: 'flex',
@@ -77,7 +77,7 @@ export default function AllProducts() { // ALL Products Page basically
 
                 <section >
                     {loader ? (
-                        <h1>Loading...</h1>
+                        <Loader />
                     ) : (
                         <>
                             <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>

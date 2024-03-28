@@ -4,6 +4,7 @@ import ProductComponent from '../../components/product component/ProductComponen
 import ResultNotFound from '../ResultNotFound';
 import Cart from '../../components/cart/Cart';
 import '../../css/grid.css';
+import Loader from '../../components/loader/Loader';
 
 export default function FavProducts() {
 
@@ -57,7 +58,7 @@ export default function FavProducts() {
 
             <section className="container-cards" style={{ marginBottom: '100px' }}>
                 {loader ? (
-                    <h1>Loading...</h1>
+                    <Loader />
                 ) : (
                     <div className="grid-cards">
                         {products

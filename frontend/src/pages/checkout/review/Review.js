@@ -15,28 +15,29 @@ export default function Review({ formPayment, setCurrentStep, }) {
     const fullAddress = `${user?.houseNumber} ${user?.street} St, ${user?.city}`;
 
 
-
     function removeOne(productId) {
-        fetch(`http://localhost:5000/cart/delete/${productId}`, {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
-        })
-            .then(res => {
-                if (!res.ok) {
-                    snackbar('Network response was not ok');
-                }
-                return res.json();
+        const confirmed = window.confirm("Are you sure you want to remove this product from the cart?");
+        if (confirmed) {
+            fetch(`http://localhost:5000/cart/delete/${productId}`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
             })
-            .then(data => {
-                console.log(data.addToCart)
-                setProductsInCart(productsInCart.filter(p => p._id !== productId));
-            })
-            .catch(error => {
-                console.error('Error fetching cart items:', error);
-            });
-    };
-
+                .then(res => {
+                    if (!res.ok) {
+                        snackbar('Network response was not ok');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    console.log(data.addToCart)
+                    setProductsInCart(productsInCart.filter(p => p._id !== productId));
+                })
+                .catch(error => {
+                    console.error('Error fetching cart items:', error);
+                });
+        }
+    }
 
     function emptyCart() {
         fetch(`http://localhost:5000/cart/delete-all`, {

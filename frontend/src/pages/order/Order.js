@@ -10,10 +10,11 @@ import ListItemText from '@mui/material/ListItemText';
 import { mainColor } from '../../css/Main.style';
 
 export default function Order() {
-    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode } = useContext(GeneralContext);
+    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode, setLoader } = useContext(GeneralContext);
 
 
     useEffect(() => {
+        setLoader(true);
         fetch(`http://localhost:5000/my-orders`, {
             credentials: 'include',
             headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
@@ -30,7 +31,7 @@ export default function Order() {
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);
-            });
+            }).finally(() => setLoader(false))
     }, [])
 
     return (

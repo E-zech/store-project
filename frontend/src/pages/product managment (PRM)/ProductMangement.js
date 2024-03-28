@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Add from '@mui/icons-material/Add.js';
 import '../../css/grid.css';
+import Loader from '../../components/loader/Loader.js';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
@@ -42,7 +43,7 @@ export default function ProductMangement() {
             </header>
             <section className="container-cards" style={{ marginBottom: '100px' }}>
                 {loader ? (
-                    <h1>Loading...</h1>
+                    <Loader />
                 ) : (
                     <div className="grid-cards">
                         {
@@ -54,6 +55,7 @@ export default function ProductMangement() {
                             sx={{
                                 minWidth: 0,
                                 width: '50px', // Set the width to the same value as the height
+                                zIndex: '99',
                                 height: '50px',
                                 borderRadius: '50%',
                                 display: 'flex',

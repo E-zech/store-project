@@ -20,7 +20,7 @@ import { listStyle, bigBoxStyle, smallBoxStyle, counterWrapper, counterBtn, foot
 import { mainColor, white } from '../../css/Main.style';
 
 export default function Cart() {
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
+    const { productsInCart, setProductsInCart, snackbar, setLoader, mode } = useContext(GeneralContext);
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -48,6 +48,7 @@ export default function Cart() {
     };
 
     const saveChanges = () => {
+        setLoader(true);
         fetch(`http://localhost:5000/cart/add`, {
             method: 'POST',
             credentials: 'include',
@@ -70,7 +71,7 @@ export default function Cart() {
             })
             .catch(error => {
                 console.error('Error saving changes:', error);
-            })
+            }).finally(() => setLoader(false))
     };
 
     const toggleDrawer = () => {
@@ -82,6 +83,7 @@ export default function Cart() {
 
     const removeFromCart = (productId) => {
         if (window.confirm("Are you sure you want to delete this product?")) {
+            setLoader(true);
             fetch(`http://localhost:5000/cart/delete/${productId}`, {
                 method: 'DELETE',
                 credentials: 'include',
@@ -99,12 +101,13 @@ export default function Cart() {
                 })
                 .catch(error => {
                     console.error('Error fetching cart items:', error);
-                });
+                }).finally(() => setLoader(false))
         }
     };
 
     const removeAllFromCart = () => {
         if (window.confirm("Are you sure you want to remove all Products ?")) {
+            setLoader(true);
             fetch(`http://localhost:5000/cart/delete-all`, {
                 method: 'DELETE',
                 credentials: 'include',
@@ -122,7 +125,7 @@ export default function Cart() {
                 })
                 .catch(error => {
                     console.error('Error fetching cart items:', error);
-                });
+                }).finally(() => setLoader(false))
         }
     };
 
@@ -237,6 +240,7 @@ export default function Cart() {
                         aria-label="add"
                         sx={{
                             width: '50px', height: '50px',
+                            zIndex: '99',
                             color: mode === 'light' ? mainColor : white,
                             backgroundColor: mode === 'light' ? 'white' : 'black',
                             boxShadow: mode === 'light' ? boxShadowLight : boxShadowDark,

@@ -105,6 +105,7 @@ function App() {
     }, [localStorage.token]);
 
     useEffect(() => {
+        setLoader(true)
         fetch(`http://localhost:5000/products`, {
             credentials: 'include',
             headers: {
@@ -116,10 +117,11 @@ function App() {
                 setProducts(data);
                 setInitialProducts(data);
                 // setFilteredProducts(data);
-            })
+            }).finally(() => setLoader(false))
     }, [order]); // i change from [path] might cause isssuise!!!!!!!!!!!!!!!
 
     useEffect(() => {
+        setLoader(true);
         fetch("http://localhost:5000/cart", {
             credentials: 'include',
             headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
@@ -136,10 +138,11 @@ function App() {
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);
-            });
+            }).finally(() => setLoader(false))
     }, [user]);
 
     const add2Cart = (productId, title, price) => {
+        setLoader(true);
         const quantity = 1;
         const products = [{ productId, quantity, price }];
         fetch(`http://localhost:5000/cart/add`, {
@@ -164,7 +167,7 @@ function App() {
             })
             .catch(error => {
                 console.error('Error adding product to cart:', error);
-            });
+            }).finally(() => setLoader(false))
     };
 
 

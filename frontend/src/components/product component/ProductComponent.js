@@ -22,7 +22,7 @@ export default function ProductComponent({ product }) {
   const [isSaving, setIsSaving] = useState(false);
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
-  const { user, mode, setFilteredProducts, setProducts, productsInCart, snackbar, setFavProducts, add2Cart } = useContext(GeneralContext);
+  const { user, mode, setFilteredProducts, setProducts, productsInCart, snackbar, setFavProducts, add2Cart, loader, setLoader } = useContext(GeneralContext);
 
   const isAdded = productsInCart.some(item => item._id === product._id);
   const isFavorite = product.faves.includes(user?._id);
@@ -48,7 +48,7 @@ export default function ProductComponent({ product }) {
   };
 
   const toggleFavOrNot = (id) => {
-    // setLoader(true);
+    setLoader(true);
     fetch(`http://localhost:5000/products/faves/${id}`, {
       credentials: 'include',
       method: 'PATCH',
@@ -70,7 +70,7 @@ export default function ProductComponent({ product }) {
           // If the product is already in favorites, remove it from favProducts
           setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
         }
-        // setLoader(false);
+        setLoader(false);
         snackbar(snackbarMessage);
       });
   };

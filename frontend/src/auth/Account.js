@@ -21,7 +21,7 @@ export default function Account() {
     const { user, setUser, setLoader, snackbar, mode } = useContext(GeneralContext);
 
     useEffect(() => {
-        // Check if the user object exists and has data
+        setLoader(true);
         if (user) {
             setFormData({
                 firstName: user.firstName || '',
@@ -34,6 +34,7 @@ export default function Account() {
                 zip: user.zip || 0
             });
         }
+        setLoader(false);
     }, [user]); // fix !! if no user then no page ! but also takes time for user to accumalte in the app.js
 
 
@@ -43,14 +44,13 @@ export default function Account() {
 
     const handleSubmit = ev => {
         ev.preventDefault();
+        setLoader(true);
         const obj = {};
         const elements = ev.target.elements;
 
         ClientStructureNoPassword.forEach((s) => {
             obj[s.name] = elements[s.name].value;
         });
-
-        setLoader(true);
 
         fetch(`http://localhost:5000/users/${user._id}`, {
             credentials: 'include',

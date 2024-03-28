@@ -28,6 +28,7 @@ export default function Signup() {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
+    setLoader(true);
     const obj = {};
     const elements = ev.target.elements;
 
@@ -35,7 +36,6 @@ export default function Signup() {
       obj[s.name] = elements[s.name].value;
     });
 
-    setLoader(true);
 
     fetch(`http://localhost:5000/signup`, {
       credentials: 'include',
