@@ -3,10 +3,6 @@ import { Button, Grid, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { GeneralContext } from "../../../App";
 import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import './review.css';
 import { mainColor } from '../../../css/Main.style';
 import { useNavigate } from 'react-router-dom';
 
@@ -172,20 +168,19 @@ export default function Review({ formPayment, setCurrentStep, }) {
                         </section>
 
                         <Grid item xs={12} sm={12}>
-                            <Button onClick={placeOrder} fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>Place Order</Button>
+                            <Button onClick={placeOrder} fullWidth variant="contained" sx={{ mt: 6, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>Place Order</Button>
                             <Button type="submit" fullWidth variant="contained" onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))} sx={{ mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>Back</Button>
                         </Grid>
                     </section>
                 ) : (
-                    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '5px' }}>
-                        <Typography sx={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>You dont have Product In Cart</Typography>
+                    <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '5px' }}>
+                        <Typography sx={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>You dont have Product In Cart.</Typography>
                         <Button
                             onClick={() => navigate('/')}
-                            fullWidth
                             variant="contained"
                             sx={{
                                 mt: 3,
-                                width: '20vw', // Set width to 20vw
+                                width: '220px', // Set width to 20vw
                                 backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
                                 color: 'white',
                                 '&:hover': {

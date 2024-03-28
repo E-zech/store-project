@@ -28,7 +28,6 @@ function App() {
     const [order, setOrder] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
 
-    console.log(products)
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
 
@@ -117,7 +116,6 @@ function App() {
                 setProducts(data);
                 setInitialProducts(data);
                 // setFilteredProducts(data);
-                console.log(data)
             })
     }, [order]); // i change from [path] might cause isssuise!!!!!!!!!!!!!!!
 
@@ -134,7 +132,6 @@ function App() {
                 return res.json();
             })
             .then(data => {
-                console.log(data)
                 setProductsInCart(data);
             })
             .catch(error => {
