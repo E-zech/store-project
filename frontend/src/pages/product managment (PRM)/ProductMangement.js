@@ -9,33 +9,25 @@ import Loader from '../../components/loader/Loader.js';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
-    const { user, setUser, userRoleType, filteredProducts, setFilteredProducts, products, setProducts, productsInCart, setProductsInCart, snackbar, loader, setLoader, mode, isAppBarFixed, setIsAppBarFixed, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
+    const { products, setProducts, setInitialProducts, loader, setLoader, mode, selectedCategory, } = useContext(GeneralContext);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-
-    //     // maybe insert if theres localstorage.token and if not send alertt or somthing
-    //     fetch(`http://localhost:5000/products`, {
-    //         credentials: 'include',
-    //         headers: {
-
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setProducts(data);
-    //             setFilteredProducts(data);
-    //         })
-    // }, [])
+    useEffect(() => {
+        setLoader(true)
+        fetch(`http://localhost:5000/products`, {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+                setInitialProducts(data);
+            }).finally(() => setLoader(false))
+    }, []);
 
 
-    // useEffect(() => {
-    //     setLoader(true)
-    //     setTimeout(() => {
-    //         setLoader(false); // Set isLoading to false after loading
-    //     }, 1000); // Adjust the delay as needed
-    // }, []);
     return (
         <>
             <header>
@@ -54,7 +46,7 @@ export default function ProductMangement() {
                             onClick={() => { navigate(`/product/add-edit`) }}
                             sx={{
                                 minWidth: 0,
-                                width: '50px', // Set the width to the same value as the height
+                                width: '50px',
                                 zIndex: '99',
                                 height: '50px',
                                 borderRadius: '50%',

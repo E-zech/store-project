@@ -20,7 +20,6 @@ function App() {
     const [snackbarText, setSnackbarText] = useState('');
     const [userRoleType, setUserRoleType] = useState(RoleTypes.none);
     const [mode, setMode] = useState('light');
-    const [filteredProducts, setFilteredProducts] = useState([]);// not using anymore i hope MAYBE DELTE
     const [products, setProducts] = useState([]);
     const [initialProducts, setInitialProducts] = useState([]);
     const [favProducts, setFavProducts] = useState([]);
@@ -59,10 +58,6 @@ function App() {
             mode: 'dark',
         },
     });
-
-    // const toggleMode = () => {
-    //     setMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
-    // };
 
     useEffect(() => {
         setLoader(true);
@@ -116,9 +111,8 @@ function App() {
             .then(data => {
                 setProducts(data);
                 setInitialProducts(data);
-                // setFilteredProducts(data);
             }).finally(() => setLoader(false))
-    }, [order]); // i change from [path] might cause isssuise!!!!!!!!!!!!!!!
+    }, [order]);
 
     useEffect(() => {
         setLoader(true);
@@ -167,7 +161,8 @@ function App() {
             })
             .catch(error => {
                 console.error('Error adding product to cart:', error);
-            }).finally(() => setLoader(false))
+            })
+            .finally(() => setLoader(false))
     };
 
 
@@ -177,7 +172,6 @@ function App() {
             <GeneralContext.Provider value={{
                 user, setUser, userRoleType, setUserRoleType,
                 products, setProducts, productsInCart, setProductsInCart,
-                filteredProducts, setFilteredProducts,
                 loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory,
                 favProducts, setFavProducts, add2Cart,
                 initialProducts, setInitialProducts,
@@ -186,7 +180,6 @@ function App() {
 
                 <Navbar />
                 <Router />
-                {loader && <Loader />}
                 {snackbarText && <SnackBar text={snackbarText} />}
                 {/* <Footer /> */}
             </GeneralContext.Provider>

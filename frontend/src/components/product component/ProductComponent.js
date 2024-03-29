@@ -20,12 +20,11 @@ import { black, mainColor, transparent, white } from "../../css/Main.style";
 export default function ProductComponent({ product }) {
   const [isDiscount, setIsDiscount] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false)
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
-  const { user, mode, setFilteredProducts, setProducts, productsInCart, snackbar, setFavProducts, add2Cart, loader, setLoader } = useContext(GeneralContext);
-
+  const { user, mode, setFilteredProducts, products, setProducts, productsInCart, snackbar, setFavProducts, add2Cart, loader, setLoader } = useContext(GeneralContext);
   const isAdded = productsInCart.some(item => item._id === product._id);
-  const isFavorite = product.faves.includes(user?._id);
   const snackbarMessage = isFavorite ? 'Removed from Favorites' : 'Added to Favorites';
 
   useEffect(() => {
@@ -42,13 +41,13 @@ export default function ProductComponent({ product }) {
     } else {
       add2Cart(product._id, product.title, product.price);
     }
-    setTimeout(() => {
-      setIsSaving(false);
-    }, 300);
+    setIsSaving(false);
   };
-
+  console.log(products)
   const toggleFavOrNot = (id) => {
-    setLoader(true);
+    // setLoader(true);
+    console.log(products)
+    setIsFavorite(product.faves.includes(user?._id))
     fetch(`http://localhost:5000/products/faves/${id}`, {
       credentials: 'include',
       method: 'PATCH',
@@ -65,19 +64,20 @@ export default function ProductComponent({ product }) {
       })
       .then(data => {
         setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+        console.log(products)
 
         if (isFavorite) {
           // If the product is already in favorites, remove it from favProducts
           setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
         }
-        setLoader(false);
+        // setLoader(false);
         snackbar(snackbarMessage);
       });
   };
 
 
   const deleteProduct = (id) => {
-    // setLoader(true);
+    setLoader(true);
 
     const isConfirmed = window.confirm("Are you sure you want to delete this product?"); // cahnge to a modal or popUp for confirmationn
 
@@ -94,7 +94,7 @@ export default function ProductComponent({ product }) {
           setFilteredProducts((filteredProducts) =>
             filteredProducts.filter((product) => product._id !== id)
           );
-          // setLoader(false);
+          setLoader(false);
           snackbar('Card deleted successfully');
         });
     }
@@ -182,7 +182,7 @@ export default function ProductComponent({ product }) {
                     backgroundColor: "green"
                   }}>
                     <IconButton
-                      aria-label="Add or Remove"
+                      aria-label="Add or Remove from cart"
                       onClick={() => { setIsSaving(true); handleClick() }}
                       disabled={isSaving}
                       sx={{
@@ -205,7 +205,7 @@ export default function ProductComponent({ product }) {
                         },
                       }}
                     >
-                      <FavoriteIcon color={product.faves?.includes(user?._id) ? "error" : ""} />
+                      <FavoriteIcon color={isFavorite ? "error" : ""} />
                     </IconButton>
                   </Tooltip>
                 </>

@@ -10,12 +10,9 @@ import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate, useParams } from 'react-router-dom';
 import { inputsForProducts, schema } from '../../components/product component/ProductStructureValid.js.js';
-import Joi from 'joi';
 import { Tooltip } from '@mui/material';
 import './AddOrEditProduct.css'
 import { useInputsFormColors } from '../../utils/utils.js'
-
-
 
 export default function AddOrEditProduct() {
     const [formData, setFormData] = useState({});
@@ -23,7 +20,7 @@ export default function AddOrEditProduct() {
     const [isFormValid, setIsFormValid] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
-    const { filteredProducts, setFilteredProducts, products, setProducts, snackbar, loader, setLoader, mode } = useContext(GeneralContext);
+    const { products, setProducts, snackbar, setLoader, mode } = useContext(GeneralContext);
     const { sx } = useInputsFormColors();
 
     useEffect(() => {
@@ -42,7 +39,6 @@ export default function AddOrEditProduct() {
                     filterData[name] = data[name];
                 })
                 setFormData(filterData);
-
             }).finally(() => {
                 setLoader(false);
             })
@@ -67,9 +63,7 @@ export default function AddOrEditProduct() {
         }
         setIsFormValid(!validate.error);
         setErrors(tempErrors);
-
     };
-
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
@@ -87,7 +81,6 @@ export default function AddOrEditProduct() {
 
         const url = id ? `http://localhost:5000/products/${id}` : `http://localhost:5000/products`;
         const methood = id ? 'PUT' : 'POST';
-
         fetch(url, {
             credentials: 'include',
             method: methood,
@@ -100,26 +93,20 @@ export default function AddOrEditProduct() {
             .then(res => res.json())
             .then(data => {
                 if (id) {
-                    // If it's an edit, find the index of the edited product in filteredProducts array
                     const index = products.findIndex(product => product._id === data._id);
-
                     if (index !== -1) {
-                        // If the product exists in filteredProducts, replace it with the edited product
                         const updatedProducts = [...products];
                         updatedProducts[index] = data;
                         setProducts(updatedProducts);
                     } else {
-                        // If the product doesn't exist in filteredProducts, add it
                         setProducts([...products, data]);
                     }
                 } else {
-                    // If it's an addition, add the new product to filteredProducts
                     setProducts([...products, data]);
                 }
                 navigate('/product-management');
                 snackbar(id ? 'Product changed successfully' : 'Product added');
             }).finally(() => setLoader(false))
-
     };
 
     return (
@@ -215,8 +202,6 @@ export default function AddOrEditProduct() {
                                         </Button>
                                     </Tooltip>
 
-
-
                                     <Tooltip title="Back to Product Management " arrow>
                                         <Button type="button" fullWidth variant="contained" sx={{
                                             mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
@@ -230,14 +215,10 @@ export default function AddOrEditProduct() {
                                             Back to management
                                         </Button>
                                     </Tooltip>
-
-
                                 </Box>
                             </>
-
                         </Box>
                     </Container>
-
                 </section>
             </>
         </>

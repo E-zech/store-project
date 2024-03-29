@@ -89,11 +89,15 @@ export default function AllProducts() { // ALL Products Page basically
                             </div>
 
                             <div className="grid-cards">
-                                {products
-                                    .filter(product => product.category === selectedCategory || selectedCategory === "All")
-                                    .map((product, index) => (
-                                        <ProductComponent key={index} product={product} />
-                                    ))}
+                                {products.length > 0 ? (
+                                    products
+                                        .filter(product => product.category === selectedCategory || selectedCategory === "All")
+                                        .map((product, index) => (
+                                            <ProductComponent key={index} product={product} />
+                                        ))
+                                ) : (
+                                    <h2 style={{ textAlign: 'center', fontSize: '2rem' }}>No results found</h2>
+                                )}
                             </div>
                         </>
 

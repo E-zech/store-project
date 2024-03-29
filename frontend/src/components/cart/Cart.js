@@ -48,7 +48,7 @@ export default function Cart() {
     };
 
     const saveChanges = () => {
-        setLoader(true);
+        // setLoader(true);
         fetch(`http://localhost:5000/cart/add`, {
             method: 'POST',
             credentials: 'include',
@@ -71,7 +71,7 @@ export default function Cart() {
             })
             .catch(error => {
                 console.error('Error saving changes:', error);
-            }).finally(() => setLoader(false))
+            });
     };
 
     const toggleDrawer = () => {
@@ -83,7 +83,6 @@ export default function Cart() {
 
     const removeFromCart = (productId) => {
         if (window.confirm("Are you sure you want to delete this product?")) {
-            setLoader(true);
             fetch(`http://localhost:5000/cart/delete/${productId}`, {
                 method: 'DELETE',
                 credentials: 'include',
@@ -101,7 +100,7 @@ export default function Cart() {
                 })
                 .catch(error => {
                     console.error('Error fetching cart items:', error);
-                }).finally(() => setLoader(false))
+                })
         }
     };
 

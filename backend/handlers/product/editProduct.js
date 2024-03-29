@@ -10,8 +10,11 @@ const editProduct = app => {
 
             const product = await Product.findById(productId);
             if (!product) {
-                return res.status(404).send('product not found');
+                return res.status(404).send('Product not found');
             }
+
+            // Fetch the existing faves array from the product in the database
+            const existingFaves = product.faves;
 
             const { error, value } = ProductValid.validate(req.body, { abortEarly: false });
 
@@ -21,13 +24,24 @@ const editProduct = app => {
                 return res.status(400).send(errorObj);
             }
 
-            product.set(value);
+            // Merge the incoming data with the existing product data, including faves
+            const updatedProductData = {
+                ...product.toObject(), // Convert Mongoose document to plain JavaScript object
+                ...value, // Incoming data from the request
+                faves: existingFaves, // Include existing faves array
+            };
+
+            // Set the merged data to the product
+            product.set(updatedProductData);
+
             await product.save();
             res.send(product);
 
         } catch (err) {
+            console.error(err);
             return res.status(500).send('Internal Server Error');
         }
     });
 }
+
 export default editProduct;
