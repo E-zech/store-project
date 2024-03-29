@@ -11,7 +11,6 @@ import { GeneralContext } from '../App';
 import { ClientStructureNoPassword, SchemaNoPassword } from '../components/FormValidation';
 import { initialFormDataNoPassword, handleChange, useInputsFormColors } from '../utils/utils'
 
-
 export default function Account() {
     const [formData, setFormData] = useState(initialFormDataNoPassword);
     const [errors, setErrors] = useState({});
@@ -36,7 +35,6 @@ export default function Account() {
         }
         setLoader(false);
     }, [user]); // fix !! if no user then no page ! but also takes time for user to accumalte in the app.js
-
 
     const handleAccountChange = (ev) => {
         handleChange(ev, formData, setFormData, errors, setErrors, SchemaNoPassword, setIsFormValid);
@@ -81,7 +79,7 @@ export default function Account() {
                 <Container component="main" maxWidth="xs">
                     <Box
                         sx={{
-                            marginTop: 8,
+                            marginTop: 15,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
