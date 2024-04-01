@@ -6,10 +6,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { GeneralContext } from '../App';
-import { RoleTypes } from '../components/navbar/Navbar';
 import Joi from 'joi';
 import { jwtDecode } from 'jwt-decode';
 import { useInputsFormColors } from '../utils/utils'

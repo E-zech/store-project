@@ -10,7 +10,6 @@ export const appBarStyle = {
 export const toolbarStyle = {
     width: '80vw',
     maxWidth: '600px',
-    // fix the min-height
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',

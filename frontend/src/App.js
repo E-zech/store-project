@@ -26,9 +26,7 @@ function App() {
     const [productsInCart, setProductsInCart] = useState([]);
     const [order, setOrder] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
-
     const navigate = useNavigate();
-    const path = useResolvedPath().pathname;
 
     const snackbar = text => {
         setSnackbarText(text);
@@ -82,7 +80,6 @@ function App() {
                     }
                 })
                 .then(data => {
-                    console.log(data)
                     setUser(data);
                     setUserRoleType(data.roleType);
                 })
@@ -181,7 +178,7 @@ function App() {
                 <Navbar />
                 <Router />
                 {snackbarText && <SnackBar text={snackbarText} />}
-                {/* <Footer /> */}
+                <Footer />
             </GeneralContext.Provider>
         </ThemeProvider>
     );

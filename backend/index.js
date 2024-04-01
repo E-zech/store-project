@@ -12,7 +12,7 @@ import logMiddleware from './middleware/logMiddleware.js';
 import dotenv from 'dotenv';
 import { getContent } from './configs/contentConfig.js';
 import orderRoutes from './routes/orderRoutes.js';
-//asdas
+
 // Environment setup
 const env = dotenv.config({ path: './prod.env' });
 const port = env.parsed.PORT || 5000;
@@ -64,4 +64,4 @@ app.listen(port, () => {
 app.all("*", async (req, res) => {
     const combinedContent = await getContent(res);
     res.send(combinedContent);
-}); // need to remember that if i want to handle diffrent type of HTTP falls requestes i need to change here the app.all to somthing more spicipic like app.get/post
+}); 

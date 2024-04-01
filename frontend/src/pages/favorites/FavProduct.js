@@ -8,7 +8,7 @@ import Loader from '../../components/loader/Loader';
 
 export default function FavProducts() {
 
-    const { user, snackbar, loader, setLoader, filteredProducts, setFilteredProducts, products, selectedCategory, favProducts, setFavProducts, add2Cart } = useContext(GeneralContext);
+    const { user, snackbar, loader, setLoader, products, selectedCategory, favProducts, setFavProducts } = useContext(GeneralContext);
 
 
     useEffect(() => {

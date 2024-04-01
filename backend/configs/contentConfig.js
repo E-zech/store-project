@@ -22,6 +22,7 @@ async function getContent(res) {
       <style>${cssContent}</style>
       <style>${keyFramesContent}</style>
     `;
+
     } catch (error) {
         res.status(404).send('404 Page Was Not Found');
     }

@@ -5,7 +5,7 @@ export const users = [
     {
         "firstName": "regular",
         "lastName": "user",
-        "roleType": RoleTypes.user,
+        "roleType": RoleTypes.business,
         "phone": "050-0000000",
         "email": "regular@gmail.com",
         "password": "Aa123456!",

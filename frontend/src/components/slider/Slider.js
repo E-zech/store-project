@@ -49,7 +49,6 @@ export default function Slider() {
 
     return (
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='container'>
-            {/* <h1>Slider bla bla</h1> */}
 
             <div className='wrapBtns'>
                 <button className='sliderBtn back' onClick={prevSlide}><ArrowForwardIosIcon /></button>

@@ -37,84 +37,33 @@ export default function CustomerMenagment() {
     {
       field: 'name',
       headerName: 'Name',
-      flex: 0.7,
+      flex: 0.4,
       justifyContent: 'center',
       valueGetter: (params) => `${params.row.firstName} ${params.row.lastName}`
     },
 
-    { field: 'email', headerName: 'Email', flex: 0.7 },
+    { field: 'email', headerName: 'Email', flex: 0.5 },
 
     {
-      field: 'business',
-      headerName: 'Business',
-      flex: 0.4, // Adjusted width
+      field: 'Phone',
+      headerName: 'Phone',
+      flex: 0.5, // Adjusted width
       renderCell: (params) => (
         <div>
-          {params.row.roleType === RoleTypes.business ? (
-            <CheckBoxIcon
-              onClick={(e) => {
-                e.stopPropagation();
-                handleBusiness(params.row);
-              }}
-              style={{ cursor: 'pointer', color: 'green' }}
-            />
-          ) : (
-            <DisabledByDefaultIcon
-              onClick={(e) => {
-                e.stopPropagation();
-                handleBusiness(params.row);
-              }}
-              style={{ cursor: 'pointer', color: 'red' }}
-            />
-          )}
+          {params.row.phone}
         </div>
       ),
     },
     {
       field: 'delete',
       headerName: 'Delete',
-      flex: 0.4, // Adjusted width
+      flex: 0.2, // Adjusted width
       renderCell: (params) => (
         <DeleteIcon onClick={() => handleDelete(params.row._id)} style={{ cursor: 'pointer' }} />
       ),
     }
   ];
 
-  const handleBusiness = (client) => {
-    setLoader(true);
-
-    const updatedClient = { ...client }; // Create a copy of the client object
-    updatedClient.roleType = client.roleType === RoleTypes.user ? RoleTypes.business : RoleTypes.user; // Toggle the roleType field
-
-    const snackbarMessage = `${updatedClient.firstName} is now ${updatedClient.roleType === RoleTypes.business ? "business" : "non-business"} client`;
-
-    fetch(`http://localhost:5000/users/${client._id}`, {
-      credentials: 'include',
-      method: 'PATCH',
-      headers: {
-        'Authorization': localStorage.token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedClient),
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to update role type');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        // Update the state with the updated client data
-        setAllClients(prevClients => prevClients.map(prevClient => prevClient._id === data._id ? data : prevClient));
-        setRefresh([{}]);
-        snackbar(snackbarMessage);
-      })
-      .catch((error) => {
-        console.error('Error updating role type:', error);
-        // Handle error, show error message, etc.
-      })
-      .finally(() => setLoader(false));
-  };
 
 
   const handleDelete = (clientID) => {
@@ -139,31 +88,6 @@ export default function CustomerMenagment() {
       <header>
         <h1 className="main-title">Customer Management</h1>
       </header>
-
-      {isPopUp && (
-        <section className="pop-up-wrapper">
-          <div className="pop-up">
-            <h3 className="pop-up-title">Here you can manage your clients</h3>
-
-            <ul className="pop-up-list">
-              <li className="list-txt">
-                You can upgrade or delete them by clicking on the CheckBox
-              </li>
-              <li className="list-txt">
-                If the CheckBox color is <span className="green">green</span>, then the user is business.
-              </li>
-              <li className="list-txt">
-                If it is <span className="red">red</span>, the user is not business.
-              </li>
-              <li className="list-txt">
-                * In small size devices, some of the info will be hidden *
-              </li>
-            </ul>
-
-            <button className="btn-pop-up" onClick={() => setIsPopUp(false)}>❌</button>
-          </div>
-        </section>
-      )}
 
       <section style={{ height: 'auto', width: '90vw', padding: '25px 15px', margin: '0 auto', display: 'flex', justifyContent: "center", alignItems: 'center' }}>
         <DataGrid

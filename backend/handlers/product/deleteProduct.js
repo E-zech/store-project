@@ -4,12 +4,12 @@ import { guard, adminGuard } from '../../middleware/guard.js';
 const deleteProduct = app => {
     app.delete('/products/:id', guard, adminGuard, async (req, res) => {
         try {
-            const productIdByParams = req.params.id; // product id from params
+            const productIdByParams = req.params.id;
 
             if (!productIdByParams) {
                 return res.status(400).send('Invalid product ID');
             }
-            const product = await Product.findById(productIdByParams); // product by id from params
+            const product = await Product.findById(productIdByParams);
 
             if (!product) {
                 return res.status(403).send('product not found');

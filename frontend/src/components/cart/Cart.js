@@ -81,9 +81,10 @@ export default function Cart() {
         setIsOpen(!isOpen);
     };
 
-    const removeFromCart = (productId) => {
-        if (window.confirm("Are you sure you want to delete this product?")) {
-            fetch(`http://localhost:5000/cart/delete/${productId}`, {
+    const removeFromCart = (id) => {
+        if (window.confirm(`Are you sure you want to delete ${id ? 'this product' : 'all products'} ?`)) {
+            const url = id ? `http://localhost:5000/cart/delete/${id}` : `http://localhost:5000/cart/delete-all`;
+            fetch(url, {
                 method: 'DELETE',
                 credentials: 'include',
                 headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
@@ -94,51 +95,30 @@ export default function Cart() {
                     }
                     return res.json();
                 })
-                .then(data => {
-                    console.log(data.addToCart)
-                    setProductsInCart(productsInCart.filter(p => p._id !== productId));
-                })
-                .catch(error => {
-                    console.error('Error fetching cart items:', error);
-                })
-        }
-    };
-
-    const removeAllFromCart = () => {
-        if (window.confirm("Are you sure you want to remove all Products ?")) {
-            setLoader(true);
-            fetch(`http://localhost:5000/cart/delete-all`, {
-                method: 'DELETE',
-                credentials: 'include',
-                headers: { "Content-Type": "application/json", 'Authorization': localStorage.token, }
-            })
-                .then(res => {
-                    if (!res.ok) {
-                        snackbar('Network response was not ok');
+                .then(() => {
+                    if (id) {
+                        setProductsInCart(productsInCart.filter(p => p._id !== id));
+                    } else {
+                        setProductsInCart([]);
                     }
-                    return res.json();
-                })
-                .then(data => {
-                    console.log(data.addToCart)
-                    setProductsInCart([]);
                 })
                 .catch(error => {
                     console.error('Error fetching cart items:', error);
-                }).finally(() => setLoader(false))
+                });
         }
-    };
+    }
 
     const list = () => (
         productsInCart.length !== 0 ? (
-            <Box // the big div 
+            <Box
                 sx={{ width: 500 }}
                 role="presentation"
                 onClick={(e) => e.stopPropagation()}
                 onKeyDown={toggleDrawer}>
 
-                <List // the wrapper div of the items
+                <List
                     sx={listStyle}>
-                    {productsInCart.map((p, index) => (
+                    {productsInCart?.map((p, index) => (
                         <Box
                             onClick={(e) => e.stopPropagation()}
                             key={index}
@@ -209,7 +189,7 @@ export default function Cart() {
                             if (productsInCart.length === 0) {
                                 snackbar("You don't have products in cart");
                             } else {
-                                removeAllFromCart();
+                                removeFromCart(null);
                             }
                         }}
                             sx={{

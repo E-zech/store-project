@@ -26,7 +26,7 @@ const getCartProducts = app => {
                         status: item.status,
                     };
                 }
-            }).filter(Boolean); // Filter out undefined values
+            }).filter(Boolean);
 
             res.send(products);
 

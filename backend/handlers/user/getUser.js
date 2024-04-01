@@ -12,7 +12,7 @@ const getUser = app => {
         }
 
         try {
-            const userByParams = await User.findById(req.params.id).select('-password'); // here the _id recive as Object mongo id type
+            const userByParams = await User.findById(req.params.id).select('-password');
             if (!userByParams) {
                 return res.status(403).send('User not found');
             }

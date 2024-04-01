@@ -2,8 +2,6 @@ import Product from '../../models/Product.js';
 import { getUserFromTKN } from '../../configs/config.js';
 import { guard } from '../../middleware/guard.js';
 
-
-
 const likeProduct = app => {
     app.patch('/products/faves/:id', guard, async (req, res) => {
         try {

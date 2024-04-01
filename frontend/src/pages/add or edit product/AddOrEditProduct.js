@@ -24,24 +24,27 @@ export default function AddOrEditProduct() {
     const { sx } = useInputsFormColors();
 
     useEffect(() => {
-        setLoader(true);
-        fetch(`http://localhost:5000/products/${id}`, {
-            credentials: 'include',
-            headers: {
-                'Authorization': localStorage.token,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                const filterData = {};
-                inputsForProducts.forEach(({ name }) => {
-                    filterData[name] = data[name];
-                })
-                setFormData(filterData);
-            }).finally(() => {
-                setLoader(false);
+        if (id) {
+            setLoader(true);
+            fetch(`http://localhost:5000/products/${id}`, {
+                credentials: 'include',
+                headers: {
+                    'Authorization': localStorage.token,
+                    'Content-Type': 'application/json',
+                },
             })
+                .then((res) => res.json())
+                .then((data) => {
+                    const filterData = {};
+                    inputsForProducts.forEach(({ name }) => {
+                        filterData[name] = data[name];
+                    })
+                    setFormData(filterData);
+                }).finally(() => {
+                    setLoader(false);
+                })
+        }
+
     }, [id])
 
     const handleChange = (event) => {
@@ -191,29 +194,48 @@ export default function AddOrEditProduct() {
                                         }
                                     </Grid>
                                     <Tooltip title="Save and Back to Product Management" arrow>
-                                        <Button type="submit" fullWidth variant="contained" sx={{
-                                            mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
-                                            '&:hover': {
-                                                backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                                            }
-                                        }}
-                                            disabled={!isFormValid}>
-                                            {id ? `Edit Product` : `Add product`}
-                                        </Button>
+                                        <span>
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                variant="contained"
+                                                sx={{
+                                                    mt: 3,
+                                                    mb: 2,
+                                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                                                    color: 'white',
+                                                    '&:hover': {
+                                                        backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+                                                    },
+                                                }}
+                                                disabled={!isFormValid}
+                                            >
+                                                {id ? `Edit Product` : `Add product`}
+                                            </Button>
+                                        </span>
                                     </Tooltip>
 
                                     <Tooltip title="Back to Product Management " arrow>
-                                        <Button type="button" fullWidth variant="contained" sx={{
-                                            mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
-                                            '&:hover': {
-                                                backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                                            }
-                                        }}
-                                            onClick={() => { navigate('/product-management') }}
-                                            disabled={isFormValid}
-                                        >
-                                            Back to management
-                                        </Button>
+                                        <span>
+                                            <Button
+                                                type="button"
+                                                fullWidth
+                                                variant="contained"
+                                                sx={{
+                                                    mt: 3,
+                                                    mb: 2,
+                                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+                                                    color: 'white',
+                                                    '&:hover': {
+                                                        backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+                                                    },
+                                                }}
+                                                onClick={() => { navigate('/product-management') }}
+                                                disabled={isFormValid}
+                                            >
+                                                Back to management
+                                            </Button>
+                                        </span>
                                     </Tooltip>
                                 </Box>
                             </>

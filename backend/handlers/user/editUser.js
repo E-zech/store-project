@@ -3,12 +3,12 @@ import { getUserFromTKN } from '../../configs/config.js';
 import { UserEditValid } from '../../validation/userJoi.js';
 import { guard } from '../../middleware/guard.js';
 
-const editUser = app => { // can edit details except for roleType.
+const editUser = app => {
     app.put('/users/:id', guard, async (req, res) => {
         const { userId, roleType } = getUserFromTKN(req, res);
-        const isMaster = roleType === RoleTypes.master; // master can edir user
+        const isMaster = roleType === RoleTypes.master;
 
-        const paramsId = req.params.id; // id from params
+        const paramsId = req.params.id;
 
         if (userId !== paramsId && !isMaster) {
             return res.status(401).send('You are not authorized to update this user');
@@ -27,7 +27,7 @@ const editUser = app => { // can edit details except for roleType.
                 return res.status(404).send('User not found');
             }
 
-            value.roleType = updateUser.roleType; //  equals to the same roleType the edit user had before 
+            value.roleType = updateUser.roleType;
 
             updateUser.set(value);
             await updateUser.save();

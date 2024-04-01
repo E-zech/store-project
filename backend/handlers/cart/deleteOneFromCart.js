@@ -2,7 +2,7 @@ import { getUserFromTKN } from '../../configs/config.js';
 import { guard } from '../../middleware/guard.js'
 import User from '../../models/User.js';
 
-const deleteFromCart = app => {
+const deleteOneFromCart = app => {
     app.delete('/cart/delete/:id', guard, async (req, res) => {
         try {
             const productId = req.params.id;
@@ -22,7 +22,6 @@ const deleteFromCart = app => {
 
             user.addToCart = filteredCart;
             await user.save();
-
             res.send(user);
 
         } catch (err) {
@@ -32,4 +31,4 @@ const deleteFromCart = app => {
     })
 }
 
-export default deleteFromCart;
+export default deleteOneFromCart;

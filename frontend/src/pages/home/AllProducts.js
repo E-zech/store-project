@@ -18,6 +18,20 @@ export default function AllProducts() { // ALL Products Page basically
     const { user, products, setProducts, loader, selectedCategory, setLoader } = useContext(GeneralContext);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setLoader(true)
+        fetch(`http://localhost:5000/products`, {
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data);
+            }).finally(() => setLoader(false))
+    }, []);
+
     const displayLow2high = () => {
         console.log("displayLow2high")
         // const sortedProducts = [...products].sort((a, b) => a.price - b.price);

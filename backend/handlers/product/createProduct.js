@@ -13,13 +13,13 @@ const createProduct = app => {
                 return res.status(400).send(errorObj);
             }
 
-            const newproduct = new Product({
+            const newProduct = new Product({
                 ...value,
             });
 
-            await newproduct.save();
+            await newProduct.save();
 
-            res.send(newproduct);
+            res.send(newProduct);
 
         } catch (err) {
             return res.status(500).send('Internal Server Error');

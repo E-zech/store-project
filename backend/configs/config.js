@@ -9,7 +9,6 @@ export const getUserFromTKN = (req, res) => {
 
     try {
         const token = jwt.decode(req.headers.authorization, process.env.JWT_SECRET);
-
         return token;
 
     } catch (error) {

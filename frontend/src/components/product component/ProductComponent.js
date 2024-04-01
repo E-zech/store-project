@@ -20,13 +20,12 @@ import { black, mainColor, transparent, white } from "../../css/Main.style";
 export default function ProductComponent({ product }) {
   const [isDiscount, setIsDiscount] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  // const [isFavorite, setIsFavorite] = useState(false)
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
-  const { user, mode, setFilteredProducts, products, setProducts, productsInCart, snackbar, favProducts, setFavProducts, add2Cart, loader, setLoader } = useContext(GeneralContext);
+  const { user, mode, products, setProducts, productsInCart, snackbar, favProducts, setFavProducts, add2Cart, setLoader } = useContext(GeneralContext);
 
-  const isAdded = productsInCart.some(item => item._id === product._id);
-  const isFavorite = favProducts.some(item => item._id === product._id); // Check if product is in favorites
+  const isAdded = productsInCart?.some(item => item._id === product._id);
+  const isFavorite = favProducts?.some(item => item._id === product._id);
 
   useEffect(() => {
     if (product.discount === 0) {
@@ -37,7 +36,6 @@ export default function ProductComponent({ product }) {
 
   const handleClick = () => {
     if (isAdded) {
-      // If the item is already in the cart, show a snackbar
       snackbar("Item already in cart");
     } else {
       add2Cart(product._id, product.title, product.price);
@@ -65,7 +63,10 @@ export default function ProductComponent({ product }) {
       })
       .then(data => {
         setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
-        setFavProducts(favProducts => isFavorite ? favProducts.filter(p => p._id !== id) : [...favProducts, product]); // Toggle product in favorites
+        setFavProducts(favProducts => {
+          if (!favProducts) favProducts = [];
+          return isFavorite ? favProducts.filter(p => p._id !== id) : [...favProducts, product];
+        });
         snackbar(snackbarMessage);
       });
   };
@@ -74,8 +75,7 @@ export default function ProductComponent({ product }) {
   const deleteProduct = (id) => {
     setLoader(true);
 
-    const isConfirmed = window.confirm("Are you sure you want to delete this product?"); // cahnge to a modal or popUp for confirmationn
-
+    const isConfirmed = window.confirm("Are you sure you want to delete this product?");
     if (isConfirmed) {
       fetch(`http://localhost:5000/products/${id}`, {
         credentials: 'include',
@@ -85,12 +85,11 @@ export default function ProductComponent({ product }) {
           'Content-Type': 'application/json',
         },
       })
-        .then(() => {
-          setFilteredProducts((filteredProducts) =>
-            filteredProducts.filter((product) => product._id !== id)
-          );
+        .then((data) => {
+          const updatedProducts = products.filter(product => product._id !== id);
+          setProducts(updatedProducts);
           setLoader(false);
-          snackbar('Card deleted successfully');
+          snackbar(data.message);
         });
     }
   }

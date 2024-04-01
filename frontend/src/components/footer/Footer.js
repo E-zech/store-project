@@ -45,6 +45,7 @@ export default function Footer() {
           height: 'auto',
           bottom: '0',
           position: 'fixed',
+          zIndex: 70
         }}>
 
           <BottomNavigation

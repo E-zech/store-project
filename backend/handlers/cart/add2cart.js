@@ -9,7 +9,6 @@ const add2cart = app => {
         try {
             const { products } = req.body;
             const { userId } = getUserFromTKN(req, res);
-
             const user = await User.findById(userId);
 
             const updatedCartProducts = await Promise.all(products.map(async (item) => {
@@ -17,7 +16,6 @@ const add2cart = app => {
 
                 if (!mongoose.Types.ObjectId.isValid(productId)) {
                     return res.status(400).send('Invalid product ID');
-
                 }
 
                 if (!price) {
@@ -25,7 +23,7 @@ const add2cart = app => {
                 }
 
                 if (!quantity || quantity < 1) {
-                    return res.status(400).send('Please provide a valid quantity');
+                    return res.status(400).send('Please provide a valid quantity, must be bigger than 0');
                 }
 
                 const product = await Product.findById(productId);
@@ -37,11 +35,10 @@ const add2cart = app => {
                 const existingCartItem = user.addToCart.find(item => item.productId.toString() === productId);
 
                 if (existingCartItem) {
-                    // If product already exists in cart, update quantity and price
                     existingCartItem.quantity = quantity;
                     existingCartItem.price = price;
+
                 } else {
-                    // If product not in cart, add it
                     user.addToCart.push({ productId, quantity, price });
                 }
 
@@ -61,7 +58,6 @@ const add2cart = app => {
         }
     });
 };
-
 
 export default add2cart;
 

@@ -5,7 +5,7 @@ import { appBarStyle, toolbarStyle, btnStyle } from './SecondNavbar.style'
 import { black, gray, mainColor, transparent, white } from '../../css/Main.style';
 
 function SecondNavbar({ openMenu }) {
-    const { mode, selectedCategory, setSelectedCategory } = useContext(GeneralContext);
+    const { mode, setSelectedCategory } = useContext(GeneralContext);
 
     return (
         <>

@@ -8,11 +8,8 @@ const getFavesProducts = app => {
             const { userId } = getUserFromTKN(req, res);
             const myFavesProducts = await Product.find({ faves: userId });
 
-            // if error use : const myFavesProducts = await Product.find({ faves: userId.toString() });
-
-
             if (!myFavesProducts || myFavesProducts.length === 0) {
-                return res.status(404).send('You dont have products');
+                return res.status(404).send('You dont have favorite products');
             }
 
             res.send(myFavesProducts);
