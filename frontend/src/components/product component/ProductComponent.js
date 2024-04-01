@@ -20,12 +20,13 @@ import { black, mainColor, transparent, white } from "../../css/Main.style";
 export default function ProductComponent({ product }) {
   const [isDiscount, setIsDiscount] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false)
+  // const [isFavorite, setIsFavorite] = useState(false)
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
-  const { user, mode, setFilteredProducts, products, setProducts, productsInCart, snackbar, setFavProducts, add2Cart, loader, setLoader } = useContext(GeneralContext);
+  const { user, mode, setFilteredProducts, products, setProducts, productsInCart, snackbar, favProducts, setFavProducts, add2Cart, loader, setLoader } = useContext(GeneralContext);
+
   const isAdded = productsInCart.some(item => item._id === product._id);
-  const snackbarMessage = isFavorite ? 'Removed from Favorites' : 'Added to Favorites';
+  const isFavorite = favProducts.some(item => item._id === product._id); // Check if product is in favorites
 
   useEffect(() => {
     if (product.discount === 0) {
@@ -43,11 +44,11 @@ export default function ProductComponent({ product }) {
     }
     setIsSaving(false);
   };
-  console.log(products)
+
+
   const toggleFavOrNot = (id) => {
-    // setLoader(true);
-    console.log(products)
-    setIsFavorite(product.faves.includes(user?._id))
+    const snackbarMessage = isFavorite ? 'Removed from Favorites' : 'Added to Favorites';
+
     fetch(`http://localhost:5000/products/faves/${id}`, {
       credentials: 'include',
       method: 'PATCH',
@@ -64,13 +65,7 @@ export default function ProductComponent({ product }) {
       })
       .then(data => {
         setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
-        console.log(products)
-
-        if (isFavorite) {
-          // If the product is already in favorites, remove it from favProducts
-          setFavProducts(favProducts => favProducts.filter(p => p._id !== id));
-        }
-        // setLoader(false);
+        setFavProducts(favProducts => isFavorite ? favProducts.filter(p => p._id !== id) : [...favProducts, product]); // Toggle product in favorites
         snackbar(snackbarMessage);
       });
   };
@@ -196,7 +191,7 @@ export default function ProductComponent({ product }) {
                   </Tooltip>
 
 
-                  <Tooltip title="Add to favorites" arrow >
+                  <Tooltip title={isFavorite ? "Remove from favorites" : "Add to favorites"} arrow >
                     <IconButton id='favoriteBtn' aria-label="add to favorites"
                       onClick={() => toggleFavOrNot(product._id,)}
                       sx={{

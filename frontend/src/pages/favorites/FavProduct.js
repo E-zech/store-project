@@ -11,14 +11,6 @@ export default function FavProducts() {
     const { user, snackbar, loader, setLoader, filteredProducts, setFilteredProducts, products, selectedCategory, favProducts, setFavProducts, add2Cart } = useContext(GeneralContext);
 
 
-    // useEffect(() => {
-    //     setLoader(true)
-    //     setTimeout(() => {
-    //         setLoader(false);
-    //     }, 1000);
-    // }, []);
-
-
     useEffect(() => {
         setLoader(true);
         fetch(`http://localhost:5000/products/my-faves-products`, {
