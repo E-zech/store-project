@@ -424,3 +424,93 @@ Route: /products/my-faves-products
 Status Code: 404
 Error:  Not Found
 
+Time: 2024-04-01T13:26:03.943Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:26:10.125Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:26:14.424Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:29:56.472Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:30:22.095Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:56:51.579Z
+Method: GET
+Route: /products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:56:51.766Z
+Method: GET
+Route: /products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:57:26.335Z
+Method: GET
+Route: /users/660a9dad53d6957ffff7bf80
+Status Code: 403
+Error:  Forbidden
+
+Time: 2024-04-01T13:57:26.343Z
+Method: GET
+Route: /cart
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-01T13:57:27.170Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-01T13:58:25.718Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-01T14:04:45.275Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-01T14:12:24.257Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-01T14:19:56.417Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-01T14:20:27.375Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
