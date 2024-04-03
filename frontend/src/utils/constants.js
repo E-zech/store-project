@@ -6,12 +6,12 @@ export const RoleTypes = {
 };
 
 export const pages = [
-    { route: '/about', title: 'about' },
-    { route: '/login', title: 'login', permissions: [RoleTypes.none] },
-    { route: '/signup', title: 'signup', permissions: [RoleTypes.none] },
-    { route: '/faves', title: 'favorites ', permissions: [RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
-    { route: '/product-management', title: 'PRM', permissions: [RoleTypes.admin, RoleTypes.master] },
-    { route: '/user-management', title: 'CRM', permissions: [RoleTypes.admin, RoleTypes.master] }];
+    { route: '/about', title: 'About' },
+    { route: '/login', title: 'Login', permissions: [RoleTypes.none] },
+    { route: '/signup', title: 'Signup', permissions: [RoleTypes.none] },
+    { route: '/faves', title: 'Favorites ', permissions: [RoleTypes.business, RoleTypes.admin, RoleTypes.master] },
+    { route: '/product-management', title: 'Prm', permissions: [RoleTypes.admin, RoleTypes.master] },
+    { route: '/user-management', title: 'Crm', permissions: [RoleTypes.admin, RoleTypes.master] }];
 
 export const disable = [
     '/user-management', '/about', '/login', '/signup', '/account', '/checkout', '/my-orders'

@@ -11,7 +11,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import SecondNavbar from './SecondNavbar';
-import { black, gray, mainColor, selectColor, transparent, white } from '../../css/Main.style';
+import { black, font, gray, mainColor, mainFont, selectColor, transparent, white } from '../../css/Main.style';
 import { homeIconStyle, homeIconStyleSmall, menuIconStyle } from './Navbar.style';
 import { RoleTypes, pages, disable } from '../../utils/constants';
 
@@ -76,6 +76,7 @@ export default function Navbar() {
                 display: 'flex',
                 justifyContent: 'center',
                 maxWidth: '2000px',
+                height: '75px',
                 margin: '0 auto', // This centers the AppBar horizontally
                 position: 'fixed',
                 top: 0,
@@ -83,6 +84,7 @@ export default function Navbar() {
                 right: 0,
                 backgroundColor: mode === 'dark' ? black : mainColor,
                 color: mode === 'dark' ? white : gray,
+                fontFamily: font,
             }}>
                 <Container sx={{ maxWidth: "2000px !important", color: mode === 'dark' ? white : gray, }}>
                     <Toolbar disableGutters>
@@ -117,15 +119,18 @@ export default function Navbar() {
                                     display: { xs: 'block', md: 'none' },
                                     '& .MuiMenu-paper': {
                                         backgroundColor: mode === 'dark' ? black : mainColor,
-                                        color: white
+                                        color: white,
+                                        top: "75px !important",
+                                        left: '1px !important',
+                                        width: '200px'
                                     }
                                 }}>
-
+                                {/* the hamburger navbar titles */}
                                 {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
                                     <Link key={p.route} to={p.route}
                                         style={{ textDecoration: 'none', color: mode === 'dark' ? white : gray, }}>
                                         <MenuItem onClick={handleCloseNavMenu}>
-                                            <Typography textAlign="center">{p.title}</Typography>
+                                            <Typography textAlign="center" sx={{ textTransform: 'none', fontSize: "1.1rem", }}>{p.title}</Typography>
                                         </MenuItem>
                                     </Link>
                                 ))}
@@ -140,7 +145,7 @@ export default function Navbar() {
                             sx={homeIconStyleSmall}>
                             <HomeIcon />
                         </Typography>
-
+                        {/* the big navbar titles */}
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
                                 <Link key={p.route} to={p.route} style={{ textDecoration: 'none' }}>
@@ -148,7 +153,8 @@ export default function Navbar() {
                                         onClick={handleCloseNavMenu}
                                         sx={{
                                             display: 'block',
-                                            my: 2,
+                                            textTransform: 'none',
+                                            fontSize: "1.1rem",
                                             color: mode === 'dark' ? white : gray,
                                             backgroundColor: p.route === path ? selectColor : transparent
                                         }}>
@@ -191,10 +197,12 @@ export default function Navbar() {
                                 </Tooltip>
                                 <Menu
                                     sx={{
-                                        mt: '45px',
+                                        mt: '59px',
                                         '& .MuiMenu-paper': {
                                             backgroundColor: mode === 'dark' ? black : mainColor,
                                             color: mode === 'dark' ? white : gray,
+                                            right: '0px',
+                                            width: '200px'
                                         }
                                     }}
                                     id="menu-appbar"
@@ -242,6 +250,3 @@ export default function Navbar() {
         </>
     );
 }
-
-
-

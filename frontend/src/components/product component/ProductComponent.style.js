@@ -47,7 +47,7 @@ export const cartMediaStyle = {
     height: '194px',
     borderRadius: '15px',
     transition: "all 0.2s ease-in-out",
-    "&:hover": { cursor: "pointer", transform: "scale(1.02)", borderRadius: '0px' }
+    "&:hover": { cursor: "pointer", transform: "scale(1.02)", borderRadius: '0' }
 };
 
 export const cardContentStyle = {
