@@ -53,7 +53,7 @@ export default function AllProducts() { // ALL Products Page basically
     return (
         <>
 
-            <section style={{ marginBottom: '100px' }}>
+            <section style={{ marginBottom: '100px', width: '100%', maxWidth: '2000px', margin: '0 auto' }}>
                 <Slider />
                 <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                     <h1 className="homePage-title">Skin Care Store</h1>
