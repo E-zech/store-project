@@ -59,7 +59,7 @@ export default function AllProducts() { // ALL Products Page basically
                     <h1 className="homePage-title">Skin Care Store</h1>
                 </header>
                 <section style={{
-                    width: '100%',
+                    width: '90%',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',

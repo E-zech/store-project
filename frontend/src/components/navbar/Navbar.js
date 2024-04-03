@@ -50,6 +50,19 @@ export default function Navbar() {
     };
 
     useEffect(() => {
+        document.body.style.paddingRight = '0';
+        document.body.style.overflow = 'visible';
+
+        return () => {
+            document.body.style.paddingRight = '';
+            document.body.style.overflow = '';
+        };
+    }, [handleOpenNavMenu]);
+
+
+
+
+    useEffect(() => {
         const productPathRegex = pathToRegexp('/product/:id');
         const addEditProductPathRegex = pathToRegexp('/product/add-edit/:id?');
 
@@ -85,6 +98,7 @@ export default function Navbar() {
                 backgroundColor: mode === 'dark' ? black : mainColor,
                 color: mode === 'dark' ? white : gray,
                 fontFamily: font,
+                paddingRight: '0 !important',
             }}>
                 <Container sx={{ maxWidth: "2000px !important", color: mode === 'dark' ? white : gray, }}>
                     <Toolbar disableGutters>
@@ -123,6 +137,10 @@ export default function Navbar() {
                                         top: "75px !important",
                                         left: '1px !important',
                                         width: '200px'
+                                    },
+                                    body: {
+                                        paddingRight: "0 !important",
+                                        overflow: 'visible !important'
                                     }
                                 }}>
                                 {/* the hamburger navbar titles */}

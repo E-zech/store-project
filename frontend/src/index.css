@@ -9,8 +9,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Fraunces", serif;
 }
 
 .root-wrapper{
@@ -21,5 +20,4 @@ code {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding: 5px;
 } 
