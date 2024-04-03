@@ -15,10 +15,16 @@ export default function OrderSum() {
     return (
         <>
             <section
-                style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
+                style={{
+                    width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px',
+                }}>
 
 
-                <section style={{ width: '80vw', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center', marginTop: '50px' }}>
+                <section style={{
+                    width: '100%', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center', marginTop: '50px',
+                    maxWidth: '2000px',
+                    margin: '0 auto'
+                }}>
 
 
                     <div style={{ backgroundColor: mainColor, gap: '5px', fontSize: '1.3rem', padding: '10px', borderRadius: '17px ', textAlign: 'center' }}>

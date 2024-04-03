@@ -1,10 +1,11 @@
 .container {
+    width: 97vw;
+    margin: 0 auto;
+    max-width: 2000px;
     margin-top: 71px;
-    /* background-color: red; */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
 }
 
 .wrapBtns {
@@ -50,4 +51,10 @@
 
 .back {
     transform: rotate(180deg);
+}
+
+@media screen and(max-width:2000px) {
+    .container{
+        width: 100%;
+    }
 }

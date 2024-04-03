@@ -115,12 +115,18 @@ export default function Review({ formPayment, setCurrentStep, }) {
         <>
             {
                 productsInCart.length !== 0 ? (
-                    <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px' }}>
+                    <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px', maxWidth: '2000px' }}>
                         <h1 className='sec-title'>Review</h1>
 
-                        <section style={{ width: '90vw', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center' }}>
+                        <section style={{ width: '90vw', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center', maxWidth: "2000px" }}>
                             {/* Products Header */}
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px', borderRadius: '17px 17px 0 0' }}>
+                            <div style={{
+                                display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px', borderRadius: '17px 17px 0 0',
+                                width: "100%",
+                                maxWidth: '2000px',
+                                margin: '0 auto'
+
+                            }}>
                                 <div style={{ textAlign: 'center' }}>Image</div>
                                 <div style={{ textAlign: 'center' }}>Title</div>
                                 <div style={{ textAlign: 'center' }}>Quantity</div>
@@ -132,9 +138,13 @@ export default function Review({ formPayment, setCurrentStep, }) {
 
                             {/* Products */}
                             {productsInCart.map((p) => (
-                                <div onClick={(e) => e.stopPropagation()} key={p._id} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px 0' }}>
+                                <div onClick={(e) => e.stopPropagation()} key={p._id} style={{
+                                    display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px 0', width: "100%",
+                                    maxWidth: '2000px',
+                                    margin: '0 auto'
+                                }}>
                                     <div className='reviewImgWrapper' style={{ textAlign: 'center' }}>
-                                        <img src={p.imgUrl} alt={p.imgAlt} style={{ display: 'block', width: '70px', height: '70px', margin: 'auto', borderRadius: '15px' }} />
+                                        <img src={p.imgUrl} alt={p.imgAlt} style={{ display: 'block', width: '70px', height: '70px', margin: 'auto', borderRadius: '15px', }} />
                                     </div>
                                     <div className='revieTitle' style={{ textAlign: 'center' }}>{p.title}</div>
                                     <div className='reviewQTY' style={{ textAlign: 'center' }}>{p.quantity}</div>
@@ -145,9 +155,17 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                 </div>
                             ))}
 
-                            <div style={{ width: '90vw', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
+                            <div style={{
+                                display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', width: "100%",
+                                maxWidth: '2000px',
+                                margin: '0 auto'
+                            }}>
                                 {/* Address part */}
-                                <section style={{ width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <section style={{
+                                    width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                    maxWidth: '2000px',
+                                    margin: '0 auto'
+                                }}>
                                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, textAlign: 'left', padding: '20px 0 20px 20px', borderBottomLeftRadius: '17px' }}>
                                         <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Address Details</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Full Name:</span> {user.firstName + ' ' + user.lastName}</div>
@@ -157,7 +175,12 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                 </section>
 
                                 {/* Payment part */}
-                                <section style={{ width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <section style={{
+                                    width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
+
+                                    maxWidth: '2000px',
+                                    margin: '0 auto'
+                                }}>
                                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, textAlign: 'left', padding: '20px 0 20px 20px', borderBottomRightRadius: '17px' }}>
                                         <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Payment Details</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Name On Card:</span> {formPayment.nameOnCard}</div>

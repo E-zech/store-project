@@ -3,7 +3,6 @@ import { GeneralContext } from "../../App";
 import { useNavigate, useParams } from "react-router-dom";
 import './Product.css';
 import Cart from "../../components/cart/Cart";
-
 import { GiBarefoot } from "react-icons/gi";
 import { FaHandSparkles } from "react-icons/fa";
 import { IoBody } from "react-icons/io5";
@@ -74,7 +73,7 @@ export default function Product() {
 
     return (
         <>
-            <main id="body">
+            <main className="productWrapper">
                 <header className="header" >
                     <h1 className="main-title">{product.title}</h1>
                 </header>

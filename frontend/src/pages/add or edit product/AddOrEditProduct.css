@@ -13,5 +13,6 @@ align-items: center;
 
 .edit-img{
     width: 10vw;
+    max-width: 200px;
     border-radius: 110px;
 }

@@ -54,9 +54,10 @@ export default function ProductMangement() {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 position: 'fixed',
-                                left: '26px',
-                                // right:'12px', // not sure where to place the add button
-                                bottom: '26px',
+                                maxWidth: '2000px',
+                                bottom: "26px",
+
+                                margin: '0 auto',
                                 color: mode === 'light' ? '#99c8c2' : '#fff',
                                 backgroundColor: mode === 'light' ? '#fff' : '#000',
                                 boxShadow: mode === 'light' ? '0px 0px 0px 5px #99c8c2, 0px 0px 9px 1px #99c8c2, 0px 0px 0px 7px #99c8c2' : '0px 0px 0px 5px #fff, 0px 0px 9px 1px #fff, 0px 0px 0px 7px #fff',
@@ -68,7 +69,7 @@ export default function ProductMangement() {
                                 },
                             }}
                         >
-                            <Add style={{ fontSize: '2.5rem', fontWeight: 'bold' }} />
+                            <Add style={{ fontSize: '2.5rem', fontWeight: 'bold', }} />
                         </Button>
 
                     </div>)}

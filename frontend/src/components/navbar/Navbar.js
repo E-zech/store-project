@@ -73,11 +73,18 @@ export default function Navbar() {
     return (
         <>
             <AppBar sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                maxWidth: '2000px',
+                margin: '0 auto', // This centers the AppBar horizontally
                 position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
                 backgroundColor: mode === 'dark' ? black : mainColor,
                 color: mode === 'dark' ? white : gray,
             }}>
-                <Container sx={{ maxWidth: "2400px !important", color: mode === 'dark' ? white : gray, }}>
+                <Container sx={{ maxWidth: "2000px !important", color: mode === 'dark' ? white : gray, }}>
                     <Toolbar disableGutters>
                         <Typography
                             variant="h6"

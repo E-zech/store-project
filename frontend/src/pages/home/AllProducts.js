@@ -94,7 +94,12 @@ export default function AllProducts() { // ALL Products Page basically
                         <Loader />
                     ) : (
                         <>
-                            <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>
+                            <div style={{
+                                display: 'flex', position: 'fixed', zIndex: '99', margin: '0 auto', maxWidth: '2000px',
+                                bottom: "10px",
+                                left: "10px",
+                                right: 0,
+                            }}>
                                 {
                                     user &&
                                     <Cart />
