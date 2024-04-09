@@ -12,14 +12,16 @@ export default function Footer() {
     <>
       <footer className="footer" style={{
         width: '100%',
-        height: '170px',
+        height: '110px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: mainColor,
         gap: '30px',
-        padding: '15px'
+        padding: '15px',
+        position: 'relative',
+        bottom: '0',
       }}>
         <div style={{
           width: '100%', display: 'flex',

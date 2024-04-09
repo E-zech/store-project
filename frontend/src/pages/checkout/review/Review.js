@@ -5,15 +5,12 @@ import { GeneralContext } from "../../../App";
 import Box from '@mui/material/Box';
 import { mainColor } from '../../../css/Main.style';
 import { useNavigate } from 'react-router-dom';
-
+import './Review.css';
 
 export default function Review({ formPayment, setCurrentStep, }) {
-    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode, setLoader } = useContext(GeneralContext);
-
+    const { user, productsInCart, setProductsInCart, products, setOrder, snackbar, mode, setLoader } = useContext(GeneralContext);
     const navigate = useNavigate();
-
     const fullAddress = `${user?.houseNumber} ${user?.street} St, ${user?.city}`;
-
 
     function removeOne(productId) {
         const confirmed = window.confirm("Are you sure you want to remove this product from the cart?");
@@ -67,15 +64,13 @@ export default function Review({ formPayment, setCurrentStep, }) {
             .reduce((acc, curr) => acc + curr, 0)
             .toFixed(2);
 
-        // Combine the product details with the cart items
         const combinedProducts = productsInCart.map(cartItem => ({
             productId: cartItem._id,
             quantity: cartItem.quantity,
             price: cartItem.price,
             ...products.find(product => product._id === cartItem._id)
         }));
-        console.log(combinedProducts)
-        // Construct the order object
+
         const obj = {
             user: user._id,
             fullName: user.firstName + ' ' + user.lastName,
@@ -87,6 +82,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
             fullAddress: fullAddress,
             totalPrice: parseFloat(totalPrice)
         };
+
         fetch(`http://localhost:5000/create/order`, {
             credentials: 'include',
             method: 'POST',
@@ -106,11 +102,13 @@ export default function Review({ formPayment, setCurrentStep, }) {
             })
             .catch(error => {
                 console.error('Error updating user:', error);
-            }).finally(() => setLoader(false))
-
-        setCurrentStep(currentStep => currentStep + 1);
-        snackbar("Thank you for your purchase");
+            }).finally(() => {
+                setLoader(false);
+                setCurrentStep(currentStep => currentStep + 1);
+                snackbar("Thank you for your purchase");
+            });
     }
+
     return (
         <>
             {
@@ -143,30 +141,40 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                     maxWidth: '2000px',
                                     margin: '0 auto'
                                 }}>
-                                    <div className='reviewImgWrapper' style={{ textAlign: 'center' }}>
+                                    <div style={{ textAlign: 'center' }}>
                                         <img src={p.imgUrl} alt={p.imgAlt} style={{ display: 'block', width: '70px', height: '70px', margin: 'auto', borderRadius: '15px', }} />
                                     </div>
-                                    <div className='revieTitle' style={{ textAlign: 'center' }}>{p.title}</div>
-                                    <div className='reviewQTY' style={{ textAlign: 'center' }}>{p.quantity}</div>
-                                    <div className='reviePrice' style={{ textAlign: 'center' }}>{p.price} $</div>
-                                    <div className='revieDiscount' style={{ textAlign: 'center' }}>{p.discount} $</div>
-                                    <div className='reviewTotal' style={{ textAlign: 'center' }}>{((p.price - p.discount) * p.quantity).toFixed(2)} $</div>
+                                    <div style={{ textAlign: 'center' }}>{p.title}</div>
+                                    <div style={{ textAlign: 'center' }}>{p.quantity}</div>
+                                    <div style={{ textAlign: 'center' }}>{p.price} $</div>
+                                    <div style={{ textAlign: 'center' }}>{p.discount} $</div>
+                                    <div style={{ textAlign: 'center' }}>{((p.price - p.discount) * p.quantity).toFixed(2)} $</div>
                                     <div onClick={() => removeOne(p._id)} style={{ textAlign: 'center', cursor: 'pointer', transition: 'all 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}>❌</div>
                                 </div>
                             ))}
 
-                            <div style={{
-                                display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', width: "100%",
-                                maxWidth: '2000px',
-                                margin: '0 auto'
-                            }}>
+                            <div className='papa'
+                            //  style={{
+                            //     display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', width: "100%",
+                            //     maxWidth: '2000px',
+                            //     margin: '0 auto'
+                            // }}
+                            >
                                 {/* Address part */}
-                                <section style={{
-                                    width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
-                                    maxWidth: '2000px',
-                                    margin: '0 auto'
-                                }}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, textAlign: 'left', padding: '20px 0 20px 20px', borderBottomLeftRadius: '17px' }}>
+                                <section className='wrapA'
+                                //  style={{
+                                //     width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                //     maxWidth: '2000px',
+
+                                // }}
+                                >
+                                    <div className='divAddress'
+                                    // style={{
+                                    //     display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, padding: '20px 0 20px 20px', borderBottomLeftRadius: '17px', '@media (max-width: 1200px)': {
+                                    //         alignItems: 'flex-start'
+                                    //     }
+                                    // }}
+                                    >
                                         <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Address Details</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Full Name:</span> {user.firstName + ' ' + user.lastName}</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Address:</span> {fullAddress}</div>
@@ -175,13 +183,21 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                 </section>
 
                                 {/* Payment part */}
-                                <section style={{
-                                    width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                <section className='wrapA'
+                                // style={{
+                                //     width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
 
-                                    maxWidth: '2000px',
-                                    margin: '0 auto'
-                                }}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, textAlign: 'left', padding: '20px 0 20px 20px', borderBottomRightRadius: '17px' }}>
+                                //     maxWidth: '2000px',
+                                //     margin: '0 auto'
+                                // }}
+                                >
+                                    <div className='divPayment'
+                                    // style={{
+                                    //     display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, padding: '20px 0 20px 20px', borderBottomRightRadius: '17px', '@media (max-width: 1200px)': {
+                                    //         alignItems: 'flex-start'
+                                    //     }
+                                    // }}
+                                    >
                                         <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Payment Details</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Name On Card:</span> {formPayment.nameOnCard}</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Last 4 Digits (Card):</span> {formPayment.cardNumber.slice(-4)}</div>
@@ -191,9 +207,14 @@ export default function Review({ formPayment, setCurrentStep, }) {
                             </div>
                         </section>
 
-                        <Grid item xs={12} sm={12}>
-                            <Button onClick={placeOrder} fullWidth variant="contained" sx={{ mt: 6, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>Place Order</Button>
-                            <Button type="submit" fullWidth variant="contained" onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))} sx={{ mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>Back</Button>
+                        <Grid item xs={12} sm={12} sx={{ width: '90vw', maxWidth: '2000px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: '20px' }}>
+                            <Button onClick={placeOrder} fullWidth variant="contained" sx={{ mt: 6, mb: 2, borderBottomLeftRadius: '17px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>
+                                Place Order
+                            </Button>
+
+                            <Button type="submit" fullWidth variant="contained" onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))} sx={{ mt: 6, mb: 2, borderBottomRightRadius: '17px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>
+                                Back
+                            </Button>
                         </Grid>
                     </section>
                 ) : (
@@ -214,11 +235,8 @@ export default function Review({ formPayment, setCurrentStep, }) {
                             Back To Home Page
                         </Button>
                     </Box>
-
                 )
             }
-
-
         </>
     );
 }

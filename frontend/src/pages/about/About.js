@@ -5,7 +5,7 @@ import "./AboutMediaQ.css";
 export default function About() {
     return (
         <>
-            <div>
+            <section>
                 <h1 className='main-title'>About Us</h1>
                 <br />
 
@@ -35,7 +35,7 @@ export default function About() {
                     </div>
                 </section>
 
-            </div>
+            </section>
         </>
     )
 }

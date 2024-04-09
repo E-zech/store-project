@@ -112,10 +112,11 @@ export default function Login() {
         <Container component="main" maxWidth="xs">
             <Box
                 sx={{
-                    marginTop: 15,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    justifyContent: 'center',
+                    minHeight: '100vh'
                 }}>
 
                 <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>

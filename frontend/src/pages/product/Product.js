@@ -9,6 +9,7 @@ import { IoBody } from "react-icons/io5";
 import { MdOutlineFaceRetouchingNatural } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 import { Tooltip } from "@mui/material";
+import { font } from "../../css/Main.style";
 
 export default function Product() {
     const [product, setProduct] = useState({});
@@ -73,12 +74,12 @@ export default function Product() {
 
     return (
         <>
-            <main className="productWrapper">
+            <main className="productWrapper" >
                 <header className="header" >
                     <h1 className="main-title">{product.title}</h1>
                 </header>
 
-                <section className="first-wrapper">
+                <section className="first-wrapper" >
 
                     <div className="img-container">
                         <Tooltip Tooltip title={`Category: ` + product.category} arrow>
@@ -110,17 +111,17 @@ export default function Product() {
 
                 </section>
 
-                <section className="second-wrapper">
+                <section className="second-wrapper" >
                     <div className="description">
-                        <h2>Description</h2>
+                        <h2 style={{ fontFamily: font }}>Description</h2>
                         {product.description}
                     </div>
                     <div className="how2use">
-                        <h2>How To Use</h2>
+                        <h2 style={{ fontFamily: font }}>How To Use</h2>
                         {product.howToUse}
                     </div>
                     <div className="Ingredients">
-                        <h2>Ingredients</h2>
+                        <h2 style={{ fontFamily: font }}>Ingredients</h2>
                         {product.Ingredients}
                     </div>
                     <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>

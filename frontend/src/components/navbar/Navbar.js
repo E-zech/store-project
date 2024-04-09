@@ -60,8 +60,6 @@ export default function Navbar() {
     }, [handleOpenNavMenu]);
 
 
-
-
     useEffect(() => {
         const productPathRegex = pathToRegexp('/product/:id');
         const addEditProductPathRegex = pathToRegexp('/product/add-edit/:id?');
@@ -100,7 +98,12 @@ export default function Navbar() {
                 fontFamily: font,
                 paddingRight: '0 !important',
             }}>
-                <Container sx={{ maxWidth: "2000px !important", color: mode === 'dark' ? white : gray, }}>
+                <Container sx={{
+                    maxWidth: "2000px !important", color: mode === 'dark' ? white : gray,
+                    '@media screen and (max-width: 600px)': {
+                        padding: 0
+                    }
+                }}>
                     <Toolbar disableGutters>
                         <Typography
                             variant="h6"
@@ -136,7 +139,7 @@ export default function Navbar() {
                                         color: white,
                                         top: "75px !important",
                                         left: '1px !important',
-                                        width: '200px'
+                                        width: '140px'
                                     },
                                     body: {
                                         paddingRight: "0 !important",
@@ -196,7 +199,11 @@ export default function Navbar() {
                             </Box>)}
 
                         <Box  >
-                            <IconButton sx={{ ml: 1 }} onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} color="inherit">
+                            <IconButton sx={{
+                                ml: 1, '@media screen and (max-width: 600px)': {
+                                    padding: 0
+                                }
+                            }} onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} color="inherit">
                                 {mode === 'dark' ? <Brightness4Icon /> : <NightlightIcon />}
                             </IconButton>
                         </Box>
@@ -216,11 +223,14 @@ export default function Navbar() {
                                 <Menu
                                     sx={{
                                         mt: '59px',
+                                        left: '0px',
                                         '& .MuiMenu-paper': {
                                             backgroundColor: mode === 'dark' ? black : mainColor,
                                             color: mode === 'dark' ? white : gray,
-                                            right: '0px',
-                                            width: '200px'
+                                            right: '0 !important',
+                                            marginLeft: '24px',
+                                            width: '130px',
+
                                         }
                                     }}
                                     id="menu-appbar"

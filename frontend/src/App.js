@@ -178,7 +178,7 @@ function App() {
                 <Navbar />
                 <Router />
                 {snackbarText && <SnackBar text={snackbarText} />}
-                {/* <Footer /> */}
+                <Footer />
             </GeneralContext.Provider>
         </ThemeProvider>
     );

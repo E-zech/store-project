@@ -49,7 +49,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
-    const { setFilteredProducts, setLoader, products, setProducts, initialProducts, setInitialProducts } = useContext(GeneralContext);
+    const { setProducts, initialProducts } = useContext(GeneralContext);
 
     const navigate = useNavigate();
     const path = useResolvedPath().pathname;
@@ -77,7 +77,7 @@ export default function SearchBar() {
                     <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
-                    placeholder="Search…"
+                    placeholder=""
                     inputProps={{ 'aria-label': 'search' }}
                     value={searchValue}
                     onChange={(ev) => handleChange(ev.target.value)} />

@@ -1,0 +1,43 @@
+.papa{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 2000px;
+    margin: 0 auto;
+}
+
+.papa .wrapA{
+width: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+max-width: 2000px;
+margin: 0 auto;
+color: black;
+background-color: #99c8c2; 
+font-size: 1.2rem;
+padding: 20px 0 20px 20px;
+};
+
+
+ /* .papa .wrapA .divAddress,
+.papa .wrapA .divPayment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    font-size: 0.8rem;
+    color: black;
+  
+  
+    border-bottom-right-radius: 17px;
+};  */
+
+ @media screen and (max-width:900px){
+    .papa .wrapA{
+    background-color: blue;
+    }
+} 

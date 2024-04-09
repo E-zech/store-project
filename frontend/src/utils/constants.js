@@ -17,3 +17,4 @@ export const disable = [
     '/user-management', '/about', '/login', '/signup', '/account', '/checkout', '/my-orders'
 ];
 
+
