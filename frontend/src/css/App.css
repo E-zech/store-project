@@ -56,9 +56,6 @@
     border: 4px double #00000094;
 }
 
-@media screen and (max-width:1400px) {
-
-}
 
 @media screen and (max-width:1000px) {
     .main-title{
