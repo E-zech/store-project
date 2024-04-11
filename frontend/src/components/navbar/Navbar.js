@@ -88,7 +88,7 @@ export default function Navbar() {
                 justifyContent: 'center',
                 maxWidth: '2000px',
                 height: '75px',
-                margin: '0 auto', // This centers the AppBar horizontally
+                margin: '0 auto',
                 position: 'fixed',
                 top: 0,
                 left: 0,
@@ -99,10 +99,7 @@ export default function Navbar() {
                 paddingRight: '0 !important',
             }}>
                 <Container sx={{
-                    maxWidth: "2000px !important", color: mode === 'dark' ? white : gray,
-                    '@media screen and (max-width: 600px)': {
-                        padding: 0
-                    }
+                    maxWidth: "2000px !important", color: mode === 'dark' ? white : gray
                 }}>
                     <Toolbar disableGutters>
                         <Typography

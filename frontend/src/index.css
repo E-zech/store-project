@@ -1,17 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,100..900,0..100;1,9..144,100..900,0..100&display=swap');
-
-
-body {
-  margin: 0;
-  font-family: "Fraunces", serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: "Fraunces", serif;
-}
-
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,100..900,0..100;1,9..144,100..900,0..100&display=swap');
 .root-wrapper{
   width: 100%;
   max-width: 2000px;
@@ -20,5 +7,7 @@ code {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+
+  font-family: "Fraunces", serif;
 } 
 

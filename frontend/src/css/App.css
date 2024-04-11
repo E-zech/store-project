@@ -1,23 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,100..900,0..100;1,9..144,100..900,0..100&display=swap');
+
 
 *{
     padding:  0;
     margin: 0;
     box-sizing: border-box;  
-    font-family: "Fraunces", serif;/* check */
     user-select: none; 
 }
 
-/* body{
-    
-} */
 .main-title,
 .sec-title{
     text-align: center;
+
 }
 
 .main-title{
-    color: #3f2f06;
+    color: #3f2f06; 
     font-size: 3rem;
     padding: 40px 0px 7px 0px;
     margin-top: 70px;

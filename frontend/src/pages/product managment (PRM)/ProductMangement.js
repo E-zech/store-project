@@ -6,6 +6,8 @@ import { Button } from '@mui/material';
 import Add from '@mui/icons-material/Add.js';
 import '../../css/grid.css';
 import Loader from '../../components/loader/Loader.js';
+import { mainColor, white } from '../../css/Main.style.js';
+import { boxShadowDark, boxShadowLight, hoverBoxShadowDark, hoverBoxShadowLight } from '../../components/cart/Cart.style.js';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
@@ -33,7 +35,7 @@ export default function ProductMangement() {
             <header>
                 <h1 className='main-title leftFix'>Products Manegment </h1> <br />
             </header>
-            <section className="container-cards" style={{ marginBottom: '100px' }}>
+            <section className="container-cards" style={{ marginBottom: '100px', maxWidth: '2000px' }}>
                 {loader ? (
                     <Loader />
                 ) : (
@@ -41,39 +43,41 @@ export default function ProductMangement() {
                         {
                             products.filter(product => product.category === selectedCategory || selectedCategory === "All").map((product, index) => <ProductComponent key={index} product={product} />)
                         }
-                        <Button
-                            variant="contained"
-                            onClick={() => { navigate(`/product/add-edit`) }}
-                            sx={{
-                                minWidth: 0,
-                                width: '50px',
-                                zIndex: '99',
-                                height: '50px',
-                                borderRadius: '50%',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                position: 'fixed',
-                                maxWidth: '2000px',
-                                bottom: "26px",
+                        <div style={{
+                            display: 'flex', position: 'fixed', zIndex: '99', margin: '0 auto', maxWidth: '2000px',
+                            bottom: "10px",
+                            left: "10px",
+                            right: 0,
 
-                                margin: '0 auto',
-                                color: mode === 'light' ? '#99c8c2' : '#fff',
-                                backgroundColor: mode === 'light' ? '#fff' : '#000',
-                                boxShadow: mode === 'light' ? '0px 0px 0px 5px #99c8c2, 0px 0px 9px 1px #99c8c2, 0px 0px 0px 7px #99c8c2' : '0px 0px 0px 5px #fff, 0px 0px 9px 1px #fff, 0px 0px 0px 7px #fff',
-                                transition: 'all 0.3s ease',
-                                '&:hover': {
-                                    transform: 'scale(1.1)',
-                                    boxShadow: mode === 'light' ? '0px 0px 0px 6px #99c8c2, 0px 0px 10px 2px #99c8c2, 0px 0px 0px 8px #99c8c2' : '0px 0px 0px 6px #fff, 0px 0px 10px 2px #fff, 0px 0px 0px 8px #fff',
-                                    backgroundColor: 'white',
-                                },
-                            }}
-                        >
-                            <Add style={{ fontSize: '2.5rem', fontWeight: 'bold', }} />
-                        </Button>
+                        }}>
+                            <Button
+                                variant="contained"
+                                onClick={() => { navigate(`/product/add-edit`) }}
+                                sx={{
+                                    minWidth: 0,
+                                    width: '50px', height: '50px',
+                                    zIndex: '99',
+                                    bottom: '15px',
+                                    borderRadius: '50%',
+                                    left: '15px',
+                                    color: mode === 'light' ? mainColor : white,
+                                    backgroundColor: mode === 'light' ? 'white' : 'black',
+                                    boxShadow: mode === 'light' ? boxShadowLight : boxShadowDark,
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        transform: 'scale(1.1)',
+                                        boxShadow: mode === 'light' ? hoverBoxShadowLight : hoverBoxShadowDark,
+                                        backgroundColor: mode === 'light' ? 'white' : 'black',
+                                    },
+                                }}
+                            >
+                                <Add style={{ fontSize: '2.5rem', fontWeight: 'bold', }} />
+                            </Button>
+                        </div>
+
 
                     </div>)}
-            </section>
+            </section >
 
 
         </>

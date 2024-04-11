@@ -22,7 +22,7 @@ export default function ProductComponent({ product }) {
   const [isSaving, setIsSaving] = useState(false);
   const path = useResolvedPath().pathname;
   const navigate = useNavigate();
-  const { user, mode, products, setProducts, productsInCart, snackbar, favProducts, setFavProducts, add2Cart, setLoader } = useContext(GeneralContext);
+  const { user, mode, products, setProducts, productsInCart, snackbar, favProducts, setFavProducts, add2Cart, setLoader, setPopUpLogin } = useContext(GeneralContext);
 
   const isAdded = productsInCart?.some(item => item._id === product._id);
   const isFavorite = favProducts?.some(item => item._id === product._id);
@@ -35,40 +35,49 @@ export default function ProductComponent({ product }) {
 
 
   const handleClick = () => {
-    if (isAdded) {
-      snackbar("Item already in cart");
+    if (user) {
+      if (isAdded) {
+        snackbar("Item already in cart");
+      } else {
+        add2Cart(product._id, product.title, product.price);
+      }
     } else {
-      add2Cart(product._id, product.title, product.price);
+      setPopUpLogin(true);
     }
     setIsSaving(false);
   };
 
 
   const toggleFavOrNot = (id) => {
-    const snackbarMessage = isFavorite ? 'Removed from Favorites' : 'Added to Favorites';
+    if (user) {
+      const snackbarMessage = isFavorite ? 'Removed from Favorites' : 'Added to Favorites';
 
-    fetch(`http://localhost:5000/products/faves/${id}`, {
-      credentials: 'include',
-      method: 'PATCH',
-      headers: {
-        'Authorization': localStorage.token,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => {
-        if (!res.ok) {
-          return snackbar('Network response was not ok : product Component "toggleFavOrNot"');
-        }
-        return res.json();
+      fetch(`http://localhost:5000/products/faves/${id}`, {
+        credentials: 'include',
+        method: 'PATCH',
+        headers: {
+          'Authorization': localStorage.token,
+          'Content-Type': 'application/json',
+        },
       })
-      .then(data => {
-        setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
-        setFavProducts(favProducts => {
-          if (!favProducts) favProducts = [];
-          return isFavorite ? favProducts.filter(p => p._id !== id) : [...favProducts, product];
+        .then(res => {
+          if (!res.ok) {
+            return snackbar('Network response was not ok : product Component "toggleFavOrNot"');
+          }
+          return res.json();
+        })
+        .then(data => {
+          setProducts(products => products.map(p => p._id === id ? { ...p, faves: data.faves } : p));
+          setFavProducts(favProducts => {
+            if (!favProducts) favProducts = [];
+            return isFavorite ? favProducts.filter(p => p._id !== id) : [...favProducts, product];
+          });
+          snackbar(snackbarMessage);
         });
-        snackbar(snackbarMessage);
-      });
+    } else {
+      setPopUpLogin(true);
+    }
+
   };
 
 
@@ -154,7 +163,7 @@ export default function ProductComponent({ product }) {
 
           </CardContent>
           {
-            user && <CardActions disableSpacing
+            <CardActions disableSpacing
               sx={{
                 display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #99c8c2',
                 borderTopLeftRadius: '80px', borderTopRightRadius: '5px', borderBottomLeftRadius: '5px', borderBottomRightRadius: '80px',
@@ -177,7 +186,7 @@ export default function ProductComponent({ product }) {
                   }}>
                     <IconButton
                       aria-label="Add or Remove from cart"
-                      onClick={() => { setIsSaving(true); handleClick() }}
+                      onClick={() => { setIsSaving(true); handleClick(); }}
                       disabled={isSaving}
                       sx={{
                         '&:hover': {

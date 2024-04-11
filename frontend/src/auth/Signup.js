@@ -73,7 +73,6 @@ export default function Signup() {
             alignItems: 'center',
             justifyContent: 'center',
             minHeight: '100vh',
-            marginTop: '110px'
           }}>
 
           <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>

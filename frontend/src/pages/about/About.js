@@ -1,10 +1,12 @@
 import React from 'react';
 import "./About.css";
 import "./AboutMediaQ.css";
+import PopUpLogin from '../../components/popUpLogin/PopUpLogin';
 
 export default function About() {
     return (
         <>
+
             <section>
                 <h1 className='main-title'>About Us</h1>
                 <br />

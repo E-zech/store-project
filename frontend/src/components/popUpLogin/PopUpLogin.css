@@ -1,0 +1,14 @@
+
+.popUpLoginBtn{
+    padding: 5px;
+    border-radius: 7px;
+    border:none;
+    font-size: 0.9rem;
+    background-color: #e6f2f1;
+    transition: all 0.2s ease-in-out;
+}
+
+.popUpLoginBtn:hover{
+    cursor: pointer;
+    background-color: #e0dfdf;
+}

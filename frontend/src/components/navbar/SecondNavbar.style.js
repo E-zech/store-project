@@ -5,6 +5,7 @@ export const appBarStyle = {
     justifyContent: 'center',
     alignItems: 'center',
     boxShadow: 'none',
+
 };
 
 export const toolbarStyle = {

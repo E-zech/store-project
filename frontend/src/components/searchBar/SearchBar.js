@@ -19,6 +19,13 @@ const Search = styled('div')(({ theme }) => ({
         marginLeft: theme.spacing(1),
         width: 'auto',
     },
+    '@media (max-width: 450px)': {
+        position: 'absolute',
+        top: '70px',
+        left: 0,
+        right: 0,
+        zIndex: 999, // Adjust the z-index as needed
+    },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -77,7 +84,7 @@ export default function SearchBar() {
                     <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
-                    placeholder=""
+                    placeholder="Search"
                     inputProps={{ 'aria-label': 'search' }}
                     value={searchValue}
                     onChange={(ev) => handleChange(ev.target.value)} />

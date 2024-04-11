@@ -1,4 +1,4 @@
-.container {
+.sliderContainer {
     width: 100%;
     margin: 0 auto;
     max-width: 2000px;
@@ -22,7 +22,7 @@
     display: none; /* Initially hide the buttons */
 }
 
-.container:hover .wrapBtns {
+.sliderContainer:hover .wrapBtns {
     display: flex; /* Show the buttons when hovering over the container */
 }
 
@@ -30,6 +30,7 @@
     display: block;
     object-fit: fill;
     width: 100%;
+    max-height: 800px;
 }
 
 .sliderBtn {

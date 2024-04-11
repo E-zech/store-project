@@ -83,6 +83,7 @@ export default function Account() {
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
+                            minHeight: '64vh'
                         }}
                     >
                         <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgUrl} alt="User Avatar" />

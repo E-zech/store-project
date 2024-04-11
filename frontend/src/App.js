@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import SnackBar from './components/snackbar/Snackbar';
 import './css/ScrollBar.css';
 import { useNavigate, useResolvedPath } from 'react-router-dom';
+import PopUpLogin from './components/popUpLogin/PopUpLogin';
 
 export const GeneralContext = createContext();
 
@@ -26,6 +27,7 @@ function App() {
     const [productsInCart, setProductsInCart] = useState([]);
     const [order, setOrder] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [popUpLogin, setPopUpLogin] = useState(false);
     const navigate = useNavigate();
 
     const snackbar = text => {
@@ -172,11 +174,12 @@ function App() {
                 loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory,
                 favProducts, setFavProducts, add2Cart,
                 initialProducts, setInitialProducts,
-                order, setOrder
+                order, setOrder, popUpLogin, setPopUpLogin
             }}>
 
                 <Navbar />
                 <Router />
+                {popUpLogin && <PopUpLogin />}
                 {snackbarText && <SnackBar text={snackbarText} />}
                 <Footer />
             </GeneralContext.Provider>
