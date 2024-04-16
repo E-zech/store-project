@@ -99,7 +99,12 @@ export default function Navbar() {
                 paddingRight: '0 !important',
             }}>
                 <Container sx={{
-                    maxWidth: "2000px !important", color: mode === 'dark' ? white : gray
+                    maxWidth: "2000px !important",
+                    color: mode === 'dark' ? 'white' : gray,
+                    '@media (max-width: 450px)': {
+                        padding: '0px',
+                        color: mode === 'dark' ? 'white' : gray,
+                    }
                 }}>
                     <Toolbar disableGutters>
                         <Typography
@@ -108,7 +113,11 @@ export default function Navbar() {
                             component="a"
                             onClick={() => { navigate('/') }}
                             sx={homeIconStyle}>
-                            <HomeIcon />
+                            <img src="../../../public/logoSkinCare.png" alt="" style={{
+                                width: '50px',
+                                height: '50px',
+                            }} />
+                            {/* <HomeIcon /> */}
                         </Typography>
 
                         <Box sx={menuIconStyle}>
@@ -161,7 +170,11 @@ export default function Navbar() {
                             component="a"
                             href="/"
                             sx={homeIconStyleSmall}>
-                            <HomeIcon />
+                            <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="" style={{
+                                width: '50px',
+                                height: '50px',
+                            }} />
+                            {/* <HomeIcon /> */}
                         </Typography>
                         {/* the big navbar titles */}
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -191,6 +204,9 @@ export default function Navbar() {
                         {isSearchBar && (
                             <Box sx={{
                                 width: user ? '30vw' : '40vw',
+                                '@media (max-width: 450px)': {
+                                    width: '10vw'
+                                }
                             }}>
                                 <SearchBar />
                             </Box>)}
