@@ -15,20 +15,15 @@ flex-direction: column;
  align-items: center;
 }
 
-.header > h1 {
-    padding: 10px;
-    font-size: 3rem;
-    font-weight: 400;
-}
-
 .first-wrapper{
-    width: 98vw;
-    max-width: 2000px;
-    height: 50vh;
+    width: 80vw;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    max-width: 2000px;
+    height: 50vh;
     margin: 0 auto;
+    padding-top: 80px;
 }
 
 .img-container{
@@ -36,28 +31,26 @@ flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50vw;
+    width:50vw;
     height: 50vh;
 }
 
 .icon{
-position: absolute;
 padding: 5px;
-top:5%;
-left: 5%;
 cursor: pointer;
 transition: transform 0.3s ease;
 }
 
-.icon:hover {
-    transform: rotate(-40deg); /* Rotate the icon by 40 degrees on hover */
-    color: rgb(116, 113, 113); /* Change the color to white on hover */
-}
+
 
 .img{
-    width: 50%;
-    height: 50%;
-    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    min-width: 500px;
+    min-height: 500px;
+    border-radius: 15%;
 }
 
 .btnsPrice-wrapper{
@@ -86,7 +79,7 @@ transition: transform 0.3s ease;
     align-items: center;
     gap: 10px;
 }
-.price, .discount{
+.price,.category, .totalPrice,.discount{
     font-size: 1.5em;
 }
 
@@ -105,9 +98,8 @@ transition: transform 0.3s ease;
    transform: scale(1.01);
 }
 
-
 .second-wrapper{
-    width: 98vw;
+    width: 63vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -115,17 +107,144 @@ transition: transform 0.3s ease;
     padding: 20px;
     gap: 20px;
     max-width: 2000px;
-margin: 0 auto;
+    margin: 100px auto;
 }
 
-@media screen and (max-width:800px) {
+.icon:hover {
+    transform: scaleX(-1); 
+    color: rgb(116, 113, 113); 
+}
+
+
+@media screen and (max-width:2000px) {
+    .second-wrapper{
+        width: 66vw;
+    }
+}
+
+@media screen and (max-width:1850px) {
+    .second-wrapper{
+        width: 67vw;
+    }
+}
+
+@media screen and (max-width:1600px) {
+    .second-wrapper{
+        width: 73vw;
+    }
+}
+
+@media screen and (max-width:1450px) {
+    .second-wrapper{
+        width: 77vw;
+    }
+}
+
+@media screen and (max-width:1250px) {
+    .btnsPrice-wrapper{
+        width: 35vw;
+    }
+    .btns-container{
+        width: 90%;
+    }
     .first-wrapper{
+        width: 90vw;
+    }
+    .second-wrapper{
+        width: 80vw;
+    }
+}
+
+@media screen and (max-width:1000px) {
+     .first-wrapper{
         flex-direction: column;
         height: auto;
+        padding-top: 0;
     }
     .img-container{
         width: 70vw;
         height: 60vh;
     }
-    
+    .img{
+        width: 72%;
+        height: 72%;
+        min-width: 450px;
+        min-height: 450px;
+    }  
+    .priceDiscount-container{
+      align-items: center;
+    }
+    .btn{  min-width: 388px;}
+    .btnsPrice-wrapper{
+        width: 49vw;
+    }
+  .btns-container{
+    padding-top: 50px;
+  }
+    .second-wrapper{
+        width: 68vw;
+    }
+}
+
+@media screen and (max-width:600px) {
+   
+    .img-container{
+    margin-top: -60px;
+
+    }
+    .img{
+        width: 65%;
+        height: 65%;
+        min-width: 350px;
+        min-height: 350px;
+    }
+    .priceDiscount-container{
+        align-items: flex-start;
+      }
+      .btns-container{
+        padding-top: 50px;
+      }
+      .btnsPrice-wrapper{
+        width: 80vw;
+        margin-top: -40px;
+    }
+   .second-wrapper{
+        width: 83vw;
+        margin:80px auto ;
+    }
+}
+
+@media screen and (max-width:450px) {
+   
+    .img-container{
+    margin-top: -105px;
+
+    }
+    .img{
+        width: 55%;
+        height: 55%;
+        min-width: 300px;
+        min-height: 300px;
+    }
+    .priceDiscount-container{
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .btnsPrice-wrapper{
+        margin-top: -59px;
+    }
+
+    .btn{
+        min-width: 300px;
+    }
+
+    .price,.category, .discount,.totalPrice, .btn{
+        font-size: 1.4em;
+    }
+
+   .second-wrapper{
+        width: 83vw;
+        margin:80px auto ;
+    }
 }

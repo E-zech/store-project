@@ -65,17 +65,24 @@
     }
 }
 
-@media screen and (max-width:700px) {
-
-}
-
-@media screen and (max-width:500px) {
+@media screen and (max-width:600px) {
     .main-title{
         font-size: 2.2rem ;
         padding: 30px 10px 5px 10px;
     }
     .sec-title{
         font-size: 1.2rem ;
+        padding: 14px 30px;
+    }  
+}
+
+@media screen and (max-width:500px) {
+    .main-title{
+        font-size: 2rem ;
+        padding: 30px 10px 5px 10px;
+    }
+    .sec-title{
+        font-size: 1.1rem ;
         padding: 14px 30px;
     }   
 }

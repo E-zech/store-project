@@ -10,6 +10,7 @@ import { MdOutlineFaceRetouchingNatural } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
 import { Tooltip } from "@mui/material";
 import { font } from "../../css/Main.style";
+import '../../css/App.css';
 
 export default function Product() {
     const [product, setProduct] = useState({});
@@ -76,26 +77,24 @@ export default function Product() {
         <>
             <main className="productWrapper" >
                 <header className="header" >
-                    <h1 className="main-title">{product.title}</h1>
+                    <h1 className="main-title">{product.title}
+                        <div className="icon">{renderIcon(product.category)}
+                        </div>
+                    </h1>
                 </header>
 
                 <section className="first-wrapper" >
-
                     <div className="img-container">
-                        <Tooltip Tooltip title={`Category: ` + product.category} arrow>
-                            <div className="icon">{renderIcon(product.category)}</div>
-                        </Tooltip>
-
                         <img className="img" src={product.imgUrl} alt={product.imgAlt} />
                     </div>
 
                     <div className="btnsPrice-wrapper">
                         <div className="priceDiscount-container">
-                            <span className="price">Category: {product.category} </span> <br />
+                            <span className="category">Category: {product.category} </span> <br />
                             <span className="price">Price: {product.price}$</span> <br />
                             <span className="discount">Discount: {product.discount}$</span><br />
 
-                            <span className="price">Total Price: {parseFloat((((product.price - product.discount)) * 100) / 100).toFixed(2)}$</span>
+                            <span className="totalPrice">Total Price: {parseFloat((((product.price - product.discount)) * 100) / 100).toFixed(2)}$</span>
                         </div>
                         {
                             user &&
@@ -124,7 +123,8 @@ export default function Product() {
                         <h2 style={{ fontFamily: font }}>Ingredients</h2>
                         {product.Ingredients}
                     </div>
-                    <div style={{ display: 'flex', position: 'fixed', bottom: '10px', left: '10px', zIndex: '9999' }}>
+
+                    <div className="cartWrapper">
                         {
                             user &&
                             <Cart />

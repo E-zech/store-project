@@ -8,6 +8,7 @@ import '../../css/grid.css';
 import Loader from '../../components/loader/Loader.js';
 import { mainColor, white } from '../../css/Main.style.js';
 import { boxShadowDark, boxShadowLight, hoverBoxShadowDark, hoverBoxShadowLight } from '../../components/cart/Cart.style.js';
+import '../../css/noResultsFound.css'
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
@@ -35,21 +36,20 @@ export default function ProductMangement() {
             <header>
                 <h1 className='main-title leftFix'>Products Manegment </h1> <br />
             </header>
-            <section className="container-cards" style={{ marginBottom: '100px', maxWidth: '2000px' }}>
+            <section className="container-cards" style={{ maxWidth: '2000px', minHeight: '70vh' }}>
                 {loader ? (
                     <Loader />
                 ) : (
                     <div className="grid-cards">
-                        {
+                        {products.length > 0 ? (
                             products.filter(product => product.category === selectedCategory || selectedCategory === "All").map((product, index) => <ProductComponent key={index} product={product} />)
-                        }
-                        <div style={{
-                            display: 'flex', position: 'fixed', zIndex: '99', margin: '0 auto', maxWidth: '2000px',
-                            bottom: "10px",
-                            left: "10px",
-                            right: 0,
+                        ) : (
+                            <h2 className='noResults'>No results found</h2>
+                        )
 
-                        }}>
+                        }
+
+                        <div className='cartWrapper'>
                             <Button
                                 variant="contained"
                                 onClick={() => { navigate(`/product/add-edit`) }}

@@ -1,0 +1,6 @@
+Time: 2024-04-14T06:56:49.457Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

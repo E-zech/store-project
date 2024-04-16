@@ -86,10 +86,10 @@ function App() {
                     setUserRoleType(data.roleType);
                 })
                 .catch(err => {
-                    console.log(err);
                     setUserRoleType(RoleTypes.none);
                     logout();
                     navigate('/');
+                    console.log(err);
                 })
                 .finally(() => setLoader(false));
         } else {

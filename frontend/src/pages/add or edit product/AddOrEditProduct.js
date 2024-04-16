@@ -115,7 +115,7 @@ export default function AddOrEditProduct() {
     return (
         <>
             <>
-                <Typography component="h1" variant="h5" sx={{ marginTop: "85px", textAlign: 'center', fontSize: '2rem' }}>
+                <Typography component="h1" variant="h5" sx={{ marginTop: "120px", textAlign: 'center', fontSize: '2rem' }}>
                     {id ? `Edit Product` : `Add Product`}
                 </Typography>
                 {

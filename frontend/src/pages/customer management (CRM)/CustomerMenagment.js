@@ -89,7 +89,7 @@ export default function CustomerMenagment() {
         <h1 className="main-title">Customer Management</h1>
       </header>
 
-      <section style={{ height: 'auto', width: '90vw', padding: '25px 15px 170px', margin: '0 auto', display: 'flex', justifyContent: "center", alignItems: 'center' }}>
+      <section style={{ height: 'auto', width: '90vw', padding: '25px 15px 170px', margin: '0 auto', display: 'flex', justifyContent: "center", alignItems: 'center', minHeight: '70vh' }}>
         <DataGrid
           rows={allClients}
           columns={columns}

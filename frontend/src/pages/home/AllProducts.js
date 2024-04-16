@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import Slider from '../../components/slider/Slider';
 import { mainColor } from '../../css/Main.style';
 import Loader from '../../components/loader/Loader';
-
+import '../../css/noResultsFound.css';
 
 
 export default function AllProducts() { // ALL Products Page basically
@@ -53,53 +53,43 @@ export default function AllProducts() { // ALL Products Page basically
     return (
         <>
 
-            <section style={{ width: '100%', maxWidth: '2000px', margin: '0 auto', minHeight: '100vh' }}>
+            <section style={{ width: '100%', maxWidth: '2000px', margin: '0 auto', minHeight: '70vh' }}>
                 <Slider />
                 <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                     <h1 className="homePage-title">Skin Care Store</h1>
                 </header>
-                <section style={{
-                    width: '90%',
+
+                <div style={{
+                    width: '100%',
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'space-around',
                     alignItems: 'center',
-                    margin: '50px 5px'
+                    padding: '50px 0'
                 }}>
-                    <div style={{
-                        width: '50vw',
-                        display: 'flex',
-                        justifyContent: 'space-around',
-                        alignItems: 'center'
-                    }}>
 
-                        <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
-                            onClick={displayLow2high}>
-                            Low To High
-                        </button>
+                    <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
+                        onClick={displayLow2high}>
+                        Low To High
+                    </button>
 
-                        <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
-                            onClick={displayHigh2Low}>
-                            High To Low
-                        </button>
+                    <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
+                        onClick={displayHigh2Low}>
+                        High To Low
+                    </button>
 
-                        <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
-                            onClick={displayDiscount}>
-                            Discount Products
-                        </button>
-                    </div>
-                </section>
+                    <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
+                        onClick={displayDiscount}>
+                        Discount Products
+                    </button>
+                </div>
+
 
                 <section >
                     {loader ? (
                         <Loader />
                     ) : (
                         <>
-                            <div style={{
-                                display: 'flex', position: 'fixed', zIndex: '99', margin: '0 auto', maxWidth: '2000px',
-                                bottom: "10px",
-                                left: "10px",
-                                right: 0,
-                            }}>
+                            <div className='cartWrapper'>
                                 {
                                     user &&
                                     <Cart />
@@ -115,7 +105,7 @@ export default function AllProducts() { // ALL Products Page basically
                                             <ProductComponent key={index} product={product} />
                                         ))
                                 ) : (
-                                    <h2 style={{ textAlign: 'center', fontSize: '2rem' }}>No results found</h2>
+                                    <h2 className='noResults'>No results found</h2>
                                 )}
                             </div>
                         </>

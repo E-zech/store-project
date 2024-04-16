@@ -1,0 +1,16 @@
+.noResults {
+    background-color: #99c8c2;
+    text-align: center;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    width: 350px;
+    font-size: 2.5rem;
+    border-radius: 50%;
+   margin-top: 50px;
+}
+
+
+

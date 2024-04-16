@@ -116,7 +116,7 @@ export default function Login() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    minHeight: '100vh'
+                    minHeight: '697px'
                 }}>
 
                 <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>

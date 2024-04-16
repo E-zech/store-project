@@ -5,7 +5,8 @@ import ResultNotFound from '../ResultNotFound';
 import Cart from '../../components/cart/Cart';
 import '../../css/grid.css';
 import Loader from '../../components/loader/Loader';
-
+import '../../css/noResultsFound.css';
+import './FavProduct.css';
 export default function FavProducts() {
 
     const { user, snackbar, loader, setLoader, products, selectedCategory, favProducts, setFavProducts } = useContext(GeneralContext);
@@ -42,28 +43,28 @@ export default function FavProducts() {
                 <br />
             </header>
 
-            <div style={{
-                display: 'flex', position: 'fixed', zIndex: '99', margin: '0 auto', maxWidth: '2000px',
-                bottom: "10px",
-                left: "10px",
-                right: 0,
-            }}>
+            <div className='cartWrapper'>
                 {
                     user &&
                     <Cart />
                 }
-
             </div>
 
-            <section className="container-cards" style={{ marginBottom: '100px' }}>
+            <section className="container-cards" style={{ minHeight: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 {loader ? (
                     <Loader />
                 ) : (
                     <div className="grid-cards">
-                        {products
-                            .filter(product => product.category === selectedCategory || selectedCategory === "All")
-                            .filter(product => favProducts?.some(favProduct => favProduct._id === product._id))
-                            .map((product, index) => <ProductComponent key={index} product={product} setFavProducts={setFavProducts} />)
+
+                        {products.length > 0 ? (
+                            products
+                                .filter(product => product.category === selectedCategory || selectedCategory === "All")
+                                .filter(product => favProducts?.some(favProduct => favProduct._id === product._id))
+                                .map((product, index) => <ProductComponent key={index} product={product} setFavProducts={setFavProducts} />)
+                        ) : (
+                            <h2 className='noResults'>No results found</h2>
+                        )
+
                         }
                     </div>
                 )}
