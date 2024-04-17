@@ -10,6 +10,8 @@ export const clientStructure = [
   { name: 'street', type: 'text', label: 'Street', required: true, block: false },
   { name: 'houseNumber', type: 'number', label: 'House Number', required: true, block: false },
   { name: 'zip', type: 'text', label: 'zip', required: true, block: false },
+  { name: 'imgSrc', type: 'text', label: 'imgSrc', required: false, block: false },
+  { name: 'imgAlt', type: 'text', label: 'imgAlt', required: false, block: true },
 ];
 
 export const schema = Joi.object({
@@ -24,6 +26,8 @@ export const schema = Joi.object({
   street: Joi.string().min(2).max(56).label('street').required(),
   houseNumber: Joi.number().min(1).label('houseNumber').required(),
   zip: Joi.string().min(3).max(9).label('zip').required(),
+  imgSrc: Joi.string().uri().label('img Src').allow(""),
+  imgAlt: Joi.string().min(5).max(100).label('img Alt').allow(""),
 }).options({ abortEarly: false });
 
 
@@ -36,6 +40,8 @@ export const ClientStructureNoPassword = [
   { name: 'street', type: 'text', label: 'Street', required: true, block: false },
   { name: 'houseNumber', type: 'number', label: 'House Number', required: true, block: false },
   { name: 'zip', type: 'text', label: 'zip', required: true, block: false },
+  { name: 'imgSrc', type: 'text', label: 'imgSrc', required: false, block: false },
+  { name: 'imgAlt', type: 'text', label: 'imgAlt', required: false, block: false },
 ];
 
 
@@ -49,6 +55,8 @@ export const SchemaNoPassword = Joi.object({
   street: Joi.string().min(2).max(56).label('street').required(),
   houseNumber: Joi.number().min(1).label('houseNumber').required(),
   zip: Joi.string().min(3).max(9).label('zip').required(),
+  imgSrc: Joi.string().min(5).max(555).label('img Src').allow(""),
+  imgAlt: Joi.string().min(5).max(100).label('img Alt').allow(""),
 }).options({ abortEarly: false });
 
 export const PaymentStructure = [

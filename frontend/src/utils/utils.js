@@ -11,7 +11,9 @@ export const initialFormData = {
     city: '',
     street: '',
     houseNumber: 0,
-    zip: ''
+    zip: '',
+    imgSrc: '',
+    imgAlt: ''
 };
 
 export const initialFormDataNoPassword = {
@@ -22,7 +24,9 @@ export const initialFormDataNoPassword = {
     city: '',
     street: '',
     houseNumber: 0,
-    zip: ''
+    zip: '',
+    imgSrc: '',
+    imgAlt: ''
 };
 
 export const initialPayment = {
@@ -43,10 +47,13 @@ export const handleChange = (ev, formData, setFormData, errors, setErrors, schem
     delete tempErrors[name];
 
     if (validate.error) {
+        console.log(validate.error)
         const item = validate.error.details.find((e) => e.context.key === name);
         if (item) {
             tempErrors[name] = item.message;
+            console.log(item.message)
         }
+        console.log(tempErrors)
     }
     if (name in tempErrors && value === "") {
         delete tempErrors[name];
@@ -54,10 +61,15 @@ export const handleChange = (ev, formData, setFormData, errors, setErrors, schem
 
     setErrors(tempErrors);
 
-    const formIsValid = Object.keys(tempErrors).length === 0 &&
-        Object.values(obj).every((value) => {
+    const formIsValid =
+        Object.keys(tempErrors).length === 0 &&
+        Object.entries(obj).every(([name, value]) => {
+            if (value === "" && (name === "imgSrc" || name === "imgAlt")) {
+                return true;
+            }
             return value !== "";
         });
+
     setIsFormValid(formIsValid);
 };
 

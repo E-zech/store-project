@@ -10,7 +10,7 @@ import { handleChange, useInputsFormColors } from '../../../utils/utils'
 
 
 export default function Payment({ formPayment, setFormPayment, errors, setErrors, setCurrentStep }) {
-    const { mode } = useContext(GeneralContext);
+    const { user, mode } = useContext(GeneralContext);
     const [isFormPaymentValid, setIsFormPaymentValid] = useState(false);
     const { sx } = useInputsFormColors();
     const handlePayment = (ev) => {
@@ -30,7 +30,7 @@ export default function Payment({ formPayment, setFormPayment, errors, setErrors
                         paddingBottom: '100px'
                     }}>
 
-                    <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
+                    <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc}>
                         <AssignmentIndIcon />
                     </Avatar>
 

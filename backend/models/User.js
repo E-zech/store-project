@@ -50,6 +50,16 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
 
+    imgSrc: {
+        type: String,
+        maxlength: 555,
+    },
+
+    imgAlt: {
+        type: String,
+        maxlength: 100,
+    },
+
     createdAt: {
         type: Date,
         default: Date.now

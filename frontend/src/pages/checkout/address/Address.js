@@ -28,7 +28,9 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                 city: user.city || '',
                 street: user.street || '',
                 houseNumber: user.houseNumber || 0,
-                zip: user.zip || ''
+                zip: user.zip || '',
+                imgSrc: user.imgSrc || '',
+                imgAlt: user.imgAlt || ''
             });
         }
     }, [user]);
@@ -61,7 +63,7 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                     paddingBottom: '100px'
                 }}>
 
-                <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
+                <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc}>
                     <AssignmentIndIcon />
                 </Avatar>
 

@@ -18,6 +18,8 @@ export const UserValid = Joi.object({
     street: Joi.string().min(2).max(56).label('street').required(),
     houseNumber: Joi.number().min(1).label('houseNumber').required(),
     zip: Joi.string().min(3).max(9).label('zip').required(),
+    imgSrc: Joi.string().uri().allow(""),
+    imgAlt: Joi.string().allow(""),
 
 
     addToCart: Joi.array().items(
@@ -47,6 +49,8 @@ export const UserEditValid = Joi.object({
     street: Joi.string().min(2).max(56).label('street').required(),
     houseNumber: Joi.number().min(1).label('houseNumber').required(),
     zip: Joi.number().min(1).label('zip').required(),
+    imgSrc: Joi.string().uri().allow(""),
+    imgAlt: Joi.string().allow(""),
 });
 
 export const userLoginValidation = Joi.object({

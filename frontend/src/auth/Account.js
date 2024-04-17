@@ -30,7 +30,9 @@ export default function Account() {
                 city: user.city || '',
                 street: user.street || '',
                 houseNumber: user.houseNumber || 0,
-                zip: user.zip || 0
+                zip: user.zip || 0,
+                imgSrc: user.imgSrc || '',
+                imgAlt: user.imgAlt || ''
             });
         }
         setLoader(false);
@@ -83,11 +85,14 @@ export default function Account() {
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            minHeight: '64vh'
+                            minHeight: '70vh',
+                            paddingBottom: '100px'
                         }}
                     >
-                        <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgUrl} alt="User Avatar" />
+                        <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc} alt="User Avatar" />
+
                         <Typography component="h1" variant="h5">Edit Details</Typography>
+
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                             <Grid container spacing={2}>
                                 {ClientStructureNoPassword.map(s =>

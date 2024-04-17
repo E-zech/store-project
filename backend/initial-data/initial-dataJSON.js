@@ -12,7 +12,9 @@ export const users = [
         "city": "New-York",
         "street": "Marvin",
         "houseNumber": "5",
-        "zip": "0452"
+        "zip": "0452",
+        "imgSrc": "https://cdn.images.express.co.uk/img/dynamic/67/590x/493317_1.jpg",
+        "imgAlt": "a photo of myself",
     },
     {
         "firstName": "business",
@@ -24,7 +26,9 @@ export const users = [
         "city": "New-Jersey",
         "street": "Marvin",
         "houseNumber": "5",
-        "zip": "5050"
+        "zip": "5050",
+        "imgSrc": "https://focus.independent.ie/thumbor/wPEk0bUtA-XAmD75-p8sSwS7eec=/960x640/smart/prod-mh-ireland/6694cbea-d386-11ed-b9b3-0210609a3fe2",
+        "imgAlt": "a photo of myself",
     },
     {
         "firstName": "admin",
@@ -36,7 +40,9 @@ export const users = [
         "city": "Florida",
         "street": "Marvin",
         "houseNumber": "5",
-        "zip": "5050"
+        "zip": "5050",
+        "imgSrc": "https://cdn.vox-cdn.com/thumbor/j-A3Yhq9z1PQXARGc_9fgLLlYnM=/0x0:2207x3000/1200x800/filters:focal(1019x704:1371x1056)/cdn.vox-cdn.com/uploads/chorus_image/image/63694287/82383576.jpg.0.jpg",
+        "imgAlt": "a photo of myself",
     }
 ];
 
