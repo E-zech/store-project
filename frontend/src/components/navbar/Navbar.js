@@ -101,6 +101,7 @@ export default function Navbar() {
                 <Container sx={{
                     maxWidth: "2000px !important",
                     color: mode === 'dark' ? 'white' : gray,
+                    paddingLeft: '16px',
                     '@media (max-width: 450px)': {
                         padding: '0px',
                         color: mode === 'dark' ? 'white' : gray,
@@ -113,11 +114,21 @@ export default function Navbar() {
                             component="a"
                             onClick={() => { navigate('/') }}
                             sx={homeIconStyle}>
-                            <img src="../../../public/logoSkinCare.png" alt="" style={{
+                            <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
                                 width: '50px',
                                 height: '50px',
+                                filter: 'grayscale(0.9)',
                             }} />
                             {/* <HomeIcon /> */}
+                            <span style={{
+                                fontFamily: font,
+                                fontSize: '1.8rem',
+                                fontWeight: 'bold',
+                                marginLeft: '-28px',
+                                marginTop: '23px',
+                                color: black
+
+                            }}>S</span>
                         </Typography>
 
                         <Box sx={menuIconStyle}>
@@ -170,10 +181,20 @@ export default function Navbar() {
                             component="a"
                             href="/"
                             sx={homeIconStyleSmall}>
-                            <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="" style={{
+                            <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
                                 width: '50px',
                                 height: '50px',
+                                filter: 'grayscale(0.9)',
                             }} />
+                            <span style={{
+                                fontFamily: font,
+                                fontSize: '1.8rem',
+                                fontWeight: 'bold',
+                                marginLeft: '-28px',
+                                marginTop: '26px',
+                                color: black
+
+                            }}>S</span>
                             {/* <HomeIcon /> */}
                         </Typography>
                         {/* the big navbar titles */}
@@ -202,14 +223,16 @@ export default function Navbar() {
                         }
 
                         {isSearchBar && (
-                            <Box sx={{
-                                width: user ? '30vw' : '40vw',
-                                '@media (max-width: 450px)': {
-                                    width: '10vw'
-                                }
-                            }}>
-                                <SearchBar />
-                            </Box>)}
+                            // <Box sx={{
+                            //     width: user ? '30vw' : '40vw',
+                            //     '@media (max-width: 450px)': {
+                            //         width: '10vw'
+                            //     }
+                            // }}> </Box>
+
+                            <SearchBar />
+
+                        )}
 
                         <Box  >
                             <IconButton sx={{

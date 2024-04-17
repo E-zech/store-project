@@ -19,7 +19,7 @@ const Search = styled('div')(({ theme }) => ({
         marginLeft: theme.spacing(1),
         width: 'auto',
     },
-    '@media (max-width: 450px)': {
+    '@media (max-width: 560px)': {
         position: 'absolute',
         top: '70px',
         left: 0,
@@ -78,7 +78,13 @@ export default function SearchBar() {
     }, [path]);
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{
+            flexGrow: 0.5, '@media (max-width: 900px)': {
+                flexGrow: 10
+            }, '@media (max-width: 600px)': {
+                flexGrow: 0.5
+            }
+        }}>
             <Search>
                 <SearchIconWrapper>
                     <SearchIcon />

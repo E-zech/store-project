@@ -12,7 +12,7 @@ export const menuIconStyle = {
 };
 
 export const homeIconStyleSmall = {
-    flexGrow: 1,
+    flexGrow: 12,
     mr: 2,
     display: { xs: 'flex', md: 'none' },
     textDecoration: 'none',

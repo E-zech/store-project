@@ -3,6 +3,8 @@ import { Button, Grid, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { GeneralContext } from "../../../App";
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { mainColor } from '../../../css/Main.style';
 import { useNavigate } from 'react-router-dom';
 import './Review.css';
@@ -113,10 +115,14 @@ export default function Review({ formPayment, setCurrentStep, }) {
         <>
             {
                 productsInCart.length !== 0 ? (
-                    <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px', maxWidth: '2000px' }}>
-                        <h1 className='sec-title'>Review</h1>
+                    <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px', maxWidth: '2000px', minHeight: '70vh' }}>
+                        <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
+                            <AssignmentIndIcon />
+                        </Avatar>
 
-                        <section style={{ width: '90vw', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center', maxWidth: "2000px" }}>
+                        <Typography component="h1" variant="h5">Review</Typography>
+
+                        <section style={{ width: '90vw', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center', maxWidth: "2000px", paddingTop: '30px' }}>
                             {/* Products Header */}
                             <div style={{
                                 display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px', borderRadius: '17px 17px 0 0',
@@ -153,28 +159,10 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                 </div>
                             ))}
 
-                            <div className='papa'
-                            //  style={{
-                            //     display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', width: "100%",
-                            //     maxWidth: '2000px',
-                            //     margin: '0 auto'
-                            // }}
-                            >
+                            <div className='papa'>
                                 {/* Address part */}
-                                <section className='wrapA'
-                                //  style={{
-                                //     width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
-                                //     maxWidth: '2000px',
-
-                                // }}
-                                >
-                                    <div className='divAddress'
-                                    // style={{
-                                    //     display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, padding: '20px 0 20px 20px', borderBottomLeftRadius: '17px', '@media (max-width: 1200px)': {
-                                    //         alignItems: 'flex-start'
-                                    //     }
-                                    // }}
-                                    >
+                                <section className='wrapA'>
+                                    <div className='divAddress'>
                                         <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Address Details</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Full Name:</span> {user.firstName + ' ' + user.lastName}</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Address:</span> {fullAddress}</div>
@@ -183,21 +171,8 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                 </section>
 
                                 {/* Payment part */}
-                                <section className='wrapA'
-                                // style={{
-                                //     width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center',
-
-                                //     maxWidth: '2000px',
-                                //     margin: '0 auto'
-                                // }}
-                                >
-                                    <div className='divPayment'
-                                    // style={{
-                                    //     display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', fontSize: '1.2rem', color: 'black', backgroundColor: mainColor, padding: '20px 0 20px 20px', borderBottomRightRadius: '17px', '@media (max-width: 1200px)': {
-                                    //         alignItems: 'flex-start'
-                                    //     }
-                                    // }}
-                                    >
+                                <section className='wrapA'>
+                                    <div className='divPayment'>
                                         <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Payment Details</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Name On Card:</span> {formPayment.nameOnCard}</div>
                                         <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Last 4 Digits (Card):</span> {formPayment.cardNumber.slice(-4)}</div>
@@ -218,7 +193,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
                         </Grid>
                     </section>
                 ) : (
-                    <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '5px' }}>
+                    <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '5px', minHeight: '70vh' }}>
                         <Typography sx={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>You dont have Product In Cart.</Typography>
                         <Button
                             onClick={() => navigate('/')}

@@ -58,6 +58,7 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    paddingBottom: '100px'
                 }}>
 
                 <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
