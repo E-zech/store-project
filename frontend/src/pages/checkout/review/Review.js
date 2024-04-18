@@ -117,7 +117,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
                 productsInCart.length !== 0 ? (
                     <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px', maxWidth: '2000px', minHeight: '70vh' }}>
                         <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc}>
-                            <AssignmentIndIcon />
+                            <AssignmentIndIcon sx={{ width: '40px', height: '40px' }} />
                         </Avatar>
 
                         <Typography component="h1" variant="h5">Review</Typography>

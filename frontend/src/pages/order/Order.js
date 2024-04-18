@@ -26,8 +26,7 @@ export default function Order() {
                 return res.json();
             })
             .then(data => {
-                console.log(data);
-                setOrder(data); // set the received orders
+                setOrder(data);
             })
             .catch(error => {
                 console.error('Error fetching cart items:', error);
@@ -41,7 +40,7 @@ export default function Order() {
                     <h1 className="main-title">
                         My Orders
                     </h1>
-                    <Grid container spacing={2} justifyContent="center" sx={{ width: '90vw', margin: '35px auto' }}>
+                    <Grid container spacing={2} justifyContent="center" sx={{ width: '90vw', margin: '35px auto', maxWidth: '2000px', minHeight: '70vh' }}>
                         {order.map((orderItem, index) => (
                             <Grid item xs={12} key={index}>
                                 <Accordion>
@@ -130,9 +129,19 @@ export default function Order() {
                     </Grid>
                 </>
             ) : (
-                <h1 className="main-title">
-                    You Don't Have Orders Yet
-                </h1>
+                <>
+
+                    <h1 className="main-title">
+                        My Orders
+                    </h1>
+
+                    <section style={{ minHeight: '56vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div>
+                            You Dont Have Orders Yet
+                        </div>
+                    </section>
+                </>
+
             )
             }
         </>

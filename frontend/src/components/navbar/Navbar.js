@@ -20,8 +20,8 @@ export const checkPermissions = (permissions, userRoleType) => {
 }
 
 export default function Navbar() {
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
+    const [anchorElNav, setAnchorElNav] = useState(false);
+    const [anchorElUser, setAnchorElUser] = useState(false);
     const [isSearchBar, setIsSearchBar] = useState(false);
     const [visibleSecondAppBar, setVisibleSecondAppBar] = useState(false);
     const [isAppBarFixed, setIsAppBarFixed] = useState(false);
@@ -253,7 +253,7 @@ export default function Navbar() {
                                                 m: 1, bgcolor: transparent,
                                                 color: mode === 'dark' ? white : gray
                                             }}
-                                            src={user.imgUrl} alt="User Avatar" />
+                                            src={user.imgSrc} alt={user.imgAlt} />
                                     </IconButton>
                                 </Tooltip>
                                 <Menu

@@ -31,7 +31,7 @@ export default function Payment({ formPayment, setFormPayment, errors, setErrors
                     }}>
 
                     <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc}>
-                        <AssignmentIndIcon />
+                        <AssignmentIndIcon sx={{ width: '40px', height: '40px' }} />
                     </Avatar>
 
                     <Typography component="h1" variant="h5">Payment</Typography>

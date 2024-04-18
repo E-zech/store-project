@@ -2,13 +2,12 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Fab from '@mui/material/Fab';
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { GeneralContext } from "../../App";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -16,7 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { listStyle, bigBoxStyle, smallBoxStyle, counterWrapper, counterBtn, footerBtnWrapper, colorLight, colorDark, boxShadowLight, boxShadowDark, hoverBoxShadowLight, hoverBoxShadowDark, imgTitleWrapper, totalWrapper } from './Cart.style'
+import { listStyle, bigBoxStyle, counterWrapper, counterBtn, footerBtnWrapper, boxShadowLight, boxShadowDark, hoverBoxShadowLight, hoverBoxShadowDark, imgTitleWrapper, totalWrapper } from './Cart.style'
 import { mainColor, white } from '../../css/Main.style';
 
 export default function Cart() {
@@ -66,7 +65,6 @@ export default function Cart() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setProductsInCart(data);
             })
             .catch(error => {
@@ -208,11 +206,8 @@ export default function Cart() {
         )
     );
 
-
-
     return (
         <>
-
             <div>
                 <Box onClick={toggleDrawer} sx={{ '& > :not(style)': { m: 2 } }}>
                     <Fab
@@ -227,6 +222,7 @@ export default function Cart() {
                             '&:hover': {
                                 transform: 'scale(1.1)',
                                 boxShadow: mode === 'light' ? hoverBoxShadowLight : hoverBoxShadowDark,
+                                backgroundColor: mode === 'light' ? 'white' : 'black',
                             },
                         }} >
                         <ShoppingCartIcon />

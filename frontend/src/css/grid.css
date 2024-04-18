@@ -8,27 +8,27 @@
 }
 
 
-@media screen and (max-width:1850px) {
+@media screen and (max-width:1950px) {
     .grid-cards{
         grid-template-columns: repeat(4, auto);
     }
 
 }
-@media screen and (max-width:1500px) {
+@media screen and (max-width:1600px) {
     .grid-cards{
         grid-template-columns: repeat(3, auto);
     }
 
 }
 
-@media screen and (max-width:1150px) {
+@media screen and (max-width:1200px) {
     .grid-cards{
         grid-template-columns: repeat(2, auto);
     }
 
 }
 
-@media screen and (max-width:750px) {
+@media screen and (max-width:850px) {
     .grid-cards{
         grid-template-columns: repeat(1, auto);
     }

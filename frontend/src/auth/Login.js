@@ -83,16 +83,9 @@ export default function Login() {
                 }
             })
             .then(data => {
-                console.log(data)
-
                 const token = data.token
-                console.log(token)
-
                 localStorage.token = token;
-
                 const decodedToken = jwtDecode(token);
-                console.log(decodedToken)
-
                 const roleTypeTKN = decodedToken.roleType;
 
                 setUser(data);

@@ -196,3 +196,15 @@ Route: /cart
 Status Code: 401
 Error:  Unauthorized
 
+Time: 2024-04-17T08:46:58.153Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-17T08:55:54.078Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+

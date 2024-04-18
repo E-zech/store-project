@@ -47,13 +47,10 @@ export const handleChange = (ev, formData, setFormData, errors, setErrors, schem
     delete tempErrors[name];
 
     if (validate.error) {
-        console.log(validate.error)
         const item = validate.error.details.find((e) => e.context.key === name);
         if (item) {
             tempErrors[name] = item.message;
-            console.log(item.message)
         }
-        console.log(tempErrors)
     }
     if (name in tempErrors && value === "") {
         delete tempErrors[name];

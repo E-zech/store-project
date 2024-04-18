@@ -16,7 +16,9 @@ export default function OrderSum() {
         <>
             <section
                 style={{
-                    width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px',
+                    width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px', maxWidth: '2000px', minHeight: '45vh', '@media (max-width: 1000px)': {
+                        minHeight: '48vh'
+                    },
                 }}>
 
 
@@ -27,7 +29,7 @@ export default function OrderSum() {
                 }}>
 
 
-                    <div style={{ backgroundColor: mainColor, gap: '5px', fontSize: '1.3rem', padding: '10px', borderRadius: '17px ', textAlign: 'center' }}>
+                    <div style={{ width: '85vw', backgroundColor: mainColor, gap: '5px', fontSize: '1.3rem', padding: '10px', borderRadius: '17px ', textAlign: 'center', maxWidth: '2000px', margin: '0 auto' }}>
                         <h2 >Your order has been placed </h2>
                         <br />
                         <div > <span style={{ fontWeight: 'bold' }}>Your order number is:</span>  {order._id}</div>
@@ -39,7 +41,7 @@ export default function OrderSum() {
                     </div>
 
 
-                    <Grid item xs={6} sm={6} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Grid item xs={6} sm={6} sx={{ display: 'flex', justifyContent: 'space-between', maxWidth: '2000px', margin: '0 auto', width: '85vw' }}>
                         <Button onClick={() => { navigate('/') }} variant="contained" sx={{ width: "45%", mt: 3, mb: 1, p: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}> Home Page</Button>
 
                         <Button type="submit" variant="contained" onClick={() => { navigate('/my-orders') }} sx={{ width: "45%", mt: 3, mb: 1, p: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>My Orders</Button>

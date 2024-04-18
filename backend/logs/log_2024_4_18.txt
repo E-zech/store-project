@@ -1,0 +1,108 @@
+Time: 2024-04-18T07:10:50.719Z
+Method: GET
+Route: /users/661f79376473b08fb86b39c6
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T07:10:50.730Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T07:10:50.939Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T07:58:31.622Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-18T07:58:52.123Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-18T07:59:29.425Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T08:20:47.583Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-18T08:20:58.247Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-18T08:21:42.643Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-18T09:00:22.016Z
+Method: POST
+Route: /cart/add
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T09:00:30.379Z
+Method: GET
+Route: /users/661f79376473b08fb86b39c6
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T09:00:30.384Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T09:00:30.612Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T10:06:06.864Z
+Method: GET
+Route: /users/661f79376473b08fb86b39c6
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T10:06:06.869Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T10:06:07.048Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T10:36:00.943Z
+Method: PUT
+Route: /users/661f79376473b08fb86b39c6
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-18T10:36:17.850Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+

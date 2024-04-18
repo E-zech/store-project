@@ -152,7 +152,6 @@ function App() {
             .then(res => res.json())
             .then(data => {
                 snackbar(`${title} added to cart successfully`);
-                console.log(data);
                 setProducts(existingProducts =>
                     existingProducts.map(product =>
                         product._id === data._id ? { ...product } : product));

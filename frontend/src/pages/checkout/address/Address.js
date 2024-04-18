@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button, Grid, Container, Typography, Tooltip } from '@mui/material';
+import { TextField, Button, Grid, Container, Typography, Tooltip, Checkbox, FormControlLabel, useRadioGroup } from '@mui/material';
 import { useEffect, useState, useContext } from 'react';
 import { GeneralContext } from "../../../App";
 import Box from '@mui/material/Box';
@@ -10,9 +10,10 @@ import { ClientStructureNoPassword, SchemaNoPassword } from '../../../components
 
 
 export default function Address({ errors, setErrors, setCurrentStep, handleSubmit }) {
-    const { user, mode } = useContext(GeneralContext);
+    const { user, setUser, mode } = useContext(GeneralContext);
     const [formData, setFormData] = useState(initialFormDataNoPassword);
     const [isFormValid, setIsFormValid] = useState(false);
+    const [updateDetails, setUpdateDetails] = useState(false);
     const [showAddressConfirmation, setShowAddressConfirmation] = useState(true);
     const { sx } = useInputsFormColors();
 
@@ -36,19 +37,30 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
     }, [user]);
 
 
+    const handleStep = () => {
+        if (updateDetails) {
+            console.log('true')
+            console.log(formData)
+            console.log(user)
+        } else {
+            console.log('false')
+            console.log(user)
+        }
+
+        // setCurrentStep(currentStep => currentStep + 1)
+    }
+
     const handleAddress = (ev) => {
         handleChange(ev, formData, setFormData, errors, setErrors, SchemaNoPassword, setIsFormValid);
     };
 
     const handleYes = () => {
         setIsFormValid(true);
-        console.log("yes")
         setShowAddressConfirmation(false);
     }
 
     const handleNo = () => {
         setFormData(initialFormDataNoPassword);
-        console.log("no")
         setShowAddressConfirmation(false);
     }
 
@@ -63,8 +75,8 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                     paddingBottom: '100px'
                 }}>
 
-                <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc}>
-                    <AssignmentIndIcon />
+                <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user?.imgSrc}>
+                    <AssignmentIndIcon sx={{ width: '40px', height: '40px' }} />
                 </Avatar>
 
                 <Typography component="h1" variant="h5">Address</Typography>
@@ -127,8 +139,16 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                                     inputProps={{ min: 0 }}
                                     sx={sx}
                                 />
+
                             </Grid>
                         )}
+                        <FormControlLabel
+                            control={<Checkbox
+                                // checked ={}
+                                onChange={() => setUpdateDetails(!updateDetails)} />}
+                            label="Update My Details"
+                            sx={{ ml: '5px' }}
+                        />
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
@@ -137,7 +157,7 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                             fullWidth
                             variant="contained"
                             disabled={!isFormValid}
-                            onClick={() => setCurrentStep(currentStep => currentStep + 1)}
+                            onClick={handleStep}
                             sx={{
                                 mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                                 '&:hover': {

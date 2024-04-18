@@ -56,7 +56,6 @@ export default function Product() {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setProduct(data);
             }).finally(() => {
                 setLoader(false);
