@@ -78,17 +78,17 @@ export const useInputsFormColors = () => {
         sx: {
             '& .MuiOutlinedInput-root': {
                 '&.Mui-focused fieldset': {
-                    borderColor: mode === 'dark' ? white : mainColor, // Change the border color when focused
+                    borderColor: mode === 'dark' ? white : mainColor,
                 },
             },
             '& input::placeholder': {
-                color: mode === 'dark' ? white : black, // Change the placeholder color
+                color: mode === 'dark' ? white : black,
             },
             '& .MuiInputLabel-root': {
-                color: mode === 'dark' ? white : black, // Change the label color
+                color: mode === 'dark' ? white : black,
             },
             '& .MuiInputLabel-root.Mui-focused': {
-                color: mode === 'dark' ? white : mainColor, // Change the focused label color
+                color: mode === 'dark' ? white : mainColor,
             },
         },
     };

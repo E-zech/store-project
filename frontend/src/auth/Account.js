@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../App';
 import { ClientStructureNoPassword, SchemaNoPassword } from '../components/FormValidation';
 import { initialFormDataNoPassword, handleChange, useInputsFormColors } from '../utils/utils'
+import { accountAvatar, accountContainer } from './auth.style';
 
 export default function Account() {
     const [formData, setFormData] = useState(initialFormDataNoPassword);
@@ -79,21 +80,17 @@ export default function Account() {
         <>
             {user ?
                 <Container component="main" maxWidth="xs">
-                    <Box
-                        sx={{
-                            marginTop: 15,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            minHeight: '70vh',
-                            paddingBottom: '100px'
+                    <Box sx={accountContainer}>
+
+                        <Avatar sx={{
+                            ...accountAvatar,
+                            backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white'
                         }}
-                    >
-                        <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc} alt="User Avatar" />
+                            src={user.imgSrc} alt="User Avatar" />
 
                         <Typography component="h1" variant="h5">Edit Details</Typography>
 
-                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <Box component="form" onSubmit={handleSubmit} noValidate mt={1}>
                             <Grid container spacing={2}>
                                 {ClientStructureNoPassword.map(s =>
                                     <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
@@ -122,7 +119,8 @@ export default function Account() {
                                 variant="contained"
                                 disabled={!isFormValid}
                                 sx={{
-                                    mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
+                                    mt: 3, mb: 2,
+                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                                     '&:hover': {
                                         backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
                                     }

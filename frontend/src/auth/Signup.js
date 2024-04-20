@@ -11,6 +11,7 @@ import { useContext, useState } from 'react';
 import { GeneralContext } from '../App';
 import { schema, clientStructure } from '../components/FormValidation';
 import { initialFormData, handleChange, useInputsFormColors } from '../utils/utils'
+import { signupConatiner } from './auth.style';
 
 
 export default function Signup() {
@@ -66,14 +67,7 @@ export default function Signup() {
     <>
       <Container component="main" maxWidth="xs">
         <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '750px',
-            padding: '140px 0'
-          }}>
+          sx={signupConatiner}>
 
           <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
             <AssignmentIndIcon />

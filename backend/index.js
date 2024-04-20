@@ -14,7 +14,7 @@ import { getContent } from './configs/contentConfig.js';
 import orderRoutes from './routes/orderRoutes.js';
 
 // Environment setup
-const env = dotenv.config({ path: './prod.env' });
+const env = dotenv.config({ path: './.env' }); // for mongoDb Atlas use path: './prod.env'
 const port = env.parsed.PORT || 5000;
 
 // MongoDB Connection

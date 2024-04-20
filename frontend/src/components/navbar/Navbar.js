@@ -12,7 +12,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import SecondNavbar from './SecondNavbar';
 import { black, font, gray, mainColor, mainFont, selectColor, transparent, white } from '../../css/Main.style';
-import { homeIconStyle, homeIconStyleSmall, menuIconStyle } from './Navbar.style';
+import { mainAppbarStyle, mainConatiner, homeIconStyle, homeIconStyleSmall, menuIconStyleXs, logoSpanStyleBig, logoSpanStyleSmall, logoImgStyle, menuStyle, menuItemStyle, menuIconStyleMd, menuBTN, darkModeBTN, userBTN, userMenuStyle } from './Navbar.style';
 import { RoleTypes, pages, disable } from '../../utils/constants';
 
 export const checkPermissions = (permissions, userRoleType) => {
@@ -47,6 +47,10 @@ export default function Navbar() {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
+    };
+
+    const colorGray = {
+        color: mode === 'dark' ? white : gray,
     };
 
     useEffect(() => {
@@ -84,27 +88,17 @@ export default function Navbar() {
     return (
         <>
             <AppBar sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                maxWidth: '2000px',
-                height: '75px',
-                margin: '0 auto',
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
+                ...mainAppbarStyle,
                 backgroundColor: mode === 'dark' ? black : mainColor,
-                color: mode === 'dark' ? white : gray,
+                ...colorGray,
                 fontFamily: font,
-                paddingRight: '0 !important',
             }}>
                 <Container sx={{
-                    maxWidth: "2000px !important",
-                    color: mode === 'dark' ? 'white' : gray,
-                    paddingLeft: '16px',
+                    ...mainConatiner,
+                    ...colorGray,
                     '@media (max-width: 450px)': {
                         padding: '0px',
-                        color: mode === 'dark' ? 'white' : gray,
+                        ...colorGray,
                     }
                 }}>
                     <Toolbar disableGutters>
@@ -115,23 +109,17 @@ export default function Navbar() {
                             onClick={() => { navigate('/') }}
                             sx={homeIconStyle}>
                             <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
-                                width: '50px',
-                                height: '50px',
-                                filter: 'grayscale(0.9)',
+                                ...logoImgStyle,
+                                filter: mode === 'dark' ? 'hue-rotate(30deg) brightness(191%)' : 'grayscale(90%)',
                             }} />
-                            {/* <HomeIcon /> */}
                             <span style={{
+                                ...logoSpanStyleBig,
+                                color: mode === 'dark' ? 'white' : 'black',
                                 fontFamily: font,
-                                fontSize: '1.8rem',
-                                fontWeight: 'bold',
-                                marginLeft: '-28px',
-                                marginTop: '23px',
-                                color: black
-
                             }}>S</span>
                         </Typography>
 
-                        <Box sx={menuIconStyle}>
+                        <Box sx={menuIconStyleXs}>
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -150,25 +138,22 @@ export default function Navbar() {
                                 open={Boolean(anchorElNav)}
                                 onClose={handleCloseNavMenu}
                                 sx={{
-                                    display: { xs: 'block', md: 'none' },
+                                    ...menuStyle,
                                     '& .MuiMenu-paper': {
                                         backgroundColor: mode === 'dark' ? black : mainColor,
-                                        color: white,
+                                        color: 'white',
                                         top: "75px !important",
                                         left: '1px !important',
                                         width: '140px'
                                     },
-                                    body: {
-                                        paddingRight: "0 !important",
-                                        overflow: 'visible !important'
-                                    }
+
                                 }}>
-                                {/* the hamburger navbar titles */}
+
                                 {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
                                     <Link key={p.route} to={p.route}
-                                        style={{ textDecoration: 'none', color: mode === 'dark' ? white : gray, }}>
+                                        style={{ ...colorGray, textDecoration: 'none' }}>
                                         <MenuItem onClick={handleCloseNavMenu}>
-                                            <Typography textAlign="center" sx={{ textTransform: 'none', fontSize: "1.1rem", }}>{p.title}</Typography>
+                                            <Typography textAlign="center" sx={menuItemStyle}>{p.title}</Typography>
                                         </MenuItem>
                                     </Link>
                                 ))}
@@ -182,31 +167,23 @@ export default function Navbar() {
                             href="/"
                             sx={homeIconStyleSmall}>
                             <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
-                                width: '50px',
-                                height: '50px',
-                                filter: 'grayscale(0.9)',
+                                ...logoImgStyle,
+                                filter: mode === 'dark' ? 'hue-rotate(30deg) brightness(191%)' : 'grayscale(90%)',
                             }} />
                             <span style={{
+                                ...logoSpanStyleSmall,
+                                color: mode === 'dark' ? 'white' : 'black',
                                 fontFamily: font,
-                                fontSize: '1.8rem',
-                                fontWeight: 'bold',
-                                marginLeft: '-28px',
-                                marginTop: '26px',
-                                color: black
-
                             }}>S</span>
-                            {/* <HomeIcon /> */}
                         </Typography>
-                        {/* the big navbar titles */}
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+                        <Box sx={menuIconStyleMd}>
                             {pages.filter(p => !p.permissions || checkPermissions(p.permissions, userRoleType)).map(p => (
                                 <Link key={p.route} to={p.route} style={{ textDecoration: 'none' }}>
                                     <Button
                                         onClick={handleCloseNavMenu}
                                         sx={{
-                                            display: 'block',
-                                            textTransform: 'none',
-                                            fontSize: "1.1rem",
+                                            ...menuBTN,
                                             color: mode === 'dark' ? white : gray,
                                             backgroundColor: p.route === path ? selectColor : transparent
                                         }}>
@@ -222,35 +199,22 @@ export default function Navbar() {
                             </Button>
                         }
 
-                        {isSearchBar && (
-                            // <Box sx={{
-                            //     width: user ? '30vw' : '40vw',
-                            //     '@media (max-width: 450px)': {
-                            //         width: '10vw'
-                            //     }
-                            // }}> </Box>
-
-                            <SearchBar />
-
-                        )}
+                        {isSearchBar && (<SearchBar />)}
 
                         <Box  >
-                            <IconButton sx={{
-                                ml: 1, '@media screen and (max-width: 600px)': {
-                                    padding: 0
-                                }
-                            }} onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} color="inherit">
+                            <IconButton sx={darkModeBTN}
+                                onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} >
                                 {mode === 'dark' ? <Brightness4Icon /> : <NightlightIcon />}
                             </IconButton>
                         </Box>
 
                         {user ?
-                            <Box sx={{ flexGrow: 0, color: black }}>
+                            <Box sx={userBTN}>
                                 <Tooltip title="Open settings">
                                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                         <Avatar
                                             sx={{
-                                                m: 1, bgcolor: transparent,
+                                                m: 1, backgroundColor: transparent,
                                                 color: mode === 'dark' ? white : gray
                                             }}
                                             src={user.imgSrc} alt={user.imgAlt} />
@@ -258,8 +222,7 @@ export default function Navbar() {
                                 </Tooltip>
                                 <Menu
                                     sx={{
-                                        mt: '59px',
-                                        left: '0px',
+                                        ...userMenuStyle,
                                         '& .MuiMenu-paper': {
                                             backgroundColor: mode === 'dark' ? black : mainColor,
                                             color: mode === 'dark' ? white : gray,

@@ -12,6 +12,7 @@ import { GeneralContext } from '../App';
 import Joi from 'joi';
 import { jwtDecode } from 'jwt-decode';
 import { useInputsFormColors } from '../utils/utils'
+import { loginAvatar, loginContainer } from './auth.style';
 
 
 export default function Login() {
@@ -103,16 +104,9 @@ export default function Login() {
 
     return (
         <Container component="main" maxWidth="xs">
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    minHeight: '697px'
-                }}>
+            <Box sx={loginContainer}>
 
-                <Avatar sx={{ m: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }}>
+                <Avatar sx={{ ...loginAvatar, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2' }}>
                     <LockOutlinedIcon />
                 </Avatar>
 
