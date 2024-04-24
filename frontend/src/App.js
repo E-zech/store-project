@@ -10,7 +10,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import SnackBar from './components/snackbar/Snackbar';
 import './css/ScrollBar.css';
-import { useNavigate, useResolvedPath } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PopUpLogin from './components/popUpLogin/PopUpLogin';
 
 export const GeneralContext = createContext();
@@ -135,7 +135,7 @@ function App() {
     }, [user]);
 
     const add2Cart = (productId, title, price) => {
-        setLoader(true);
+        // setLoader(true);
         const quantity = 1;
         const products = [{ productId, quantity, price }];
         fetch(`http://localhost:5000/cart/add`, {
@@ -160,7 +160,7 @@ function App() {
             .catch(error => {
                 console.error('Error adding product to cart:', error);
             })
-            .finally(() => setLoader(false))
+        // .finally(() => setLoader(false))
     };
 
 

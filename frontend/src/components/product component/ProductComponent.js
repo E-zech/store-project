@@ -43,7 +43,9 @@ export default function ProductComponent({ product }) {
       if (isAdded) {
         snackbar("Item already in cart");
       } else {
+        // here i want to add a loader (small loader) that will be inside the card instead of (and in the size of) the ShoppingCartIcon
         add2Cart(product._id, product.title, product.price);
+        // anf here after the add2Cart function is finish i want to stop the loader 
       }
     } else {
       setPopUpLogin(true);
@@ -104,6 +106,7 @@ export default function ProductComponent({ product }) {
           snackbar(data.message);
         });
     }
+    setLoader(false);
   }
 
   return (

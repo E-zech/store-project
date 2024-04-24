@@ -99,7 +99,7 @@ export const footerBtnWrapper = {
 export const emptyCartMSG = {
     width: 500,
     textAlign: 'center',
-    marginTop: '20px'
+    marginTop: '20px',
 };
 
 export const cartIcon = {

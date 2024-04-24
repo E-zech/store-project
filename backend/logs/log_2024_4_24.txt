@@ -208,3 +208,33 @@ Route: /products/my-faves-products
 Status Code: 404
 Error:  Not Found
 
+Time: 2024-04-24T13:38:26.824Z
+Method: GET
+Route: /products/my-faves-products
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-24T13:59:12.888Z
+Method: POST
+Route: /cart/add
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-24T13:59:17.833Z
+Method: GET
+Route: /users/662362087ec321eedc2d9b97
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-24T13:59:17.838Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-24T13:59:18.647Z
+Method: GET
+Route: /cart
+Status Code: 401
+Error:  Unauthorized
+
