@@ -12,6 +12,7 @@ import { GeneralContext } from '../App';
 import { schema, clientStructure } from '../components/FormValidation';
 import { initialFormData, handleChange, useInputsFormColors } from '../utils/utils'
 import { signupConatiner } from './auth.style';
+import '../css/App.css';
 
 
 export default function Signup() {
@@ -73,7 +74,7 @@ export default function Signup() {
             <AssignmentIndIcon />
           </Avatar>
 
-          <Typography component="h1" variant="h5">Sign Up</Typography>
+          <h1 className='form-title'>Sign Up</h1>
 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 

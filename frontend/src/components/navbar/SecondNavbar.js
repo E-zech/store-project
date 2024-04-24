@@ -9,10 +9,7 @@ function SecondNavbar({ openMenu }) {
 
     return (
         <>
-            <AppBar sx={{
-                ...appBarStyle,
-                backgroundColor: mode === 'dark' ? black : transparent,
-            }}>
+            <AppBar sx={appBarStyle}>
                 <Toolbar sx={{
                     ...toolbarStyle,
                     backgroundColor: mode === 'dark' ? black : mainColor,

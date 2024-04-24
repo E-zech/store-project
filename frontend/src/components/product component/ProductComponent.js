@@ -14,8 +14,8 @@ import { Box, Container, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Tooltip from '@mui/material/Tooltip';
-import { cardContentStyle, cardStyle, cartMediaStyle, containerCardStyle, discountBtnStyle, priceWrapper, titleStyle, totalPriceBtn } from './ProductComponent.style';
-import { black, mainColor, transparent, white } from "../../css/Main.style";
+import { btnBgcGray, btnBgcTransparent, btnBgcWhite, btnWrapper, cardContentStyle, cardStyle, cartMediaStyle, containerCardStyle, discountBtnStyle, priceWrapper, titleStyle } from './ProductComponent.style';
+import { black, mainColor, white } from "../../css/Main.style";
 
 export default function ProductComponent({ product }) {
   const [isDiscount, setIsDiscount] = useState(true);
@@ -26,6 +26,10 @@ export default function ProductComponent({ product }) {
 
   const isAdded = productsInCart?.some(item => item._id === product._id);
   const isFavorite = favProducts?.some(item => item._id === product._id);
+
+  const btnBgcMode = {
+    backgroundColor: mode === 'light' ? btnBgcWhite : btnBgcGray
+  };
 
   useEffect(() => {
     if (product.discount === 0) {
@@ -83,7 +87,6 @@ export default function ProductComponent({ product }) {
 
   const deleteProduct = (id) => {
     setLoader(true);
-
     const isConfirmed = window.confirm("Are you sure you want to delete this product?");
     if (isConfirmed) {
       fetch(`http://localhost:5000/products/${id}`, {
@@ -133,17 +136,13 @@ export default function ProductComponent({ product }) {
 
             <Box sx={priceWrapper}>
               {isDiscount &&
-                <IconButton aria-label="total-price" sx={totalPriceBtn}>
-
+                <IconButton aria-label="total-price" sx={btnBgcTransparent}>
                   {`${(Math.floor((product.price - product.discount) * 10) / 10).toFixed(1)}0$`}
                 </IconButton>
-
               }
 
               <IconButton aria-label="price" sx={{
-                textDecoration: isDiscount ? 'line-through' : 'none', '&:hover': {
-                  backgroundColor: 'white',
-                },
+                textDecoration: isDiscount ? 'line-through' : 'none', ...btnBgcTransparent
               }}>
                 {product.price.toFixed(2)}$
               </IconButton>
@@ -159,41 +158,20 @@ export default function ProductComponent({ product }) {
                 </Box>
               </>
             }
-
-
           </CardContent>
+
           {
             <CardActions disableSpacing
-              sx={{
-                display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #99c8c2',
-                borderTopLeftRadius: '80px', borderTopRightRadius: '5px', borderBottomLeftRadius: '5px', borderBottomRightRadius: '80px',
-                transition: 'all 0.3s ease-in-out',
-                '&:hover': {
-                  borderTopLeftRadius: '5px',
-                  borderTopRightRadius: '80px',
-                  borderBottomLeftRadius: '80px',
-                  borderBottomRightRadius: '5px',
-
-                  backgroundColor: '#99c8c2'
-                }
-
-              }}>
+              sx={btnWrapper}>
               {(path === '/' || path === '/faves') && (
                 <>
-                  <Tooltip title="Add to cart" arrow sx={{
-                    color: "lightblue",
-                    backgroundColor: "green"
-                  }}>
+                  <Tooltip title={isAdded ? "Already In Cart" : "Add to Cart"} arrow>
+
                     <IconButton
                       aria-label="Add or Remove from cart"
                       onClick={() => { setIsSaving(true); handleClick(); }}
                       disabled={isSaving}
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: 'white',
-                        },
-                      }}
-                    >
+                      sx={btnBgcMode}>
                       {isAdded ? <ShoppingCartIcon /> : <AddShoppingCartIcon />}
                     </IconButton>
                   </Tooltip>
@@ -202,12 +180,7 @@ export default function ProductComponent({ product }) {
                   <Tooltip title={isFavorite ? "Remove from favorites" : "Add to favorites"} arrow >
                     <IconButton id='favoriteBtn' aria-label="add to favorites"
                       onClick={() => toggleFavOrNot(product._id,)}
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: 'white',
-                        },
-                      }}
-                    >
+                      sx={btnBgcMode}>
                       <FavoriteIcon color={isFavorite ? "error" : ""} />
                     </IconButton>
                   </Tooltip>
@@ -216,30 +189,24 @@ export default function ProductComponent({ product }) {
 
               {path === '/product-management' && (
                 <>
-                  <IconButton aria-label="Edit"
-                    sx={{
-                      '&:hover': {
-                        backgroundColor: 'white',
-                      },
-                    }}
-                    onClick={() => { navigate(`/product/add-edit/${product._id}`) }}><EditIcon />
-                  </IconButton>
+                  <Tooltip title="Edit Product" arrow>
+                    <IconButton aria-label="Edit"
+                      sx={btnBgcMode}
+                      onClick={() => { navigate(`/product/add-edit/${product._id}`) }}><EditIcon />
+                    </IconButton>
+                  </Tooltip>
 
-                  <IconButton aria-label="Delete"
-                    sx={{
-                      '&:hover': {
-                        backgroundColor: 'white',
-                      },
-                    }}
-                    onClick={() => deleteProduct(product._id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
+                  <Tooltip title="Delete Product" arrow>
+                    <IconButton aria-label="Delete"
+                      sx={btnBgcMode}
+                      onClick={() => deleteProduct(product._id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
                 </>
               )}
             </CardActions>
           }
-
         </Card>
       </Container>
     </>

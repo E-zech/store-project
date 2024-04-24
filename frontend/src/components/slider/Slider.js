@@ -49,16 +49,12 @@ export default function Slider() {
 
     return (
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className='sliderContainer'>
-
             <div className='wrapBtns'>
                 <button className='sliderBtn back' onClick={prevSlide}><ArrowForwardIosIcon /></button>
                 <button className='sliderBtn foward' onClick={nextSlide}><ArrowForwardIosIcon /></button>
             </div>
 
-
             <img className='sliderImg' src={images[currentSlide]} alt={`Slide ${currentSlide}`} />
-
-
         </div>
     );
 }

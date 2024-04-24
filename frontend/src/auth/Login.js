@@ -13,6 +13,7 @@ import Joi from 'joi';
 import { jwtDecode } from 'jwt-decode';
 import { useInputsFormColors } from '../utils/utils'
 import { loginAvatar, loginContainer } from './auth.style';
+import '../css/App.css';
 
 
 export default function Login() {
@@ -55,7 +56,6 @@ export default function Login() {
                 tempErrors[name] = item.message;
             }
         }
-
         setIsFormValid(!validate.error);
         setErrors(tempErrors);
     }
@@ -110,7 +110,7 @@ export default function Login() {
                     <LockOutlinedIcon />
                 </Avatar>
 
-                <Typography component="h1" variant="h5">Login</Typography>
+                <h1 className='form-title'>Login</h1>
 
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField

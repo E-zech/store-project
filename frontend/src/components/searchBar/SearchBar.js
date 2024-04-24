@@ -1,65 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { GeneralContext } from '../../App';
-import { useNavigate, useResolvedPath } from 'react-router-dom';
-
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-    '@media (max-width: 560px)': {
-        position: 'absolute',
-        top: '70px',
-        left: 0,
-        right: 0,
-        zIndex: 999,
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '100%',
-            },
-        },
-    },
-}));
+import { useResolvedPath } from 'react-router-dom';
+import { Search, SearchIconWrapper, SearchIconWrapperStyle, SearchStyle, StyledInputBase, StyledInputBaseStyle, searchWrapper, searchWrapperStyle } from './SearchBar.style';
+import { selectColor } from '../../css/Main.style';
 
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
-    const { setProducts, initialProducts } = useContext(GeneralContext);
-
-    const navigate = useNavigate();
+    const { setProducts, initialProducts, mode } = useContext(GeneralContext);
     const path = useResolvedPath().pathname;
+
+    const colorInput = {
+        color: mode === 'dark' ? 'white' : 'black'
+    };
 
     const handleChange = (value) => {
         const lowercaseValue = value.toLowerCase().trim();
@@ -78,14 +32,15 @@ export default function SearchBar() {
     }, [path]);
 
     return (
-        <Box sx={{
-            flexGrow: 0.5, '@media (max-width: 900px)': {
-                flexGrow: 10
-            }, '@media (max-width: 600px)': {
-                flexGrow: 0.5
-            }
-        }}>
-            <Search>
+        <Box sx={searchWrapper}>
+            <Search sx={{
+                color: colorInput,
+                backgroundColor: selectColor,
+                '@media (max-width: 560px)': {
+                    color: colorInput,
+                    backgroundColor: mode === 'dark' ? '#646464' : '#ebf5f4',
+                },
+            }}>
                 <SearchIconWrapper>
                     <SearchIcon />
                 </SearchIconWrapper>

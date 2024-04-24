@@ -56,3 +56,9 @@
     transform: rotate(180deg);
 }
 
+@media screen and (max-width:560px) {
+.sliderContainer{
+    margin-top:114px ;
+}
+    
+}

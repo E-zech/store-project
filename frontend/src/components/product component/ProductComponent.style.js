@@ -20,7 +20,6 @@ export const cardStyle = {
     '&:hover': {
         transform: 'scale(1.02)',
         boxShadow: 'none',
-        // boxShadow: '0px 0px 6px 1px #b6b6b6',
     },
 };
 
@@ -47,7 +46,11 @@ export const cartMediaStyle = {
     height: '194px',
     borderRadius: '15px',
     transition: "all 0.2s ease-in-out",
-    "&:hover": { cursor: "pointer", transform: "scale(1.02)", borderRadius: '0' }
+    "&:hover": {
+        cursor: "pointer",
+        transform: "scale(1.02)",
+        borderRadius: '0'
+    }
 };
 
 export const cardContentStyle = {
@@ -60,15 +63,44 @@ export const titleStyle = {
     fontWeight: 'bold',
     fontFamily: font,
     padding: '5px 0px'
-}
+};
 
 export const priceWrapper = {
     display: 'flex',
-    flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
 };
 
-export const totalPriceBtn = {
+export const btnWrapper = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: '2px solid #99c8c2',
+    borderRadius: '80px 5px 80px 5px',
+    transition: 'all 0.3s ease-in-out',
+    '&:hover': {
+        borderRadius: '5px 80px 5px 80px',
+        backgroundColor: '#99c8c2'
+    }
+};
+
+export const btnBgcWhite = {
     '&:hover': {
         backgroundColor: 'white',
     },
-}
+};
+
+export const btnBgcGray = {
+    '&:hover': {
+        backgroundColor: 'gray',
+    },
+};
+
+export const btnBgcTransparent = {
+    '&:hover': {
+        backgroundColor: 'transparent',
+    },
+};
+
+

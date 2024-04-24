@@ -2,9 +2,8 @@
 padding-bottom: 100px ;
 }
 
-
 .edit-imgContainer{
-    margin-top: 25px;
+margin-top: 25px;
 width: 100%;
 display: flex;
 justify-content: center;
@@ -12,7 +11,7 @@ align-items: center;
 }
 
 .edit-img{
-    width: 10vw;
+    width: 125px;
     max-width: 200px;
     border-radius: 110px;
 }
