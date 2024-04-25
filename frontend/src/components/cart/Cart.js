@@ -119,12 +119,7 @@ export default function Cart() {
                     anchor="right"
                     open={isOpen}
                     onClose={toggleDrawer}
-                    transitionDuration={300}
-                    sx={{
-                        '& .MuiPaper-root': {
-                            // work here
-                        }
-                    }}>
+                    transitionDuration={300}>
                     {<CartList toggleDrawer={toggleDrawer} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} removeFromCart={removeFromCart} />}
                 </Drawer>
             </div>

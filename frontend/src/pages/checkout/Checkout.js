@@ -38,7 +38,6 @@ export default function Checkout() {
                 return response.json();
             })
             .then(data => {
-                // Update user data in the context
                 setUser(data);
                 setLoader(false);
                 snackbar("Update successful");
@@ -46,7 +45,6 @@ export default function Checkout() {
             .catch(error => {
                 console.error('Error updating user:', error);
                 setLoader(false);
-                // Handle error
             });
     };
 
@@ -54,22 +52,22 @@ export default function Checkout() {
     return (
         <>
             <h1 className='main-title'>CHEKOUT</h1>
-            {// Address
+            {
                 currentStep === 1 &&
                 <Address errors={errors} setErrors={setErrors} setCurrentStep={setCurrentStep} handleSubmit={handleSubmit} />
             }
 
-            {// Payment
+            {
                 currentStep === 2 &&
                 <Payment formPayment={formPayment} setFormPayment={setFormPayment} errors={errors} setErrors={setErrors} setCurrentStep={setCurrentStep} />
             }
 
-            {// Review
+            {
                 currentStep === 3 &&
                 <Review formPayment={formPayment} setCurrentStep={setCurrentStep} />
             }
 
-            { // thank you + order Number
+            {
                 currentStep === 4 &&
                 <OrderSum />
             }

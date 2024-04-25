@@ -12,8 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { listStyle, bigBoxStyle, counterWrapper, counterBtn, footerBtnWrapper, imgTitleWrapper, totalWrapper, cartListItem, cartImg, cartSpanText, cartText, cartRemoveBTN, emptyCartMSG } from './Cart.style'
-import { mainColor, selectColor } from '../../css/Main.style';
+import { listStyle, bigBoxStyle, counterWrapper, counterBtn, bottomBtnWrapper, imgTitleWrapper, totalWrapper, cartListItem, cartImg, cartSpanText, cartText, cartRemoveBTN, emptyCartMSG, img, dividerStyle, listWrapper } from './Cart.style'
+import { mainColor } from '../../css/Main.style';
 
 export default function CartList({ toggleDrawer, incrementQuantity,
     decrementQuantity, removeFromCart }) {
@@ -74,7 +74,7 @@ export default function CartList({ toggleDrawer, incrementQuantity,
             {
                 productsInCart.length !== 0 ? (
                     <Box
-                        sx={{ width: 500 }}
+                        sx={listWrapper}
                         role="presentation"
                         onClick={(e) => e.stopPropagation()}
                         onKeyDown={toggleDrawer}>
@@ -90,12 +90,12 @@ export default function CartList({ toggleDrawer, incrementQuantity,
                                     <ListItem sx={cartListItem}>
 
                                         <Box sx={imgTitleWrapper}>
-                                            <ListItemIcon >
-                                                <img src={p.imgUrl} alt={p.imgAlt} style={cartImg} />
+                                            <ListItemIcon sx={{ ...cartImg, ...colorMode }}>
+                                                <img src={p.imgUrl} alt={p.imgAlt} style={img} />
                                             </ListItemIcon>
 
                                             <ListItemText
-                                                primary={<span style={{ ...cartSpanText, ...colorMode }}>{p.title}</span>}
+                                                primary={<Typography sx={{ ...cartSpanText, ...colorMode }}>{p.title}</Typography>}
                                                 sx={cartText} />
                                         </Box>
 
@@ -105,7 +105,7 @@ export default function CartList({ toggleDrawer, incrementQuantity,
                                                 sx={btnStyle}><AddIcon />
                                             </IconButton>
 
-                                            <span style={{ ...cartSpanText, ...colorMode }}>{p.quantity}</span>
+                                            <Typography sx={{ ...cartSpanText, ...colorMode }}>{p.quantity}</Typography>
 
                                             <IconButton aria-label="Decrease quantity" onClick={() => decrementQuantity(p._id, p.price)}
                                                 sx={btnStyle}><RemoveIcon />
@@ -115,22 +115,24 @@ export default function CartList({ toggleDrawer, incrementQuantity,
                                         <Box sx={totalWrapper}>
 
                                             <ListItemText primary={
-                                                <span style={{ ...cartSpanText, ...colorMode }}>
-                                                    Total: {parseFloat((((p.price - p.discount) * p.quantity) * 100) / 100).toFixed(2)}
-                                                </span>
+                                                <Typography sx={{ ...cartSpanText, ...colorMode }}>
+                                                    Total: {parseFloat((((p.price - p.discount) * p.quantity) * 100) / 100).toFixed(2)}$
+                                                </Typography>
                                             } />
 
                                             <Button sx={RemoveBTNStyle} onClick={() => removeFromCart(p._id)}>
                                                 <RemoveShoppingCartIcon />
                                             </Button>
                                         </Box>
+                                        <Box sx={dividerStyle}></Box>
+
                                     </ListItem>
                                 </Box>
                             ))}
 
                         </List>
 
-                        <Box sx={{ ...footerBtnWrapper, backgroundColor: mode === 'dark' ? 'black' : mainColor }}
+                        <Box sx={{ ...bottomBtnWrapper, backgroundColor: mode === 'dark' ? 'black' : mainColor }}
                             onClick={(e) => e.stopPropagation()}
                         >
                             <Box sx={{ width: '350px' }}>
@@ -141,12 +143,7 @@ export default function CartList({ toggleDrawer, incrementQuantity,
 
                             <Box sx={deleteIconStyle}>
                                 <Button onClick={handleClearCart}
-                                    sx={{
-                                        ...colorMode,
-                                        "&:hover": {
-                                            ...colorMode
-                                        }
-                                    }}
+                                    sx={{ ...colorMode, "&:hover": { ...colorMode } }}
                                 ><DeleteIcon /></Button>
                             </Box>
                         </Box>

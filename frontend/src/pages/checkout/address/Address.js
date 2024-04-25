@@ -19,7 +19,6 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
 
 
     useEffect(() => {
-        // Check if the user object exists and has data
         if (user) {
             setFormData({
                 firstName: user.firstName || '',
@@ -35,20 +34,6 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
             });
         }
     }, [user]);
-
-
-    const handleStep = () => {
-        if (updateDetails) {
-            console.log('true')
-            console.log(formData)
-            console.log(user)
-        } else {
-            console.log('false')
-            console.log(user)
-        }
-
-        // setCurrentStep(currentStep => currentStep + 1)
-    }
 
     const handleAddress = (ev) => {
         handleChange(ev, formData, setFormData, errors, setErrors, SchemaNoPassword, setIsFormValid);
@@ -142,13 +127,6 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
 
                             </Grid>
                         )}
-                        <FormControlLabel
-                            control={<Checkbox
-                                // checked ={}
-                                onChange={() => setUpdateDetails(!updateDetails)} />}
-                            label="Update My Details"
-                            sx={{ ml: '5px' }}
-                        />
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
@@ -157,7 +135,7 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                             fullWidth
                             variant="contained"
                             disabled={!isFormValid}
-                            onClick={handleStep}
+                            onClick={() => setCurrentStep(currentStep => currentStep + 1)}
                             sx={{
                                 mt: 3, mb: 2, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
                                 '&:hover': {
