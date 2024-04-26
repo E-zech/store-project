@@ -14,16 +14,15 @@
     max-width: 2000px;
     padding: 0 25px;
     position: absolute;
-    display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 33;
     margin-bottom: 100px;
-    display: none; /* Initially hide the buttons */
+    display: none;
 }
 
 .sliderContainer:hover .wrapBtns {
-    display: flex; /* Show the buttons when hovering over the container */
+    display: flex; 
 }
 
 .sliderImg {
@@ -56,9 +55,17 @@
     transform: rotate(180deg);
 }
 
+@media screen and (max-width:1000px) {
+.wrapBtns{
+    margin-bottom:34px ;
+}
+    
+}
 @media screen and (max-width:560px) {
 .sliderContainer{
     margin-top:114px ;
 }
-    
+.sliderBtn > svg{
+    font-size: 2rem;
+}
 }

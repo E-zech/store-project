@@ -1,22 +1,29 @@
 import React from 'react';
-import { TextField, Button, Grid, Container, Typography, Tooltip, Checkbox, FormControlLabel, useRadioGroup } from '@mui/material';
+import { TextField, Button, Grid, Container, Typography, Tooltip } from '@mui/material';
 import { useEffect, useState, useContext } from 'react';
 import { GeneralContext } from "../../../App";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { initialFormDataNoPassword, handleChange, useInputsFormColors } from '../../../utils/utils'
-import { ClientStructureNoPassword, SchemaNoPassword } from '../../../components/FormValidation';
-
+import { ClientStructureNoPassword, SchemaNoPassword } from '../../../utils/FormValidation';
+import { addressBtnsWrapper, addressContainer, avatarIcon, avatarStyle, confirmationBox, confirmationBoxWrapper, confirmationText } from './Address.style';
 
 export default function Address({ errors, setErrors, setCurrentStep, handleSubmit }) {
     const { user, setUser, mode } = useContext(GeneralContext);
     const [formData, setFormData] = useState(initialFormDataNoPassword);
     const [isFormValid, setIsFormValid] = useState(false);
-    const [updateDetails, setUpdateDetails] = useState(false);
     const [showAddressConfirmation, setShowAddressConfirmation] = useState(true);
     const { sx } = useInputsFormColors();
 
+    const whiteColor = {
+        color: mode === 'dark' ? 'white' : 'black'
+    };
+
+    const btnsStyle = {
+        ...whiteColor,
+        fontWeight: 'bold'
+    };
 
     useEffect(() => {
         if (user) {
@@ -52,58 +59,32 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
     return (
         <Container component="main" maxWidth="xs">
             <Box
-                sx={{
-                    marginTop: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    paddingBottom: '100px'
-                }}>
+                sx={addressContainer}>
 
-                <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user?.imgSrc}>
-                    <AssignmentIndIcon sx={{ width: '40px', height: '40px' }} />
+                <Avatar sx={{ ...avatarStyle, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user?.imgSrc}>
+                    <AssignmentIndIcon sx={avatarIcon} />
                 </Avatar>
 
                 <Typography component="h1" variant="h5">Address</Typography>
                 {showAddressConfirmation && (
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'white',
-                        padding: '20px',
-                        borderRadius: '5px',
-                        margin: "0 auto"
-                    }}>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                            <p style={{ marginBottom: '10px' }}>Is this your current details?</p>
-                            <div style={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}>
+                    <Box sx={{ ...confirmationBoxWrapper, ...whiteColor }}>
+                        <Box sx={confirmationBox}>
+                            <Typography sx={confirmationText}>Is this your current details?</Typography>
 
+                            <Box sx={addressBtnsWrapper}>
                                 <Tooltip title="Keep details" arrow >
-                                    <Button onClick={handleYes} sx={{ color: 'black' }}>Yes</Button>
+                                    <Button onClick={handleYes} sx={btnsStyle}>Yes</Button>
                                 </Tooltip>
 
                                 <Tooltip title="Clear details" arrow >
-                                    <Button onClick={handleNo} sx={{ color: 'black' }} >No</Button>
+                                    <Button onClick={handleNo} sx={btnsStyle} >No</Button>
                                 </Tooltip>
-                            </div>
-
-                        </div>
-
-                    </div>
+                            </Box>
+                        </Box>
+                    </Box>
                 )}
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <Grid container spacing={2}>
                         {ClientStructureNoPassword.map(s =>
                             <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
@@ -124,7 +105,6 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                                     inputProps={{ min: 0 }}
                                     sx={sx}
                                 />
-
                             </Grid>
                         )}
                     </Grid>
@@ -147,7 +127,7 @@ export default function Address({ errors, setErrors, setCurrentStep, handleSubmi
                     </Grid>
                 </Box>
             </Box>
-        </Container>
+        </Container >
     );
 }
 

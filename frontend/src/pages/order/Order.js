@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Grid, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Grid, Typography, Accordion, AccordionSummary, AccordionDetails, Container, ListItemIcon } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { useContext } from 'react';
 import { GeneralContext } from "../../App";
 import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import { mainColor } from '../../css/Main.style';
+import { fontBig, fontMedium, fontSmall, mainBackgroundColor, orderAccordionSummarySeconed, orderGrid, tableFirstWrapper, productTitle, tableSeconedWrapper, tableThirdWrapper, tableGrid, center, orderMessage, orderImgWrapper, orderImg, accordionPadding } from './Order.style';
 
 export default function Order() {
-    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode, setLoader } = useContext(GeneralContext);
-
+    const { order, setOrder, snackbar, mode, setLoader, mainTitleMode } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true);
@@ -35,64 +32,63 @@ export default function Order() {
 
     return (
         <>
+            <h1 className="main-title" style={mainTitleMode}>
+                My Orders
+            </h1>
             {order.length > 0 ? (
                 <>
-                    <h1 className="main-title">
-                        My Orders
-                    </h1>
-                    <Grid container spacing={2} justifyContent="center" sx={{ width: '90vw', margin: '35px auto', maxWidth: '2000px', minHeight: '70vh' }}>
+
+                    <Grid container spacing={2} sx={orderGrid}>
                         {order.map((orderItem, index) => (
                             <Grid item xs={12} key={index}>
                                 <Accordion>
-                                    <AccordionSummary sx={{ backgroundColor: mainColor }}
+                                    <AccordionSummary sx={mainBackgroundColor}
                                         expandIcon={<ExpandMoreIcon />}
                                     >
-                                        <Typography sx={{ fontSize: '1.4rem' }}><strong>Order ID:</strong> {orderItem._id}
-                                            <br />
-                                            <Typography sx={{ fontSize: '1.3rem' }}><strong>Created At:</strong> {new Date(orderItem.createdAt).toLocaleString()}</Typography>
+                                        <Typography sx={fontBig}><strong>Order ID:</strong> {orderItem._id}
+                                            <Typography sx={fontMedium}><strong>Created At:</strong> {new Date(orderItem.createdAt).toLocaleString()}</Typography>
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <Box sx={{ width: '100%' }}>
+                                        <Box fullWidth>
 
                                             <Accordion>
-                                                <AccordionSummary sx={{ backgroundColor: mainColor, mt: 1 }}
+                                                <AccordionSummary sx={orderAccordionSummarySeconed}
                                                     expandIcon={<ExpandMoreIcon />}
                                                 >
-                                                    <Typography sx={{ fontSize: '1.3rem' }}><strong>Products:</strong></Typography>
+                                                    <Typography sx={fontMedium}><strong>Products:</strong></Typography>
                                                 </AccordionSummary>
                                                 <AccordionDetails>
-                                                    <Box sx={{ width: '100%' }}>
+                                                    <Box fullWidth>
                                                         {orderItem.products.map((product, idx) => (
 
                                                             <Accordion key={idx}>
-                                                                <AccordionSummary sx={{ backgroundColor: mainColor, mt: 1 }} expandIcon={<ExpandMoreIcon />}>
-                                                                    <Typography sx={{ fontSize: '1.1rem', fontWeight: 'bold' }}>{product.title}</Typography>
+                                                                <AccordionSummary sx={orderAccordionSummarySeconed} expandIcon={<ExpandMoreIcon />}>
+                                                                    <Typography sx={productTitle}>{product.title}</Typography>
                                                                 </AccordionSummary>
-                                                                <AccordionDetails>
-                                                                    <section style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
+                                                                <AccordionDetails sx={accordionPadding}>
+                                                                    <Box sx={tableFirstWrapper}>
+                                                                        <Box sx={tableSeconedWrapper}>
+                                                                            <Box sx={tableThirdWrapper}>
+                                                                                <Box>Image</Box>
+                                                                                <Box>Quantity</Box>
+                                                                                <Box>Price</Box>
+                                                                                <Box>Discount</Box>
+                                                                                <Box>Total </Box>
+                                                                            </Box>
 
-                                                                        <section style={{ width: '100%', backgroundColor: mainColor, display: 'grid', gridTemplateColumns: '1fr', justifyContent: 'center', alignItems: 'center', }}>
-                                                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px', borderRadius: '0px', border: '2px solid black', borderBottom: 'none' }}>
-                                                                                <div style={{ textAlign: 'center' }}>Image</div>
-                                                                                <div style={{ textAlign: 'center' }}>Quantity</div>
-                                                                                <div style={{ textAlign: 'center' }}>Price</div>
-                                                                                <div style={{ textAlign: 'center' }}>Discount</div>
-                                                                                <div style={{ textAlign: 'center' }}>Total </div>
-                                                                            </div>
+                                                                            <Box key={product._id} sx={{ ...tableGrid, color: mode === 'dark' ? 'white' : 'black', backgroundColor: mode === 'dark' ? 'black' : 'white' }}>
+                                                                                <ListItemIcon sx={orderImgWrapper}>
+                                                                                    <img src={product.imgUrl} alt={product.imgAlt} style={orderImg} />
+                                                                                </ListItemIcon>
 
-                                                                            <div key={product._id} style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', backgroundColor: 'white', gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px 0', border: '2px solid black' }}>
-                                                                                <div className='reviewImgWrapper' style={{ textAlign: 'center' }}>
-                                                                                    <img src={product.imgUrl} alt={product.imgAlt} style={{ display: 'block', width: '70px', height: '70px', margin: 'auto', borderRadius: '15px' }} />
-                                                                                </div>
-
-                                                                                <div className='reviewQTY' style={{ textAlign: 'center' }}>{product.quantity}</div>
-                                                                                <div className='reviePrice' style={{ textAlign: 'center' }}>{product.price} $</div>
-                                                                                <div className='revieDiscount' style={{ textAlign: 'center' }}>{product.discount} $</div>
-                                                                                <div className='reviewTotal' style={{ textAlign: 'center' }}>{((product.price - product.discount) * product.quantity).toFixed(2)} $</div>
-                                                                            </div>
-                                                                        </section>
-                                                                    </section>
+                                                                                <Box className='reviewQTY' sx={center}>{product.quantity}</Box>
+                                                                                <Box className='reviePrice' sx={center}>{product.price} $</Box>
+                                                                                <Box className='revieDiscount' sx={center}>{product.discount} $</Box>
+                                                                                <Box className='reviewTotal' sx={center}>{((product.price - product.discount) * product.quantity).toFixed(2)} $</Box>
+                                                                            </Box>
+                                                                        </Box>
+                                                                    </Box>
                                                                 </AccordionDetails>
                                                             </Accordion>
 
@@ -101,23 +97,22 @@ export default function Order() {
                                                 </AccordionDetails>
                                             </Accordion>
 
-                                            <br />
                                             <Accordion>
-                                                <AccordionSummary sx={{ backgroundColor: mainColor }}
+                                                <AccordionSummary sx={mainBackgroundColor}
                                                     expandIcon={<ExpandMoreIcon />}
                                                 >
-                                                    <Typography sx={{ fontSize: '1.3rem' }}><strong>Payment Details:</strong></Typography>
+                                                    <Typography sx={fontBig}><strong>Payment Details:</strong></Typography>
                                                 </AccordionSummary>
                                                 <AccordionDetails>
-                                                    <Typography sx={{ fontSize: '1.1rem', mt: 1 }}><strong>Name on Card:</strong> {orderItem.paymentDetails.nameOnCard}</Typography>
-                                                    <Typography sx={{ fontSize: '1.1rem', mt: 1 }}><strong>Card Last 4 Digits:</strong> {orderItem.paymentDetails.cardLast4Digits}</Typography>
+                                                    <Typography mt={1} sx={fontSmall}><strong>Name on Card:</strong> {orderItem.paymentDetails.nameOnCard}</Typography>
+                                                    <Typography mt={1} sx={fontSmall}><strong>Last 4 Digits:</strong> {orderItem.paymentDetails.cardLast4Digits}</Typography>
                                                 </AccordionDetails>
                                             </Accordion>
-                                            <br />
+
                                             <AccordionDetails>
                                                 <Box >
-                                                    <Typography sx={{ fontSize: '1.3rem' }}><strong>Full Address:</strong> {orderItem.fullAddress}</Typography>
-                                                    <Typography sx={{ fontSize: '1.3rem', mt: 1 }}><strong>Total Order:</strong> {orderItem.totalPrice}$</Typography>
+                                                    <Typography sx={fontBig}><strong>Full Address:</strong> {orderItem.fullAddress}</Typography>
+                                                    <Typography mt={1} sx={fontBig}><strong>Total Order:</strong> {orderItem.totalPrice}$</Typography>
 
                                                 </Box>
                                             </AccordionDetails>
@@ -130,16 +125,11 @@ export default function Order() {
                 </>
             ) : (
                 <>
-
-                    <h1 className="main-title">
-                        My Orders
-                    </h1>
-
-                    <section style={{ minHeight: '56vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div>
+                    <Box sx={orderMessage}>
+                        <Box>
                             You Dont Have Orders Yet
-                        </div>
-                    </section>
+                        </Box>
+                    </Box>
                 </>
 
             )

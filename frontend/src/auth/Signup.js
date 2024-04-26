@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { GeneralContext } from '../App';
-import { schema, clientStructure } from '../components/FormValidation';
+import { schema, clientStructure } from '../utils/FormValidation';
 import { initialFormData, handleChange, useInputsFormColors } from '../utils/utils'
 import { signupConatiner } from './auth.style';
 import '../css/App.css';
@@ -21,7 +21,7 @@ export default function Signup() {
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
   const { sx } = useInputsFormColors();
-  const { setLoader, snackbar, mode } = useContext(GeneralContext);
+  const { setLoader, snackbar, mode, mainTitleMode } = useContext(GeneralContext);
 
   const handleSignupChange = (ev) => {
     handleChange(ev, formData, setFormData, errors, setErrors, schema, setIsFormValid);
@@ -74,7 +74,7 @@ export default function Signup() {
             <AssignmentIndIcon />
           </Avatar>
 
-          <h1 className='form-title'>Sign Up</h1>
+          <h1 className='form-title' style={mainTitleMode}>Sign Up</h1>
 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 

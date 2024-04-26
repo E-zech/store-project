@@ -1,22 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import { GeneralContext } from '../../App';
 import "./CustomerMenagment.css";
-import "./PopUpBtn.css";
-import "./PopUpMediaQ.css";
-import { useMediaQuery } from "@mui/material";
 import '../../css/grid.css';
 import { RoleTypes } from "../../utils/constants";
 
 export default function CustomerMenagment() {
   const [allClients, setAllClients] = useState([]);
   const [refresh, setRefresh] = useState([]);
-  const { setLoader, snackbar } = useContext(GeneralContext);
-  const [isPopUp, setIsPopUp] = useState(true);
-  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const { setLoader, mainTitleMode } = useContext(GeneralContext);
 
   useEffect(() => {
     setLoader(true);
@@ -47,7 +40,7 @@ export default function CustomerMenagment() {
     {
       field: 'Phone',
       headerName: 'Phone',
-      flex: 0.5, // Adjusted width
+      flex: 0.5,
       renderCell: (params) => (
         <div>
           {params.row.phone}
@@ -57,14 +50,12 @@ export default function CustomerMenagment() {
     {
       field: 'delete',
       headerName: 'Delete',
-      flex: 0.2, // Adjusted width
+      flex: 0.2,
       renderCell: (params) => (
         <DeleteIcon onClick={() => handleDelete(params.row._id)} style={{ cursor: 'pointer' }} />
       ),
     }
   ];
-
-
 
   const handleDelete = (clientID) => {
     setLoader(true);
@@ -86,16 +77,15 @@ export default function CustomerMenagment() {
   return (
     <>
       <header>
-        <h1 className="main-title">Customer Management</h1>
+        <h1 className="main-title" style={mainTitleMode}>Customer Management</h1>
       </header>
 
-      <section style={{ height: 'auto', width: '90vw', padding: '25px 15px 170px', margin: '0 auto', display: 'flex', justifyContent: "center", alignItems: 'center', minHeight: '70vh' }}>
+      <section className="tableContainer">
         <DataGrid
           rows={allClients}
           columns={columns}
           pageSize={5}
           getRowId={(row) => row._id} />
-
       </section>
     </>
   );

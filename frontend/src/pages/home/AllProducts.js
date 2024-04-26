@@ -1,22 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ProductComponent from '../../components/product component/ProductComponent';
 import { GeneralContext } from '../../App';
-import ResultNotFound from '../ResultNotFound';
 import Cart from '../../components/cart/Cart';
+import Slider from '../../components/slider/Slider';
+import Loader from '../../components/loader/Loader';
 import '../../css/App.css';
 import '../../css/grid.css';
-import { RoleTypes } from '../../components/navbar/Navbar';
-import { Box, MenuItem, Select, Switch, AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import Slider from '../../components/slider/Slider';
-import { mainColor } from '../../css/Main.style';
-import Loader from '../../components/loader/Loader';
 import '../../css/noResultsFound.css';
-
+import './AllProducts.css';
 
 export default function AllProducts() { // ALL Products Page basically
     const { user, products, setProducts, loader, selectedCategory, setLoader } = useContext(GeneralContext);
-    const navigate = useNavigate();
 
     useEffect(() => {
         setLoader(true)
@@ -59,30 +53,19 @@ export default function AllProducts() { // ALL Products Page basically
                     <h1 className="homePage-title">Skin Care Store</h1>
                 </header>
 
-                <div style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                    padding: '50px 0'
-                }}>
-
-                    <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
-                        onClick={displayLow2high}>
+                <div className='allProductsBtnWrapper'>
+                    <button className='allProductsBtn' onClick={displayLow2high}>
                         Low To High
                     </button>
 
-                    <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
-                        onClick={displayHigh2Low}>
+                    <button className='allProductsBtn' onClick={displayHigh2Low}>
                         High To Low
                     </button>
 
-                    <button style={{ padding: '7px 15px', borderRadius: '15px', fontSize: '1em', borderColor: 'transparent', backgroundColor: mainColor, cursor: 'pointer' }}
-                        onClick={displayDiscount}>
+                    <button className='allProductsBtn' onClick={displayDiscount}>
                         Discount Products
                     </button>
                 </div>
-
 
                 <section >
                     {loader ? (
@@ -94,7 +77,6 @@ export default function AllProducts() { // ALL Products Page basically
                                     user &&
                                     <Cart />
                                 }
-
                             </div>
 
                             <div className="grid-cards">
@@ -109,7 +91,6 @@ export default function AllProducts() { // ALL Products Page basically
                                 )}
                             </div>
                         </>
-
                     )}
                 </section>
             </section>

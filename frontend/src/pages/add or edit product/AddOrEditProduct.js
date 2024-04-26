@@ -11,8 +11,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate, useParams } from 'react-router-dom';
 import { inputsForProducts, schema } from '../../components/product component/ProductStructureValid.js.js';
 import { Tooltip } from '@mui/material';
-import './AddOrEditProduct.css'
 import { useInputsFormColors } from '../../utils/utils.js'
+import { boxWrapper, titleProduct, productBtn, productContainer, imageStyles, imageContainer } from './AddOrEdit.style.js';
 
 export default function AddOrEditProduct() {
     const [formData, setFormData] = useState({});
@@ -22,6 +22,14 @@ export default function AddOrEditProduct() {
     const navigate = useNavigate();
     const { products, setProducts, snackbar, setLoader, mode } = useContext(GeneralContext);
     const { sx } = useInputsFormColors();
+
+    const btnStyle = {
+        ...productBtn,
+        backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+        '&:hover': {
+            backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+        },
+    }
 
     useEffect(() => {
         if (id) {
@@ -44,7 +52,6 @@ export default function AddOrEditProduct() {
                     setLoader(false);
                 })
         }
-
     }, [id])
 
     const handleChange = (event) => {
@@ -115,22 +122,21 @@ export default function AddOrEditProduct() {
     return (
         <>
             <>
-                <Typography component="h1" variant="h5" sx={{ marginTop: "120px", textAlign: 'center', fontSize: '2rem' }}>
+                <Typography component="h1" variant="h5" sx={titleProduct}>
                     {id ? `Edit Product` : `Add Product`}
                 </Typography>
                 {
-                    id && <div className='edit-imgContainer'>
-                        <img className="edit-img" src={formData.imgUrl} alt={formData.imgAlt} />
-                    </div>
+                    id && <Typography sx={imageContainer}>
+                        <img style={imageStyles} src={formData.imgUrl} alt={formData.imgAlt} />
+                    </Typography>
                 }
-
-                <section className='form-container' id='addCard'>
-                    <Container component="main" maxWidth="sm"  >
+                <Container sx={productContainer}>
+                    <Container component="main" maxWidth="sm" >
                         <CssBaseline />
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-
+                        <Box sx={boxWrapper}>
                             <>
                                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
                                     <Grid container spacing={2}>
                                         {inputsForProducts.map((i) => (
                                             <Grid key={i.name} item xs={12}>
@@ -143,7 +149,7 @@ export default function AddOrEditProduct() {
                                                         label={i.label}
                                                         name={i.name}
                                                         multiline
-                                                        rows={4} // Adjust the number of rows as needed
+                                                        rows={4}
                                                         value={formData[i.name] || ''}
                                                         onChange={handleChange}
                                                         error={Boolean(errors[i.name])}
@@ -193,23 +199,15 @@ export default function AddOrEditProduct() {
                                             </Grid>))
                                         }
                                     </Grid>
+
                                     <Tooltip title="Save and Back to Product Management" arrow>
                                         <span>
                                             <Button
                                                 type="submit"
                                                 fullWidth
                                                 variant="contained"
-                                                sx={{
-                                                    mt: 3,
-                                                    mb: 2,
-                                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
-                                                    color: 'white',
-                                                    '&:hover': {
-                                                        backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                                                    },
-                                                }}
-                                                disabled={!isFormValid}
-                                            >
+                                                sx={btnStyle}
+                                                disabled={!isFormValid}>
                                                 {id ? `Edit Product` : `Add product`}
                                             </Button>
                                         </span>
@@ -221,27 +219,19 @@ export default function AddOrEditProduct() {
                                                 type="button"
                                                 fullWidth
                                                 variant="contained"
-                                                sx={{
-                                                    mt: 3,
-                                                    mb: 2,
-                                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
-                                                    color: 'white',
-                                                    '&:hover': {
-                                                        backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                                                    },
-                                                }}
+                                                sx={btnStyle}
                                                 onClick={() => { navigate('/product-management') }}
-                                                disabled={isFormValid}
-                                            >
+                                                disabled={isFormValid}>
                                                 Back to management
                                             </Button>
                                         </span>
                                     </Tooltip>
+
                                 </Box>
                             </>
                         </Box>
                     </Container>
-                </section>
+                </Container>
             </>
         </>
     );

@@ -110,16 +110,16 @@ export default function Product() {
                 </section>
 
                 <section className="second-wrapper" >
-                    <div className="description">
-                        <h2 style={{ fontFamily: font }}>Description</h2>
+                    <div >
+                        <h2>Description</h2>
                         {product.description}
                     </div>
-                    <div className="how2use">
-                        <h2 style={{ fontFamily: font }}>How To Use</h2>
+                    <div >
+                        <h2>How To Use</h2>
                         {product.howToUse}
                     </div>
-                    <div className="Ingredients">
-                        <h2 style={{ fontFamily: font }}>Ingredients</h2>
+                    <div >
+                        <h2>Ingredients</h2>
                         {product.Ingredients}
                     </div>
 
@@ -128,7 +128,6 @@ export default function Product() {
                             user &&
                             <Cart />
                         }
-
                     </div>
                 </section>
             </main>

@@ -1,18 +1,17 @@
 import { useState, useContext } from 'react';
 import { GeneralContext } from "../../App";
-import { ClientStructureNoPassword } from '../../components/FormValidation';
+import { ClientStructureNoPassword } from '../../utils/FormValidation';
 import { initialPayment } from '../../utils/utils'
 import Address from './address/Address';
 import Payment from './payment/Payment';
 import Review from './review/Review';
 import OrderSum from './order summary/OrderSum';
 
-
 export default function Checkout() {
     const [errors, setErrors] = useState({});
     const [currentStep, setCurrentStep] = useState(1);
     const [formPayment, setFormPayment] = useState(initialPayment);
-    const { user, setUser, snackbar, setLoader, mode } = useContext(GeneralContext);
+    const { user, setUser, snackbar, setLoader, mode, mainTitleMode } = useContext(GeneralContext);
 
     const handleSubmit = ev => {
         ev.preventDefault();
@@ -51,7 +50,7 @@ export default function Checkout() {
 
     return (
         <>
-            <h1 className='main-title'>CHEKOUT</h1>
+            <h1 className='main-title' style={mainTitleMode}>CHEKOUT</h1>
             {
                 currentStep === 1 &&
                 <Address errors={errors} setErrors={setErrors} setCurrentStep={setCurrentStep} handleSubmit={handleSubmit} />

@@ -15,6 +15,24 @@ export default function ProductMangement() {
     const { products, setProducts, setInitialProducts, loader, setLoader, mode, selectedCategory, } = useContext(GeneralContext);
     const navigate = useNavigate();
 
+    const btnStyle = {
+        minWidth: 0,
+        width: '50px', height: '50px',
+        zIndex: '99',
+        bottom: '15px',
+        borderRadius: '50%',
+        left: '15px',
+        color: mode === 'light' ? mainColor : white,
+        backgroundColor: mode === 'light' ? 'white' : 'black',
+        boxShadow: mode === 'light' ? boxShadowLight : boxShadowDark,
+        transition: 'all 0.3s ease',
+        '&:hover': {
+            transform: 'scale(1.1)',
+            boxShadow: mode === 'light' ? hoverBoxShadowLight : hoverBoxShadowDark,
+            backgroundColor: mode === 'light' ? 'white' : 'black',
+        },
+    };
+
     useEffect(() => {
         setLoader(true)
         fetch(`http://localhost:5000/products`, {
@@ -36,7 +54,7 @@ export default function ProductMangement() {
             <header>
                 <h1 className='main-title leftFix'>Products Manegment </h1> <br />
             </header>
-            <section className="container-cards" style={{ maxWidth: '2000px', minHeight: '70vh' }}>
+            <section style={{ maxWidth: '2000px', minHeight: '70vh' }}>
                 {loader ? (
                     <Loader />
                 ) : (
@@ -46,36 +64,15 @@ export default function ProductMangement() {
                         ) : (
                             <h2 className='noResults'>No results found</h2>
                         )
-
                         }
-
                         <div className='cartWrapper'>
                             <Button
                                 variant="contained"
                                 onClick={() => { navigate(`/product/add-edit`) }}
-                                sx={{
-                                    minWidth: 0,
-                                    width: '50px', height: '50px',
-                                    zIndex: '99',
-                                    bottom: '15px',
-                                    borderRadius: '50%',
-                                    left: '15px',
-                                    color: mode === 'light' ? mainColor : white,
-                                    backgroundColor: mode === 'light' ? 'white' : 'black',
-                                    boxShadow: mode === 'light' ? boxShadowLight : boxShadowDark,
-                                    transition: 'all 0.3s ease',
-                                    '&:hover': {
-                                        transform: 'scale(1.1)',
-                                        boxShadow: mode === 'light' ? hoverBoxShadowLight : hoverBoxShadowDark,
-                                        backgroundColor: mode === 'light' ? 'white' : 'black',
-                                    },
-                                }}
-                            >
-                                <Add style={{ fontSize: '2.5rem', fontWeight: 'bold', }} />
+                                sx={btnStyle}>
+                                <Add sx={{ fontSize: '2.5rem' }} />
                             </Button>
                         </div>
-
-
                     </div>)}
             </section >
 

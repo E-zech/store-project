@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../../App';
 import ProductComponent from '../../components/product component/ProductComponent';
-import ResultNotFound from '../ResultNotFound';
 import Cart from '../../components/cart/Cart';
 import '../../css/grid.css';
 import Loader from '../../components/loader/Loader';
 import '../../css/noResultsFound.css';
 import './FavProduct.css';
+
 export default function FavProducts() {
-
-    const { user, snackbar, loader, setLoader, products, selectedCategory, favProducts, setFavProducts } = useContext(GeneralContext);
-
+    const { user, snackbar, loader, setLoader, products, selectedCategory, favProducts, setFavProducts, mainTitleMode } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true);
@@ -26,7 +24,7 @@ export default function FavProducts() {
                     return res.json();
                 } else {
                     return res.text().then(x => {
-                        return snackbar(x); // of there is no product react error NEED TO FIX   
+                        return snackbar(x);
                     });
                 }
             })
@@ -39,7 +37,7 @@ export default function FavProducts() {
     return (
         <>
             <header>
-                <h1 className='main-title'> My Favorites Products</h1>
+                <h1 className='main-title' style={mainTitleMode}> My Favorites Products</h1>
                 <br />
             </header>
 
@@ -50,12 +48,11 @@ export default function FavProducts() {
                 }
             </div>
 
-            <section className="container-cards" style={{ minHeight: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <section className='favContainer'>
                 {loader ? (
                     <Loader />
                 ) : (
                     <div className="grid-cards">
-
                         {products.length > 0 ? (
                             products
                                 .filter(product => product.category === selectedCategory || selectedCategory === "All")
@@ -64,7 +61,6 @@ export default function FavProducts() {
                         ) : (
                             <h2 className='noResults'>No results found</h2>
                         )
-
                         }
                     </div>
                 )}

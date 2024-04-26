@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Slider.css';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function Slider() {
@@ -8,9 +7,9 @@ export default function Slider() {
     const [isHovered, setIsHovered] = useState(false);
     const images = [
         'https://www.lorealparisusa.com/-/media/project/loreal/brand-sites/oap/americas/us/products/skin-care/facial-moisturizers/hero/moisturisers-category-page.jpg?rev=67bca7ae15654a52a773fd2d7fda6b31&cx=0.39&cy=0.5&cw=2000&ch=600&hash=C67E4DD8B5DA05AB5F5AA0133A799A9029391583',
+        'https://www.lorealparis.ca/-/media/project/loreal/brand-sites/oap/americas/ca/articles/blog/skin_care/2000x900-layerskincare.jpg?rev=8e96360f249c46f18302176b9377a717&cx=0.45&cy=0.4&cw=2000&ch=600&hash=3654CAF15C5E0A6CCE1F4FFE29C3FF2F1CDDE71E',
         'https://www.matisfourways.co.za/shop/wp-content/uploads/2023/09/White-Beauty-Vloger-Linkedln-banner.jpg',
-        'https://picsum.photos/1200/500?random=3',
-        'https://picsum.photos/1200/500?random=4',
+        'https://www.jeunesse.co.nz/wp-content/uploads/2020/10/Osmosis-Beauty-Banner.png',
     ];
 
     const nextSlide = () => {
@@ -29,15 +28,15 @@ export default function Slider() {
         }
     };
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         if (!isHovered) {
-    //             nextSlide();
-    //         }
-    //     }, 2200);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (!isHovered) {
+                nextSlide();
+            }
+        }, 2800);
 
-    //     return () => clearInterval(interval);
-    // }, [currentSlide, isHovered]);
+        return () => clearInterval(interval);
+    }, [currentSlide, isHovered]);
 
     const handleMouseEnter = () => {
         setIsHovered(true);

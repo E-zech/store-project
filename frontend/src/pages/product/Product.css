@@ -42,7 +42,6 @@ transition: transform 0.3s ease;
 }
 
 
-
 .img{
     width: 100%;
     height: 100%;
@@ -79,6 +78,7 @@ transition: transform 0.3s ease;
     align-items: center;
     gap: 10px;
 }
+
 .price,.category, .totalPrice,.discount{
     font-size: 1.5em;
 }
@@ -159,7 +159,7 @@ transition: transform 0.3s ease;
      .first-wrapper{
         flex-direction: column;
         height: auto;
-        padding-top: 0;
+        padding-top: 0px;
     }
     .img-container{
         width: 70vw;

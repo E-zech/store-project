@@ -1,18 +1,29 @@
 import React from 'react';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, ListItemIcon, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { GeneralContext } from "../../../App";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import { mainColor } from '../../../css/Main.style';
 import { useNavigate } from 'react-router-dom';
+import {
+    reviewContainer, reviewGridHead, reviewGridBody, reviewGridWrapper, reviewImgGrid, reviewImgGridWrapper, removeBtn, reviewAddressPaymentWrapper, reviewAddress, reviewPayment, reviewTitles, paddingTop, bold, reviewBtnWrapper, reviewBtnLeft,
+    reviewBtnRight,
+    noProductsWrapper,
+    noProductsText
+} from './Review.style.js';
 import './Review.css';
+import { avatarIcon, avatarStyle } from '../address/Address.style.js';
+
 
 export default function Review({ formPayment, setCurrentStep, }) {
     const { user, productsInCart, setProductsInCart, products, setOrder, snackbar, mode, setLoader } = useContext(GeneralContext);
     const navigate = useNavigate();
     const fullAddress = `${user?.houseNumber} ${user?.street} St, ${user?.city}`;
+
+    const btnStyle = {
+        backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' }
+    }
 
     function removeOne(productId) {
         const confirmed = window.confirm("Are you sure you want to remove this product from the cart?");
@@ -115,98 +126,94 @@ export default function Review({ formPayment, setCurrentStep, }) {
         <>
             {
                 productsInCart.length !== 0 ? (
-                    <section style={{ width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px', maxWidth: '2000px', minHeight: '70vh' }}>
-                        <Avatar sx={{ m: 1, width: '100px', height: '100px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white' }} src={user.imgSrc}>
-                            <AssignmentIndIcon sx={{ width: '40px', height: '40px' }} />
+                    <Box sx={reviewContainer}>
+                        <Avatar sx={avatarStyle} src={user.imgSrc}>
+                            <AssignmentIndIcon sx={avatarIcon} />
                         </Avatar>
 
                         <Typography component="h1" variant="h5">Review</Typography>
+                        <Box sx={reviewGridWrapper}>
+                            <Box sx={reviewGridHead}>
+                                <Box>Image</Box>
+                                <Box>Title</Box>
+                                <Box>Quantity</Box>
+                                <Box>Price</Box>
+                                <Box>Discount</Box>
+                                <Box>Total </Box>
+                                <Box>Remove</Box>
+                            </Box>
 
-                        <section style={{ width: '90vw', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center', maxWidth: "2000px", paddingTop: '30px' }}>
-                            {/* Products Header */}
-                            <div style={{
-                                display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px', borderRadius: '17px 17px 0 0',
-                                width: "100%",
-                                maxWidth: '2000px',
-                                margin: '0 auto'
-
-                            }}>
-                                <div style={{ textAlign: 'center' }}>Image</div>
-                                <div style={{ textAlign: 'center' }}>Title</div>
-                                <div style={{ textAlign: 'center' }}>Quantity</div>
-                                <div style={{ textAlign: 'center' }}>Price</div>
-                                <div style={{ textAlign: 'center' }}>Discount</div>
-                                <div style={{ textAlign: 'center' }}>Total </div>
-                                <div style={{ textAlign: 'center' }}>Remove</div>
-                            </div>
-
-                            {/* Products */}
                             {productsInCart.map((p) => (
-                                <div onClick={(e) => e.stopPropagation()} key={p._id} style={{
-                                    display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: mainColor, gap: '5px', fontSize: '1.2rem', alignItems: 'center', padding: '10px 0', width: "100%",
-                                    maxWidth: '2000px',
-                                    margin: '0 auto'
-                                }}>
-                                    <div style={{ textAlign: 'center' }}>
-                                        <img src={p.imgUrl} alt={p.imgAlt} style={{ display: 'block', width: '70px', height: '70px', margin: 'auto', borderRadius: '15px', }} />
-                                    </div>
-                                    <div style={{ textAlign: 'center' }}>{p.title}</div>
-                                    <div style={{ textAlign: 'center' }}>{p.quantity}</div>
-                                    <div style={{ textAlign: 'center' }}>{p.price} $</div>
-                                    <div style={{ textAlign: 'center' }}>{p.discount} $</div>
-                                    <div style={{ textAlign: 'center' }}>{((p.price - p.discount) * p.quantity).toFixed(2)} $</div>
-                                    <div onClick={() => removeOne(p._id)} style={{ textAlign: 'center', cursor: 'pointer', transition: 'all 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}>❌</div>
-                                </div>
+                                <Box onClick={(e) => e.stopPropagation()} key={p._id} sx={reviewGridBody}>
+                                    <ListItemIcon sx={reviewImgGridWrapper}>
+                                        <img src={p.imgUrl} alt={p.imgAlt} style={reviewImgGrid} />
+                                    </ListItemIcon>
+                                    <Box>{p.title}</Box>
+                                    <Box>{p.quantity}</Box>
+                                    <Box>{p.price} $</Box>
+                                    <Box>{p.discount} $</Box>
+                                    <Box>{((p.price - p.discount) * p.quantity).toFixed(2)} $</Box>
+                                    <Box onClick={() => removeOne(p._id)} sx={removeBtn}>❌</Box>
+                                </Box>
                             ))}
 
-                            <div className='papa'>
-                                {/* Address part */}
-                                <section className='wrapA'>
-                                    <div className='divAddress'>
-                                        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Address Details</div>
-                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Full Name:</span> {user.firstName + ' ' + user.lastName}</div>
-                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Address:</span> {fullAddress}</div>
-                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {user.zip}</div>
-                                    </div>
-                                </section>
+                            <Box sx={reviewAddressPaymentWrapper}>
+                                <Box sx={reviewAddress}>
+                                    <Box sx={reviewTitles}>
+                                        Address Details
+                                    </Box>
+                                    <Box sx={paddingTop}>
+                                        <Typography sx={bold}>Full Name:</Typography>
+                                        {` ${user.firstName + ' ' + user.lastName}`}
+                                    </Box>
+                                    <Box sx={paddingTop}>
+                                        <Typography sx={bold}>Address:</Typography>
+                                        {` ${fullAddress}`}
+                                    </Box>
+                                    <Box sx={paddingTop}>
+                                        <Typography sx={bold}>Zip Code:</Typography>
+                                        {` ${user.zip}`}
+                                    </Box>
+                                </Box>
 
-                                {/* Payment part */}
-                                <section className='wrapA'>
-                                    <div className='divPayment'>
-                                        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', paddingBottom: '20px' }}>Payment Details</div>
-                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Name On Card:</span> {formPayment.nameOnCard}</div>
-                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Last 4 Digits (Card):</span> {formPayment.cardNumber.slice(-4)}</div>
-                                        <div style={{ paddingTop: '10px' }}><span style={{ fontWeight: 'bold' }}>Expiry Date:</span> {formPayment.expiryDate}</div>
-                                    </div>
-                                </section>
-                            </div>
-                        </section>
+                                <Box sx={reviewAddress}>
+                                    <Box >
+                                        <Box sx={reviewTitles}>
+                                            Payment Details
+                                        </Box>
+                                        <Box sx={paddingTop}>
+                                            <Typography sx={bold}>Name On Card:</Typography>
+                                            {` ${formPayment.nameOnCard}`}
+                                        </Box>
+                                        <Box sx={paddingTop}>
+                                            <Typography sx={bold}>Last 4 Digits:</Typography> {` ${formPayment.cardNumber.slice(-4)}`}
+                                        </Box>
+                                        <Box sx={paddingTop}>
+                                            <Typography sx={bold}>Expiry Date:</Typography>
+                                            {` ${formPayment.expiryDate}`}
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
 
-                        <Grid item xs={12} sm={12} sx={{ width: '90vw', maxWidth: '2000px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: '20px' }}>
-                            <Button onClick={placeOrder} fullWidth variant="contained" sx={{ mt: 6, mb: 2, borderBottomLeftRadius: '17px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>
+                        <Grid item xs={12} sm={12} sx={reviewBtnWrapper}>
+                            <Button onClick={placeOrder} fullWidth variant="contained" sx={{ ...reviewBtnLeft, ...btnStyle }}>
                                 Place Order
                             </Button>
 
-                            <Button type="submit" fullWidth variant="contained" onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))} sx={{ mt: 6, mb: 2, borderBottomRightRadius: '17px', backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>
+                            <Button type="submit" fullWidth variant="contained" onClick={() => setCurrentStep(currentStep => Math.max(currentStep - 1, 1))} sx={{ ...reviewBtnRight, ...btnStyle }}>
                                 Back
                             </Button>
                         </Grid>
-                    </section>
+                    </Box>
                 ) : (
-                    <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '5px', minHeight: '70vh' }}>
-                        <Typography sx={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>You dont have Product In Cart.</Typography>
+                    <Box sx={noProductsWrapper}>
+                        <Typography sx={noProductsText}>You dont have Product In Cart.</Typography>
                         <Button
                             onClick={() => navigate('/')}
                             variant="contained"
-                            sx={{
-                                mt: 3,
-                                width: '220px', // Set width to 20vw
-                                backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
-                                color: 'white',
-                                '&:hover': {
-                                    backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                                }
-                            }}>
+                            sx={{ mt: 3, width: '220px', ...btnStyle }}>
                             Back To Home Page
                         </Button>
                     </Box>
@@ -216,3 +223,4 @@ export default function Review({ formPayment, setCurrentStep, }) {
     );
 }
 
+// 225 rows before split style

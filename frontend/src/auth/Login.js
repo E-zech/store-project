@@ -25,7 +25,7 @@ export default function Login() {
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
     const navigate = useNavigate();
-    const { setUser, setLoader, snackbar, setUserRoleType, mode } = useContext(GeneralContext);
+    const { setUser, setLoader, snackbar, setUserRoleType, mode, mainTitleMode } = useContext(GeneralContext);
     const { sx } = useInputsFormColors();
 
     const schema = Joi.object({
@@ -110,7 +110,7 @@ export default function Login() {
                     <LockOutlinedIcon />
                 </Avatar>
 
-                <h1 className='form-title'>Login</h1>
+                <h1 className='form-title' style={mainTitleMode}>Login</h1>
 
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField

@@ -15,7 +15,7 @@ import PopUpLogin from './components/popUpLogin/PopUpLogin';
 
 export const GeneralContext = createContext();
 
-function App() {
+export default function App() {
     const [user, setUser] = useState();
     const [loader, setLoader] = useState(true);
     const [snackbarText, setSnackbarText] = useState('');
@@ -33,13 +33,17 @@ function App() {
     const snackbar = text => {
         setSnackbarText(text);
         setTimeout(() => setSnackbarText(''), 1 * 2000);
-    }
+    };
+
+    const mainTitleMode = {
+        color: mode === 'dark' ? 'white' : 'black'
+    };
 
     const logout = () => {
         localStorage.removeItem('token');
-        setUser(null); // Reset user state
-        setUserRoleType(RoleTypes.none); // Reset user role type
-        navigate('/'); // Redirect to the login page or homepage
+        setUser(null);
+        setUserRoleType(RoleTypes.none);
+        navigate('/');
         snackbar('You have been successfully logged out');
     };
 
@@ -48,7 +52,6 @@ function App() {
             mode: 'light',
             background: {
                 default: '#ffffff',
-                // default: '#ffefd78a',
             },
         },
     });
@@ -135,7 +138,6 @@ function App() {
     }, [user]);
 
     const add2Cart = (productId, title, price) => {
-        // setLoader(true);
         const quantity = 1;
         const products = [{ productId, quantity, price }];
         fetch(`http://localhost:5000/cart/add`, {
@@ -160,9 +162,7 @@ function App() {
             .catch(error => {
                 console.error('Error adding product to cart:', error);
             })
-        // .finally(() => setLoader(false))
     };
-
 
     return (
         <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
@@ -173,9 +173,8 @@ function App() {
                 loader, setLoader, snackbar, logout, mode, setMode, selectedCategory, setSelectedCategory,
                 favProducts, setFavProducts, add2Cart,
                 initialProducts, setInitialProducts,
-                order, setOrder, popUpLogin, setPopUpLogin
+                order, setOrder, popUpLogin, setPopUpLogin, mainTitleMode
             }}>
-
                 <Navbar />
                 <Router />
                 {popUpLogin && <PopUpLogin />}
@@ -186,4 +185,4 @@ function App() {
     );
 }
 
-export default App;
+

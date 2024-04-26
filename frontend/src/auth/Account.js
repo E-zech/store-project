@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../App';
-import { ClientStructureNoPassword, SchemaNoPassword } from '../components/FormValidation';
+import { ClientStructureNoPassword, SchemaNoPassword } from '../utils/FormValidation';
 import { initialFormDataNoPassword, handleChange, useInputsFormColors } from '../utils/utils'
 import { accountAvatar, accountContainer } from './auth.style';
 
