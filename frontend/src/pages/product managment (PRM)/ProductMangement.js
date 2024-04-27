@@ -8,11 +8,11 @@ import '../../css/grid.css';
 import Loader from '../../components/loader/Loader.js';
 import { mainColor, white } from '../../css/Main.style.js';
 import { boxShadowDark, boxShadowLight, hoverBoxShadowDark, hoverBoxShadowLight } from '../../components/cart/Cart.style.js';
-import '../../css/noResultsFound.css'
+import ResultResultNotFound from '../../utils/ResultNotFound.js';
 
 export default function ProductMangement() {
     const [allMyProducts, setAllMyProducts] = useState([]);
-    const { products, setProducts, setInitialProducts, loader, setLoader, mode, selectedCategory, } = useContext(GeneralContext);
+    const { products, setProducts, setInitialProducts, loader, setLoader, mode, selectedCategory, mainTitleMode } = useContext(GeneralContext);
     const navigate = useNavigate();
 
     const btnStyle = {
@@ -52,7 +52,8 @@ export default function ProductMangement() {
     return (
         <>
             <header>
-                <h1 className='main-title leftFix'>Products Manegment </h1> <br />
+                <h1 className='main-title' style={mainTitleMode}>Products Manegment </h1>
+                <br />
             </header>
             <section style={{ maxWidth: '2000px', minHeight: '70vh' }}>
                 {loader ? (
@@ -62,7 +63,7 @@ export default function ProductMangement() {
                         {products.length > 0 ? (
                             products.filter(product => product.category === selectedCategory || selectedCategory === "All").map((product, index) => <ProductComponent key={index} product={product} />)
                         ) : (
-                            <h2 className='noResults'>No results found</h2>
+                            <ResultResultNotFound />
                         )
                         }
                         <div className='cartWrapper'>
@@ -75,8 +76,6 @@ export default function ProductMangement() {
                         </div>
                     </div>)}
             </section >
-
-
         </>
     )
 }

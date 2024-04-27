@@ -1,3 +1,5 @@
+import { gridHeadBodyWrapperMediaQ, reviewAddressMediaQ, reviewAddressPaymentWrapperMediaQ, reviewBtnLeftMediaQ, reviewBtnWrapperMediaQ, reviewGridHeadMediaQ, reviewGridWrapperMediaQ, reviewImgGridWrapperMediaQ, reviewTitlesMediaQ } from "./Review.styleMediaQ";
+
 export const reviewContainer = {
     width: '100%',
     display: "flex",
@@ -19,9 +21,17 @@ export const reviewGridWrapper = {
     alignItems: 'center',
     maxWidth: "2000px",
     paddingTop: '30px',
-    '@media (max-width: 800px)': {
-        width: '95vw',
-    }
+    ...reviewGridWrapperMediaQ
+};
+
+export const gridHeadBodyWrapper = {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    gap: '15px',
+    ...gridHeadBodyWrapperMediaQ
 };
 
 export const reviewGridHead = {
@@ -36,15 +46,11 @@ export const reviewGridHead = {
     maxWidth: '2000px',
     margin: '0 auto',
     textAlign: 'center',
-    '@media (max-width: 800px)': {
-        gap: '0px',
-        fontSize: '1rem',
-    }
+    ...reviewGridHeadMediaQ
 };
 
 export const reviewGridBody = {
-    ...reviewGridHead,
-    borderRadius: '0px',
+    ...reviewGridHead, borderRadius: '0px',
 };
 
 export const reviewImgGridWrapper = {
@@ -52,6 +58,8 @@ export const reviewImgGridWrapper = {
     width: '70px',
     height: '70px',
     margin: '0 auto',
+    overflow: 'hidden',
+    ...reviewImgGridWrapperMediaQ
 };
 
 export const reviewImgGrid = {
@@ -70,6 +78,7 @@ export const reviewAddressPaymentWrapper = {
     width: '100%',
     maxWidth: '2000px',
     margin: '0 auto',
+    ...reviewAddressPaymentWrapperMediaQ
 };
 
 export const reviewAddress = {
@@ -85,23 +94,14 @@ export const reviewAddress = {
     padding: '20px 0 20px 20px',
     flexDirection: 'column',
     textAlign: 'left',
-    '@media (max-width: 800px)': {
-        fontSize: '1rem',
-        padding: '15px 0 15px 20px',
-    }
+    ...reviewAddressMediaQ
 };
 
 export const reviewTitles = {
     fontWeight: 'bold',
     fontSize: '1.5rem',
     paddingBottom: '20px',
-    '@media (max-width: 800px)': {
-        fontSize: '1.3rem',
-    }
-};
-
-export const paddingTop = {
-    padddingTop: '10px',
+    ...reviewTitlesMediaQ
 };
 
 export const bold = {
@@ -116,21 +116,21 @@ export const reviewBtnWrapper = {
     margin: '0 auto',
     display: 'flex', justifyContent: 'center',
     gap: '20px',
-    '@media (max-width: 800px)': {
-        width: '95vw',
-    }
+    ...reviewBtnWrapperMediaQ
 };
 
 export const reviewBtnLeft = {
-    mt: 6, mb: 2,
+    mt: 2.5, mb: 2,
     color: 'white',
     borderBottomLeftRadius: '17px',
+    ...reviewBtnLeftMediaQ
 };
 
 export const reviewBtnRight = {
-    mt: 6, mb: 2,
+    mt: 2.5, mb: 2,
     color: 'white',
     borderBottomRightRadius: '17px',
+    ...reviewBtnLeftMediaQ,
 };
 
 export const noProductsWrapper = {
@@ -138,7 +138,5 @@ export const noProductsWrapper = {
 };
 
 export const noProductsText = {
-    textAlign: 'center',
-    fontSize: '1.5rem',
-    fontWeight: 'bold'
+    textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold'
 };

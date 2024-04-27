@@ -4,18 +4,18 @@ import Signup from './auth/Signup';
 import Account from './auth/Account';
 import UsersMenagment from './pages/customer management (CRM)/CustomerMenagment';
 import About from './pages/about/About';
-import AllProducts from './pages/home/AllProducts';
 import FavProducts from './pages/favorites/FavProduct';
 import ProductMangement from './pages/product managment (PRM)/ProductMangement';
 import AddOrEditProduct from './pages/add or edit product/AddOrEditProduct';
 import Product from './pages/product/Product';
 import Checkout from './pages/checkout/Checkout';
 import Order from './pages/order/Order';
+import Home from './pages/home/Home';
 
 export default function Router() {
     return (
         <Routes>
-            <Route path="/" element={<AllProducts />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/product/:id" element={<Product />} />
             <Route path="/product-management" element={<ProductMangement />} />

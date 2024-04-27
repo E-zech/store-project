@@ -32,10 +32,8 @@ export default function ProductComponent({ product }) {
   };
 
   useEffect(() => {
-    if (product.discount === 0) {
-      setIsDiscount(false)
-    }
-  }, [path])
+    setIsDiscount(product.discount !== 0);
+  }, [product.discount])
 
 
   const handleClick = () => {

@@ -7,12 +7,12 @@ import Avatar from '@mui/material/Avatar';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { useNavigate } from 'react-router-dom';
 import {
-    reviewContainer, reviewGridHead, reviewGridBody, reviewGridWrapper, reviewImgGrid, reviewImgGridWrapper, removeBtn, reviewAddressPaymentWrapper, reviewAddress, reviewPayment, reviewTitles, paddingTop, bold, reviewBtnWrapper, reviewBtnLeft,
+    reviewContainer, reviewGridHead, reviewGridBody, reviewGridWrapper, reviewImgGrid, reviewImgGridWrapper, removeBtn, reviewAddressPaymentWrapper, reviewAddress, reviewTitles, bold, reviewBtnWrapper, reviewBtnLeft,
     reviewBtnRight,
     noProductsWrapper,
-    noProductsText
+    noProductsText,
+    gridHeadBodyWrapper
 } from './Review.style.js';
-import './Review.css';
 import { avatarIcon, avatarStyle } from '../address/Address.style.js';
 
 
@@ -133,44 +133,45 @@ export default function Review({ formPayment, setCurrentStep, }) {
 
                         <Typography component="h1" variant="h5">Review</Typography>
                         <Box sx={reviewGridWrapper}>
-                            <Box sx={reviewGridHead}>
-                                <Box>Image</Box>
-                                <Box>Title</Box>
-                                <Box>Quantity</Box>
-                                <Box>Price</Box>
-                                <Box>Discount</Box>
-                                <Box>Total </Box>
-                                <Box>Remove</Box>
-                            </Box>
-
-                            {productsInCart.map((p) => (
-                                <Box onClick={(e) => e.stopPropagation()} key={p._id} sx={reviewGridBody}>
-                                    <ListItemIcon sx={reviewImgGridWrapper}>
-                                        <img src={p.imgUrl} alt={p.imgAlt} style={reviewImgGrid} />
-                                    </ListItemIcon>
-                                    <Box>{p.title}</Box>
-                                    <Box>{p.quantity}</Box>
-                                    <Box>{p.price} $</Box>
-                                    <Box>{p.discount} $</Box>
-                                    <Box>{((p.price - p.discount) * p.quantity).toFixed(2)} $</Box>
-                                    <Box onClick={() => removeOne(p._id)} sx={removeBtn}>❌</Box>
+                            <Box sx={gridHeadBodyWrapper}>
+                                <Box sx={reviewGridHead}>
+                                    <Box>Image</Box>
+                                    <Box>Title</Box>
+                                    <Box>Quantity</Box>
+                                    <Box>Price</Box>
+                                    <Box>Discount</Box>
+                                    <Box>Total </Box>
+                                    <Box>Remove</Box>
                                 </Box>
-                            ))}
 
+                                {productsInCart.map((p) => (
+                                    <Box onClick={(e) => e.stopPropagation()} key={p._id} sx={reviewGridBody}>
+                                        <ListItemIcon sx={reviewImgGridWrapper}>
+                                            <img src={p.imgUrl} alt={p.imgAlt} style={reviewImgGrid} />
+                                        </ListItemIcon>
+                                        <Box>{p.title}</Box>
+                                        <Box>{p.quantity}</Box>
+                                        <Box>{p.price} $</Box>
+                                        <Box>{p.discount} $</Box>
+                                        <Box>{((p.price - p.discount) * p.quantity).toFixed(2)} $</Box>
+                                        <Box onClick={() => removeOne(p._id)} sx={removeBtn}>❌</Box>
+                                    </Box>
+                                ))}
+                            </Box>
                             <Box sx={reviewAddressPaymentWrapper}>
                                 <Box sx={reviewAddress}>
                                     <Box sx={reviewTitles}>
                                         Address Details
                                     </Box>
-                                    <Box sx={paddingTop}>
+                                    <Box>
                                         <Typography sx={bold}>Full Name:</Typography>
                                         {` ${user.firstName + ' ' + user.lastName}`}
                                     </Box>
-                                    <Box sx={paddingTop}>
+                                    <Box>
                                         <Typography sx={bold}>Address:</Typography>
                                         {` ${fullAddress}`}
                                     </Box>
-                                    <Box sx={paddingTop}>
+                                    <Box>
                                         <Typography sx={bold}>Zip Code:</Typography>
                                         {` ${user.zip}`}
                                     </Box>
@@ -181,14 +182,14 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                         <Box sx={reviewTitles}>
                                             Payment Details
                                         </Box>
-                                        <Box sx={paddingTop}>
+                                        <Box>
                                             <Typography sx={bold}>Name On Card:</Typography>
                                             {` ${formPayment.nameOnCard}`}
                                         </Box>
-                                        <Box sx={paddingTop}>
+                                        <Box>
                                             <Typography sx={bold}>Last 4 Digits:</Typography> {` ${formPayment.cardNumber.slice(-4)}`}
                                         </Box>
-                                        <Box sx={paddingTop}>
+                                        <Box>
                                             <Typography sx={bold}>Expiry Date:</Typography>
                                             {` ${formPayment.expiryDate}`}
                                         </Box>
@@ -222,5 +223,3 @@ export default function Review({ formPayment, setCurrentStep, }) {
         </>
     );
 }
-
-// 225 rows before split style

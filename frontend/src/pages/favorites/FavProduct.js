@@ -4,8 +4,8 @@ import ProductComponent from '../../components/product component/ProductComponen
 import Cart from '../../components/cart/Cart';
 import '../../css/grid.css';
 import Loader from '../../components/loader/Loader';
-import '../../css/noResultsFound.css';
 import './FavProduct.css';
+import ResultResultNotFound from '../../utils/ResultNotFound';
 
 export default function FavProducts() {
     const { user, snackbar, loader, setLoader, products, selectedCategory, favProducts, setFavProducts, mainTitleMode } = useContext(GeneralContext);
@@ -59,7 +59,7 @@ export default function FavProducts() {
                                 .filter(product => favProducts?.some(favProduct => favProduct._id === product._id))
                                 .map((product, index) => <ProductComponent key={index} product={product} setFavProducts={setFavProducts} />)
                         ) : (
-                            <h2 className='noResults'>No results found</h2>
+                            <ResultResultNotFound />
                         )
                         }
                     </div>

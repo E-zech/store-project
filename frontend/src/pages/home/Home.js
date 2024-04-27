@@ -6,10 +6,10 @@ import Slider from '../../components/slider/Slider';
 import Loader from '../../components/loader/Loader';
 import '../../css/App.css';
 import '../../css/grid.css';
-import '../../css/noResultsFound.css';
-import './AllProducts.css';
+import './Home.css';
+import ResultResultNotFound from '../../utils/ResultNotFound';
 
-export default function AllProducts() { // ALL Products Page basically
+export default function Home() {
     const { user, products, setProducts, loader, selectedCategory, setLoader } = useContext(GeneralContext);
 
     useEffect(() => {
@@ -26,45 +26,61 @@ export default function AllProducts() { // ALL Products Page basically
             }).finally(() => setLoader(false))
     }, []);
 
-    const displayLow2high = () => {
-        console.log("displayLow2high")
-        // const sortedProducts = [...products].sort((a, b) => a.price - b.price);
-        // setProducts(sortedProducts);
+    const displayLowToHigh = () => {
+        setProducts([...products.sort((a, b) => (a.price - a.discount) - (b.price - b.discount))]);
     }
 
-    const displayHigh2Low = () => {
-        console.log("displayHigh2Low")
-        // const sortedProducts = [...products].sort((a, b) => b.price - a.price);
-        // setProducts(sortedProducts);
+    const displayHighToLow = () => {
+        setProducts([...products.sort((a, b) => (b.price - b.discount) - (a.price - a.discount))]);
     }
 
     const displayDiscount = () => {
-        console.log("displayDiscount")
-        // const sortedProducts = [...products].filter(product => product.discount > 0).sort((a, b) => b.discount - a.discount);
-        // setProducts(sortedProducts);
+        setProducts([...products.filter(product => product.discount)]);
     }
+
+    const displayA2Z = () => {
+        setProducts([...products.sort((a, b) => a.title.localeCompare(b.title))]);
+    }
+
+    const displayZ2A = () => {
+        setProducts([...products.sort((a, b) => b.title.localeCompare(a.title))]);
+    }
+
 
     return (
         <>
 
-            <section style={{ width: '100%', maxWidth: '2000px', margin: '0 auto', minHeight: '70vh' }}>
+            <section className='homeContainer'>
                 <Slider />
                 <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
                     <h1 className="homePage-title">Skin Care Store</h1>
                 </header>
 
-                <div className='allProductsBtnWrapper'>
-                    <button className='allProductsBtn' onClick={displayLow2high}>
-                        Low To High
+                <div className='homeBtnWrapper'>
+                    {/* <span className='homeSpan'>Display: </span> */}
+                    <button className='homeBtn' onClick={displayLowToHigh}>
+                        Low to High
                     </button>
 
-                    <button className='allProductsBtn' onClick={displayHigh2Low}>
-                        High To Low
+                    <button className='homeBtn' onClick={displayHighToLow}>
+                        High to Low
                     </button>
 
-                    <button className='allProductsBtn' onClick={displayDiscount}>
-                        Discount Products
+                    <button className='homeBtn' onClick={displayDiscount}>
+                        Discount
                     </button>
+
+                    <button className='homeBtn' onClick={displayA2Z}>
+                        A - Z
+                    </button>
+
+                    <button className='homeBtn' onClick={displayZ2A}>
+                        Z - A
+                    </button>
+
+
+
+
                 </div>
 
                 <section >
@@ -87,7 +103,7 @@ export default function AllProducts() { // ALL Products Page basically
                                             <ProductComponent key={index} product={product} />
                                         ))
                                 ) : (
-                                    <h2 className='noResults'>No results found</h2>
+                                    <ResultResultNotFound />
                                 )}
                             </div>
                         </>

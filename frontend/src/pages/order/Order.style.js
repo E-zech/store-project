@@ -2,15 +2,12 @@ export const orderGrid = {
     width: '90vw',
     margin: '35px auto',
     maxWidth: '2000px',
-    minHeight: '70vh',
+
     justifyContent: 'center',
     '@media (max-width: 700px)': {
-        width: '95vw',
+        width: '96vw',
+        paddingLeft: '0px'
     }
-};
-
-export const mainBackgroundColor = {
-    backgroundColor: '#99c8c2'
 };
 
 export const fontBig = {
@@ -44,6 +41,7 @@ export const orderImgWrapper = {
     width: '70px',
     height: '70px',
     margin: '0 auto',
+    paddingLeft: '5px',
     '@media (max-width: 600px)': {
         width: '60px',
         height: '60px',
@@ -56,10 +54,6 @@ export const orderImgWrapper = {
 
 export const orderImg = {
     borderRadius: '15px'
-};
-
-export const orderAccordionSummarySeconed = {
-    backgroundColor: '#99c8c2', marginTop: 1,
 };
 
 export const productTitle = {
@@ -85,7 +79,6 @@ export const tableFirstWrapper = {
 
 export const tableSeconedWrapper = {
     width: '100%',
-    backgroundColor: '#99c8c2',
     display: 'grid',
     gridTemplateColumns: '1fr',
     justifyContent: 'center',
@@ -94,7 +87,7 @@ export const tableSeconedWrapper = {
 
 export const tableThirdWrapper = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(5, 1fr)', backgroundColor: '#99c8c2',
+    gridTemplateColumns: 'repeat(5, 1fr)',
     gap: '5px',
     fontSize: '1.2rem',
     alignItems: 'center',
