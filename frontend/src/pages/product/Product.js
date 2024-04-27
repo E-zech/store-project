@@ -17,7 +17,7 @@ export default function Product() {
     const [isInCart, setIsInCart] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
-    const { user, loader, setLoader, filteredProducts, setFilteredProducts, snackbar, selectedCategory, productsInCart, setProductsInCart, add2Cart } = useContext(GeneralContext);
+    const { user, setLoader, snackbar, productsInCart, add2Cart } = useContext(GeneralContext);
 
     const icons = {
         Feet: <GiBarefoot size={50} />,

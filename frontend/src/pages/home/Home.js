@@ -10,7 +10,7 @@ import './Home.css';
 import ResultResultNotFound from '../../utils/ResultNotFound';
 
 export default function Home() {
-    const { user, products, setProducts, loader, selectedCategory, setLoader } = useContext(GeneralContext);
+    const { user, products, setProducts, loader, selectedCategory, setLoader, mainTitleMode } = useContext(GeneralContext);
 
     useEffect(() => {
         setLoader(true)
@@ -28,36 +28,35 @@ export default function Home() {
 
     const displayLowToHigh = () => {
         setProducts([...products.sort((a, b) => (a.price - a.discount) - (b.price - b.discount))]);
-    }
+    };
 
     const displayHighToLow = () => {
         setProducts([...products.sort((a, b) => (b.price - b.discount) - (a.price - a.discount))]);
-    }
+    };
 
     const displayDiscount = () => {
         setProducts([...products.filter(product => product.discount)]);
-    }
+    };
 
     const displayA2Z = () => {
         setProducts([...products.sort((a, b) => a.title.localeCompare(b.title))]);
-    }
+    };
 
     const displayZ2A = () => {
         setProducts([...products.sort((a, b) => b.title.localeCompare(a.title))]);
-    }
-
+    };
 
     return (
         <>
 
             <section className='homeContainer'>
                 <Slider />
-                <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                    <h1 className="homePage-title">Skin Care Store</h1>
+
+                <header className='homeHeader'>
+                    <h1 className="homePage-title" style={mainTitleMode}>Skin Care Store</h1>
                 </header>
 
                 <div className='homeBtnWrapper'>
-                    {/* <span className='homeSpan'>Display: </span> */}
                     <button className='homeBtn' onClick={displayLowToHigh}>
                         Low to High
                     </button>
@@ -77,10 +76,6 @@ export default function Home() {
                     <button className='homeBtn' onClick={displayZ2A}>
                         Z - A
                     </button>
-
-
-
-
                 </div>
 
                 <section >

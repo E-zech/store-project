@@ -14,7 +14,7 @@ import { Box, Container, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Tooltip from '@mui/material/Tooltip';
-import { btnBgcGray, btnBgcTransparent, btnBgcWhite, btnWrapper, cardContentStyle, cardStyle, cartMediaStyle, containerCardStyle, discountBtnStyle, priceWrapper, titleStyle } from './ProductComponent.style';
+import { btnBgcGray, btnBgcTransparent, btnBgcWhite, btnWrapper, cardContentStyle, cardStyle, cartMediaStyle, containerCardStyle, discountBtnStyle, priceWrapper, titleStyle, priceStyle } from './ProductComponent.style';
 import { black, mainColor, white } from "../../css/Main.style";
 
 export default function ProductComponent({ product }) {
@@ -115,7 +115,7 @@ export default function ProductComponent({ product }) {
           {isDiscount && (
             <IconButton aria-label="discount"
               sx={{
-                ...discountBtnStyle,
+                ...discountBtnStyle, ...priceStyle,
                 backgroundColor: mode === 'light' ? mainColor : black,
               }}>
               -{product.discount.toFixed(2)}$
@@ -137,13 +137,13 @@ export default function ProductComponent({ product }) {
 
             <Box sx={priceWrapper}>
               {isDiscount &&
-                <IconButton aria-label="total-price" sx={btnBgcTransparent}>
+                <IconButton aria-label="total-price" sx={{ ...btnBgcTransparent, ...priceStyle }}>
                   {`${(Math.floor((product.price - product.discount) * 10) / 10).toFixed(1)}0$`}
                 </IconButton>
               }
 
               <IconButton aria-label="price" sx={{
-                textDecoration: isDiscount ? 'line-through' : 'none', ...btnBgcTransparent
+                textDecoration: isDiscount ? 'line-through' : 'none', ...btnBgcTransparent, ...priceStyle
               }}>
                 {product.price.toFixed(2)}$
               </IconButton>

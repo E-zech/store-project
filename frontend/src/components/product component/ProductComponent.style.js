@@ -72,6 +72,10 @@ export const priceWrapper = {
     alignItems: 'center',
 };
 
+export const priceStyle = {
+    fontFamily: font,
+}
+
 export const btnWrapper = {
     display: 'flex',
     justifyContent: 'center',

@@ -108,10 +108,12 @@ export default function Navbar() {
                             component="a"
                             onClick={() => { navigate('/') }}
                             sx={homeIconStyle}>
-                            <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
-                                ...logoImgStyle,
-                                filter: mode === 'dark' ? 'hue-rotate(30deg) brightness(191%)' : 'grayscale(90%)',
-                            }} />
+                            <Tooltip title="Home" arrow>
+                                <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
+                                    ...logoImgStyle,
+                                    filter: mode === 'dark' ? 'hue-rotate(30deg) brightness(191%)' : 'grayscale(90%)',
+                                }} />
+                            </Tooltip>
                             <span style={{
                                 ...logoSpanStyleBig,
                                 color: mode === 'dark' ? 'white' : 'black',
@@ -166,10 +168,12 @@ export default function Navbar() {
                             component="a"
                             href="/"
                             sx={homeIconStyleSmall}>
-                            <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
-                                ...logoImgStyle,
-                                filter: mode === 'dark' ? 'hue-rotate(30deg) brightness(191%)' : 'grayscale(90%)',
-                            }} />
+                            <Tooltip title="Home" arrow>
+                                <img src="https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-skincare-logo-png-image_6309022.png" alt="a logo photo" style={{
+                                    ...logoImgStyle,
+                                    filter: mode === 'dark' ? 'hue-rotate(30deg) brightness(191%)' : 'grayscale(90%)',
+                                }} />
+                            </Tooltip>
                             <span style={{
                                 ...logoSpanStyleSmall,
                                 color: mode === 'dark' ? 'white' : 'black',
@@ -201,16 +205,18 @@ export default function Navbar() {
 
                         {isSearchBar && (<SearchBar />)}
 
-                        <Box  >
-                            <IconButton sx={darkModeBTN}
-                                onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} >
-                                {mode === 'dark' ? <Brightness4Icon /> : <NightlightIcon />}
-                            </IconButton>
+                        <Box >
+                            <Tooltip title={mode === 'dark' ? 'Light Mode' : 'Dark Mode'} arrow>
+                                <IconButton sx={darkModeBTN}
+                                    onClick={() => setMode(mode === 'light' ? 'dark' : 'light')} >
+                                    {mode === 'dark' ? <Brightness4Icon /> : <NightlightIcon />}
+                                </IconButton>
+                            </Tooltip>
                         </Box>
 
                         {user ?
                             <Box sx={userBTN}>
-                                <Tooltip title="Open settings">
+                                <Tooltip title="Open settings" arrow>
                                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                         <Avatar
                                             sx={{
