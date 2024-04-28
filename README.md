@@ -1,4 +1,4 @@
-Skin Care Store Project 
+###Skin Care Store Project 
 
 * backend full documentation (Postman) - https://documenter.getpostman.com/view/28292545/2sA3BuVog9.
 ## Technologies and Libraries
