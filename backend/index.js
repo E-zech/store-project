@@ -4,14 +4,14 @@ import mongoose from 'mongoose';
 import chalk from 'chalk';
 import morgan from 'morgan';
 import { coloredStatus } from './configs/morganConfig.js';
+import { initialDataStart } from './initial-data/initial-data.js';
+import { getContent } from './configs/contentConfig.js';
+import logMiddleware from './middleware/logMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cardRoutes from './routes/cartRoutes.js';
-import { initialDataStart } from './initial-data/initial-data.js';
-import logMiddleware from './middleware/logMiddleware.js';
-import dotenv from 'dotenv';
-import { getContent } from './configs/contentConfig.js';
 import orderRoutes from './routes/orderRoutes.js';
+import dotenv from 'dotenv';
 
 // Environment setup
 const env = dotenv.config({ path: './.env' }); // for mongoDb Atlas use path: './prod.env'
@@ -22,7 +22,7 @@ async function main() {
     try {
         await mongoose.connect(env.parsed.REMOTE_URL);
         console.log(chalk.green(`mongodb connection established on port : ${chalk.bgGreen('27017')}`));
-        // await initialDataStart();
+        await initialDataStart();
     }
     catch (err) {
         console.error(chalk.bgRed(err));
