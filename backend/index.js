@@ -22,7 +22,7 @@ async function main() {
     try {
         await mongoose.connect(env.parsed.REMOTE_URL);
         console.log(chalk.green(`mongodb connection established on port : ${chalk.bgGreen('27017')}`));
-        await initialDataStart();
+        // await initialDataStart();
     }
     catch (err) {
         console.error(chalk.bgRed(err));

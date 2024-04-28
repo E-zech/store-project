@@ -244,3 +244,135 @@ Route: /cart
 Status Code: 401
 Error:  Unauthorized
 
+Time: 2024-04-28T15:07:05.022Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-04-28T15:09:29.173Z
+Method: POST
+Route: /signup
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-04-28T15:15:22.918Z
+Method: GET
+Route: /users/662e674d61a24102562984b8
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-28T15:15:43.307Z
+Method: GET
+Route: /users/662e674d61a24102562984b8
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-28T15:16:27.793Z
+Method: GET
+Route: /users/662e674d61a24102562984b8
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-28T15:20:24.996Z
+Method: PUT
+Route: /users/662e674d61a24102562984b8
+Status Code: 400
+Error:  Bad Request
+
+Time: 2024-04-28T15:30:55.895Z
+Method: PUT
+Route: /products/662e6ae64f63c7e03146ab77
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-28T15:35:30.284Z
+Method: DELETE
+Route: /products/662e6ae64f63c7e03146ab77
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-28T15:41:36.181Z
+Method: POST
+Route: /cart/add
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-28T15:41:50.726Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:42:10.085Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:42:54.825Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:43:01.544Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:45:42.852Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:48:03.668Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:49:23.831Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:49:36.192Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:49:45.688Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T15:50:11.074Z
+Method: POST
+Route: /cart/add
+Status Code: 500
+Error:  Internal Server Error
+
+Time: 2024-04-28T16:01:59.409Z
+Method: DELETE
+Route: /cart/delete/662e6dec4f63c7e03146ab83
+Status Code: 404
+Error:  Not Found
+
+Time: 2024-04-28T16:03:55.967Z
+Method: DELETE
+Route: /cart/delete-all
+Status Code: 401
+Error:  Unauthorized
+
+Time: 2024-04-28T16:13:42.220Z
+Method: GET
+Route: /my-orders
+Status Code: 401
+Error:  Unauthorized
+
