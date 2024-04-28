@@ -21,8 +21,18 @@ export default function Review({ formPayment, setCurrentStep, }) {
     const navigate = useNavigate();
     const fullAddress = `${user?.houseNumber} ${user?.street} St, ${user?.city}`;
 
+    const backgroundColorGrid = {
+        backgroundColor: mode === 'dark' ? 'black' : '#99c8c2'
+    }
+
     const btnStyle = {
         backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' }
+    }
+
+    const reviewTitlesStyle = {
+        ...reviewAddress,
+        ...backgroundColorGrid,
+        color: mode === 'dark' ? 'white' : 'black'
     }
 
     function removeOne(productId) {
@@ -132,34 +142,34 @@ export default function Review({ formPayment, setCurrentStep, }) {
                         </Avatar>
 
                         <Typography component="h1" variant="h5">Review</Typography>
-                        <Box sx={reviewGridWrapper}>
+                        <Box sx={{ ...reviewGridWrapper, backgroundColor: mode === 'dark' ? 'dark' : 'transparent' }}>
                             <Box sx={gridHeadBodyWrapper}>
-                                <Box sx={reviewGridHead}>
+                                <Box sx={{ ...reviewGridHead, ...backgroundColorGrid }}>
                                     <Box>Image</Box>
                                     <Box>Title</Box>
-                                    <Box>Quantity</Box>
                                     <Box>Price</Box>
-                                    <Box>Discount</Box>
+                                    <Box>Dis</Box>
+                                    <Box>QTY</Box>
                                     <Box>Total </Box>
                                     <Box>Remove</Box>
                                 </Box>
 
                                 {productsInCart.map((p) => (
-                                    <Box onClick={(e) => e.stopPropagation()} key={p._id} sx={reviewGridBody}>
+                                    <Box onClick={(e) => e.stopPropagation()} key={p._id} sx={{ ...reviewGridBody, ...backgroundColorGrid }}>
                                         <ListItemIcon sx={reviewImgGridWrapper}>
                                             <img src={p.imgUrl} alt={p.imgAlt} style={reviewImgGrid} />
                                         </ListItemIcon>
                                         <Box>{p.title}</Box>
+                                        <Box>{p.price}$</Box>
+                                        <Box>{p.discount}$</Box>
                                         <Box>{p.quantity}</Box>
-                                        <Box>{p.price} $</Box>
-                                        <Box>{p.discount} $</Box>
-                                        <Box>{((p.price - p.discount) * p.quantity).toFixed(2)} $</Box>
+                                        <Box>{((p.price - p.discount) * p.quantity).toFixed(2)}$</Box>
                                         <Box onClick={() => removeOne(p._id)} sx={removeBtn}>❌</Box>
                                     </Box>
                                 ))}
                             </Box>
                             <Box sx={reviewAddressPaymentWrapper}>
-                                <Box sx={reviewAddress}>
+                                <Box sx={reviewTitlesStyle}>
                                     <Box sx={reviewTitles}>
                                         Address Details
                                     </Box>
@@ -177,7 +187,7 @@ export default function Review({ formPayment, setCurrentStep, }) {
                                     </Box>
                                 </Box>
 
-                                <Box sx={reviewAddress}>
+                                <Box sx={reviewTitlesStyle}>
                                     <Box >
                                         <Box sx={reviewTitles}>
                                             Payment Details

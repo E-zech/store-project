@@ -84,8 +84,13 @@ padding: 0;
     }
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:550px) {
+    .main-title{
+        margin-top: 85px;
+    }  
+}
 
+@media screen and (max-width:500px) {
     .main-title,
     .homePage-title{
         font-size: 2rem;
@@ -96,3 +101,4 @@ padding: 0;
         padding: 14px 30px;
     }   
 }
+

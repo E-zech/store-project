@@ -11,7 +11,6 @@ export const reviewGridWrapperMediaQ = {
 
 export const gridHeadBodyWrapperMediaQ = {
     '@media (max-width: 600px)': {
-        flexDirection: 'row',
         gap: '8px'
     },
 };
@@ -22,20 +21,14 @@ export const reviewGridHeadMediaQ = {
         fontSize: '1rem',
     },
     '@media (max-width: 600px)': {
-        fontSize: '1.2rem',
-        fontWeight: 'bold',
-        width: '50%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        padding: '15px',
-        minHeight: '400px',
-        gap: '5px',
-        borderRadius: '17px 17px 0 0',
+        fontSize: '15px',
+    },
+    '@media (max-width: 500px)': {
+        fontSize: '13px',
+        padding: '8px 0px'
     },
     '@media (max-width: 450px)': {
-        fontSize: '1rem',
+        fontSize: '11px',
     }
 };
 
@@ -47,9 +40,13 @@ export const reviewImgGridWrapperMediaQ = {
     '@media (max-width: 600px)': {
         width: '45px',
         height: '45px',
-        marginTop: '-15px'
+    },
+    '@media (max-width: 450px)': {
+        width: '40px',
+        height: '40px',
     }
 };
+
 
 export const reviewAddressPaymentWrapperMediaQ = {
     '@media (max-width: 600px)': {

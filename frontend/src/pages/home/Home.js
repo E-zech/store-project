@@ -34,10 +34,6 @@ export default function Home() {
         setProducts([...products.sort((a, b) => (b.price - b.discount) - (a.price - a.discount))]);
     };
 
-    const displayDiscount = () => {
-        setProducts([...products.filter(product => product.discount)]);
-    };
-
     const displayA2Z = () => {
         setProducts([...products.sort((a, b) => a.title.localeCompare(b.title))]);
     };
@@ -63,10 +59,6 @@ export default function Home() {
 
                     <button className='homeBtn' onClick={displayHighToLow}>
                         High to Low
-                    </button>
-
-                    <button className='homeBtn' onClick={displayDiscount}>
-                        Discount
                     </button>
 
                     <button className='homeBtn' onClick={displayA2Z}>

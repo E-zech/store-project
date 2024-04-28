@@ -15,10 +15,17 @@ export default function Cart() {
 
     const incrementQuantity = (productId, price) => {
         const productIndex = productsInCart.findIndex(p => p._id === productId);
+
         if (productIndex !== -1) {
             const updatedproductsInCart = [...productsInCart];
-            updatedproductsInCart[productIndex].quantity += 1;
-            setProductsInCart(updatedproductsInCart);
+            const product = updatedproductsInCart[productIndex];
+
+            if (product.quantity + 1 <= product.totalQuantity) {
+                product.quantity += 1;
+                setProductsInCart(updatedproductsInCart);
+            } else {
+                snackbar("Max quantity stock");
+            }
         }
     }
 
@@ -36,7 +43,6 @@ export default function Cart() {
     };
 
     const saveChanges = () => {
-        // setLoader(true);
         fetch(`http://localhost:5000/cart/add`, {
             method: 'POST',
             credentials: 'include',

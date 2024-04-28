@@ -20,6 +20,14 @@ export default function Account() {
     const { sx } = useInputsFormColors();
     const { user, setUser, setLoader, snackbar, mode } = useContext(GeneralContext);
 
+    const btnStyle = {
+        mt: 3, mb: 2,
+        backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
+        '&:hover': {
+            backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
+        }
+    };
+
     useEffect(() => {
         setLoader(true);
         if (user) {
@@ -37,7 +45,7 @@ export default function Account() {
             });
         }
         setLoader(false);
-    }, [user]); // fix !! if no user then no page ! but also takes time for user to accumalte in the app.js
+    }, [user]);
 
     const handleAccountChange = (ev) => {
         handleChange(ev, formData, setFormData, errors, setErrors, SchemaNoPassword, setIsFormValid);
@@ -118,14 +126,7 @@ export default function Account() {
                                 fullWidth
                                 variant="contained"
                                 disabled={!isFormValid}
-                                sx={{
-                                    mt: 3, mb: 2,
-                                    backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white',
-                                    '&:hover': {
-                                        backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2',
-                                    }
-                                }}
-                            >
+                                sx={btnStyle}>
                                 Save
                             </Button>
                         </Box>

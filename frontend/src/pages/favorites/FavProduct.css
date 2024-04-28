@@ -28,3 +28,10 @@
         right: 0;
     }
 }
+@media screen and (max-width: 500px) {
+    .cartWrapper {
+        bottom: 0px;
+        left: 0px;
+    }
+
+}

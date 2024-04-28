@@ -154,7 +154,7 @@ export default function ProductComponent({ product }) {
               <>
                 <Box>
                   <Typography sx={{ textAlign: 'center' }}>
-                    In-Stock: {product.totalQuantity} Units
+                    {product.totalQuantity === 0 ? 'Out of Stock' : `In-Stock: ${product.totalQuantity} Units`}
                   </Typography>
                 </Box>
               </>

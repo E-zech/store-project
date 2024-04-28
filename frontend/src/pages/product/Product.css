@@ -58,7 +58,6 @@ transition: transform 0.3s ease;
     justify-content: space-evenly;
     align-items: center;
     width:49vw;
-    height: 50vh;
     font-weight: bold;
 }
 

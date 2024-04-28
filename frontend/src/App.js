@@ -124,7 +124,6 @@ export default function App() {
         })
             .then(res => {
                 if (!res.ok) {
-                    snackbar('Network response was not ok : App.js');
                     return [];
                 }
                 return res.json();

@@ -11,7 +11,6 @@ import { boxShadowDark, boxShadowLight, hoverBoxShadowDark, hoverBoxShadowLight 
 import ResultResultNotFound from '../../utils/ResultNotFound.js';
 
 export default function ProductMangement() {
-    const [allMyProducts, setAllMyProducts] = useState([]);
     const { products, setProducts, setInitialProducts, loader, setLoader, mode, selectedCategory, mainTitleMode } = useContext(GeneralContext);
     const navigate = useNavigate();
 
@@ -61,7 +60,8 @@ export default function ProductMangement() {
                 ) : (
                     <div className="grid-cards">
                         {products.length > 0 ? (
-                            products.filter(product => product.category === selectedCategory || selectedCategory === "All").map((product, index) => <ProductComponent key={index} product={product} />)
+                            products.filter(product => product.category === selectedCategory || selectedCategory === "All")
+                                .map((product, index) => <ProductComponent key={index} product={product} />)
                         ) : (
                             <ResultResultNotFound />
                         )

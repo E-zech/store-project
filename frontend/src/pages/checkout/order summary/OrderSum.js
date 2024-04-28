@@ -1,54 +1,55 @@
-
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { GeneralContext } from "../../../App";
 import { mainColor } from '../../../css/Main.style';
-import { Button, Grid } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-
+import { orderSumContainer, orderSumContainerWrapper, orderSum, thanksMessage, orderSumGrid, orderSumBtn, orderSumTitle, orderSumText } from './OrderSum.style';
 
 export default function OrderSum() {
     const navigate = useNavigate();
-    const { user, productsInCart, setProductsInCart, products, order, setOrder, snackbar, mode } = useContext(GeneralContext);
-    console.log(order)
-    console.log(order._id)
+    const { order, mode } = useContext(GeneralContext);
+
+    const btnStyle = {
+        ...orderSumBtn,
+        backgroundColor: mode === 'dark' ? 'black' : '#99c8c2',
+        color: 'white',
+        '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' }
+    }
+
     return (
         <>
-            <section
-                style={{
-                    width: '100%', display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '100px', maxWidth: '2000px', minHeight: '45vh', '@media (max-width: 1000px)': {
-                        minHeight: '48vh'
-                    },
-                }}>
+            <Box sx={orderSumContainerWrapper}>
+                <Box sx={{ ...orderSumContainer, backgroundColor: mode === 'dark' ? '#3e3e3e' : 'transparent' }}>
 
-
-                <section style={{
-                    width: '100%', backgroundColor: 'white', display: 'grid', gridTemplateColumns: '1fr', gap: '15px', justifyContent: 'center', alignItems: 'center', marginTop: '50px',
-                    maxWidth: '2000px',
-                    margin: '0 auto'
-                }}>
-
-
-                    <div style={{ width: '85vw', backgroundColor: mainColor, gap: '5px', fontSize: '1.3rem', padding: '10px', borderRadius: '17px ', textAlign: 'center', maxWidth: '2000px', margin: '0 auto' }}>
-                        <h2 >Your order has been placed </h2>
+                    <Box sx={{
+                        ...orderSum, backgroundColor: mode === 'dark' ? 'black' : mainColor
+                    }}>
+                        <Typography sx={orderSumTitle} >Your order has been placed </Typography>
                         <br />
-                        <div > <span style={{ fontWeight: 'bold' }}>Your order number is:</span>  {order._id}</div>
+                        <Box sx={orderSumText} > <strong>Order Number :</strong>{` ${order._id}`}</Box>
                         <br />
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Box sx={thanksMessage}>
                             Thank you for your purchase
-                            <SentimentSatisfiedAltIcon style={{ marginLeft: '5px' }} />
-                        </div>
-                    </div>
+                            <SentimentSatisfiedAltIcon sx={{ marginLeft: '5px' }} />
+                        </Box>
+                    </Box>
 
+                    <Grid item xs={6} sm={6} sx={orderSumGrid}>
+                        <Button variant="contained"
+                            onClick={() => { navigate('/') }}
+                            sx={btnStyle}>
+                            Home Page
+                        </Button>
 
-                    <Grid item xs={6} sm={6} sx={{ display: 'flex', justifyContent: 'space-between', maxWidth: '2000px', margin: '0 auto', width: '85vw' }}>
-                        <Button onClick={() => { navigate('/') }} variant="contained" sx={{ width: "45%", mt: 3, mb: 1, p: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}> Home Page</Button>
-
-                        <Button type="submit" variant="contained" onClick={() => { navigate('/my-orders') }} sx={{ width: "45%", mt: 3, mb: 1, p: 1, backgroundColor: mode === 'dark' ? 'black' : '#99c8c2', color: 'white', '&:hover': { backgroundColor: mode === 'dark' ? 'gray' : '#99c8c2' } }}>My Orders</Button>
+                        <Button variant="contained"
+                            onClick={() => { navigate('/my-orders') }}
+                            sx={btnStyle}>
+                            My Orders
+                        </Button>
                     </Grid>
-
-                </section>
-            </section>
+                </Box>
+            </Box>
         </>
     )
 }

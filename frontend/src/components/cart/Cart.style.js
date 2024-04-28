@@ -164,6 +164,10 @@ export const cartIcon = {
     height: '50px',
     zIndex: '99',
     transition: 'all 0.3s ease',
+    '@media (max-width:500px)': {
+        width: '40px',
+        height: '40px',
+    }
 };
 
 export const dividerStyle = {

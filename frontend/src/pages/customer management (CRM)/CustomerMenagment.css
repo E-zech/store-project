@@ -9,3 +9,10 @@
     align-items: center;
     min-height: 70vh;
 }
+
+@media screen and (max-width:500px) {
+ .tableContainer{
+    width: 95vw;
+    padding: 25px 5px 170px;
+ }
+}

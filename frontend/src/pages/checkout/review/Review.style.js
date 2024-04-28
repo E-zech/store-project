@@ -13,7 +13,6 @@ export const reviewContainer = {
 
 export const reviewGridWrapper = {
     width: '90vw',
-    backgroundColor: 'white',
     display: 'grid',
     gridTemplateColumns: '1fr',
     gap: '15px',
@@ -63,7 +62,7 @@ export const reviewImgGridWrapper = {
 };
 
 export const reviewImgGrid = {
-    borderRadius: '15px'
+    borderRadius: '15px',
 };
 
 export const removeBtn = {
