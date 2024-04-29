@@ -1,7 +1,8 @@
 # Skin Care Store Project  
 
+## Backend Documentation:
+## Postman - https://documenter.getpostman.com/view/28292545/2sA3BuVog9
 ## Backend Folder Structure:
-
 ```plaintext
 /backend
 │
@@ -92,9 +93,9 @@
 ##
 ##
 
-## frontend documentation 
+## Frontend Documentation 
 
-## Folder Structure:
+## Frontend Folder Structure:
 
 ## Technologies and Libraries:
 
