@@ -6,16 +6,16 @@
 /backend
 │
 ├── /configs
-│   ├── config.js          # Configuration settings
-│   ├── contentConfig.js   # Configuration for content
-│   └── morganConfig.js    # Configuration for Morgan logging
+│   ├── config.js           # Configuration settings
+│   ├── contentConfig.js    # Configuration for content
+│   └── morganConfig.js     # Configuration for Morgan logging
 │
 ├── /handlers
 │   ├── /cart
-│   │   ├── add2cart.js            # Handler for adding products to cart
-│   │   ├── deleteAllCart.js       # Handler for deleting all cart items
-│   │   ├── deleteOneFromCart.js   # Handler for deleting one item from cart
-│   │   └── getCartProducts.js     # Handler for getting cart products
+│   │   ├── add2cart.js             # Handler for adding products to cart
+│   │   ├── deleteAllCart.js        # Handler for deleting all cart items
+│   │   ├── deleteOneFromCart.js    # Handler for deleting one item from cart
+│   │   └── getCartProducts.js      # Handler for getting cart products
 │   │
 │   ├── /order
 │   │   ├── createOrder.js    # Handler for creating orders
@@ -73,6 +73,7 @@
 ├── .env                        # Environment variables
 ├── index.js                    # Entry point of the application
 └── prod.env                    # Production environment variables
+
 
 ## Technologies and Libraries:
 
