@@ -7,6 +7,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
+background: rgb(255,255,255);
+background: linear-gradient(153deg, rgba(255,255,255,1) 0%, rgba(167,207,201,0.7175245098039216) 50%, rgba(255,255,255,1) 100%);
 }
 
 .header{
@@ -58,6 +60,7 @@ transition: transform 0.3s ease;
     justify-content: space-evenly;
     align-items: center;
     width:49vw;
+    height: 50vh;
     font-weight: bold;
 }
 
@@ -173,10 +176,13 @@ transition: transform 0.3s ease;
     .priceDiscount-container{
       align-items: center;
     }
+
     .btn{  min-width: 388px;}
+
     .btnsPrice-wrapper{
-        width: 49vw;
+        height: auto;
     }
+
   .btns-container{
     padding-top: 50px;
   }
@@ -227,7 +233,7 @@ transition: transform 0.3s ease;
     }
     .priceDiscount-container{
         width: 100%;
-        align-items: flex-start;
+        align-items: center;
       }
 
       .btnsPrice-wrapper{

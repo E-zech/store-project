@@ -17,7 +17,7 @@ export default function Product() {
     const [isInCart, setIsInCart] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
-    const { user, setLoader, snackbar, productsInCart, add2Cart } = useContext(GeneralContext);
+    const { user, setLoader, snackbar, productsInCart, add2Cart, mainTitleMode, mode } = useContext(GeneralContext);
 
     const icons = {
         Feet: <GiBarefoot size={50} />,
@@ -74,9 +74,9 @@ export default function Product() {
 
     return (
         <>
-            <main className="productWrapper" >
+            <main className="productWrapper" style={{ background: mode === 'dark' ? 'black' : '' }} >
                 <header className="header" >
-                    <h1 className="main-title">{product.title}
+                    <h1 className="main-title" style={mainTitleMode}>{product.title}
                         <div className="icon">{renderIcon(product.category)}
                         </div>
                     </h1>
