@@ -1,9 +1,8 @@
 # Skin Care Store Project  
 
 ## backend full documentation (Postman) - https://documenter.getpostman.com/view/28292545/2sA3BuVog9.
-## Technologies and Libraries
 
-The backend of this project is developed using the following technologies and libraries:
+## Technologies and Libraries :
 
 - **Node.js:** A JavaScript runtime built on Chrome's V8 JavaScript engine.
 - **Express:** A minimal and flexible Node.js web application framework.
@@ -16,10 +15,9 @@ The backend of this project is developed using the following technologies and li
 - **jsonwebtoken:** A library to generate and verify JSON Web Tokens (JWT).
 - **moment:** A library for parsing, validating, manipulating, and formatting dates.
 - **morgan:** A HTTP request logger middleware for Node.js.
-##
+
 ## frontend documentation 
-## Technologies and Libraries
-The frontend of this project is developed using the following technologies and libraries:
+## Technologies and Libraries:
 
 - **React**: A JavaScript library for building user interfaces.
 - **React DOM**: Entry point to the DOM and server renderer for React.
