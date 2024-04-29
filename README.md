@@ -1,5 +1,18 @@
 # Skin Care Store Project  
 
+## Summary
+Welcome to our Skin Care Store, your ultimate destination for skincare essentials! Our e-commerce platform offers a diverse range of products meticulously curated to enhance and nourish your skin, fostering a healthier and radiant complexion. With an emphasis on convenience and effectiveness, our store categorizes products into five main categories: face, eyes, body, hands, and feet, ensuring comprehensive coverage for all your skincare needs.
+
+Upon signing up, users gain access to a seamless shopping experience, enabling them to add products to their cart or favorites list for future reference. Our platform prioritizes user engagement and satisfaction, providing personalized features tailored to individual preferences.
+
+For administrators, our platform offers robust functionalities, empowering them with complete control over the store's operations. Admins can effortlessly manage product listings through CRUD operations, including adding, editing, and deleting products. Additionally, they have the authority to apply discounts to products, enhancing promotional activities, and can efficiently handle user management tasks such as deleting non-admin users.
+
+With user experience at the forefront of our design philosophy, our platform boasts a responsive interface, catering to a wide range of devices, from smartphones to desktops. Whether you're browsing on a compact mobile screen or a large desktop monitor, our platform adapts seamlessly to deliver an optimal viewing and interaction experience.
+
+Furthermore, we understand the importance of accessibility and offer full support for both dark and light modes, ensuring users can customize their browsing experience based on their preferences and environmental conditions.
+
+Experience the pinnacle of skincare shopping with our Skin Care Store, where quality, convenience, and satisfaction converge to redefine your skincare journey.
+
 ## Backend Documentation:
 ## Postman - https://documenter.getpostman.com/view/28292545/2sA3BuVog9
 ## Backend Folder Structure:
