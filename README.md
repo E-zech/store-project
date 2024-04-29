@@ -13,8 +13,20 @@ Furthermore, we understand the importance of accessibility and offer full suppor
 
 Experience the pinnacle of skincare shopping with our Skin Care Store, where quality, convenience, and satisfaction converge to redefine your skincare journey.
 
+## starter
+business-user:
+email: RedRoss@gmail.com
+password: Aa123456!
+
+admin-user:
+email: howUDoing@gmail.com
+password:Aa123456!
+
+Once the app starts then initial-data of: users, products, orders. will be created auto for your convinece.
+
+please also look for full backend documentation - https://documenter.getpostman.com/view/28292545/2sA3BuVog9.
+
 ## Backend Documentation:
-## Postman - https://documenter.getpostman.com/view/28292545/2sA3BuVog9
 ## Backend Folder Structure:
 ```plaintext
 /backend
