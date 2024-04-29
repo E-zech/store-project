@@ -12,4 +12,4 @@ export default function userRoutes(app) {
     getAllUsers(app);
     editUser(app);
     deleteUser(app);
-}
+}  

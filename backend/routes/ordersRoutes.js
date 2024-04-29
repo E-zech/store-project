@@ -1,7 +1,7 @@
 import createOrder from "../handlers/order/createOrder.js";
-import getOrder from "../handlers/order/getOrder.js";
+import getOrders from "../handlers/order/getOrders.js";
 
 export default function orderRoutes(app) {
     createOrder(app);
-    getOrder(app);
-};    
+    getOrders(app);
+};     

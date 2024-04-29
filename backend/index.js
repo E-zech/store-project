@@ -10,7 +10,7 @@ import logMiddleware from './middleware/logMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cardRoutes from './routes/cartRoutes.js';
-import orderRoutes from './routes/orderRoutes.js';
+import ordersRoutes from './routes/ordersRoutes.js';
 import dotenv from 'dotenv';
 
 // Environment setup
@@ -53,7 +53,7 @@ app.get('/', (req, res) => res.send(`Welcome 😊 \n Project NodeJs + MongoDb, 2
 userRoutes(app);
 productRoutes(app);
 cardRoutes(app);
-orderRoutes(app);
+ordersRoutes(app);
 
 // Server Listening
 app.listen(port, () => {
