@@ -96,6 +96,125 @@
 ## Frontend Documentation 
 
 ## Frontend Folder Structure:
+```plaintext
+/frontend
+│
+├── /public
+│   ├── favicon.ico.png
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+│
+└── /src
+    ├── /auth
+    │   ├── Account.js
+    │   ├── auth.style.js
+    │   ├── Login.js
+    │   └── Signup.js
+    │
+    ├── /components
+    │   ├── /cart
+    │   │   ├── Cart.js
+    │   │   ├── Cart.style.js
+    │   │   └── CartList.js
+    │   │
+    │   ├── /footer
+    │   │   ├── Footer.css
+    │   │   └── Footer.js
+    │   │
+    │   ├── /loader
+    │   │   ├── Loader.css
+    │   │   └── Loader.js
+    │   │
+    │   ├── /navbar
+    │   │   ├── Navbar.js
+    │   │   ├── Navbar.style.js
+    │   │   ├── SecondNavbar.js
+    │   │   └── SecondNavbar.style.js
+    │   │
+    │   ├── /popUpLogin
+    │   │   ├── PopUpLogin.css
+    │   │   └── PopUpLogin.js
+    │   │
+    │   ├── /productComponent
+    │   │   ├── ProductComponent.js
+    │   │   ├── ProductComponent.style.js
+    │   │   └── ProductStructureValid.js
+    │   │
+    │   ├── /searchBar
+    │   │   ├── SearchBar.js
+    │   │   └── SearchBar.style.js
+    │   │
+    │   ├── /slider
+    │   │   ├── Slider.css
+    │   │   └── Slider.js
+    │   │
+    │   └── /snackbar
+    │       ├── Snackbar.css
+    │       └── Snackbar.js
+    │
+    ├── /css
+    │   ├── App.css
+    │   ├── grid.css
+    │   ├── Main.style.js
+    │   ├── ResultNotFound.css
+    │   └── ScrollBar.css
+    │
+    ├── /pages
+    │   ├── /about
+    │   │   ├── About.css
+    │   │   ├── About.js
+    │   │   └── AboutMediaQ.css
+    │   │
+    │   ├── /addOrEditProduct
+    │   │   ├── AddOrEdit.style.js
+    │   │   └── AddOrEditProduct.js
+    │   │
+    │   ├── /checkout
+    │   │   ├── /address
+    │   │   │   ├── Address.js
+    │   │   │   └── Address.style.js
+    │   │   │
+    │   │   ├── /orderSummary
+    │   │   │   ├── OrderSum.js
+    │   │   │   └── OrderSum.style.js
+    │   │   │
+    │   │   ├── /payment
+    │   │   │   └── Payment.js
+    │   │   │
+    │   │   └── /review
+    │   │       ├── Review.js
+    │   │       ├── Review.style.js
+    │   │       └── Review.styleMediaQ.js
+    │   │
+    │   ├── CustomerMenagment.css
+    │   ├── CustomerMenagment.js
+    │   ├── FavProduct.css
+    │   ├── FavProduct.js
+    │   ├── Home.css
+    │   ├── Home.js
+    │   ├── Order.js
+    │   ├── Order.style.js
+    │   ├── Product.css
+    │   ├── Product.js
+    │   └── ProductMangement.js
+    │
+    ├── /utils
+    │   ├── constants.js
+    │   ├── FormValidation.js
+    │   ├── ResultNotFound.js
+    │   └── utils.js
+    │
+    ├── App.js
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── reportWebVitals.js
+    ├── Router.js
+    ├── setupTests.js
+    └── package.json
+```
+
 
 ## Technologies and Libraries:
 
