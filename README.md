@@ -73,8 +73,7 @@
 ├── .env                        # Environment variables
 ├── index.js                    # Entry point of the application
 └── prod.env                    # Production environment variables
-...
-
+```
 
 ## Technologies and Libraries:
 
