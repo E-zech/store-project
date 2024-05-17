@@ -64,4 +64,4 @@ app.listen(port, () => {
 app.all("*", async (req, res) => {
     const combinedContent = await getContent(res);
     res.send(combinedContent);
-}); 
+});  
