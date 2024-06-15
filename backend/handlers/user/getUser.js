@@ -1,11 +1,11 @@
-import User from '../../models/User.js';
+import User, { RoleTypes } from '../../models/User.js';
 import { getUserFromTKN } from '../../configs/config.js';
 import { guard } from '../../middleware/guard.js';
 
 const getUser = app => {
     app.get('/users/:id', guard, async (req, res) => {
         const { userId, roleType } = getUserFromTKN(req, res);
-        const isAdminOrMaster = roleType === roleType.admin || roleType === roleType.master;;
+        const isAdminOrMaster = roleType === RoleTypes.admin || RoleTypes === roleType.master;;
 
         if (userId !== req.params.id && !isAdminOrMaster) {
             return res.status(401).send('you are not authorized to do so');
